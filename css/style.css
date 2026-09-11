@@ -2307,6 +2307,14 @@ tbody tr:nth-child(even) {
        mais longo era cortado. auto-fit respeita o mínimo legível. */
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
+
+  /* Blocos e pratos vêm sempre de seis em seis: em 4 colunas a segunda
+     linha ficava com dois cards e um buraco à direita. Em três, as duas
+     linhas fecham e cada card ganha ~100px. */
+  .grade-blocos,
+  .grade-pratos {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 
