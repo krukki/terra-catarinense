@@ -28,9 +28,9 @@ galeria com filtro e os cards que viram.
 
 Não é necessário instalar nada, rodar servidor nem compilar.
 
-> **Observação:** as fotos e as fontes (Google Fonts) são carregadas da internet.
-> Sem conexão, o site continua funcionando, mas aparece sem imagens e com as fontes
-> substitutas do sistema.
+> **Observação:** as fotos ficam na pasta `assets/`, então elas aparecem mesmo sem
+> internet. Só as fontes (Google Fonts) vêm da rede: sem conexão o site continua
+> funcionando, com as fontes substitutas do sistema.
 
 Se quiser abrir com um servidor local (opcional), dentro da pasta do projeto:
 
@@ -74,12 +74,18 @@ terra-catarinense/
 │   ├── litoral/ ............ Fotos de praias e do litoral
 │   ├── serra/ .............. Fotos da serra, araucárias e geada
 │   ├── cidades/ ............ Fotos de Florianópolis, Blumenau, etc.
+│   ├── cultura/ ............ Fotos de festas, imigração e arquitetura
 │   └── gastronomia/ ........ Fotos de pratos típicos
+├── ferramentas/ ............ Scripts Python que buscaram, baixaram e
+│                             recortaram as fotos (ver a seção 6). Não
+│                             fazem parte do site: podem ser apagados sem
+│                             quebrar nada.
 └── README.md ............... Este arquivo
 ```
 
-As pastas de assets estão vazias (só com um arquivo `.gitkeep`) porque todas as
-imagens do site usam, por enquanto, placeholders do serviço picsum.photos.
+Cada foto em `assets/` já está gravada exatamente no tamanho dos atributos
+`width` e `height` da tag que a usa, para o navegador reservar o espaço certo e
+a página não dar solavanco enquanto carrega.
 
 ## 4. Identidade visual
 
@@ -124,11 +130,39 @@ do sistema operacional.
   barra de navegação no desktop, e o painel de regiões já vem preenchido no HTML.
 - Alvos de toque de no mínimo 24x24px (WCAG 2.5.8).
 
-## 6. O que ainda precisa ser substituído antes da entrega
+## 6. Fotos e créditos
 
-- [ ] **Fotos:** trocar todas as URLs de picsum.photos por fotos próprias ou de banco
-      de imagens livre, salvas em `assets/`. No HTML, cada ponto de troca está marcado
-      com um comentário `TROCAR:`.
+As 58 fotos do site vêm do **Wikimedia Commons**, sob licenças livres (Creative
+Commons e domínio público). As licenças CC BY e CC BY-SA exigem creditar quem fez
+a foto, e por isso `curiosidades.html` tem a seção **Créditos das fotos**, com o
+arquivo, o autor e a licença de cada uma. O rodapé de todas as páginas tem link
+para ela.
+
+Os scripts que fizeram esse trabalho estão em `ferramentas/`, nesta ordem:
+
+| Script | O que faz |
+| --- | --- |
+| `manifesto.py` | monta a lista das 58 vagas: tamanho, texto `alt` e termos de busca |
+| `buscar_imagens.py` | procura candidatas no Commons, por categoria e por texto |
+| `repontuar.py` | repontua dando peso ao vínculo com Santa Catarina |
+| `contato.py` | gera uma folha de contato para conferir foto por foto no navegador |
+| `aplicar_escolhas.py` | devolve as escolhas da folha para o `candidatas.json` |
+| `baixar_imagens.py` | baixa e recorta no tamanho exato de cada vaga |
+| `trocar_html.py` | troca os endereços no HTML e gera a lista de créditos |
+
+Para trocar alguma foto: abra `ferramentas/contato.html` (gerado pelo `contato.py`),
+escolha outra opção, salve o `escolhas.json` em `ferramentas/` e rode
+
+```bash
+python ferramentas/aplicar_escolhas.py
+python ferramentas/baixar_imagens.py
+```
+
+Se a lista de fotos mudar, rode o `trocar_html.py` de novo e cole a lista nova de
+`ferramentas/creditos.html` na seção de créditos.
+
+## 7. O que ainda precisa ser conferido antes da entrega
+
 - [ ] **Dados do IBGE:** conferir e atualizar população, área, PIB, IDH e número de
       habitantes de cada cidade em
       [cidades.ibge.gov.br/brasil/sc/panorama](https://cidades.ibge.gov.br/brasil/sc/panorama).
