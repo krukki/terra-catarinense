@@ -1,0 +1,102 @@
+{
+ "_leia_me": [
+  "Fotos escolhidas a mao, fora do Wikimedia Commons. A chave e o seed da vaga,",
+  "igual ao imagens.json. O trocar_html.py le este arquivo e usa estas entradas",
+  "no lugar das do Commons ao gerar ferramentas/creditos.html.",
+  "",
+  "'fonte' e a pagina de onde a foto veio; 'credito' e o que a pagina informa",
+  "sobre a autoria. 'licenca' so esta preenchida quando a pagina declara uma:",
+  "nos demais casos a foto e material protegido, usado aqui a titulo de",
+  "trabalho escolar, com a origem creditada. Prints das paginas em cfonts/."
+ ],
+
+ "joinville-industria": {
+  "arquivo": "assets/cidades/joinville2.jpg",
+  "titulo": "Pórtico e Moinho da XV, em Joinville",
+  "credito": "Foto de Juliano Cruz",
+  "fonte": "",
+  "licenca": "",
+  "print": "cfonts/fonte joinville2.png"
+ },
+
+ "chapeco-campo": {
+  "arquivo": "assets/cidades/catedral-chapeco.jpg",
+  "titulo": "Catedral de Chapecó",
+  "credito": "Catarinense fx, obra do próprio",
+  "fonte": "https://commons.wikimedia.org/wiki/Category:Chapec%C3%B3",
+  "licenca": "CC BY-SA 4.0",
+  "print": "cfonts/fonte chapeco2.png"
+ },
+
+ "sc-mata-atlantica-indigena": {
+  "arquivo": "assets/cultura/guarani.jpg",
+  "titulo": "Homens guarani em celebração",
+  "credito": "(conferir autoria na página de origem)",
+  "fonte": "https://pt.wikipedia.org/wiki/Guaranis",
+  "licenca": "",
+  "print": "cfonts/fonte guarani.png"
+ },
+
+ "sc-imigracao-alema-1829": {
+  "arquivo": "assets/cultura/pedro-alcantara.jpg",
+  "titulo": "Pintura de São Pedro de Alcântara",
+  "credito": "(origem nao registrada — falta o print)",
+  "fonte": "",
+  "licenca": "",
+  "print": ""
+ },
+
+ "cur-pomerode-lingua": {
+  "arquivo": "assets/cidades/pomerano.jpg",
+  "titulo": "Trajes típicos pomeranos e o brasão da Pomerânia",
+  "credito": "Montanhas Capixabas",
+  "fonte": "https://www.montanhascapixabas.com.br/lingua-pomerana-inglesa-e-alema-muito-mais-em-comum-do-que-voce-imagina/",
+  "licenca": "",
+  "print": "cfonts/fonte pomerano.png"
+ },
+
+ "cur-praias-500": {
+  "arquivo": "assets/litoral/praia.jpg",
+  "titulo": "Ilha do Campeche",
+  "credito": "Divulgação / Associação Couto de Magalhães de Preservação da Ilha do Campeche",
+  "fonte": "",
+  "licenca": "",
+  "print": "cfonts/fonte praia.png"
+ },
+
+ "floripa-ponte": {
+  "arquivo": "assets/cidades/florianopoliscima.jpg",
+  "titulo": "Beira-Mar Norte, em Florianópolis",
+  "credito": "Rio & Learn",
+  "fonte": "https://rioandlearn.com/pt-br/florianopolis/",
+  "licenca": "",
+  "print": "cfonts/fonte florianopolis2.png"
+ },
+
+ "blumenau-enxaimel": {
+  "arquivo": "assets/cidades/blumenau-enxaimel2.jpg",
+  "titulo": "Parque Vila Germânica, em Blumenau",
+  "credito": "Divulgação",
+  "fonte": "",
+  "licenca": "",
+  "print": "cfonts/fonte blumenau2.png"
+ },
+
+ "prato-polenta-galeto": {
+  "arquivo": "assets/gastronomia/galeto-polenta.jpg",
+  "titulo": "Galeto com polenta frita",
+  "credito": "Galeto's",
+  "fonte": "https://galetos.com.br/galeto-polenta/",
+  "licenca": "",
+  "print": "cfonts/fonte galeto2.png"
+ },
+
+ "cur-bolshoi": {
+  "arquivo": "assets/cultura/bolshoi.jpg",
+  "titulo": "Espetáculo da escola do Bolshoi em Joinville",
+  "credito": "Visite Joinville",
+  "fonte": "https://www.visitejoinville.com.br/bolshoi-apresenta-espetaculo-em-joinville",
+  "licenca": "",
+  "print": "cfonts/fonte bolshoi.png"
+ }
+}

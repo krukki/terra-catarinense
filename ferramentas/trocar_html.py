@@ -33,6 +33,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 MANIFESTO = "ferramentas/imagens.json"
 CANDIDATAS = "ferramentas/candidatas.json"
+MANUAIS = "ferramentas/fontes_manuais.json"
 CREDITOS = "ferramentas/creditos.html"
 
 PICSUM = re.compile(r"https://picsum\.photos/seed/([A-Za-z0-9_-]+)/(\d+)/(\d+)")
@@ -57,6 +58,10 @@ def dimensoes(caminho):
 def main():
     seco = "--seco" in sys.argv
     limpar = "--limpar" in sys.argv
+
+    if "--creditos" in sys.argv:      # so regera a lista, sem tocar no HTML
+        creditos()
+        return
 
     vagas = {v["seed"]: v for v in json.load(io.open(MANIFESTO, encoding="utf-8"))}
     paginas = sorted({v["pagina"] for v in vagas.values()})
@@ -130,15 +135,19 @@ def main():
             print("  --limpar tira os que ocupam a linha inteira; os de bloco sao a mao.")
 
     if usadas and not seco:
-        creditos(usadas)
+        creditos()
 
 
-def creditos(usadas):
+def creditos():
     """Grava o trecho de creditos das fotos.
 
     O Commons e quase todo CC BY / CC BY-SA: a licenca exige creditar autor,
-    licenca e obra. Sem essa lista o site estaria usando as fotos fora da
-    licenca, entao o trecho e gerado junto com a troca.
+    licenca e obra. As fotos escolhidas a mao, de fora do Commons, ficam em
+    fontes_manuais.json e entram aqui no lugar da candidata do Commons — sem
+    isso, regerar a lista apagaria o credito delas.
+
+    A lista sai do manifesto inteiro, e nao das vagas trocadas nesta rodada,
+    para dar para regerar a qualquer momento com --creditos.
     """
     if not os.path.exists(CANDIDATAS):
         print("\n(sem candidatas.json — creditos nao gerados)")
@@ -149,32 +158,54 @@ def creditos(usadas):
         if v.get("escolhida") is not None:
             escolhas[v["seed"]] = v["candidatas"][v["escolhida"]]
 
-    linhas = []
-    vistos = set()
-    for v in sorted(usadas, key=lambda x: x["destino"]):
-        c = escolhas.get(v["seed"])
-        if c is None or c["arquivo"] in vistos:
+    manuais = {}
+    if os.path.exists(MANUAIS):
+        manuais = {k: v for k, v in json.load(io.open(MANUAIS, encoding="utf-8")).items()
+                   if not k.startswith("_")}
+
+    itens = []
+    for v in json.load(io.open(MANIFESTO, encoding="utf-8")):
+        m = manuais.get(v["seed"])
+        if m:
+            detalhe = m["credito"]
+            if m.get("licenca"):
+                detalhe += " (%s)" % m["licenca"]
+            else:
+                detalhe += " — material protegido, usado como trabalho escolar"
+            itens.append((m["arquivo"], m["titulo"], m.get("fonte", ""), detalhe))
             continue
-        vistos.add(c["arquivo"])
-        titulo = os.path.splitext(c["arquivo"])[0]
+        c = escolhas.get(v["seed"])
+        if c is None:
+            continue
+        itens.append((v["destino"], os.path.splitext(c["arquivo"])[0], c["pagina"],
+                      "%s, via Wikimedia Commons (%s)" % (c["autor"], c["licenca"])))
+
+    linhas, vistos = [], set()
+    for arquivo, titulo, fonte, detalhe in sorted(itens):
+        if arquivo in vistos:
+            continue
+        vistos.add(arquivo)
+        nome = ('<a href="%s" rel="external noopener" target="_blank">%s</a>'
+                % (escapar(fonte), escapar(titulo))) if fonte else escapar(titulo)
         linhas.append(
             '          <li>\n'
-            '            <a href="%s" rel="external noopener" target="_blank">%s</a>\n'
-            '            <p>%s — %s, via Wikimedia Commons (%s).</p>\n'
-            '          </li>' % (c["pagina"], escapar(titulo), escapar(v["destino"]),
-                                 escapar(c["autor"]), escapar(c["licenca"])))
+            '            %s\n'
+            '            <p>%s — %s.</p>\n'
+            '          </li>' % (nome, escapar(arquivo), escapar(detalhe)))
 
     trecho = (
         "<!-- Creditos das fotos — gerado por ferramentas/trocar_html.py.\n"
-        "     Cole dentro de uma <section> nova (sugestao: em curiosidades.html,\n"
-        "     ao lado das fontes de pesquisa). Nao edite aqui: este arquivo e\n"
-        "     reescrito toda vez que o trocar_html.py roda. -->\n"
-        '        <ul class="fontes">\n%s\n        </ul>\n' % "\n".join(linhas))
+        "     Cole dentro da secao #creditos de curiosidades.html. Nao edite\n"
+        "     aqui: este arquivo e reescrito toda vez que o script roda.\n"
+        "     Para regerar sem tocar no HTML:\n"
+        "         python ferramentas/trocar_html.py --creditos -->\n"
+        '        <ul class="fontes fontes--creditos revelar">\n%s\n        </ul>\n'
+        % "\n".join(linhas))
 
     with io.open(CREDITOS, "w", encoding="utf-8") as f:
         f.write(trecho)
-    print("\ncreditos de %d fotos em %s — falta colar numa pagina."
-          % (len(linhas), CREDITOS))
+    print("\ncreditos de %d fotos em %s (%d fora do Commons)."
+          % (len(linhas), CREDITOS, len(manuais)))
 
 
 def escapar(t):

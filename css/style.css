@@ -2315,6 +2315,12 @@ tbody tr:nth-child(even) {
   .grade-pratos {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  /* Vegetação e fauna vêm de quatro em quatro: em três colunas sobrava
+     um card sozinho na segunda linha. */
+  .grade-blocos--duas {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 
