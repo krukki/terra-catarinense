@@ -63,8 +63,8 @@ svg {
 
 img {
   height: auto;
-  /* cor de espera enquanto a foto do placeholder carrega */
-  background-color: #dfe7ea;
+  /* cor de espera enquanto a foto carrega — acompanha o tema */
+  background-color: var(--cor-img-vazia);
 }
 
 button,
@@ -2025,6 +2025,9 @@ tbody tr:nth-child(even) {
 .rodape__mapa-estado img {
   width: 100%;
   height: auto;
+  /* SVG transparente: sem a cor de espera das fotos, senão fica uma
+     caixa clara recortada no rodapé escuro */
+  background: none;
 }
 
 .rodape__titulo {
@@ -2317,7 +2320,8 @@ tbody tr:nth-child(even) {
   .banner__controles,
   .voltar-topo,
   .filtros,
-  .regiao-botoes {
+  .regiao-botoes,
+  .rodape__mapa-estado {
     display: none !important;
   }
 
