@@ -48,6 +48,8 @@ projeto-santa-catarina/
 │                             regiões (clique numa região e o painel troca).
 ├── cultura.html ............ Cultura e imigração + LINHA DO TEMPO animada
 │                             conforme a rolagem da página.
+├── panorama.html ........... Geografia e clima, gastronomia típica e economia
+│                             do estado, com tabelas de dados.
 ├── turismo.html ............ Geografia, clima, vegetação, fauna, roteiros e
 │                             GALERIA DE FOTOS COM FILTRO por categoria.
 ├── curiosidades.html ....... Cards com EFEITO FLIP, gastronomia típica,
@@ -58,10 +60,13 @@ projeto-santa-catarina/
 │                             banner, cards, timeline, galeria, flip cards,
 │                             footer, media queries).
 ├── js/
-│   └── script.js ........... Todo o JavaScript, em 10 módulos comentados
-│                             (menu, banner, flip, mapa, timeline, galeria,
-│                             scroll-reveal, voltar ao topo).
+│   └── script.js ........... Todo o JavaScript, em 11 módulos comentados
+│                             (menu, tema claro/escuro, banner, flip, mapa,
+│                             timeline, galeria, scroll-reveal, voltar ao
+│                             topo, ano do rodapé).
 ├── assets/
+│   ├── favicon.svg ......... Ícone da aba (selo "SC" com o gradiente da marca)
+│   ├── mapa-sc.svg ......... Contorno do estado usado no rodapé
 │   ├── litoral/ ............ Fotos de praias e do litoral
 │   ├── serra/ .............. Fotos da serra, araucárias e geada
 │   ├── cidades/ ............ Fotos de Florianópolis, Blumenau, etc.
@@ -86,6 +91,11 @@ Tipografia (Google Fonts):
     Nunito Sans .... texto corrido
     Caveat ......... selos e "Você sabia?"
 
+Todas as cores do site são variáveis CSS no :root. O tema escuro só
+redefine essas variáveis — nenhum componente precisa saber que ele existe.
+O botão de tema fica no cabeçalho e a escolha é guardada no navegador; sem
+escolha, o site segue a preferência do sistema operacional.
+
 -------------------------------------------------------------------------------
 5. ACESSIBILIDADE
 -------------------------------------------------------------------------------
@@ -99,6 +109,12 @@ Tipografia (Google Fonts):
 - Tags semânticas: header, nav, main, section, article, aside, footer.
 - Respeita a preferência "prefers-reduced-motion" do sistema.
 - Mobile-first, testado a partir de 360px de largura.
+- Tema claro e escuro, seguindo "prefers-color-scheme" quando o usuário
+  não escolhe manualmente.
+- Sem JavaScript o site continua utilizável: o menu nasce fechado no
+  celular e vira barra de navegação no desktop, e o painel de regiões já
+  vem preenchido no HTML.
+- Alvos de toque de no mínimo 24x24px (WCAG 2.5.8).
 
 -------------------------------------------------------------------------------
 6. O QUE AINDA PRECISA SER SUBSTITUÍDO ANTES DA ENTREGA

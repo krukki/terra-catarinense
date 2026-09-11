@@ -6,6 +6,7 @@
    MÓDULOS (cada um só roda se os elementos existirem na página)
    01. Marcação "js" no <html>
    02. Menu sticky (hamburguer no mobile)
+   02b. Tema claro/escuro
    03. Banner rotativo (index.html)
    04. Flip cards (toque/clique/teclado)
    05. Mapa interativo de regiões (cidades.html)
@@ -88,6 +89,67 @@
         abrir(false);
         botao.focus();
       }
+    });
+  }
+
+
+  /* ========================================================================
+     02b. TEMA CLARO / ESCURO
+     Sem escolha salva, o site segue o sistema (o CSS resolve sozinho).
+     O botão grava a preferência e ela passa a valer nas duas direções.
+     ==================================================================== */
+  function iniciarTema() {
+    var botao = document.querySelector("[data-tema-botao]");
+    if (!botao) return;
+
+    var raiz = document.documentElement;
+    var consultaEscuro = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function temaDoSistema() {
+      return consultaEscuro.matches ? "escuro" : "claro";
+    }
+
+    function temaAtual() {
+      return raiz.getAttribute("data-tema") || temaDoSistema();
+    }
+
+    function aplicar(tema) {
+      // Desliga as transições só durante a troca (ver comentário no CSS)
+      raiz.classList.add("trocando-tema");
+      raiz.setAttribute("data-tema", tema);
+      void raiz.offsetWidth; // força o recálculo antes de religar
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          raiz.classList.remove("trocando-tema");
+        });
+      });
+      botao.setAttribute("aria-label",
+        tema === "escuro"
+          ? "Mudar para o tema claro"
+          : "Mudar para o tema escuro");
+    }
+
+    aplicar(temaAtual());
+
+    botao.addEventListener("click", function () {
+      var novo = temaAtual() === "escuro" ? "claro" : "escuro";
+      aplicar(novo);
+      try {
+        window.localStorage.setItem("terra-catarinense:tema", novo);
+      } catch (erro) {
+        // Modo privativo ou armazenamento bloqueado: o tema vale só nesta página
+      }
+    });
+
+    // Enquanto o usuário não escolher, acompanha o sistema
+    consultaEscuro.addEventListener("change", function () {
+      var salvo = null;
+      try {
+        salvo = window.localStorage.getItem("terra-catarinense:tema");
+      } catch (erro) {
+        salvo = null;
+      }
+      if (!salvo) aplicar(temaDoSistema());
     });
   }
 
@@ -268,14 +330,45 @@
     var cards = document.querySelectorAll("[data-flip]");
     if (!cards.length) return;
 
+    // O hover é um atalho visual do CSS; o clique é o estado de verdade.
+    var consultaPonteiro = window.matchMedia("(hover: hover) and (pointer: fine)");
+
     cards.forEach(function (gatilho) {
       var card = gatilho.closest(".flip-card");
       if (!card) return;
 
+      var verso = document.getElementById(gatilho.getAttribute("aria-controls"));
+      var sobOPonteiro = false;
+
+      // O verso só entra na árvore de acessibilidade quando está à mostra.
+      // backface-visibility esconde só o pixel: sem isto o leitor de tela
+      // lê a resposta junto com a pergunta.
+      function sincronizar() {
+        if (!verso) return;
+        var virado = card.classList.contains("flip-card--virado");
+        var hover = sobOPonteiro && consultaPonteiro.matches;
+        // hover inverte o estado, igual ao que o CSS faz visualmente
+        var mostrandoVerso = virado !== hover;
+        verso.setAttribute("aria-hidden", String(!mostrandoVerso));
+      }
+
       gatilho.addEventListener("click", function () {
         var virado = card.classList.toggle("flip-card--virado");
         gatilho.setAttribute("aria-expanded", String(virado));
+        sincronizar();
       });
+
+      card.addEventListener("mouseenter", function () {
+        sobOPonteiro = true;
+        sincronizar();
+      });
+
+      card.addEventListener("mouseleave", function () {
+        sobOPonteiro = false;
+        sincronizar();
+      });
+
+      sincronizar();
     });
   }
 
@@ -563,6 +656,7 @@
      ==================================================================== */
   function iniciar() {
     iniciarMenu();
+    iniciarTema();
     iniciarBanner();
     iniciarFlipCards();
     iniciarMapaInterativo();
