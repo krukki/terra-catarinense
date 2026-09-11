@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Curiosidades — Terra Catarinense</title>
+  <meta name="description" content="Curiosidades sobre Santa Catarina em cards que viram e a arquitetura enxaimel de Blumenau e Pomerode.">
+  <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon: selo "SC" com o gradiente da marca -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0E7C9C">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- ===================== HEADER STICKY ===================== -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interno">
+      <a class="logo" href="index.html">
+        <span class="logo__marca" aria-hidden="true">SC</span>
+        <span class="logo__texto">
+          Terra Catarinense
+          <small>o estado mais diverso do Brasil</small>
+        </span>
+      </a>
+
+      <button class="menu-botao" type="button" data-menu-botao
+              aria-expanded="false" aria-controls="menu-principal">
+        <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
+        <span data-menu-rotulo>Menu</span>
+      </button>
+
+      <nav class="navegacao" id="menu-principal" data-menu aria-label="Navegação principal">
+        <ul class="navegacao__lista">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="panorama.html#geografia">Geografia</a></li>
+          <li><a href="cidades.html">Cidades</a></li>
+          <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+          <li><a href="turismo.html">Turismo</a></li>
+          <li><a href="panorama.html#economia">Economia</a></li>
+          <li><a href="curiosidades.html" aria-current="page">Curiosidades</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ===================== HERO DA PÁGINA ===================== -->
+    <section class="hero-pagina">
+      <div class="container">
+        <span class="etiqueta">Curiosidades</span>
+        <h1>O que quase ninguém sabe sobre Santa Catarina</h1>
+        <p>
+          Recordes de frio, uma república que durou quatro meses, ostras
+          premiadas e um dialeto alemão vivo no interior. Vire os cards para
+          descobrir.
+        </p>
+      </div>
+    </section>
+
+    <nav class="trilha" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="index.html">Início</a></li>
+          <li aria-current="page">Curiosidades</li>
+        </ol>
+      </div>
+    </nav>
+
+
+    <!-- ================================================================
+         DIFERENCIAL 4 — CARDS COM EFEITO FLIP
+         Giro por CSS no hover; no toque e no teclado o JS alterna a classe
+         .flip-card--virado e o aria-pressed de cada botão.
+         ================================================================= -->
+    <section class="secao" id="cards">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Vire os cards</span>
+          <h2>Oito fatos surpreendentes</h2>
+          <p class="subtitulo-secao">
+            No computador, passe o mouse. No celular, toque no card. Navegando por
+            teclado, use Tab e Enter.
+          </p>
+        </div>
+
+        <div class="grade-flip">
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-neve-urupema/600/700"
+                     alt="Paisagem rural com camada fina de neve sobre a grama e cercas de madeira."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>O lugar mais frio do Brasil</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  <strong>Urupema</strong> já registrou temperaturas abaixo de
+                  <strong>-8 °C</strong> e disputa com São Joaquim o título de
+                  cidade mais fria do país. A sensação térmica passa de -15 °C.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-ostra-cultivo/600/700"
+                     alt="Estruturas de cultivo de ostras flutuando em baía calma ao amanhecer."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Capital nacional da ostra</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Cerca de <strong>90% das ostras cultivadas no Brasil</strong> vêm
+                  de Santa Catarina, principalmente do Ribeirão da Ilha, em
+                  Florianópolis.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-tordesilhas-laguna/600/700"
+                     alt="Marco de pedra antigo à beira-mar em dia nublado."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>A linha de Tordesilhas</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  A linha imaginária do <strong>Tratado de Tordesilhas</strong>
+                  cortava o litoral catarinense na altura de Laguna, onde ainda
+                  existe um marco histórico da divisão entre Portugal e Espanha.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-boto-laguna/600/700"
+                     alt="Boto emergindo perto de pescador com tarrafa em água rasa."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Pescaria com botos</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Em Laguna, <strong>botos selvagens</strong> avisam os pescadores,
+                  com um movimento de corpo, o momento exato de lançar a rede. A
+                  prática é passada de geração em geração — entre humanos e
+                  golfinhos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-bolshoi/600/700"
+                     alt="Bailarinos em sapatilhas durante ensaio em sala de dança com barra de apoio."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Bolshoi fora da Rússia</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  <strong>Joinville</strong> abriga a única escola do Teatro
+                  Bolshoi fora da Rússia, com ensino gratuito, e sedia o maior
+                  festival de dança do mundo.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-vinho-altitude/600/700"
+                     alt="Taça de vinho tinto ao lado de parreiral em região de altitude."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Vinho de altitude</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Acima de <strong>900 metros</strong>, o frio da serra atrasa a
+                  colheita e concentra o açúcar da uva. Isso criou os vinhos de
+                  altitude de São Joaquim, premiados na Europa.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-pomerode-lingua/600/700"
+                     alt="Placa de rua em cidade de colonização alemã cercada por flores."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Uma língua cooficial</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Em <strong>Pomerode</strong>, o <strong>pomerano</strong> é
+                  reconhecido como língua cooficial ao lado do português — e ainda
+                  é falado em casa por muitas famílias.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/cur-praias-500/600/700"
+                     alt="Vista aérea de várias enseadas e praias sucessivas ao longo de uma costa recortada."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Mais de 500 praias</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Em <strong>561 km de litoral</strong>, o estado reúne mais de
+                  <strong>500 praias</strong>. Só a Ilha de Santa Catarina tem mais
+                  de 40 — de praias urbanas a enseadas que só se alcança por
+                  trilha.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         ARQUITETURA ENXAIMEL
+         ================================================================= -->
+    <section class="secao secao--clara" id="enxaimel">
+      <div class="container">
+        <div class="duas-colunas">
+          <div class="revelar">
+            <span class="etiqueta">Arquitetura</span>
+            <h2>Enxaimel: a casa que se monta como um quebra-cabeça</h2>
+            <p>
+              O <strong>enxaimel</strong> (do alemão <em>Fachwerk</em>) é uma
+              técnica medieval trazida pelos imigrantes: uma estrutura de madeira
+              encaixada, sem pregos, cujos vãos são preenchidos com tijolos ou
+              barro. As vigas ficam à vista e formam desenhos geométricos na
+              fachada.
+            </p>
+            <p>
+              Em Blumenau e Pomerode, essas construções deixaram de ser apenas
+              casas e passaram a ser patrimônio. A <strong>Rota do Enxaimel</strong>,
+              em Pomerode, reúne mais de 30 edificações centenárias ao longo de
+              16 km — o maior conjunto preservado do Brasil.
+            </p>
+
+            <ul class="lista-topicos">
+              <li><strong>Estrutura aparente:</strong> as vigas são o esqueleto da casa, não decoração.</li>
+              <li><strong>Preenchimento:</strong> tijolo maciço, pedra ou pau a pique, conforme o material disponível.</li>
+              <li><strong>Telhado inclinado:</strong> herança do clima europeu, útil também nas chuvas do vale.</li>
+              <li><strong>Proteção legal:</strong> em Pomerode, leis municipais incentivam a preservação e o estilo em obras novas.</li>
+            </ul>
+
+            <p class="selo" style="margin-top:1rem">
+              Casas com mais de 150 anos ainda habitadas pelas mesmas famílias.
+            </p>
+          </div>
+
+          <figure class="mapa-quadro revelar">
+            <!-- TROCAR: assets/cidades/enxaimel-pomerode.jpg -->
+            <img src="https://picsum.photos/seed/enxaimel-pomerode-casa/900/700"
+                 alt="Casa enxaimel de dois andares com vigas de madeira escura formando triângulos sobre parede clara."
+                 width="900" height="700" loading="lazy"
+                 style="border-radius:0.5rem">
+            <figcaption>
+              Construção em estilo enxaimel na Rota do Enxaimel, em Pomerode.
+              Repare nas vigas cruzadas: elas sustentam a casa.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape__grade">
+
+        <div class="rodape__sobre">
+          <h2>Terra Catarinense</h2>
+          <p>
+            Site educativo sobre o estado de Santa Catarina, produzido como
+            trabalho da disciplina de Front-End do curso Técnico em Informática
+            do IFMT — Campus Várzea Grande.
+          </p>
+
+          <div class="rodape__mapa-estado">
+            <svg viewBox="0 0 600 380" role="img" aria-label="Contorno real do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
+              <path class="regiao" d="M136.36,64.38L166.21,68.94L193.93,84.37L227.25,82.95L236.06,95.45L251.65,83.77L247.36,63.12L254.43,69.53L260.85,63.5L272.56,64.72L270.32,73.87L283.85,80.3L290.52,92.71L300.19,90.75L316.68,106.36L307.87,110.62L306.29,123.65L296.13,138.23L290.3,136.26L285.53,142.85L277.44,136.24L257.41,152.91L246.42,145.74L244.11,158.56L230.65,158.8L221.1,152.14L217.21,157.35L224.13,162.16L221.59,170.47L212.87,176.39L209.33,172.36L196.59,177L194.39,172.11L192.05,176.16L182,157.81L173.57,159.11L166.76,152.11L162.49,157.19L160.17,150.08L156.16,156.35L143.04,146.26L139.04,151.16L124.01,148.15L121.93,152.58L106.88,141.41L100.22,144.83L97.96,140.77L95.51,146.59L91.08,132.68L87.02,140.88L78.85,139.25L66.58,146.32L68.17,138.53L61.79,133.88L49.55,137.92L50.44,144.79L20,141.31L23.54,128.4L26.87,130.68L24.47,127.21L34.43,119.07L27.02,88.86L37.52,49.5L50.23,54.68L68.52,49.23L85.86,63.63L117.36,58.64L136.36,64.38Z"></path>
+              <path class="regiao" d="M484.43,22.09L484.32,37.62L492.48,48.03L484.54,69.77L474.52,84.13L463.95,76L461.46,87.81L445.35,101.67L444.37,89.5L423.27,85.17L422.55,78.66L409.3,73.29L399.72,76.82L393.81,94.83L386.26,94.88L382.73,102.77L374.4,94.95L364.41,105.24L353.46,107.76L344.98,103.42L337.25,110.75L316.2,89.32L313.19,102.45L300.19,90.75L290.52,92.71L283.85,80.3L270.32,73.87L272.56,64.72L260.85,63.5L254.43,69.53L247.36,63.12L264.33,47.17L276.4,52.65L277.29,47.87L279.92,53.33L282.81,48.63L296.54,48.84L304.27,30.67L310.97,30.26L309.39,24.61L330.39,37.91L337.65,27.46L344.12,32.29L344.83,26.93L349.24,30.58L360.49,25.55L362.47,30.24L365.13,25.3L399.31,48.16L433.66,24.47L484.43,22.09Z"></path>
+              <path class="regiao" d="M478.32,82.32L477.83,101L485.33,102.8L480.12,115.43L486.7,125.31L482.78,134.6L488.06,140.17L491.97,135.81L495.88,138.76L494.87,144.98L478.56,146.09L475.29,138.17L465.13,138.01L445.1,151.66L430.42,153.84L422.17,160.43L419.96,183.37L406.54,181.06L393.75,190.35L392.93,186.21L383.13,189.28L366.72,166.45L334.22,145.27L329.02,133.95L340.45,105.82L364.41,105.24L374.4,94.95L382.73,102.77L386.26,94.88L393.81,94.83L399.72,76.82L409.3,73.29L422.55,78.66L423.27,85.17L444.37,89.5L445.35,101.67L461.46,87.81L463.95,76L473.23,84.32L478.32,82.32Z"></path>
+              <path class="regiao" d="M337.25,110.75L329.02,133.95L334.22,145.27L357.59,157.29L358.4,164.4L366.72,166.45L383.13,189.28L403.52,184.5L407.87,200.54L423.54,211.82L413.51,235.63L401.5,243.24L399.56,272.89L386.21,287.37L380.52,270.43L364.7,272.65L362.5,268.5L351.01,273.11L348.61,268.51L345.5,274.01L338.04,267.3L328.72,270.2L304.62,263.78L290.39,238.86L282.37,237.54L278.05,221.63L269.64,220.17L264.53,208.64L250.38,202.43L236.96,186.8L233.01,190.02L227.81,180.35L221.07,182.89L215.33,177.72L224.13,162.16L217.21,157.35L221.1,152.14L230.65,158.8L244.11,158.56L246.42,145.74L257.41,152.91L277.44,136.24L285.53,142.85L290.3,136.26L296.13,138.23L306.29,123.65L307.87,110.62L316.68,106.36L316.2,89.32L337.25,110.75Z"></path>
+              <path class="regiao" d="M483.72,146.25L483.76,155.22L490.53,158.84L485.28,169.94L494.27,162.27L504.36,168.78L492.76,195.6L494.97,201.5L484.32,209.59L474.49,232.73L457.26,230.57L451.23,235.25L443.92,223.49L421.16,218.5L423.54,211.82L407.87,200.54L403.29,187.88L406.54,181.06L420.73,182.73L423.8,158.05L445.1,151.66L465.13,138.01L475.29,138.17L483.72,146.25Z"></path>
+              <path class="regiao" d="M482.11,218.96L479.93,247.89L464.99,285.12L422.77,312.73L385.38,357.05L363.21,344.38L349.82,350.23L356.28,360L348.33,354.88L344.24,349.44L347.7,343.87L349.92,348.37L351.33,340.39L358.37,342.68L363.8,332.98L359.76,331.43L366.31,322.43L365.7,297.05L373.87,295.11L379.18,285.46L388.56,286.37L399.56,272.89L401.5,243.24L413.51,235.63L421.16,218.5L443.92,223.49L451.23,235.25L457.26,230.57L474.49,232.73L482.11,218.96Z"></path>
+              <circle cx="488.53" cy="184" r="6" fill="#C1272D"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <nav class="rodape__navegacao" id="mapa-site" aria-labelledby="titulo-mapa-site">
+          <h3 class="rodape__titulo" id="titulo-mapa-site">Mapa do site</h3>
+          <ul class="rodape__lista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="index.html#sobre">Sobre Santa Catarina</a></li>
+            <li><a href="panorama.html#geografia">Geografia</a></li>
+            <li><a href="cidades.html">Cidades e regiões</a></li>
+            <li><a href="cultura.html">Cultura e imigração</a></li>
+            <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+            <li><a href="turismo.html">Turismo e natureza</a></li>
+            <li><a href="panorama.html#economia">Economia</a></li>
+            <li><a href="curiosidades.html">Curiosidades</a></li>
+            <li><a href="index.html#fontes">Fontes de pesquisa</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="rodape__titulo">Fontes de pesquisa</h3>
+          <ul class="rodape__lista">
+            <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
+            <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
+            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
+          </ul>
+
+          <h3 class="rodape__titulo" style="margin-top:1.5rem">Redes sociais</h3>
+          <ul class="redes">
+            <li>
+              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
+                 aria-label="Perfil do projeto Terra Catarinense no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
+                 aria-label="Canal do projeto Terra Catarinense no YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
+                 aria-label="Página do projeto Terra Catarinense no Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rodape__base">
+        <p>
+          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Imagens ilustrativas de banco público de imagens.
+        </p>
+        <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="voltar-topo" type="button" data-voltar-topo
+          aria-label="Voltar ao topo da página">&#8593;</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

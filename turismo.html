@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turismo e Natureza de Santa Catarina — Terra Catarinense</title>
+  <meta name="description" content="Clima, vegetação e fauna de Santa Catarina, com galeria de fotos filtrável por litoral, serra, cidades e gastronomia.">
+  <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon: selo "SC" com o gradiente da marca -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0E7C9C">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- ===================== HEADER STICKY ===================== -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interno">
+      <a class="logo" href="index.html">
+        <span class="logo__marca" aria-hidden="true">SC</span>
+        <span class="logo__texto">
+          Terra Catarinense
+          <small>o estado mais diverso do Brasil</small>
+        </span>
+      </a>
+
+      <button class="menu-botao" type="button" data-menu-botao
+              aria-expanded="false" aria-controls="menu-principal">
+        <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
+        <span data-menu-rotulo>Menu</span>
+      </button>
+
+      <nav class="navegacao" id="menu-principal" data-menu aria-label="Navegação principal">
+        <ul class="navegacao__lista">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="panorama.html#geografia">Geografia</a></li>
+          <li><a href="cidades.html">Cidades</a></li>
+          <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+          <li><a href="turismo.html" aria-current="page">Turismo</a></li>
+          <li><a href="panorama.html#economia">Economia</a></li>
+          <li><a href="curiosidades.html">Curiosidades</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ===================== HERO DA PÁGINA ===================== -->
+    <section class="hero-pagina">
+      <div class="container">
+        <span class="etiqueta">Turismo e natureza</span>
+        <h1>Do nível do mar aos 1.800 metros</h1>
+        <p>
+          Em menos de três horas de carro é possível sair de uma praia de água
+          morna e chegar a um cânion a 1.400 metros de altitude. Esta página
+          explica o clima e a vida selvagem que tornam isso possível — o relevo
+          que torna tudo isso possível está detalhado na página de
+          <a href="panorama.html#geografia">Geografia</a>.
+        </p>
+      </div>
+    </section>
+
+    <nav class="trilha" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="index.html">Início</a></li>
+          <li aria-current="page">Turismo e Natureza</li>
+        </ol>
+      </div>
+    </nav>
+
+
+    <!-- ================================================================
+         CLIMA
+         ================================================================= -->
+    <section class="secao secao--clara" id="clima">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Clima</span>
+          <h2>O único estado com as quatro estações</h2>
+        </div>
+
+        <div class="duas-colunas">
+          <div class="revelar">
+            <p>
+              Santa Catarina é o estado brasileiro onde as quatro estações
+              aparecem de forma mais nítida. Todo o território tem clima
+              <strong>subtropical úmido</strong>, sem estação seca, mas a altitude
+              cria uma variação enorme de temperatura.
+            </p>
+            <p>
+              No litoral, a média anual fica perto de <strong>21 °C</strong>. No
+              planalto serrano, cai para <strong>13 °C</strong>, com geadas de maio
+              a setembro e neve em vários invernos. É a chamada variedade
+              <strong>subtropical de altitude</strong>.
+            </p>
+
+            <ul class="lista-topicos">
+              <li>Chuvas bem distribuídas: entre 1.300 mm e 2.000 mm por ano.</li>
+              <li>Frentes frias vindas do sul provocam quedas bruscas de temperatura.</li>
+              <li>O estado registra os recordes nacionais de frio, com marcas abaixo de -10 °C na serra.</li>
+              <li>No verão, o litoral passa dos 35 °C com alta umidade.</li>
+            </ul>
+
+            <p class="selo" style="margin-top:1rem">
+              Levar agasalho em julho não é exagero: é sobrevivência.
+            </p>
+          </div>
+
+          <div class="tabela-envolvida revelar" style="margin-top:0">
+            <table>
+              <caption>
+                Temperaturas médias aproximadas em três pontos do estado —
+                conferir séries atualizadas no INMET antes da entrega.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Altitude</th>
+                  <th scope="col">Verão</th>
+                  <th scope="col">Inverno</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Florianópolis</th>
+                  <td>3 m</td>
+                  <td>28 °C</td>
+                  <td>16 °C</td>
+                </tr>
+                <tr>
+                  <th scope="row">Chapecó</th>
+                  <td>674 m</td>
+                  <td>27 °C</td>
+                  <td>13 °C</td>
+                </tr>
+                <tr>
+                  <th scope="row">São Joaquim</th>
+                  <td>1.353 m</td>
+                  <td>21 °C</td>
+                  <td>8 °C</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         VEGETAÇÃO E FAUNA
+         ================================================================= -->
+    <section class="secao" id="natureza">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Vegetação e fauna</span>
+          <h2>Quem vive aqui</h2>
+          <p class="subtitulo-secao">
+            Santa Catarina está inteiramente dentro do bioma Mata Atlântica, um
+            dos mais ameaçados do planeta — e guarda espécies que só existem aqui.
+          </p>
+        </div>
+
+        <h3 class="revelar">Vegetação</h3>
+        <div class="grade-blocos revelar" style="margin-top:1.25rem">
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🌲</p>
+            <h4>Araucária</h4>
+            <p>
+              O pinheiro-brasileiro é o símbolo do planalto. Pode passar de 40
+              metros de altura, vive séculos e produz o pinhão. Restam menos de 3%
+              da floresta original.
+            </p>
+          </article>
+
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🌳</p>
+            <h4>Imbuia</h4>
+            <p>
+              Árvore de madeira nobre que cresce junto às araucárias. Muito
+              explorada no século XX para móveis, hoje está ameaçada de extinção.
+            </p>
+          </article>
+
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🌵</p>
+            <h4>Restinga</h4>
+            <p>
+              Vegetação baixa e resistente ao sal que fixa as dunas do litoral.
+              Protege as praias da erosão e abriga répteis e aves nativas.
+            </p>
+          </article>
+
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🌿</p>
+            <h4>Mangue</h4>
+            <p>
+              Presente nas baías de Florianópolis e no norte do estado, funciona
+              como berçário de camarões, caranguejos e peixes.
+            </p>
+          </article>
+        </div>
+
+        <h3 class="revelar" style="margin-top:3rem">Fauna</h3>
+        <div class="grade-blocos revelar" style="margin-top:1.25rem">
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🐬</p>
+            <h4>Boto-cinza</h4>
+            <p>
+              Vive nas baías de Florianópolis e é considerado ameaçado. Em Laguna,
+              a subespécie local pesca em parceria com os pescadores artesanais.
+            </p>
+          </article>
+
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🦜</p>
+            <h4>Papagaio-charão</h4>
+            <p>
+              Depende diretamente da araucária para se alimentar e nidificar.
+              Urupema e Urubici estão entre os principais pontos de observação e
+              proteção da espécie no Brasil.
+            </p>
+            <p class="bloco__nota">sem araucária, não há charão</p>
+          </article>
+
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🐋</p>
+            <h4>Baleia-franca</h4>
+            <p>
+              Entre julho e novembro, as fêmeas vêm parir nas águas calmas do sul
+              catarinense. A região tem uma Área de Proteção Ambiental criada só
+              para elas.
+            </p>
+          </article>
+
+          <article class="bloco">
+            <p class="bloco__icone" aria-hidden="true">🦦</p>
+            <h4>Lontra e gato-do-mato</h4>
+            <p>
+              Habitam rios e florestas do interior. São indicadores de ambientes
+              bem preservados e aparecem nos parques estaduais da serra.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         DIFERENCIAL 2 — GALERIA COM FILTRO
+         O JS (js/script.js) lê data-categoria de cada figura e aplica hidden
+         nos itens fora do filtro. Nenhuma biblioteca externa.
+         ================================================================= -->
+    <section class="secao secao--principal" id="galeria">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Galeria</span>
+          <h2>Fotos por categoria</h2>
+          <p class="subtitulo-secao">
+            Use os botões para filtrar as fotos por tema. A seleção acontece na
+            hora, sem recarregar a página.
+          </p>
+        </div>
+
+        <div class="filtros" role="group" aria-label="Filtrar fotos por categoria">
+          <button class="filtro-botao" type="button" data-filtro="todas" aria-pressed="true">Todas</button>
+          <button class="filtro-botao" type="button" data-filtro="litoral" aria-pressed="false">Litoral</button>
+          <button class="filtro-botao" type="button" data-filtro="serra" aria-pressed="false">Serra</button>
+          <button class="filtro-botao" type="button" data-filtro="cidades" aria-pressed="false">Cidades</button>
+          <button class="filtro-botao" type="button" data-filtro="gastronomia" aria-pressed="false">Gastronomia</button>
+        </div>
+
+        <p class="galeria-contador" data-galeria-contador role="status" aria-live="polite"></p>
+
+        <!-- TROCAR: todas as imagens abaixo por fotos próprias em
+             assets/litoral/, assets/serra/, assets/cidades/ e assets/gastronomia/ -->
+        <div class="galeria" data-galeria>
+
+          <!-- ---------- Litoral ---------- -->
+          <figure class="galeria__item" data-categoria="litoral">
+            <img src="https://picsum.photos/seed/gal-joaquina/600/450"
+                 alt="Dunas de areia clara com mar ao fundo na Praia da Joaquina, Florianópolis."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Praia da Joaquina</strong>
+              <span>Florianópolis</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="litoral">
+            <img src="https://picsum.photos/seed/gal-bombinhas/600/450"
+                 alt="Enseada de água transparente cercada por morros verdes em Bombinhas."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Praia de Bombinhas</strong>
+              <span>Bombinhas</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="litoral">
+            <img src="https://picsum.photos/seed/gal-guarda-embau/600/450"
+                 alt="Rio encontrando o mar entre um morro e uma faixa de areia, na Guarda do Embaú."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Guarda do Embaú</strong>
+              <span>Palhoça</span>
+            </figcaption>
+          </figure>
+
+          <!-- ---------- Serra ---------- -->
+          <figure class="galeria__item" data-categoria="serra">
+            <img src="https://picsum.photos/seed/gal-rio-do-rastro/600/450"
+                 alt="Curvas da Serra do Rio do Rastro vistas do mirante, com nuvens abaixo da estrada."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Serra do Rio do Rastro</strong>
+              <span>Bom Jardim da Serra</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="serra">
+            <img src="https://picsum.photos/seed/gal-morro-da-igreja/600/450"
+                 alt="Formação rochosa Pedra Furada vista do alto do Morro da Igreja, em Urubici."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Morro da Igreja</strong>
+              <span>Urubici</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="serra">
+            <img src="https://picsum.photos/seed/gal-araucarias-geada/600/450"
+                 alt="Floresta de araucárias sob geada, com campo esbranquiçado ao amanhecer."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Floresta de araucárias</strong>
+              <span>São Joaquim</span>
+            </figcaption>
+          </figure>
+
+          <!-- ---------- Cidades ---------- -->
+          <figure class="galeria__item" data-categoria="cidades">
+            <img src="https://picsum.photos/seed/gal-ponte-hercilio/600/450"
+                 alt="Ponte Hercílio Luz iluminada ao anoitecer, ligando a ilha ao continente."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Ponte Hercílio Luz</strong>
+              <span>Florianópolis</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="cidades">
+            <img src="https://picsum.photos/seed/gal-blumenau-centro/600/450"
+                 alt="Prédio de estilo germânico com torre de relógio no centro de Blumenau."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Centro histórico</strong>
+              <span>Blumenau</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="cidades">
+            <img src="https://picsum.photos/seed/gal-bc-teleferico/600/450"
+                 alt="Cabine de teleférico sobre morro arborizado com vista para a praia de Balneário Camboriú."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Teleférico do Parque Unipraias</strong>
+              <span>Balneário Camboriú</span>
+            </figcaption>
+          </figure>
+
+          <!-- ---------- Gastronomia ---------- -->
+          <figure class="galeria__item" data-categoria="gastronomia">
+            <img src="https://picsum.photos/seed/gal-ostras/600/450"
+                 alt="Bandeja de ostras frescas abertas, servidas com limão."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Ostras da Baía Sul</strong>
+              <span>Ribeirão da Ilha</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="gastronomia">
+            <img src="https://picsum.photos/seed/gal-cuca/600/450"
+                 alt="Pedaço de cuca com farofa doce por cima, sobre prato de cerâmica."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Cuca de banana</strong>
+              <span>Vale do Itajaí</span>
+            </figcaption>
+          </figure>
+
+          <figure class="galeria__item" data-categoria="gastronomia">
+            <img src="https://picsum.photos/seed/gal-pinhao/600/450"
+                 alt="Pinhões cozidos em panela de ferro, ainda com casca escura."
+                 width="600" height="450" loading="lazy">
+            <figcaption>
+              <strong>Pinhão cozido</strong>
+              <span>Planalto Serrano</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         ROTEIROS
+         ================================================================= -->
+    <section class="secao" id="roteiros">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Roteiros</span>
+          <h2>Três formas de conhecer o estado</h2>
+        </div>
+
+        <div class="grade-cards">
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <img src="https://picsum.photos/seed/rot-praias/800/500"
+                   alt="Trilha costeira levando a uma praia isolada entre morros de mata."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Verão</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h3>Rota das praias</h3>
+              <p>
+                De Bombinhas a Garopaba, passando por Florianópolis: praias
+                urbanas, enseadas de água clara e trilhas até praias sem acesso
+                de carro.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">4 a 7 dias</li>
+                <li class="etiqueta-dado">Dez. a mar.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <img src="https://picsum.photos/seed/rot-serra-inverno/800/500"
+                   alt="Estrada de terra entre campos de altitude cobertos de geada, com araucárias ao longe."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Inverno</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h3>Rota do frio</h3>
+              <p>
+                Lages, Urubici, São Joaquim e a descida da Serra do Rio do Rastro:
+                cânions, cachoeiras, vinícolas de altitude e a chance de ver neve.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">3 a 5 dias</li>
+                <li class="etiqueta-dado">Jun. a ago.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <img src="https://picsum.photos/seed/rot-vale-europeu/800/500"
+                   alt="Rua de cidade colonial alemã com casas de madeira e flores nas janelas."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Ano inteiro</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h3>Vale Europeu</h3>
+              <p>
+                Blumenau, Pomerode, Timbó e Rio dos Cedros: rota do enxaimel,
+                cervejarias artesanais, cafés coloniais e ciclovias entre colônias.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">2 a 4 dias</li>
+                <li class="etiqueta-dado">Out. na Oktoberfest</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <aside class="voce-sabia revelar" style="margin-top:2.5rem">
+          <h3>Você sabia?</h3>
+          <p>
+            A Serra do Rio do Rastro sobe 1.400 metros em apenas 12 quilômetros de
+            estrada, com 284 curvas. O mirante no topo fica acima do nível das
+            nuvens em boa parte dos dias de inverno.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape__grade">
+
+        <div class="rodape__sobre">
+          <h2>Terra Catarinense</h2>
+          <p>
+            Site educativo sobre o estado de Santa Catarina, produzido como
+            trabalho da disciplina de Front-End do curso Técnico em Informática
+            do IFMT — Campus Várzea Grande.
+          </p>
+
+          <div class="rodape__mapa-estado">
+            <svg viewBox="0 0 600 380" role="img" aria-label="Contorno real do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
+              <path class="regiao" d="M136.36,64.38L166.21,68.94L193.93,84.37L227.25,82.95L236.06,95.45L251.65,83.77L247.36,63.12L254.43,69.53L260.85,63.5L272.56,64.72L270.32,73.87L283.85,80.3L290.52,92.71L300.19,90.75L316.68,106.36L307.87,110.62L306.29,123.65L296.13,138.23L290.3,136.26L285.53,142.85L277.44,136.24L257.41,152.91L246.42,145.74L244.11,158.56L230.65,158.8L221.1,152.14L217.21,157.35L224.13,162.16L221.59,170.47L212.87,176.39L209.33,172.36L196.59,177L194.39,172.11L192.05,176.16L182,157.81L173.57,159.11L166.76,152.11L162.49,157.19L160.17,150.08L156.16,156.35L143.04,146.26L139.04,151.16L124.01,148.15L121.93,152.58L106.88,141.41L100.22,144.83L97.96,140.77L95.51,146.59L91.08,132.68L87.02,140.88L78.85,139.25L66.58,146.32L68.17,138.53L61.79,133.88L49.55,137.92L50.44,144.79L20,141.31L23.54,128.4L26.87,130.68L24.47,127.21L34.43,119.07L27.02,88.86L37.52,49.5L50.23,54.68L68.52,49.23L85.86,63.63L117.36,58.64L136.36,64.38Z"></path>
+              <path class="regiao" d="M484.43,22.09L484.32,37.62L492.48,48.03L484.54,69.77L474.52,84.13L463.95,76L461.46,87.81L445.35,101.67L444.37,89.5L423.27,85.17L422.55,78.66L409.3,73.29L399.72,76.82L393.81,94.83L386.26,94.88L382.73,102.77L374.4,94.95L364.41,105.24L353.46,107.76L344.98,103.42L337.25,110.75L316.2,89.32L313.19,102.45L300.19,90.75L290.52,92.71L283.85,80.3L270.32,73.87L272.56,64.72L260.85,63.5L254.43,69.53L247.36,63.12L264.33,47.17L276.4,52.65L277.29,47.87L279.92,53.33L282.81,48.63L296.54,48.84L304.27,30.67L310.97,30.26L309.39,24.61L330.39,37.91L337.65,27.46L344.12,32.29L344.83,26.93L349.24,30.58L360.49,25.55L362.47,30.24L365.13,25.3L399.31,48.16L433.66,24.47L484.43,22.09Z"></path>
+              <path class="regiao" d="M478.32,82.32L477.83,101L485.33,102.8L480.12,115.43L486.7,125.31L482.78,134.6L488.06,140.17L491.97,135.81L495.88,138.76L494.87,144.98L478.56,146.09L475.29,138.17L465.13,138.01L445.1,151.66L430.42,153.84L422.17,160.43L419.96,183.37L406.54,181.06L393.75,190.35L392.93,186.21L383.13,189.28L366.72,166.45L334.22,145.27L329.02,133.95L340.45,105.82L364.41,105.24L374.4,94.95L382.73,102.77L386.26,94.88L393.81,94.83L399.72,76.82L409.3,73.29L422.55,78.66L423.27,85.17L444.37,89.5L445.35,101.67L461.46,87.81L463.95,76L473.23,84.32L478.32,82.32Z"></path>
+              <path class="regiao" d="M337.25,110.75L329.02,133.95L334.22,145.27L357.59,157.29L358.4,164.4L366.72,166.45L383.13,189.28L403.52,184.5L407.87,200.54L423.54,211.82L413.51,235.63L401.5,243.24L399.56,272.89L386.21,287.37L380.52,270.43L364.7,272.65L362.5,268.5L351.01,273.11L348.61,268.51L345.5,274.01L338.04,267.3L328.72,270.2L304.62,263.78L290.39,238.86L282.37,237.54L278.05,221.63L269.64,220.17L264.53,208.64L250.38,202.43L236.96,186.8L233.01,190.02L227.81,180.35L221.07,182.89L215.33,177.72L224.13,162.16L217.21,157.35L221.1,152.14L230.65,158.8L244.11,158.56L246.42,145.74L257.41,152.91L277.44,136.24L285.53,142.85L290.3,136.26L296.13,138.23L306.29,123.65L307.87,110.62L316.68,106.36L316.2,89.32L337.25,110.75Z"></path>
+              <path class="regiao" d="M483.72,146.25L483.76,155.22L490.53,158.84L485.28,169.94L494.27,162.27L504.36,168.78L492.76,195.6L494.97,201.5L484.32,209.59L474.49,232.73L457.26,230.57L451.23,235.25L443.92,223.49L421.16,218.5L423.54,211.82L407.87,200.54L403.29,187.88L406.54,181.06L420.73,182.73L423.8,158.05L445.1,151.66L465.13,138.01L475.29,138.17L483.72,146.25Z"></path>
+              <path class="regiao" d="M482.11,218.96L479.93,247.89L464.99,285.12L422.77,312.73L385.38,357.05L363.21,344.38L349.82,350.23L356.28,360L348.33,354.88L344.24,349.44L347.7,343.87L349.92,348.37L351.33,340.39L358.37,342.68L363.8,332.98L359.76,331.43L366.31,322.43L365.7,297.05L373.87,295.11L379.18,285.46L388.56,286.37L399.56,272.89L401.5,243.24L413.51,235.63L421.16,218.5L443.92,223.49L451.23,235.25L457.26,230.57L474.49,232.73L482.11,218.96Z"></path>
+              <circle cx="488.53" cy="184" r="6" fill="#C1272D"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <nav class="rodape__navegacao" id="mapa-site" aria-labelledby="titulo-mapa-site">
+          <h3 class="rodape__titulo" id="titulo-mapa-site">Mapa do site</h3>
+          <ul class="rodape__lista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="index.html#sobre">Sobre Santa Catarina</a></li>
+            <li><a href="panorama.html#geografia">Geografia</a></li>
+            <li><a href="cidades.html">Cidades e regiões</a></li>
+            <li><a href="cultura.html">Cultura e imigração</a></li>
+            <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+            <li><a href="turismo.html">Turismo e natureza</a></li>
+            <li><a href="panorama.html#economia">Economia</a></li>
+            <li><a href="curiosidades.html">Curiosidades</a></li>
+            <li><a href="index.html#fontes">Fontes de pesquisa</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="rodape__titulo">Fontes de pesquisa</h3>
+          <ul class="rodape__lista">
+            <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
+            <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
+            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
+          </ul>
+
+          <h3 class="rodape__titulo" style="margin-top:1.5rem">Redes sociais</h3>
+          <ul class="redes">
+            <li>
+              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
+                 aria-label="Perfil do projeto Terra Catarinense no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
+                 aria-label="Canal do projeto Terra Catarinense no YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
+                 aria-label="Página do projeto Terra Catarinense no Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rodape__base">
+        <p>
+          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Imagens ilustrativas de banco público de imagens.
+        </p>
+        <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="voltar-topo" type="button" data-voltar-topo
+          aria-label="Voltar ao topo da página">&#8593;</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

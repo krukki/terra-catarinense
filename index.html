@@ -1,0 +1,735 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terra Catarinense — Conheça Santa Catarina</title>
+  <meta name="description" content="Site educativo sobre Santa Catarina: geografia, clima, colonização, cidades, cultura, gastronomia, turismo e economia do estado.">
+  <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
+
+  <!-- Google Fonts: Montserrat (títulos), Nunito Sans (texto), Caveat (selos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon: selo "SC" com o gradiente da marca -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0E7C9C">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- ==================================================================
+       HEADER STICKY (componente reutilizável — igual em todas as páginas)
+       =================================================================== -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interno">
+      <a class="logo" href="index.html">
+        <span class="logo__marca" aria-hidden="true">SC</span>
+        <span class="logo__texto">
+          Terra Catarinense
+          <small>o estado mais diverso do Brasil</small>
+        </span>
+      </a>
+
+      <button class="menu-botao" type="button" data-menu-botao
+              aria-expanded="false" aria-controls="menu-principal">
+        <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
+        <span data-menu-rotulo>Menu</span>
+      </button>
+
+      <nav class="navegacao" id="menu-principal" data-menu aria-label="Navegação principal">
+        <ul class="navegacao__lista">
+          <li><a href="index.html" aria-current="page">Início</a></li>
+          <li><a href="panorama.html#geografia">Geografia</a></li>
+          <li><a href="cidades.html">Cidades</a></li>
+          <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+          <li><a href="turismo.html">Turismo</a></li>
+          <li><a href="panorama.html#economia">Economia</a></li>
+          <li><a href="curiosidades.html">Curiosidades</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <main id="conteudo">
+
+    <!-- ================================================================
+         BANNER ROTATIVO — 3 imagens alternadas por JS (sem biblioteca)
+         TROCAR: substituir as URLs do picsum por fotos definitivas em
+         assets/litoral/ e assets/serra/.
+         ================================================================= -->
+    <section class="banner" data-banner aria-roledescription="carrossel"
+             aria-label="Paisagens de Santa Catarina">
+
+      <div class="banner__slides">
+        <div class="banner__slide" data-slide data-ativo="true"
+             data-legenda="Foto 1 de 3 — Praia da Joaquina, Florianópolis (litoral)">
+          <img src="https://picsum.photos/seed/sc-litoral-praia/1600/900"
+               alt="Praia de areia clara com mar aberto e morros cobertos de vegetação ao fundo, no litoral de Santa Catarina."
+               width="1600" height="900">
+        </div>
+        <div class="banner__slide" data-slide
+             data-legenda="Foto 2 de 3 — Serra do Rio do Rastro, Bom Jardim da Serra (serra)">
+          <img src="https://picsum.photos/seed/sc-serra-estrada/1600/900"
+               alt="Estrada sinuosa descendo uma serra alta entre paredões de rocha e nuvens baixas."
+               width="1600" height="900" loading="lazy">
+        </div>
+        <div class="banner__slide" data-slide
+             data-legenda="Foto 3 de 3 — Araucárias no planalto serrano, São Joaquim (serra)">
+          <img src="https://picsum.photos/seed/sc-araucaria-campo/1600/900"
+               alt="Campos de altitude com araucárias isoladas e geada leve sobre a vegetação, no planalto serrano."
+               width="1600" height="900" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container banner__conteudo">
+        <span class="banner__selo">de mar em mar, de serra em serra</span>
+        <h1>Santa Catarina: praia de manhã, neve à tarde</h1>
+        <p class="banner__texto">
+          Um estado pequeno no mapa e enorme na variedade: mais de 500 praias,
+          uma serra que congela no inverno e três heranças de imigração vivas na
+          mesa e na arquitetura.
+        </p>
+
+        <p class="banner__acoes">
+          <a class="botao botao--destaque" href="#sobre">Explore o Estado</a>
+          <a class="botao botao--contorno" href="cidades.html">Ver cidades e regiões</a>
+        </p>
+
+        <!-- Controles do carrossel -->
+        <div class="banner__controles">
+          <button class="banner__seta" type="button" data-banner-anterior
+                  aria-label="Foto anterior">&#8249;</button>
+          <button class="banner__seta" type="button" data-banner-proximo
+                  aria-label="Próxima foto">&#8250;</button>
+
+          <div class="banner__pontos" role="tablist" aria-label="Escolher foto do banner">
+            <button class="banner__ponto" type="button" data-ponto role="tab"
+                    aria-selected="true" aria-label="Foto 1: litoral"></button>
+            <button class="banner__ponto" type="button" data-ponto role="tab"
+                    aria-selected="false" aria-label="Foto 2: serra do Rio do Rastro"></button>
+            <button class="banner__ponto" type="button" data-ponto role="tab"
+                    aria-selected="false" aria-label="Foto 3: araucárias"></button>
+          </div>
+
+          <button class="banner__pausa" type="button" data-banner-pausa
+                  aria-pressed="false"
+                  aria-label="Pausar rotação automática das fotos">&#9208;</button>
+        </div>
+
+        <p class="banner__legenda" data-banner-legenda role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         SOBRE SANTA CATARINA
+         ================================================================= -->
+    <section class="secao" id="sobre">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">O projeto</span>
+          <h2>Sobre Santa Catarina</h2>
+        </div>
+
+        <div class="texto-medida revelar">
+          <p>
+            O <strong>Terra Catarinense</strong> é um site educativo que apresenta o
+            estado de Santa Catarina de forma completa e visual: geografia, clima,
+            história da colonização, cidades e regiões, cultura, gastronomia e turismo.
+          </p>
+          <p>
+            A proposta é mostrar, por meio de textos objetivos, mapas, fotografias e
+            curiosidades, por que Santa Catarina é um dos estados mais diversos do
+            Brasil — reunindo mais de <strong>500 praias</strong>, uma serra com clima
+            <strong>subtropical de altitude</strong>, forte herança da imigração
+            <strong>açoriana, alemã e italiana</strong>, e uma das economias mais
+            fortes do país.
+          </p>
+          <p class="selo">É o único estado brasileiro onde nevar não é notícia de primeira página.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         MAPA + CARDS DE CARACTERÍSTICAS (duas colunas)
+         ================================================================= -->
+    <section class="secao secao--clara" id="caracteristicas">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Onde fica</span>
+          <h2>O estado em números e no mapa</h2>
+          <p class="subtitulo-secao">
+            Santa Catarina está na Região Sul do Brasil, entre o Paraná e o Rio
+            Grande do Sul, com a Argentina a oeste e o Oceano Atlântico a leste.
+          </p>
+        </div>
+
+        <div class="duas-colunas">
+
+          <!-- Coluna 1: mapa em SVG, contorno real do estado -->
+          <figure class="mapa-quadro revelar">
+            <svg class="mapa-svg" viewBox="0 0 600 380" role="img"
+                 aria-labelledby="titulo-mapa-home desc-mapa-home">
+              <title id="titulo-mapa-home">Mapa de Santa Catarina</title>
+              <desc id="desc-mapa-home">
+                Contorno real do estado, com as fronteiras oficiais do IBGE para
+                as seis mesorregiões: Oeste Catarinense, Norte Catarinense, Vale
+                do Itajaí, Serrana, Grande Florianópolis (Litoral) e Sul
+                Catarinense. O ponto vermelho marca a capital, Florianópolis.
+              </desc>
+
+              <path class="regiao" d="M136.36,64.38L166.21,68.94L193.93,84.37L227.25,82.95L236.06,95.45L251.65,83.77L247.36,63.12L254.43,69.53L260.85,63.5L272.56,64.72L270.32,73.87L283.85,80.3L290.52,92.71L300.19,90.75L316.68,106.36L307.87,110.62L306.29,123.65L296.13,138.23L290.3,136.26L285.53,142.85L277.44,136.24L257.41,152.91L246.42,145.74L244.11,158.56L230.65,158.8L221.1,152.14L217.21,157.35L224.13,162.16L221.59,170.47L212.87,176.39L209.33,172.36L196.59,177L194.39,172.11L192.05,176.16L182,157.81L173.57,159.11L166.76,152.11L162.49,157.19L160.17,150.08L156.16,156.35L143.04,146.26L139.04,151.16L124.01,148.15L121.93,152.58L106.88,141.41L100.22,144.83L97.96,140.77L95.51,146.59L91.08,132.68L87.02,140.88L78.85,139.25L66.58,146.32L68.17,138.53L61.79,133.88L49.55,137.92L50.44,144.79L20,141.31L23.54,128.4L26.87,130.68L24.47,127.21L34.43,119.07L27.02,88.86L37.52,49.5L50.23,54.68L68.52,49.23L85.86,63.63L117.36,58.64L136.36,64.38Z"></path>
+              <text class="mapa-rotulo" x="159.66" y="110.13" text-anchor="middle">Oeste</text>
+
+              <path class="regiao" d="M484.43,22.09L484.32,37.62L492.48,48.03L484.54,69.77L474.52,84.13L463.95,76L461.46,87.81L445.35,101.67L444.37,89.5L423.27,85.17L422.55,78.66L409.3,73.29L399.72,76.82L393.81,94.83L386.26,94.88L382.73,102.77L374.4,94.95L364.41,105.24L353.46,107.76L344.98,103.42L337.25,110.75L316.2,89.32L313.19,102.45L300.19,90.75L290.52,92.71L283.85,80.3L270.32,73.87L272.56,64.72L260.85,63.5L254.43,69.53L247.36,63.12L264.33,47.17L276.4,52.65L277.29,47.87L279.92,53.33L282.81,48.63L296.54,48.84L304.27,30.67L310.97,30.26L309.39,24.61L330.39,37.91L337.65,27.46L344.12,32.29L344.83,26.93L349.24,30.58L360.49,25.55L362.47,30.24L365.13,25.3L399.31,48.16L433.66,24.47L484.43,22.09Z"></path>
+              <text class="mapa-rotulo" x="377.33" y="62.19" text-anchor="middle">Norte</text>
+
+              <path class="regiao" d="M478.32,82.32L477.83,101L485.33,102.8L480.12,115.43L486.7,125.31L482.78,134.6L488.06,140.17L491.97,135.81L495.88,138.76L494.87,144.98L478.56,146.09L475.29,138.17L465.13,138.01L445.1,151.66L430.42,153.84L422.17,160.43L419.96,183.37L406.54,181.06L393.75,190.35L392.93,186.21L383.13,189.28L366.72,166.45L334.22,145.27L329.02,133.95L340.45,105.82L364.41,105.24L374.4,94.95L382.73,102.77L386.26,94.88L393.81,94.83L399.72,76.82L409.3,73.29L422.55,78.66L423.27,85.17L444.37,89.5L445.35,101.67L461.46,87.81L463.95,76L473.23,84.32L478.32,82.32Z"></path>
+              <text class="mapa-rotulo" x="408.36" y="128.36" text-anchor="middle">Vale do Itajaí</text>
+
+              <path class="regiao" d="M337.25,110.75L329.02,133.95L334.22,145.27L357.59,157.29L358.4,164.4L366.72,166.45L383.13,189.28L403.52,184.5L407.87,200.54L423.54,211.82L413.51,235.63L401.5,243.24L399.56,272.89L386.21,287.37L380.52,270.43L364.7,272.65L362.5,268.5L351.01,273.11L348.61,268.51L345.5,274.01L338.04,267.3L328.72,270.2L304.62,263.78L290.39,238.86L282.37,237.54L278.05,221.63L269.64,220.17L264.53,208.64L250.38,202.43L236.96,186.8L233.01,190.02L227.81,180.35L221.07,182.89L215.33,177.72L224.13,162.16L217.21,157.35L221.1,152.14L230.65,158.8L244.11,158.56L246.42,145.74L257.41,152.91L277.44,136.24L285.53,142.85L290.3,136.26L296.13,138.23L306.29,123.65L307.87,110.62L316.68,106.36L316.2,89.32L337.25,110.75Z"></path>
+              <text class="mapa-rotulo" x="326.07" y="199.12" text-anchor="middle">Planalto Serrano</text>
+
+              <path class="regiao" d="M504.28,151.67L505.34,153.78L503.78,153.03L504.28,151.67ZM483.72,146.25L482.47,150.65L483.76,155.22L485.32,156.43L488.08,155.85L489.36,154.37L490.53,158.84L489.54,160.19L489.91,164.4L488.45,165.55L488.19,167.81L485.28,169.94L489.91,167.21L490.48,165.27L494.27,162.27L500.18,162.49L502.57,168.12L504.36,168.78L503.03,172.81L499.39,178.69L499.33,181.66L500.53,181.62L498.8,185.81L492.76,195.6L492.22,199.1L494.97,201.5L493.02,203.95L492.22,202.75L489.76,204.03L488.85,207.49L484.32,209.59L483.9,212.04L486.34,213.05L479.58,221.09L478.9,223.22L474.46,227.1L473.07,230.53L474.14,230.55L474.49,232.73L465.58,233.81L465.37,232.31L462.89,231.66L457.92,232.46L457.26,230.57L454.54,231.71L452.96,235.19L451.23,235.25L450.83,232.56L446.53,229.35L443.92,223.49L439.18,225.16L435.45,225.07L434.26,221.23L432.84,222.64L422.51,218.01L421.16,218.5L421.41,215.96L423.54,211.82L422.25,211.96L420.2,207.4L418.44,208.05L416.85,205.7L414.67,205.89L409.89,200.24L407.87,200.54L406.62,197.48L407.9,195.43L403.29,187.88L403.52,184.5L406.54,181.06L410.52,182.77L411.92,180.69L417.05,180.71L419.96,183.37L420.73,182.73L419.62,180.45L420.3,179.19L419.56,176.92L422.5,171.79L422.28,166.86L421.37,166.25L421.01,163.86L423.8,158.05L428.52,156.54L430.42,153.84L433.15,153.95L441.94,151.52L442.68,152.18L445.1,151.66L465.13,138.01L466.22,139.96L468.08,139.56L468.47,138.08L470.3,138L471.38,139.31L475.29,138.17L477.18,141.39L476.11,142.11L476.57,143.96L478.56,146.09L483.28,145.5L483.72,146.25Z"></path>
+              <text class="mapa-rotulo" x="455.96" y="186.75" text-anchor="middle">Litoral</text>
+
+              <path class="regiao" d="M482.11,218.96L481.17,223.6L481.6,226.05L483.11,226.12L484.13,227.48L483.22,228.37L483.15,230.76L481.14,233.19L478.35,242.9L478.94,244.01L478.02,245.8L479.93,247.89L477.56,249.69L475.02,254.2L474.77,258.28L471.88,262.32L469.19,270.96L469.51,273.62L470.87,275.28L464.75,283.45L464.99,285.12L461.67,285.79L450.51,291.83L432.08,304.63L422.77,312.73L406.82,329.19L395.12,343.34L385.38,357.05L382.79,357.4L383.76,356.33L382.91,354.44L379.76,354.24L373.49,351.66L372.58,347.83L367.63,345.29L363.21,344.38L360.22,347.32L349.82,350.23L350.23,352.42L354.23,355.58L356.82,359.27L356.28,360L355.4,358.4L353.89,358.75L354.73,357.22L349.94,354.89L348.6,352.67L348.33,354.88L346.49,349.31L344.24,349.44L347.42,348.33L346.78,346.49L347.97,346L347.7,343.87L351.65,345.77L349.9,347.02L349.92,348.37L351.72,346.92L352.4,344.34L351.21,342.55L351.33,340.39L354.31,340.02L351.88,340.95L353.42,343.29L358.37,342.68L357.37,341.68L359.11,340.17L358.72,337.17L361.3,338.16L360.6,336.58L362.66,336.09L362.73,332.91L363.8,332.98L363.69,330.82L359.76,331.43L363.37,329.57L365.16,326.72L362.93,326.66L365.01,322.71L366.31,322.43L365.79,321.07L363.69,320.78L363.01,317.04L364.91,312.45L363.04,307.32L363.34,301.7L364.83,299.68L366.85,299.04L365.7,297.05L368.24,295.24L369.03,297.09L370.32,296.21L369.49,298.41L371.27,294.77L373.87,295.11L374.21,291.06L375.46,291.05L375.94,288.76L379.18,285.46L379.44,287.4L381.45,286.03L381.45,287.21L386.21,287.37L388.56,286.37L391.28,283.38L390.42,280.59L391.33,278.69L399.56,272.89L398.64,271.17L400.41,267.99L398.83,267.92L398.24,265.81L400.34,262.78L398.85,261.77L402.2,254.27L401.74,251.28L399.94,251.7L401.35,249.88L401.2,248.66L399.72,248.42L401.52,247.08L401.5,243.24L405.23,237.2L409.43,237.69L409.82,236.2L413.51,235.63L413.12,232.53L415.44,231.06L417.51,224.05L420.36,222.69L421.16,218.5L422.51,218.01L432.84,222.64L434.26,221.23L435.45,225.07L439.18,225.16L443.92,223.49L446.53,229.35L450.83,232.56L451.23,235.25L452.96,235.19L454.54,231.71L457.26,230.57L457.92,232.46L462.89,231.66L465.37,232.31L465.58,233.81L474.49,232.73L474.14,230.55L473.07,230.53L474.46,227.1L476.24,226.31L479.58,221.09L482.11,218.96Z"></path>
+              <text class="mapa-rotulo" x="417.74" y="282.73" text-anchor="middle">Sul</text>
+
+              <!-- Marcador da capital -->
+              <circle cx="488.53" cy="184" r="5" fill="#C1272D" stroke="#FFFFFF" stroke-width="1.5"></circle>
+            </svg>
+
+            <figcaption>
+              Contorno real do estado, com as fronteiras oficiais do IBGE para
+              as seis mesorregiões catarinenses (projeção simplificada a partir
+              de dados geográficos abertos). O ponto vermelho no litoral marca
+              a capital, Florianópolis.
+            </figcaption>
+          </figure>
+
+          <!-- Coluna 2: cards de dados -->
+          <div class="revelar">
+            <dl class="cards-dados">
+              <div class="card-dado">
+                <dt>Área</dt>
+                <dd>95.730 km² <small>o 20º estado em extensão</small></dd>
+              </div>
+              <div class="card-dado">
+                <dt>População</dt>
+                <dd>7,6 milhões <small>Censo IBGE 2022</small></dd>
+              </div>
+              <div class="card-dado">
+                <dt>Capital</dt>
+                <dd>Florianópolis <small>cidade-ilha, fundada em 1726</small></dd>
+              </div>
+              <div class="card-dado">
+                <dt>Municípios</dt>
+                <dd>295 <small>de 1,4 mil a 600 mil habitantes</small></dd>
+              </div>
+              <div class="card-dado">
+                <dt>Litoral</dt>
+                <dd>561 km <small>mais de 500 praias</small></dd>
+              </div>
+              <div class="card-dado">
+                <dt>Ponto mais alto</dt>
+                <dd>1.827 m <small>Morro da Boa Vista, Grão-Pará</small></dd>
+              </div>
+            </dl>
+
+            <aside class="voce-sabia">
+              <h3>Você sabia?</h3>
+              <p>
+                Santa Catarina ocupa cerca de 1% do território brasileiro, mas
+                aparece entre os primeiros lugares nacionais em IDH, expectativa
+                de vida e exportação de carnes.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         CIDADES EM DESTAQUE
+         ================================================================= -->
+    <section class="secao" id="cidades-destaque">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Cidades</span>
+          <h2>Cidades em destaque</h2>
+          <p class="subtitulo-secao">
+            Três retratos diferentes do mesmo estado: a capital-ilha, a cidade
+            alemã do Vale do Itajaí e a metrópole vertical do litoral.
+          </p>
+        </div>
+
+        <!-- TROCAR: fotos definitivas em assets/cidades/ -->
+        <div class="grade-cards">
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <img src="https://picsum.photos/seed/floripa-ponte/800/500"
+                   alt="Vista aérea de Florianópolis com a ponte pênsil ligando a ilha ao continente e o mar ao redor."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Litoral</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h3>Florianópolis</h3>
+              <p>
+                Capital do estado e uma das poucas cidades-ilha do Brasil. Reúne
+                mais de 40 praias, centro histórico açoriano, mercado público e um
+                polo de tecnologia que rendeu à cidade o apelido de "Vale do Silício
+                brasileiro".
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~540 mil habitantes</li>
+                <li class="etiqueta-dado">Herança açoriana</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <img src="https://picsum.photos/seed/blumenau-enxaimel/800/500"
+                   alt="Prédios de arquitetura enxaimel, com vigas de madeira aparentes, em rua de Blumenau."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Vale do Itajaí</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h3>Blumenau</h3>
+              <p>
+                Fundada por imigrantes alemães em 1850, é o centro da cultura
+                germânica no Brasil. Casas em estilo enxaimel, cervejarias
+                artesanais e a Oktoberfest, uma das maiores festas alemãs fora
+                da Alemanha.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~360 mil habitantes</li>
+                <li class="etiqueta-dado">Imigração alemã</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <img src="https://picsum.photos/seed/bc-predios-praia/800/500"
+                   alt="Praia com faixa de areia estreita e fileira de edifícios altos ao fundo, em Balneário Camboriú."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Litoral Norte</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h3>Balneário Camboriú</h3>
+              <p>
+                O destino de praia mais verticalizado do país, com arranha-céus
+                que rivalizam em altura com os de grandes capitais. Tem
+                teleférico ligando duas praias e uma das maiores rendas médias
+                do Brasil.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~150 mil habitantes</li>
+                <li class="etiqueta-dado">Turismo de verão</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <p class="revelar" style="margin-top:1.75rem">
+          <a class="link-seta" href="cidades.html">
+            Ver todas as cidades e o mapa interativo das regiões
+          </a>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         DIFERENCIAL: DUAS SANTA CATARINAS
+         ================================================================= -->
+    <section class="secao secao--principal" id="duas-santa-catarinas">
+      <div class="container">
+        <div class="secao__cabecalho centralizado revelar">
+          <span class="etiqueta">Diversidade climática</span>
+          <h2>Duas Santa Catarinas</h2>
+          <p class="subtitulo-secao">
+            No mesmo dia de julho, é possível tomar sol numa praia de Bombinhas e
+            ver geada em São Joaquim — a 200 km de distância e 1.300 metros acima.
+          </p>
+        </div>
+
+        <div class="comparativo">
+
+          <!-- Lado 1: litoral -->
+          <article class="comparativo__lado comparativo__lado--litoral revelar">
+            <div class="comparativo__foto">
+              <!-- TROCAR: foto definitiva em assets/litoral/ -->
+              <img src="https://picsum.photos/seed/sc-praia-verao/900/520"
+                   alt="Praia ensolarada com mar esverdeado, coqueiros e banhistas ao longe."
+                   width="900" height="520" loading="lazy">
+              <div class="comparativo__titulo">
+                <span>quase sempre verão</span>
+                <h3>Litoral subtropical</h3>
+              </div>
+            </div>
+
+            <div class="comparativo__corpo">
+              <dl class="comparativo__indices">
+                <div>
+                  <dt>Altitude</dt>
+                  <dd>0–30 m</dd>
+                </div>
+                <div>
+                  <dt>Média anual</dt>
+                  <dd>21 °C</dd>
+                </div>
+                <div>
+                  <dt>Verão</dt>
+                  <dd>até 35 °C</dd>
+                </div>
+              </dl>
+
+              <p>
+                Faixa de 561 km de costa, com clima úmido e temperaturas amenas o
+                ano inteiro. A vegetação é de Mata Atlântica, restinga e mangue, e
+                a economia gira em torno do turismo, da pesca e dos portos.
+              </p>
+
+              <ul class="comparativo__lista">
+                <li>Mais de 500 praias, de urbanas a desertas</li>
+                <li>Botos-cinza na Baía Norte e baleias-franca no sul</li>
+                <li>Ostras e mariscos: Florianópolis produz a maior parte do país</li>
+                <li>Neve: nunca</li>
+              </ul>
+            </div>
+          </article>
+
+          <p class="comparativo__divisor" aria-hidden="true">vs.</p>
+
+          <!-- Lado 2: serra -->
+          <article class="comparativo__lado comparativo__lado--serra revelar">
+            <div class="comparativo__foto">
+              <!-- TROCAR: foto definitiva em assets/serra/ -->
+              <img src="https://picsum.photos/seed/sc-serra-geada/900/520"
+                   alt="Campo de altitude coberto de geada ao amanhecer, com araucárias e cerca de madeira."
+                   width="900" height="520" loading="lazy">
+              <div class="comparativo__titulo">
+                <span>o inverno de verdade</span>
+                <h3>Planalto Serrano</h3>
+              </div>
+            </div>
+
+            <div class="comparativo__corpo">
+              <dl class="comparativo__indices">
+                <div>
+                  <dt>Altitude</dt>
+                  <dd>1.200–1.800 m</dd>
+                </div>
+                <div>
+                  <dt>Média anual</dt>
+                  <dd>13 °C</dd>
+                </div>
+                <div>
+                  <dt>Inverno</dt>
+                  <dd>abaixo de 0 °C</dd>
+                </div>
+              </dl>
+
+              <p>
+                Clima subtropical de altitude, com as temperaturas mais baixas do
+                Brasil. A paisagem é de campos de altitude e florestas de
+                araucária, e a economia combina pecuária, maçã, vinho de altitude
+                e turismo de inverno.
+              </p>
+
+              <ul class="comparativo__lista">
+                <li>Urupema e São Joaquim: as cidades mais frias do país</li>
+                <li>Araucárias e imbuias, símbolos da mata de altitude</li>
+                <li>Maçãs e vinhos de altitude premiados</li>
+                <li>Neve: quase todo inverno</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <p class="centralizado revelar" style="margin-top:2rem">
+          <a class="link-seta" href="turismo.html#clima">
+            Entender o clima e a natureza catarinense em detalhe
+          </a>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         PRÉVIA DE CURIOSIDADES — flip cards
+         Viram no hover (desktop) ou no toque/Enter (mobile e teclado)
+         ================================================================= -->
+    <section class="secao secao--verde" id="curiosidades-previa">
+      <div class="container">
+        <div class="secao__cabecalho centralizado revelar">
+          <span class="etiqueta">Curiosidades</span>
+          <h2>Vire os cards e descubra</h2>
+          <p class="subtitulo-secao">
+            Passe o mouse (ou toque, no celular) para ver o que quase ninguém sabe
+            sobre Santa Catarina.
+          </p>
+        </div>
+
+        <div class="grade-flip">
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/sc-neve-serra/600/700"
+                     alt="Galhos e cerca cobertos por uma fina camada de neve em região serrana."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Neve no Brasil?</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Santa Catarina é o estado brasileiro onde <strong>mais neva</strong>.
+                  Em São Joaquim, Urupema e Bom Jardim da Serra, a neve aparece em
+                  quase todos os invernos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/sc-ostras-prato/600/700"
+                     alt="Prato com ostras frescas servidas sobre gelo e limão."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Capital das ostras</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  A maior parte das <strong>ostras cultivadas no Brasil</strong> sai
+                  das baías de Florianópolis. A cidade tem até uma festa dedicada ao
+                  molusco, a Fenaostra.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/sc-pomerode-casa/600/700"
+                     alt="Casa de arquitetura enxaimel com jardim florido em cidade de colonização alemã."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Alemão como língua viva</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Em <strong>Pomerode</strong>, o dialeto pomerano ainda é falado em
+                  casa e no comércio — e é reconhecido como língua cooficial do
+                  município.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+            <div class="flip-card__interno">
+              <div class="flip-card__face flip-card__frente">
+                <img src="https://picsum.photos/seed/sc-laguna-farol/600/700"
+                     alt="Farol antigo à beira-mar em dia de céu nublado, na cidade de Laguna."
+                     width="600" height="700" loading="lazy">
+                <span class="flip-card__dica">toque para virar</span>
+                <h3>Uma república de 4 meses</h3>
+              </div>
+              <div class="flip-card__face flip-card__verso">
+                <h4>Você sabia?</h4>
+                <p>
+                  Em 1839, Laguna foi capital da <strong>República Juliana</strong>,
+                  país independente que durou apenas quatro meses, no contexto da
+                  Revolução Farroupilha.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="centralizado revelar" style="margin-top:2rem">
+          <a class="link-seta" href="curiosidades.html">
+            Ver todas as curiosidades e a gastronomia típica
+          </a>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         FONTES
+         ================================================================= -->
+    <section class="secao secao--verde" id="fontes">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Referências</span>
+          <h2>Fontes de pesquisa</h2>
+          <p class="subtitulo-secao">
+            Todo o conteúdo deste site foi produzido a partir de dados públicos
+            dos portais oficiais abaixo. Os números devem ser reconferidos antes
+            da entrega, porque as estatísticas são atualizadas periodicamente.
+          </p>
+        </div>
+
+        <ul class="fontes revelar">
+          <li>
+            <a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">
+              IBGE Cidades — panorama de Santa Catarina
+            </a>
+            <p>
+              Área, população, número de municípios, PIB, IDH e dados por
+              município. É a fonte usada para todos os números estatísticos do site.
+            </p>
+          </li>
+          <li>
+            <a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">
+              Governo do Estado — Conheça SC
+            </a>
+            <p>
+              História da colonização, símbolos do estado, geografia e informações
+              gerais sobre as regiões catarinenses.
+            </p>
+          </li>
+          <li>
+            <a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">
+              Santur — Agência de Desenvolvimento do Turismo de Santa Catarina
+            </a>
+            <p>
+              Roteiros turísticos, calendário de festas, atrativos naturais e
+              dados sobre as regiões turísticas.
+            </p>
+          </li>
+          <li>
+            <a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">
+              Portal oficial do Estado de Santa Catarina
+            </a>
+            <p>
+              Notícias, indicadores de economia e serviços públicos estaduais.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ==================================================================
+       FOOTER (componente reutilizável — igual em todas as páginas)
+       =================================================================== -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape__grade">
+
+        <div class="rodape__sobre">
+          <h2>Terra Catarinense</h2>
+          <p>
+            Site educativo sobre o estado de Santa Catarina, produzido como
+            trabalho da disciplina de Front-End do curso Técnico em Informática
+            do IFMT — Campus Várzea Grande.
+          </p>
+
+          <!-- Mapa do estado no rodapé (mesma silhueta, sem interação) -->
+          <div class="rodape__mapa-estado">
+            <svg viewBox="0 0 600 380" role="img" aria-label="Contorno real do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
+              <path class="regiao" d="M136.36,64.38L166.21,68.94L193.93,84.37L227.25,82.95L236.06,95.45L251.65,83.77L247.36,63.12L254.43,69.53L260.85,63.5L272.56,64.72L270.32,73.87L283.85,80.3L290.52,92.71L300.19,90.75L316.68,106.36L307.87,110.62L306.29,123.65L296.13,138.23L290.3,136.26L285.53,142.85L277.44,136.24L257.41,152.91L246.42,145.74L244.11,158.56L230.65,158.8L221.1,152.14L217.21,157.35L224.13,162.16L221.59,170.47L212.87,176.39L209.33,172.36L196.59,177L194.39,172.11L192.05,176.16L182,157.81L173.57,159.11L166.76,152.11L162.49,157.19L160.17,150.08L156.16,156.35L143.04,146.26L139.04,151.16L124.01,148.15L121.93,152.58L106.88,141.41L100.22,144.83L97.96,140.77L95.51,146.59L91.08,132.68L87.02,140.88L78.85,139.25L66.58,146.32L68.17,138.53L61.79,133.88L49.55,137.92L50.44,144.79L20,141.31L23.54,128.4L26.87,130.68L24.47,127.21L34.43,119.07L27.02,88.86L37.52,49.5L50.23,54.68L68.52,49.23L85.86,63.63L117.36,58.64L136.36,64.38Z"></path>
+              <path class="regiao" d="M484.43,22.09L484.32,37.62L492.48,48.03L484.54,69.77L474.52,84.13L463.95,76L461.46,87.81L445.35,101.67L444.37,89.5L423.27,85.17L422.55,78.66L409.3,73.29L399.72,76.82L393.81,94.83L386.26,94.88L382.73,102.77L374.4,94.95L364.41,105.24L353.46,107.76L344.98,103.42L337.25,110.75L316.2,89.32L313.19,102.45L300.19,90.75L290.52,92.71L283.85,80.3L270.32,73.87L272.56,64.72L260.85,63.5L254.43,69.53L247.36,63.12L264.33,47.17L276.4,52.65L277.29,47.87L279.92,53.33L282.81,48.63L296.54,48.84L304.27,30.67L310.97,30.26L309.39,24.61L330.39,37.91L337.65,27.46L344.12,32.29L344.83,26.93L349.24,30.58L360.49,25.55L362.47,30.24L365.13,25.3L399.31,48.16L433.66,24.47L484.43,22.09Z"></path>
+              <path class="regiao" d="M478.32,82.32L477.83,101L485.33,102.8L480.12,115.43L486.7,125.31L482.78,134.6L488.06,140.17L491.97,135.81L495.88,138.76L494.87,144.98L478.56,146.09L475.29,138.17L465.13,138.01L445.1,151.66L430.42,153.84L422.17,160.43L419.96,183.37L406.54,181.06L393.75,190.35L392.93,186.21L383.13,189.28L366.72,166.45L334.22,145.27L329.02,133.95L340.45,105.82L364.41,105.24L374.4,94.95L382.73,102.77L386.26,94.88L393.81,94.83L399.72,76.82L409.3,73.29L422.55,78.66L423.27,85.17L444.37,89.5L445.35,101.67L461.46,87.81L463.95,76L473.23,84.32L478.32,82.32Z"></path>
+              <path class="regiao" d="M337.25,110.75L329.02,133.95L334.22,145.27L357.59,157.29L358.4,164.4L366.72,166.45L383.13,189.28L403.52,184.5L407.87,200.54L423.54,211.82L413.51,235.63L401.5,243.24L399.56,272.89L386.21,287.37L380.52,270.43L364.7,272.65L362.5,268.5L351.01,273.11L348.61,268.51L345.5,274.01L338.04,267.3L328.72,270.2L304.62,263.78L290.39,238.86L282.37,237.54L278.05,221.63L269.64,220.17L264.53,208.64L250.38,202.43L236.96,186.8L233.01,190.02L227.81,180.35L221.07,182.89L215.33,177.72L224.13,162.16L217.21,157.35L221.1,152.14L230.65,158.8L244.11,158.56L246.42,145.74L257.41,152.91L277.44,136.24L285.53,142.85L290.3,136.26L296.13,138.23L306.29,123.65L307.87,110.62L316.68,106.36L316.2,89.32L337.25,110.75Z"></path>
+              <path class="regiao" d="M483.72,146.25L483.76,155.22L490.53,158.84L485.28,169.94L494.27,162.27L504.36,168.78L492.76,195.6L494.97,201.5L484.32,209.59L474.49,232.73L457.26,230.57L451.23,235.25L443.92,223.49L421.16,218.5L423.54,211.82L407.87,200.54L403.29,187.88L406.54,181.06L420.73,182.73L423.8,158.05L445.1,151.66L465.13,138.01L475.29,138.17L483.72,146.25Z"></path>
+              <path class="regiao" d="M482.11,218.96L479.93,247.89L464.99,285.12L422.77,312.73L385.38,357.05L363.21,344.38L349.82,350.23L356.28,360L348.33,354.88L344.24,349.44L347.7,343.87L349.92,348.37L351.33,340.39L358.37,342.68L363.8,332.98L359.76,331.43L366.31,322.43L365.7,297.05L373.87,295.11L379.18,285.46L388.56,286.37L399.56,272.89L401.5,243.24L413.51,235.63L421.16,218.5L443.92,223.49L451.23,235.25L457.26,230.57L474.49,232.73L482.11,218.96Z"></path>
+              <circle cx="488.53" cy="184" r="6" fill="#C1272D"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <nav class="rodape__navegacao" id="mapa-site" aria-labelledby="titulo-mapa-site">
+          <h3 class="rodape__titulo" id="titulo-mapa-site">Mapa do site</h3>
+          <ul class="rodape__lista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="index.html#sobre">Sobre Santa Catarina</a></li>
+            <li><a href="panorama.html#geografia">Geografia</a></li>
+            <li><a href="cidades.html">Cidades e regiões</a></li>
+            <li><a href="cultura.html">Cultura e imigração</a></li>
+            <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+            <li><a href="turismo.html">Turismo e natureza</a></li>
+            <li><a href="panorama.html#economia">Economia</a></li>
+            <li><a href="curiosidades.html">Curiosidades</a></li>
+            <li><a href="index.html#fontes">Fontes de pesquisa</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="rodape__titulo">Fontes de pesquisa</h3>
+          <ul class="rodape__lista">
+            <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
+            <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
+            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
+          </ul>
+
+          <h3 class="rodape__titulo" style="margin-top:1.5rem">Redes sociais</h3>
+          <ul class="redes">
+            <li>
+              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
+                 aria-label="Perfil do projeto Terra Catarinense no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
+                 aria-label="Canal do projeto Terra Catarinense no YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
+                 aria-label="Página do projeto Terra Catarinense no Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rodape__base">
+        <p>
+          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Imagens ilustrativas de banco público de imagens.
+        </p>
+        <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="voltar-topo" type="button" data-voltar-topo
+          aria-label="Voltar ao topo da página">&#8593;</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

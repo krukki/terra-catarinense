@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cidades e Regiões de Santa Catarina — Terra Catarinense</title>
+  <meta name="description" content="Mapa interativo das regiões de Santa Catarina e perfil das principais cidades: Florianópolis, Blumenau, Balneário Camboriú, Joinville, Pomerode, Urubici e Chapecó.">
+  <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon: selo "SC" com o gradiente da marca -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0E7C9C">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- ===================== HEADER STICKY ===================== -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interno">
+      <a class="logo" href="index.html">
+        <span class="logo__marca" aria-hidden="true">SC</span>
+        <span class="logo__texto">
+          Terra Catarinense
+          <small>o estado mais diverso do Brasil</small>
+        </span>
+      </a>
+
+      <button class="menu-botao" type="button" data-menu-botao
+              aria-expanded="false" aria-controls="menu-principal">
+        <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
+        <span data-menu-rotulo>Menu</span>
+      </button>
+
+      <nav class="navegacao" id="menu-principal" data-menu aria-label="Navegação principal">
+        <ul class="navegacao__lista">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="panorama.html#geografia">Geografia</a></li>
+          <li><a href="cidades.html" aria-current="page">Cidades</a></li>
+          <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+          <li><a href="turismo.html">Turismo</a></li>
+          <li><a href="panorama.html#economia">Economia</a></li>
+          <li><a href="curiosidades.html">Curiosidades</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ===================== HERO DA PÁGINA ===================== -->
+    <section class="hero-pagina">
+      <div class="container">
+        <span class="etiqueta">Cidades e regiões</span>
+        <h1>295 municípios, seis regiões, muitos sotaques</h1>
+        <p>
+          Santa Catarina não tem uma única identidade. Cada região foi ocupada por
+          um povo diferente e desenvolveu economia, arquitetura e culinária
+          próprias. Comece pelo mapa e explore.
+        </p>
+      </div>
+    </section>
+
+    <nav class="trilha" aria-label="Trilha de navegação">
+      <div class="container">
+        <ol>
+          <li><a href="index.html">Início</a></li>
+          <li aria-current="page">Cidades e Regiões</li>
+        </ol>
+      </div>
+    </nav>
+
+
+    <!-- ================================================================
+         DIFERENCIAL 1 — MAPA INTERATIVO
+         Cada região do SVG é um elemento clicável (role="button").
+         O JS troca o conteúdo do painel ao lado, sem recarregar a página.
+         Os botões abaixo do mapa fazem a mesma coisa e garantem uso por
+         teclado e em telas pequenas.
+         ================================================================= -->
+    <section class="secao" id="mapa">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Mapa interativo</span>
+          <h2>Clique numa região do mapa</h2>
+          <p class="subtitulo-secao">
+            Escolha uma das seis regiões para ver as principais cidades e uma
+            curiosidade local.
+          </p>
+        </div>
+
+        <div class="mapa-interativo">
+
+          <figure class="mapa-interativo__figura revelar">
+            <svg class="mapa-svg" viewBox="0 0 600 380"
+                 aria-labelledby="titulo-mapa desc-mapa">
+              <title id="titulo-mapa">Mapa interativo das regiões de Santa Catarina</title>
+              <desc id="desc-mapa">
+                Contorno real do estado de Santa Catarina, com as fronteiras
+                oficiais do IBGE para as seis mesorregiões: Oeste Catarinense,
+                Norte Catarinense, Vale do Itajaí, Serrana, Grande Florianópolis
+                (Litoral) e Sul Catarinense. Cada região pode ser selecionada
+                para exibir suas cidades. O ponto vermelho marca a capital,
+                Florianópolis.
+              </desc>
+
+              <path class="regiao" d="M136.36,64.38L139.14,66.54L140.37,66.51L141.64,68.39L147.45,67.31L149.28,68.52L150.08,67.71L155.76,68.49L158.48,70.56L159.54,69.85L162.36,71.13L166.21,68.94L167.96,70.92L174.01,72.78L174.41,75.76L180.71,79.21L181.97,81.08L187.74,81.55L189.07,82.86L191.56,82.35L193.93,84.37L199.24,82.17L201.27,83.29L205.96,81.72L209.95,82.48L211.78,80.94L212.98,80.97L215.28,83.15L227.25,82.95L228.86,85.33L228.32,86.9L229.88,86.66L232.75,93.25L236.06,95.45L236.52,92.92L235.44,91.99L236.66,90.76L240.57,89.29L246.38,89.66L246.2,88.67L248.47,86.96L250.12,87.3L250.24,84.99L251.65,83.77L250.83,79.3L247.12,74.26L248.89,70.63L246.75,70.27L247.07,69.11L244.71,66.19L246.94,64.55L247.36,63.12L253.45,67.14L253.18,68.32L254.43,69.53L260.85,63.5L272.56,64.72L274.48,67.23L273,67.28L273.38,68.64L270.63,70.35L271.7,72.93L270.32,73.87L276.63,79.45L278.76,78.87L280.29,79.95L283.85,80.3L290.52,92.71L294.9,93.31L297.47,91.88L297.64,90.49L300.19,90.75L302.38,94.63L310.35,101.56L313.19,102.45L316.68,106.36L311.82,107.87L310.93,107.3L307.87,110.62L307.95,113.53L306.79,115.36L307.49,117.33L305.09,119.93L306.29,123.65L304.5,123.46L303.51,127.34L301.78,127.18L301.68,130.99L296.23,135.53L297.24,136.8L296.13,138.23L294.75,136.47L290.3,136.26L285.53,142.85L284.59,140.08L282.35,139.28L281.9,137.07L277.44,136.24L275.25,139.35L270.37,141.7L268.73,146.81L265.41,149.65L261.35,148.32L257.41,152.91L252.73,150.5L252.56,148.95L250.99,147.72L248.37,147.75L246.42,145.74L242.31,150.53L244.72,153.49L243.59,156.36L245.78,156.71L244.11,158.56L239.79,156.89L239.75,158.38L238.15,158.46L238.36,156.76L236.94,157.41L232.52,156.02L230.65,158.8L228.24,157.29L228.11,155.44L224.44,156.02L225.06,154.55L223.67,152.66L221.1,152.14L221.46,154.14L219.88,155.75L219.11,153.54L217.21,157.35L221.34,157.43L224.13,162.16L222.21,162.84L221.59,170.47L218.11,173.16L215.55,172.29L214.06,174.19L213.96,176.09L212.87,176.39L211.29,174.94L211.67,173.26L209.33,172.36L207.82,175.49L206.81,175.73L204.73,173.27L200.71,173.45L200.9,177.56L198.82,175.86L196.59,177L195.54,176.28L196.61,173.2L194.39,172.11L193.34,173.36L193.91,175.78L192.05,176.16L191.54,170.86L189.81,170.35L187.08,171.99L185.89,171.13L188.61,168.26L186.84,166.03L183.04,165.47L182.67,163.59L187.09,163.9L187.07,162.59L184.92,161.69L183.39,162.28L180.7,160.66L182,157.81L178.53,159.11L176.87,158.4L173.57,159.11L173.36,155.78L171.53,154.7L168.43,155.87L167.74,155.37L168.58,152.28L166.76,152.11L164.72,156.75L162.49,157.19L161.82,155.35L158.54,154.88L158.31,153.59L161.97,151.04L160.17,150.08L156.25,150.2L155.61,151.02L156.92,154.97L156.16,156.35L151.53,153.33L150.17,154.9L149.01,154.28L148.86,150.2L147.3,150.77L147.84,152.96L147.14,153.67L143.82,150.89L144.61,146.82L143.04,146.26L140.21,148L140.52,150.5L139.04,151.16L135.23,150.48L133.74,148.37L132.78,149.34L130.56,149.17L127.98,151.02L125.47,150.51L124.01,148.15L122.71,149.35L121.93,152.58L120.08,151.76L119.62,148.45L118.31,148.05L117.23,149.88L115.12,149.36L115.52,145.96L111.17,144.68L108.65,145.6L107.71,144.68L108.05,142.49L106.88,141.41L102.38,144.5L100.22,144.83L99.25,141.09L97.96,140.77L96.7,146.21L95.51,146.59L94.18,145.25L94.08,142.96L95.66,140.79L94.86,138.54L93.6,138.19L92.51,139.74L90.56,139.91L90.46,136.94L92.32,134.9L92.22,133.09L91.08,132.68L88.72,133.39L87.12,136.29L87.93,139.76L87.02,140.88L81.88,142.19L80.81,138.82L78.85,139.25L77.99,143.38L76.52,143.64L73.57,141.56L68.16,144.14L66.58,146.32L65.55,145.6L68.17,138.53L66.01,136.3L62.82,135.98L61.79,133.88L60.36,133.86L57.65,138.58L54.34,139.94L49.55,137.92L49.1,139.59L50.73,142.49L50.44,144.79L48.21,144.66L45.04,141.76L41.72,143.19L39.68,143.04L38.24,145.78L36.45,145.45L36.42,142.1L34.32,140.51L29.37,143.38L27.54,143.25L26.34,139.69L25.3,139.21L21.93,142.03L20,141.31L21.22,138.88L23.3,139.12L23.38,138.16L21.48,138.36L20.97,137.3L22.84,136.71L22.89,135.25L25.3,134.79L23,132.96L23.54,128.4L25.68,131.08L26.87,130.68L24.47,127.21L26.24,128.9L27.89,127.6L26.42,125.3L28.47,125.91L29.2,125.19L28.4,123.51L30.45,122.86L28.85,122.08L29.74,120.35L31,120.98L31.98,119.83L31.46,117.77L34.43,119.07L32.38,117.17L34.44,115.78L34.45,113.75L32.61,113.35L33.85,111.39L33.15,110.5L35.55,110.71L31.69,105.97L30.57,102.54L32.2,101.44L29.41,101.01L30.85,99.57L27.03,96.67L29.03,96.12L28.26,92.47L30.44,91.16L30.26,89.55L27.02,88.86L29.45,86.47L30.13,82.53L29.44,74.61L31.14,74.88L32.41,73.4L31.9,71.77L30.71,71.48L32.35,69.96L31.81,68.5L33.22,68.64L31.46,63.97L32.08,60.71L36.76,53.3L37.52,49.5L38.68,50.68L42.17,50L42.54,51.67L45.05,53.65L50.23,54.68L56.42,52.47L60.81,48.59L67.12,50.48L68.52,49.23L70.46,50.8L70.69,53.36L77.93,58.88L79.47,59.55L81.35,58.9L82.85,61.65L85.86,62.67L85.86,63.63L90.04,62.54L94.71,59.18L98.51,60.65L105.97,60.24L107.68,58.87L115.08,59.79L117.36,58.64L119.17,60.17L122.46,59.7L129.93,66.03L136.36,64.38Z"
+                    role="button" tabindex="0" data-regiao="oeste"
+                    aria-pressed="false"
+                    aria-label="Região Oeste Catarinense"></path>
+              <text class="mapa-rotulo" x="159.66" y="110.13" text-anchor="middle">Oeste</text>
+              <path class="regiao" d="M484.43,22.09L483.21,30.96L484.32,37.62L485.52,40.66L490.69,41.21L490.44,44.84L492.48,48.03L484.73,64.95L484.54,69.77L478.32,82.32L476.17,81.56L474.52,84.13L473.23,84.32L470.47,78.37L466.64,76.19L463.95,76L462.98,79.05L461.97,78.77L460.89,80.59L461.46,87.81L459.19,88.5L458.75,90.2L455.76,88.96L454.03,93.76L450.45,97.89L448.78,99.23L447.34,99.1L447.26,100.72L445.35,101.67L444.06,98.72L444.98,97.86L444.16,95.3L446.95,92.76L444.37,89.5L438.46,89.89L438.37,85.77L436.95,86.66L436.96,87.97L434.01,89.21L432.89,85.81L431.12,86.62L423.27,85.17L422.17,81.51L422.95,80.65L422.55,78.66L419.92,78.58L416.9,75.76L416.07,73.48L411.58,75.42L409.3,73.29L408.51,74.44L401.69,77.06L399.72,76.82L399.91,78.11L397.09,82.39L396.66,86.76L395.42,88.45L393.63,88.69L393.81,94.83L391.58,93.64L386.26,94.88L384.72,96.65L384.14,100.5L382.73,102.77L380.13,101.86L376.84,95.83L374.4,94.95L369.62,98.6L367.27,103.53L366.2,103.37L364.41,105.24L361.79,103.91L355.9,105.79L353.46,107.76L353.96,105.15L350.56,105.99L344.98,103.42L342.28,105.88L340.45,105.82L337.25,110.75L334.84,107.64L333,108.19L329.04,107.17L330.57,102.36L332.2,101.8L328.58,99.74L329.61,98.65L325.41,98.4L317.98,94.06L318.36,90.65L316.2,89.32L314.29,93.09L314.18,96L315.97,100.68L313.19,102.45L310.35,101.56L302.38,94.63L300.19,90.75L297.64,90.49L297.47,91.88L294.9,93.31L290.52,92.71L283.85,80.3L280.29,79.95L278.76,78.87L276.63,79.45L270.32,73.87L271.7,72.93L270.63,70.35L273.38,68.64L273,67.28L274.48,67.23L272.56,64.72L260.85,63.5L254.43,69.53L253.18,68.32L253.45,67.14L247.36,63.12L249.07,61.8L248.28,60.88L248.84,58L252.17,56.03L252.96,54.06L254.31,54.61L258.14,52.29L262.28,51.71L264.33,47.17L266.34,48.82L271.58,47.62L276.4,52.65L277.38,51.27L276.32,48.81L277.29,47.87L279.34,49.37L279.92,53.33L281.37,52.81L282.81,48.63L285.89,51.53L286.58,49.24L289.59,47.28L292.46,46.61L293.67,47.08L293.82,49.1L296.54,48.84L295.14,45.34L298.43,42.19L299.42,39.78L302.31,37.66L301.7,34.82L304.27,30.67L307.21,31.45L310.97,30.26L311.21,28.94L307.97,29.18L307.36,27.13L309.39,24.61L311.11,28.24L317.7,26.79L320.76,28.09L320.18,29.03L321.56,30.63L324.37,30.57L326.99,32.33L327.97,35.49L330.39,37.91L331.44,37.1L330.49,32.95L333.47,29.86L336.13,28.69L337.36,29.59L337.65,27.46L338.97,27.96L340.19,30.46L342.77,30.91L344.12,32.29L346.34,28.45L343.93,27.66L344.83,26.93L347.5,27.07L346.59,29.63L348.22,28.64L349.24,30.58L351.79,28.87L352.44,26.93L353.01,28.95L354.04,27.69L356.6,27.12L359.25,28.97L358.93,25.77L360.49,25.55L363.18,27.17L361.88,29.75L362.47,30.24L364.52,27.49L363.39,26.59L365.13,25.3L365.67,27.73L367.39,26.96L371.91,27.99L371.98,29.89L374.55,31.36L375.42,33.76L377.03,33.32L377.39,35.42L379.44,36.31L380.47,35.49L382.19,36.88L382.21,38.45L383.95,38.59L383.2,40.13L384.05,41.57L385.36,39.88L387.34,43.38L390.57,43.11L390.84,45.26L392.33,44.65L395.07,47.11L397.22,45.79L399.31,48.16L400.49,45.86L403.81,47.08L407.72,40.64L409.84,41.69L413.06,39.46L415.65,39.99L420,35.41L421.91,35.54L422.51,32.82L424.8,32.24L427.51,27.45L433.66,24.47L435.2,25.67L437.53,24.04L439.44,25.23L442.04,24.46L443.23,26.3L444.7,24.87L446.72,25.99L448.66,25.57L452.01,22.49L476.68,22.78L480.02,20L480.93,22.19L484.43,22.09Z"
+                    role="button" tabindex="0" data-regiao="norte"
+                    aria-pressed="false"
+                    aria-label="Região Norte Catarinense"></path>
+              <text class="mapa-rotulo" x="377.33" y="62.19" text-anchor="middle">Norte</text>
+              <path class="regiao" d="M478.32,82.32L476.16,92.42L477.83,101L480.32,100.8L481.19,102.61L483.47,103.33L484.06,101.65L485.33,102.8L484.04,106.37L482.08,107.04L481.08,109.01L480.12,115.43L481.66,117.65L480.98,122.75L483.2,125L485.48,123.68L486.7,125.31L484.52,130.65L484.71,132.46L482.78,134.6L485.29,138.9L488.06,140.17L489.82,139.11L490.23,136.79L491.97,135.81L491.59,137.57L492.81,139.05L495.88,138.76L493.1,141.02L493.14,144.07L494.87,144.98L491.41,146.09L492.93,144.51L490.88,142.57L489.02,142.74L483.72,146.25L483.28,145.5L478.56,146.09L476.57,143.96L476.11,142.11L477.18,141.39L475.29,138.17L471.38,139.31L470.3,138L468.47,138.08L468.08,139.56L466.22,139.96L465.13,138.01L445.1,151.66L442.68,152.18L441.94,151.52L433.15,153.95L430.42,153.84L428.52,156.54L423.8,158.05L422.17,160.43L422.58,161.56L421.01,163.86L421.37,166.25L422.28,166.86L422.5,171.79L419.56,176.92L420.3,179.19L419.62,180.45L420.73,182.73L419.96,183.37L417.05,180.71L411.92,180.69L410.52,182.77L406.54,181.06L403.52,184.5L397.06,187.43L396.41,188.83L393.75,190.35L392.02,190.39L391.89,188.96L393.69,186.41L392.93,186.21L390.81,188.65L387.42,189.7L383.13,189.28L383.54,186.4L380.76,182.58L379.71,183.07L374.6,178.36L373.25,173.83L369.73,174.19L369.38,170.15L366.72,166.45L363.86,164.78L362.47,165.69L361.03,164.79L360.98,166.35L358.4,164.4L358.93,163.11L356.91,161.73L356.99,160.15L355.6,160.16L356.12,157.93L357.43,158.66L357.59,157.29L355.7,156.09L354.31,156.91L354.38,155.49L351.02,154.27L348.9,152.19L344.71,151.82L342.39,148.22L340.82,149.22L338.77,148.72L336.18,146.76L336.76,144.69L334.22,145.27L334.79,141.05L332.67,141.02L332.96,139.57L331.66,138.95L332.08,137.21L330.97,135.14L329.02,133.95L332.35,130.9L331.69,130.04L332.05,124.78L333.91,123.62L333.51,121.58L336.71,113.47L335.14,111.73L337.25,110.75L340.45,105.82L342.28,105.88L344.98,103.42L350.56,105.99L353.96,105.15L353.46,107.76L355.9,105.79L361.79,103.91L364.41,105.24L366.2,103.37L367.27,103.53L369.62,98.6L374.4,94.95L376.84,95.83L380.13,101.86L382.73,102.77L384.14,100.5L384.72,96.65L386.26,94.88L391.58,93.64L393.81,94.83L393.63,88.69L395.42,88.45L396.66,86.76L397.09,82.39L399.91,78.11L399.72,76.82L401.69,77.06L408.51,74.44L409.3,73.29L411.58,75.42L416.07,73.48L416.9,75.76L419.92,78.58L422.55,78.66L422.95,80.65L422.17,81.51L423.27,85.17L431.12,86.62L432.89,85.81L434.01,89.21L436.96,87.97L436.95,86.66L438.37,85.77L438.46,89.89L444.37,89.5L446.95,92.76L444.16,95.3L444.98,97.86L444.06,98.72L445.35,101.67L447.26,100.72L447.34,99.1L448.78,99.23L450.45,97.89L454.03,93.76L455.76,88.96L458.75,90.2L459.19,88.5L461.46,87.81L460.89,80.59L461.97,78.77L462.98,79.05L463.95,76L466.64,76.19L470.47,78.37L473.23,84.32L474.52,84.13L476.17,81.56L478.32,82.32Z"
+                    role="button" tabindex="0" data-regiao="vale"
+                    aria-pressed="false"
+                    aria-label="Região do Vale do Itajaí"></path>
+              <text class="mapa-rotulo" x="408.36" y="128.36" text-anchor="middle">Vale do Itajaí</text>
+              <path class="regiao" d="M337.25,110.75L335.14,111.73L336.71,113.47L333.51,121.58L333.91,123.62L332.05,124.78L331.69,130.04L332.35,130.9L329.02,133.95L330.97,135.14L332.08,137.21L331.66,138.95L332.96,139.57L332.67,141.02L334.79,141.05L334.22,145.27L336.76,144.69L336.18,146.76L338.77,148.72L340.82,149.22L342.39,148.22L344.71,151.82L348.9,152.19L351.02,154.27L354.38,155.49L354.31,156.91L355.7,156.09L357.59,157.29L357.43,158.66L356.12,157.93L355.6,160.16L356.99,160.15L356.91,161.73L358.93,163.11L358.4,164.4L360.98,166.35L361.03,164.79L362.47,165.69L363.86,164.78L366.72,166.45L369.38,170.15L369.73,174.19L373.25,173.83L374.6,178.36L379.71,183.07L380.76,182.58L383.54,186.4L383.13,189.28L387.42,189.7L390.81,188.65L392.93,186.21L393.69,186.41L391.89,188.96L392.02,190.39L393.75,190.35L396.41,188.83L397.06,187.43L403.52,184.5L403.83,189.77L406.96,193.09L407.9,195.43L406.62,197.48L407.87,200.54L409.89,200.24L414.67,205.89L416.85,205.7L418.44,208.05L420.2,207.4L422.25,211.96L423.54,211.82L421.41,215.96L421.21,221.12L420.36,222.69L417.51,224.05L415.44,231.06L413.12,232.53L413.51,235.63L409.82,236.2L409.43,237.69L405.23,237.2L401.5,243.24L401.52,247.08L399.72,248.42L401.2,248.66L401.35,249.88L399.94,251.7L401.74,251.28L402.2,254.27L398.85,261.77L400.34,262.78L398.24,265.81L398.83,267.92L400.41,267.99L398.64,271.17L399.56,272.89L391.33,278.69L390.42,280.59L391.28,283.38L388.56,286.37L386.21,287.37L387.2,286.35L385.59,284.91L385.4,281.7L384.27,281.56L383.79,279.63L382.37,279.44L382.35,278.01L384.11,276.37L382.37,275.16L382.22,273.87L380.69,274.6L380.52,270.43L378.43,274.12L376.86,271.4L376.53,272.97L371.73,273.34L372,270.76L370.74,269.99L372.83,268.94L368.91,268.98L369.76,270.42L368.38,270.94L366.24,269.6L365.37,270.29L366.25,271.62L364.7,272.65L364.14,269.55L362.81,270.07L362.5,268.5L360.92,269L360.93,270.17L358.12,269.73L357.51,271.9L353.46,272.56L352.26,271.74L351.01,273.11L349.08,272.1L348.7,270.75L350.05,269.02L348.61,268.51L345.72,270.8L347.57,273.8L345.5,274.01L344.1,269.66L341.91,268.83L340.79,270.51L339.03,270.18L338.04,267.3L336.5,268.77L337.74,269.18L335.67,270.18L333.21,268.4L329.88,268.35L330.07,269.92L328.72,270.2L328.82,266.96L327.36,266.56L326.14,269.18L324.75,267.75L321.93,267.83L319.44,265.54L312.85,265.08L312.87,267.34L309.75,265.72L307.36,262.63L304.62,263.78L304.26,261.09L300.97,258.27L301.57,256.9L298.32,253.32L298.2,251.25L293.36,249.22L292.39,243.61L290.02,244.3L290.39,238.86L287.61,238.63L286.01,236.24L283.81,238.44L282.37,237.54L282.31,233.97L279.92,233.31L282.35,229.91L282.36,228.48L281.09,226.76L278.04,225.51L278.05,221.63L271.88,219.07L271.25,220.68L269.64,220.17L269.55,216.71L266.36,214.83L266.46,211.17L264.27,210.27L264.53,208.64L262.82,207.23L260.04,207.72L259.39,204.82L257.24,204.69L254.78,202.3L251.9,201.46L250.38,202.43L249.56,200.6L247.04,199.45L247.14,197.42L243.95,196.4L244.45,194.53L243.56,192.33L242.18,191.54L239.41,192.33L237.83,190.46L238.52,188.12L236.96,186.8L233.01,190.02L232.69,187.57L229.08,184.33L228.99,181.56L227.81,180.35L222.16,180.85L221.07,182.89L219.43,181.42L220.14,177.47L218.84,176.81L216.08,179.06L215.33,177.72L216.44,174.48L215.3,173.32L215.55,172.29L218.11,173.16L221.59,170.47L222.21,162.84L224.13,162.16L221.34,157.43L217.21,157.35L219.11,153.54L219.88,155.75L221.46,154.14L221.1,152.14L223.67,152.66L225.06,154.55L224.44,156.02L228.11,155.44L228.24,157.29L230.65,158.8L232.52,156.02L236.94,157.41L238.36,156.76L238.15,158.46L239.75,158.38L239.79,156.89L244.11,158.56L245.78,156.71L243.59,156.36L244.72,153.49L242.31,150.53L246.42,145.74L248.37,147.75L250.99,147.72L252.56,148.95L252.73,150.5L257.41,152.91L261.35,148.32L265.41,149.65L268.73,146.81L270.37,141.7L275.25,139.35L277.44,136.24L281.9,137.07L282.35,139.28L284.59,140.08L285.53,142.85L290.3,136.26L294.75,136.47L296.13,138.23L297.24,136.8L296.23,135.53L301.68,130.99L301.78,127.18L303.51,127.34L304.5,123.46L306.29,123.65L305.09,119.93L307.49,117.33L306.79,115.36L307.95,113.53L307.87,110.62L310.93,107.3L311.82,107.87L316.68,106.36L313.19,102.45L315.97,100.68L314.18,96L314.29,93.09L316.2,89.32L318.36,90.65L317.98,94.06L325.41,98.4L329.61,98.65L328.58,99.74L332.2,101.8L330.57,102.36L329.04,107.17L333,108.19L334.84,107.64L337.25,110.75Z"
+                    role="button" tabindex="0" data-regiao="serra"
+                    aria-pressed="false"
+                    aria-label="Região Serrana (Planalto Serrano)"></path>
+              <text class="mapa-rotulo" x="326.07" y="199.12" text-anchor="middle">Planalto Serrano</text>
+              <path class="regiao" d="M504.28,151.67L505.34,153.78L503.78,153.03L504.28,151.67ZM483.72,146.25L482.47,150.65L483.76,155.22L485.32,156.43L488.08,155.85L489.36,154.37L490.53,158.84L489.54,160.19L489.91,164.4L488.45,165.55L488.19,167.81L485.28,169.94L489.91,167.21L490.48,165.27L494.27,162.27L500.18,162.49L502.57,168.12L504.36,168.78L503.03,172.81L499.39,178.69L499.33,181.66L500.53,181.62L498.8,185.81L492.76,195.6L492.22,199.1L494.97,201.5L493.02,203.95L492.22,202.75L489.76,204.03L488.85,207.49L484.32,209.59L483.9,212.04L486.34,213.05L479.58,221.09L478.9,223.22L474.46,227.1L473.07,230.53L474.14,230.55L474.49,232.73L465.58,233.81L465.37,232.31L462.89,231.66L457.92,232.46L457.26,230.57L454.54,231.71L452.96,235.19L451.23,235.25L450.83,232.56L446.53,229.35L443.92,223.49L439.18,225.16L435.45,225.07L434.26,221.23L432.84,222.64L422.51,218.01L421.16,218.5L421.41,215.96L423.54,211.82L422.25,211.96L420.2,207.4L418.44,208.05L416.85,205.7L414.67,205.89L409.89,200.24L407.87,200.54L406.62,197.48L407.9,195.43L403.29,187.88L403.52,184.5L406.54,181.06L410.52,182.77L411.92,180.69L417.05,180.71L419.96,183.37L420.73,182.73L419.62,180.45L420.3,179.19L419.56,176.92L422.5,171.79L422.28,166.86L421.37,166.25L421.01,163.86L423.8,158.05L428.52,156.54L430.42,153.84L433.15,153.95L441.94,151.52L442.68,152.18L445.1,151.66L465.13,138.01L466.22,139.96L468.08,139.56L468.47,138.08L470.3,138L471.38,139.31L475.29,138.17L477.18,141.39L476.11,142.11L476.57,143.96L478.56,146.09L483.28,145.5L483.72,146.25Z"
+                    role="button" tabindex="0" data-regiao="litoral"
+                    aria-pressed="false"
+                    aria-label="Região da Grande Florianópolis (Litoral)"></path>
+              <text class="mapa-rotulo" x="455.96" y="186.75" text-anchor="middle">Litoral</text>
+              <path class="regiao" d="M482.11,218.96L481.17,223.6L481.6,226.05L483.11,226.12L484.13,227.48L483.22,228.37L483.15,230.76L481.14,233.19L478.35,242.9L478.94,244.01L478.02,245.8L479.93,247.89L477.56,249.69L475.02,254.2L474.77,258.28L471.88,262.32L469.19,270.96L469.51,273.62L470.87,275.28L464.75,283.45L464.99,285.12L461.67,285.79L450.51,291.83L432.08,304.63L422.77,312.73L406.82,329.19L395.12,343.34L385.38,357.05L382.79,357.4L383.76,356.33L382.91,354.44L379.76,354.24L373.49,351.66L372.58,347.83L367.63,345.29L363.21,344.38L360.22,347.32L349.82,350.23L350.23,352.42L354.23,355.58L356.82,359.27L356.28,360L355.4,358.4L353.89,358.75L354.73,357.22L349.94,354.89L348.6,352.67L348.33,354.88L346.49,349.31L344.24,349.44L347.42,348.33L346.78,346.49L347.97,346L347.7,343.87L351.65,345.77L349.9,347.02L349.92,348.37L351.72,346.92L352.4,344.34L351.21,342.55L351.33,340.39L354.31,340.02L351.88,340.95L353.42,343.29L358.37,342.68L357.37,341.68L359.11,340.17L358.72,337.17L361.3,338.16L360.6,336.58L362.66,336.09L362.73,332.91L363.8,332.98L363.69,330.82L359.76,331.43L363.37,329.57L365.16,326.72L362.93,326.66L365.01,322.71L366.31,322.43L365.79,321.07L363.69,320.78L363.01,317.04L364.91,312.45L363.04,307.32L363.34,301.7L364.83,299.68L366.85,299.04L365.7,297.05L368.24,295.24L369.03,297.09L370.32,296.21L369.49,298.41L371.27,294.77L373.87,295.11L374.21,291.06L375.46,291.05L375.94,288.76L379.18,285.46L379.44,287.4L381.45,286.03L381.45,287.21L386.21,287.37L388.56,286.37L391.28,283.38L390.42,280.59L391.33,278.69L399.56,272.89L398.64,271.17L400.41,267.99L398.83,267.92L398.24,265.81L400.34,262.78L398.85,261.77L402.2,254.27L401.74,251.28L399.94,251.7L401.35,249.88L401.2,248.66L399.72,248.42L401.52,247.08L401.5,243.24L405.23,237.2L409.43,237.69L409.82,236.2L413.51,235.63L413.12,232.53L415.44,231.06L417.51,224.05L420.36,222.69L421.16,218.5L422.51,218.01L432.84,222.64L434.26,221.23L435.45,225.07L439.18,225.16L443.92,223.49L446.53,229.35L450.83,232.56L451.23,235.25L452.96,235.19L454.54,231.71L457.26,230.57L457.92,232.46L462.89,231.66L465.37,232.31L465.58,233.81L474.49,232.73L474.14,230.55L473.07,230.53L474.46,227.1L476.24,226.31L479.58,221.09L482.11,218.96Z"
+                    role="button" tabindex="0" data-regiao="sul"
+                    aria-pressed="false"
+                    aria-label="Região Sul Catarinense"></path>
+              <text class="mapa-rotulo" x="417.74" y="282.73" text-anchor="middle">Sul</text>
+
+              <circle cx="488.53" cy="184" r="5" fill="#C1272D" stroke="#FFFFFF" stroke-width="1.5"></circle>
+            </svg>
+
+            <figcaption>
+              Contorno real do estado, com as fronteiras oficiais do IBGE para
+              as seis mesorregiões catarinenses (projeção simplificada a partir
+              de dados geográficos abertos). O ponto vermelho no litoral marca
+              a capital, Florianópolis.
+            </figcaption>
+
+            <!-- Mesma função do mapa, em botões -->
+            <div class="regiao-botoes" role="group" aria-label="Selecionar região por botão">
+              <button class="regiao-botao" type="button" data-regiao="litoral" aria-pressed="false">Litoral</button>
+              <button class="regiao-botao" type="button" data-regiao="vale" aria-pressed="false">Vale do Itajaí</button>
+              <button class="regiao-botao" type="button" data-regiao="norte" aria-pressed="false">Norte</button>
+              <button class="regiao-botao" type="button" data-regiao="serra" aria-pressed="false">Planalto Serrano</button>
+              <button class="regiao-botao" type="button" data-regiao="oeste" aria-pressed="false">Oeste</button>
+              <button class="regiao-botao" type="button" data-regiao="sul" aria-pressed="false">Sul</button>
+            </div>
+          </figure>
+
+          <!-- Painel preenchido pelo JS -->
+          <article class="painel-regiao revelar" data-painel-regiao="litoral"
+                   aria-live="polite">
+            <h3 data-regiao-nome>Litoral e Grande Florianópolis</h3>
+            <p data-regiao-resumo>
+              Selecione uma região no mapa para ver o resumo.
+            </p>
+
+            <h4>Principais cidades</h4>
+            <ul class="painel-regiao__cidades" data-regiao-cidades></ul>
+
+            <p class="painel-regiao__curiosidade" data-regiao-curiosidade></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         CIDADES POR REGIÃO
+         ================================================================= -->
+    <section class="secao secao--clara" id="cidades">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Perfis</span>
+          <h2>Cidades para conhecer</h2>
+          <p class="subtitulo-secao">
+            Sete cidades que resumem a diversidade catarinense, organizadas por
+            região.
+          </p>
+        </div>
+
+        <!-- ---------- Litoral ---------- -->
+        <h3 class="revelar" id="litoral">Litoral e Grande Florianópolis</h3>
+        <div class="grade-cards" style="margin-top:1.25rem">
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/florianopolis.jpg -->
+              <img src="https://picsum.photos/seed/floripa-centro/800/500"
+                   alt="Vista da orla de Florianópolis com prédios baixos, barcos ancorados e morros ao fundo."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Capital</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Florianópolis</h4>
+              <p>
+                Capital do estado, dividida entre a ilha e uma pequena porção
+                continental. Tem mais de 40 praias, forte herança açoriana no
+                centro e nas comunidades pesqueiras, e virou polo nacional de
+                tecnologia.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~540 mil habitantes</li>
+                <li class="etiqueta-dado">Fundada em 1726</li>
+                <li class="etiqueta-dado">Ostras e tainha</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/balneario-camboriu.jpg -->
+              <img src="https://picsum.photos/seed/bc-orla-noite/800/500"
+                   alt="Faixa de praia iluminada à noite com muitos edifícios altos ao fundo."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Litoral Norte</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Balneário Camboriú</h4>
+              <p>
+                Cidade mais verticalizada do país, com arranha-céus à beira-mar,
+                teleférico entre praias e vida noturna intensa. No verão, a
+                população chega a triplicar.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~150 mil habitantes</li>
+                <li class="etiqueta-dado">Turismo de verão</li>
+                <li class="etiqueta-dado">Alta renda média</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- ---------- Vale do Itajaí ---------- -->
+        <h3 class="revelar" id="vale" style="margin-top:3rem">Vale do Itajaí</h3>
+        <div class="grade-cards" style="margin-top:1.25rem">
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/blumenau.jpg -->
+              <img src="https://picsum.photos/seed/blumenau-rua-xv/800/500"
+                   alt="Rua de Blumenau com construções de estilo alemão e vigas de madeira aparentes."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Vale do Itajaí</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Blumenau</h4>
+              <p>
+                Fundada em 1850 pelo alemão Hermann Blumenau, é o centro da cultura
+                germânica no Brasil. Além da Oktoberfest, tem museus da imigração,
+                cervejarias artesanais e um dos maiores parques têxteis do país.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~360 mil habitantes</li>
+                <li class="etiqueta-dado">Oktoberfest</li>
+                <li class="etiqueta-dado">Enxaimel</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/pomerode.jpg -->
+              <img src="https://picsum.photos/seed/pomerode-casa-alema/800/500"
+                   alt="Casa enxaimel branca com estrutura de madeira escura e jardim bem cuidado, em Pomerode."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Vale do Itajaí</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Pomerode</h4>
+              <p>
+                Conhecida como a cidade mais alemã do Brasil. Cerca de 90% da
+                população tem ascendência germânica, o dialeto pomerano é língua
+                cooficial e a arquitetura enxaimel é protegida por lei municipal.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~34 mil habitantes</li>
+                <li class="etiqueta-dado">Dialeto pomerano</li>
+                <li class="etiqueta-dado">Rota do Enxaimel</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- ---------- Norte ---------- -->
+        <h3 class="revelar" id="norte" style="margin-top:3rem">Norte e Nordeste</h3>
+        <div class="grade-cards" style="margin-top:1.25rem">
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/joinville.jpg -->
+              <img src="https://picsum.photos/seed/joinville-industria/800/500"
+                   alt="Avenida larga arborizada em Joinville, com galpões industriais e prédios ao fundo."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Norte</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Joinville</h4>
+              <p>
+                Maior cidade do estado em população e principal polo industrial,
+                especialmente nos setores metalmecânico e de motores elétricos.
+                Abriga a única escola do Bolshoi fora da Rússia.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~600 mil habitantes</li>
+                <li class="etiqueta-dado">Cidade das Flores</li>
+                <li class="etiqueta-dado">Festival de Dança</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- ---------- Planalto Serrano ---------- -->
+        <h3 class="revelar" id="serra" style="margin-top:3rem">Planalto Serrano</h3>
+        <div class="grade-cards" style="margin-top:1.25rem">
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/serra/urubici.jpg -->
+              <img src="https://picsum.photos/seed/urubici-morro/800/500"
+                   alt="Formação rochosa no alto de um morro cercado por campos de altitude, em Urubici."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Serra</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Urubici</h4>
+              <p>
+                Capital catarinense do turismo de aventura e observação de
+                natureza. Concentra cânions, cachoeiras, o Morro da Igreja e um
+                dos últimos refúgios do papagaio-charão.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~11 mil habitantes</li>
+                <li class="etiqueta-dado">1.000 m de altitude</li>
+                <li class="etiqueta-dado">Geada frequente</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/serra/sao-joaquim.jpg -->
+              <img src="https://picsum.photos/seed/sao-joaquim-macieira/800/500"
+                   alt="Pomar de macieiras em fileiras sobre terreno inclinado, com serra ao fundo."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Serra</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>São Joaquim</h4>
+              <p>
+                A 1.353 metros de altitude, é a cidade brasileira onde mais neva.
+                Vive da maçã e do vinho de altitude, e recebe visitantes que sobem
+                a serra só para ver o inverno.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~27 mil habitantes</li>
+                <li class="etiqueta-dado">1.353 m de altitude</li>
+                <li class="etiqueta-dado">Maçã e vinho</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- ---------- Oeste e Sul ---------- -->
+        <h3 class="revelar" id="oeste-sul" style="margin-top:3rem">Oeste e Sul</h3>
+        <div class="grade-cards" style="margin-top:1.25rem">
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/chapeco.jpg -->
+              <img src="https://picsum.photos/seed/chapeco-campo/800/500"
+                   alt="Área rural com plantações e galpões de criação de aves, típica do oeste catarinense."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Oeste</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Chapecó</h4>
+              <p>
+                Principal cidade do oeste e capital brasileira da agroindústria de
+                aves e suínos. Foi colonizada por descendentes de italianos e
+                alemães vindos do Rio Grande do Sul.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~254 mil habitantes</li>
+                <li class="etiqueta-dado">Agroindústria</li>
+                <li class="etiqueta-dado">Cooperativas</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card-cidade revelar">
+            <div class="card-cidade__foto">
+              <!-- TROCAR: assets/cidades/laguna.jpg -->
+              <img src="https://picsum.photos/seed/laguna-centro-historico/800/500"
+                   alt="Casario colonial colorido de Laguna com o mar visível ao fundo."
+                   width="800" height="500" loading="lazy">
+              <span class="card-cidade__regiao">Sul</span>
+            </div>
+            <div class="card-cidade__corpo">
+              <h4>Laguna</h4>
+              <p>
+                Cidade histórica onde passava a linha do Tratado de Tordesilhas e
+                que foi capital da República Juliana, em 1839. Guarda casario
+                colonial tombado e a pesca artesanal com botos.
+              </p>
+              <ul class="card-cidade__dados">
+                <li class="etiqueta-dado">~46 mil habitantes</li>
+                <li class="etiqueta-dado">Centro histórico</li>
+                <li class="etiqueta-dado">Pesca com botos</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <aside class="voce-sabia revelar" style="margin-top:2.5rem">
+          <h3>Você sabia?</h3>
+          <p>
+            Em Laguna, pescadores e botos-da-tainha trabalham juntos há mais de um
+            século: o boto empurra o cardume e sinaliza com um movimento de corpo o
+            momento exato de lançar a rede. É um caso raro de cooperação entre
+            humanos e animais selvagens.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape__grade">
+
+        <div class="rodape__sobre">
+          <h2>Terra Catarinense</h2>
+          <p>
+            Site educativo sobre o estado de Santa Catarina, produzido como
+            trabalho da disciplina de Front-End do curso Técnico em Informática
+            do IFMT — Campus Várzea Grande.
+          </p>
+
+          <div class="rodape__mapa-estado">
+            <svg viewBox="0 0 600 380" role="img" aria-label="Contorno real do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
+              <path class="regiao" d="M136.36,64.38L166.21,68.94L193.93,84.37L227.25,82.95L236.06,95.45L251.65,83.77L247.36,63.12L254.43,69.53L260.85,63.5L272.56,64.72L270.32,73.87L283.85,80.3L290.52,92.71L300.19,90.75L316.68,106.36L307.87,110.62L306.29,123.65L296.13,138.23L290.3,136.26L285.53,142.85L277.44,136.24L257.41,152.91L246.42,145.74L244.11,158.56L230.65,158.8L221.1,152.14L217.21,157.35L224.13,162.16L221.59,170.47L212.87,176.39L209.33,172.36L196.59,177L194.39,172.11L192.05,176.16L182,157.81L173.57,159.11L166.76,152.11L162.49,157.19L160.17,150.08L156.16,156.35L143.04,146.26L139.04,151.16L124.01,148.15L121.93,152.58L106.88,141.41L100.22,144.83L97.96,140.77L95.51,146.59L91.08,132.68L87.02,140.88L78.85,139.25L66.58,146.32L68.17,138.53L61.79,133.88L49.55,137.92L50.44,144.79L20,141.31L23.54,128.4L26.87,130.68L24.47,127.21L34.43,119.07L27.02,88.86L37.52,49.5L50.23,54.68L68.52,49.23L85.86,63.63L117.36,58.64L136.36,64.38Z"></path>
+              <path class="regiao" d="M484.43,22.09L484.32,37.62L492.48,48.03L484.54,69.77L474.52,84.13L463.95,76L461.46,87.81L445.35,101.67L444.37,89.5L423.27,85.17L422.55,78.66L409.3,73.29L399.72,76.82L393.81,94.83L386.26,94.88L382.73,102.77L374.4,94.95L364.41,105.24L353.46,107.76L344.98,103.42L337.25,110.75L316.2,89.32L313.19,102.45L300.19,90.75L290.52,92.71L283.85,80.3L270.32,73.87L272.56,64.72L260.85,63.5L254.43,69.53L247.36,63.12L264.33,47.17L276.4,52.65L277.29,47.87L279.92,53.33L282.81,48.63L296.54,48.84L304.27,30.67L310.97,30.26L309.39,24.61L330.39,37.91L337.65,27.46L344.12,32.29L344.83,26.93L349.24,30.58L360.49,25.55L362.47,30.24L365.13,25.3L399.31,48.16L433.66,24.47L484.43,22.09Z"></path>
+              <path class="regiao" d="M478.32,82.32L477.83,101L485.33,102.8L480.12,115.43L486.7,125.31L482.78,134.6L488.06,140.17L491.97,135.81L495.88,138.76L494.87,144.98L478.56,146.09L475.29,138.17L465.13,138.01L445.1,151.66L430.42,153.84L422.17,160.43L419.96,183.37L406.54,181.06L393.75,190.35L392.93,186.21L383.13,189.28L366.72,166.45L334.22,145.27L329.02,133.95L340.45,105.82L364.41,105.24L374.4,94.95L382.73,102.77L386.26,94.88L393.81,94.83L399.72,76.82L409.3,73.29L422.55,78.66L423.27,85.17L444.37,89.5L445.35,101.67L461.46,87.81L463.95,76L473.23,84.32L478.32,82.32Z"></path>
+              <path class="regiao" d="M337.25,110.75L329.02,133.95L334.22,145.27L357.59,157.29L358.4,164.4L366.72,166.45L383.13,189.28L403.52,184.5L407.87,200.54L423.54,211.82L413.51,235.63L401.5,243.24L399.56,272.89L386.21,287.37L380.52,270.43L364.7,272.65L362.5,268.5L351.01,273.11L348.61,268.51L345.5,274.01L338.04,267.3L328.72,270.2L304.62,263.78L290.39,238.86L282.37,237.54L278.05,221.63L269.64,220.17L264.53,208.64L250.38,202.43L236.96,186.8L233.01,190.02L227.81,180.35L221.07,182.89L215.33,177.72L224.13,162.16L217.21,157.35L221.1,152.14L230.65,158.8L244.11,158.56L246.42,145.74L257.41,152.91L277.44,136.24L285.53,142.85L290.3,136.26L296.13,138.23L306.29,123.65L307.87,110.62L316.68,106.36L316.2,89.32L337.25,110.75Z"></path>
+              <path class="regiao" d="M483.72,146.25L483.76,155.22L490.53,158.84L485.28,169.94L494.27,162.27L504.36,168.78L492.76,195.6L494.97,201.5L484.32,209.59L474.49,232.73L457.26,230.57L451.23,235.25L443.92,223.49L421.16,218.5L423.54,211.82L407.87,200.54L403.29,187.88L406.54,181.06L420.73,182.73L423.8,158.05L445.1,151.66L465.13,138.01L475.29,138.17L483.72,146.25Z"></path>
+              <path class="regiao" d="M482.11,218.96L479.93,247.89L464.99,285.12L422.77,312.73L385.38,357.05L363.21,344.38L349.82,350.23L356.28,360L348.33,354.88L344.24,349.44L347.7,343.87L349.92,348.37L351.33,340.39L358.37,342.68L363.8,332.98L359.76,331.43L366.31,322.43L365.7,297.05L373.87,295.11L379.18,285.46L388.56,286.37L399.56,272.89L401.5,243.24L413.51,235.63L421.16,218.5L443.92,223.49L451.23,235.25L457.26,230.57L474.49,232.73L482.11,218.96Z"></path>
+              <circle cx="488.53" cy="184" r="6" fill="#C1272D"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <nav class="rodape__navegacao" id="mapa-site" aria-labelledby="titulo-mapa-site">
+          <h3 class="rodape__titulo" id="titulo-mapa-site">Mapa do site</h3>
+          <ul class="rodape__lista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="index.html#sobre">Sobre Santa Catarina</a></li>
+            <li><a href="panorama.html#geografia">Geografia</a></li>
+            <li><a href="cidades.html">Cidades e regiões</a></li>
+            <li><a href="cultura.html">Cultura e imigração</a></li>
+            <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
+            <li><a href="turismo.html">Turismo e natureza</a></li>
+            <li><a href="panorama.html#economia">Economia</a></li>
+            <li><a href="curiosidades.html">Curiosidades</a></li>
+            <li><a href="index.html#fontes">Fontes de pesquisa</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="rodape__titulo">Fontes de pesquisa</h3>
+          <ul class="rodape__lista">
+            <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
+            <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
+            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
+          </ul>
+
+          <h3 class="rodape__titulo" style="margin-top:1.5rem">Redes sociais</h3>
+          <ul class="redes">
+            <li>
+              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
+                 aria-label="Perfil do projeto Terra Catarinense no Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
+                 aria-label="Canal do projeto Terra Catarinense no YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
+                 aria-label="Página do projeto Terra Catarinense no Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rodape__base">
+        <p>
+          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Imagens ilustrativas de banco público de imagens.
+        </p>
+        <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="voltar-topo" type="button" data-voltar-topo
+          aria-label="Voltar ao topo da página">&#8593;</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
