@@ -80,8 +80,6 @@
 
     <!-- ================================================================
          BANNER ROTATIVO — 3 imagens alternadas por JS (sem biblioteca)
-         TROCAR: substituir as URLs do picsum por fotos definitivas em
-         assets/litoral/ e assets/serra/.
          ================================================================= -->
     <section class="banner" data-banner aria-roledescription="carrossel"
              aria-label="Paisagens de Santa Catarina">
@@ -89,19 +87,19 @@
       <div class="banner__slides">
         <div class="banner__slide" data-slide data-ativo="true"
              data-legenda="Foto 1 de 3 — Praia da Joaquina, Florianópolis (litoral)">
-          <img src="https://picsum.photos/seed/sc-litoral-praia/1600/900"
+          <img src="assets/litoral/litoral-praia.jpg"
                alt="Praia de areia clara com mar aberto e morros cobertos de vegetação ao fundo, no litoral de Santa Catarina."
                width="1600" height="900" decoding="async" fetchpriority="high">
         </div>
         <div class="banner__slide" data-slide
              data-legenda="Foto 2 de 3 — Serra do Rio do Rastro, Bom Jardim da Serra (serra)">
-          <img src="https://picsum.photos/seed/sc-serra-estrada/1600/900"
+          <img src="assets/serra/serra-estrada.jpg"
                alt="Estrada sinuosa descendo uma serra alta entre paredões de rocha e nuvens baixas."
                width="1600" height="900" loading="lazy" decoding="async">
         </div>
         <div class="banner__slide" data-slide
              data-legenda="Foto 3 de 3 — Araucárias no planalto serrano, São Joaquim (serra)">
-          <img src="https://picsum.photos/seed/sc-araucaria-campo/1600/900"
+          <img src="assets/serra/araucarias-campo.jpg"
                alt="Campos de altitude com araucárias isoladas e geada leve sobre a vegetação, no planalto serrano."
                width="1600" height="900" loading="lazy" decoding="async">
         </div>
@@ -292,12 +290,11 @@
           </p>
         </div>
 
-        <!-- TROCAR: fotos definitivas em assets/cidades/ -->
         <div class="grade-cards">
 
           <article class="card-cidade revelar">
             <div class="card-cidade__foto">
-              <img src="https://picsum.photos/seed/floripa-ponte/800/500"
+              <img src="assets/cidades/florianopolis-ponte.jpg"
                    alt="Vista aérea de Florianópolis com a ponte pênsil ligando a ilha ao continente e o mar ao redor."
                    width="800" height="500" loading="lazy" decoding="async">
               <span class="card-cidade__regiao">Litoral</span>
@@ -319,7 +316,7 @@
 
           <article class="card-cidade revelar">
             <div class="card-cidade__foto">
-              <img src="https://picsum.photos/seed/blumenau-enxaimel/800/500"
+              <img src="assets/cidades/blumenau-enxaimel.jpg"
                    alt="Prédios de arquitetura enxaimel, com vigas de madeira aparentes, em rua de Blumenau."
                    width="800" height="500" loading="lazy" decoding="async">
               <span class="card-cidade__regiao">Vale do Itajaí</span>
@@ -341,7 +338,7 @@
 
           <article class="card-cidade revelar">
             <div class="card-cidade__foto">
-              <img src="https://picsum.photos/seed/bc-predios-praia/800/500"
+              <img src="assets/cidades/balneario-camboriu-praia.jpg"
                    alt="Praia com faixa de areia estreita e fileira de edifícios altos ao fundo, em Balneário Camboriú."
                    width="800" height="500" loading="lazy" decoding="async">
               <span class="card-cidade__regiao">Litoral Norte</span>
@@ -390,8 +387,7 @@
           <!-- Lado 1: litoral -->
           <article class="comparativo__lado comparativo__lado--litoral revelar">
             <div class="comparativo__foto">
-              <!-- TROCAR: foto definitiva em assets/litoral/ -->
-              <img src="https://picsum.photos/seed/sc-praia-verao/900/520"
+              <img src="assets/litoral/praia-verao.jpg"
                    alt="Praia ensolarada com mar esverdeado, coqueiros e banhistas ao longe."
                    width="900" height="520" loading="lazy" decoding="async">
               <div class="comparativo__titulo">
@@ -436,8 +432,7 @@
           <!-- Lado 2: serra -->
           <article class="comparativo__lado comparativo__lado--serra revelar">
             <div class="comparativo__foto">
-              <!-- TROCAR: foto definitiva em assets/serra/ -->
-              <img src="https://picsum.photos/seed/sc-serra-geada/900/520"
+              <img src="assets/serra/serra-geada.jpg"
                    alt="Campo de altitude coberto de geada ao amanhecer, com araucárias e cerca de madeira."
                    width="900" height="520" loading="lazy" decoding="async">
               <div class="comparativo__titulo">
@@ -508,7 +503,7 @@
           <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
-                <img src="https://picsum.photos/seed/sc-neve-serra/600/700"
+                <img src="assets/serra/neve-serra.jpg"
                      alt="Galhos e cerca cobertos por uma fina camada de neve em região serrana."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
@@ -530,7 +525,7 @@
           <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
-                <img src="https://picsum.photos/seed/sc-ostras-prato/600/700"
+                <img src="assets/gastronomia/ostras-prato.jpg"
                      alt="Prato com ostras frescas servidas sobre gelo e limão."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
@@ -552,7 +547,7 @@
           <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
-                <img src="https://picsum.photos/seed/sc-pomerode-casa/600/700"
+                <img src="assets/cidades/pomerode-jardim.jpg"
                      alt="Casa de arquitetura enxaimel com jardim florido em cidade de colonização alemã."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
@@ -574,7 +569,7 @@
           <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
-                <img src="https://picsum.photos/seed/sc-laguna-farol/600/700"
+                <img src="assets/cidades/laguna-farol.jpg"
                      alt="Farol antigo à beira-mar em dia de céu nublado, na cidade de Laguna."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>

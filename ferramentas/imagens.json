@@ -1,0 +1,771 @@
+[
+ {
+  "seed": "floripa-centro",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/florianopolis.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Vista da orla de Florianópolis com prédios baixos, barcos ancorados e morros ao fundo.",
+  "busca": [
+   "Florianópolis centro vista",
+   "Florianópolis orla baía"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "bc-orla-noite",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/balneario-camboriu.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Faixa de praia iluminada à noite com muitos edifícios altos ao fundo.",
+  "busca": [
+   "Balneário Camboriú noite",
+   "Balneário Camboriú skyline"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "blumenau-rua-xv",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/blumenau.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Rua de Blumenau com construções de estilo alemão e vigas de madeira aparentes.",
+  "busca": [
+   "Blumenau Rua XV de Novembro",
+   "Blumenau centro histórico"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "pomerode-casa-alema",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/pomerode.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Casa enxaimel branca com estrutura de madeira escura e jardim bem cuidado, em Pomerode.",
+  "busca": [
+   "Pomerode casa enxaimel",
+   "Pomerode Fachwerk"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "joinville-industria",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/joinville.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Avenida larga arborizada em Joinville, com galpões industriais e prédios ao fundo.",
+  "busca": [
+   "Joinville avenida centro",
+   "Joinville vista cidade"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "urubici-morro",
+  "pagina": "cidades.html",
+  "destino": "assets/serra/urubici.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Formação rochosa no alto de um morro cercado por campos de altitude, em Urubici.",
+  "busca": [
+   "Urubici Morro da Igreja",
+   "Urubici Santa Catarina paisagem"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sao-joaquim-macieira",
+  "pagina": "cidades.html",
+  "destino": "assets/serra/sao-joaquim.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Pomar de macieiras em fileiras sobre terreno inclinado, com serra ao fundo.",
+  "busca": [
+   "São Joaquim Santa Catarina",
+   "apple orchard",
+   "pomar de maçã"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "chapeco-campo",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/chapeco.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Área rural com plantações e galpões de criação de aves, típica do oeste catarinense.",
+  "busca": [
+   "Chapecó Santa Catarina vista",
+   "Chapecó agricultura"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "laguna-centro-historico",
+  "pagina": "cidades.html",
+  "destino": "assets/cidades/laguna.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Casario colonial colorido de Laguna com o mar visível ao fundo.",
+  "busca": [
+   "Laguna Santa Catarina centro histórico",
+   "Laguna casario colonial"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-mata-atlantica-indigena",
+  "pagina": "cultura.html",
+  "destino": "assets/cultura/mata-atlantica.jpg",
+  "largura": 700,
+  "altura": 500,
+  "alt": "Trilha na Mata Atlântica densa, ambiente ocupado historicamente pelos povos originários de Santa Catarina.",
+  "busca": [
+   "Mata Atlântica trilha Santa Catarina",
+   "Atlantic Forest trail Brazil"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "sc-acoriano-casario",
+  "pagina": "cultura.html",
+  "destino": "assets/litoral/acoriano-casario.jpg",
+  "largura": 700,
+  "altura": 500,
+  "alt": "Casario colonial branco com portas e janelas azuis, típico da arquitetura açoriana do litoral catarinense.",
+  "busca": [
+   "Ribeirão da Ilha Florianópolis casario",
+   "arquitetura açoriana Santa Catarina"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-imigracao-alema-1829",
+  "pagina": "cultura.html",
+  "destino": "assets/cultura/imigracao-alema.jpg",
+  "largura": 700,
+  "altura": 500,
+  "alt": "Casa de madeira e alvenaria em estilo colonial alemão, cercada por vegetação.",
+  "busca": [
+   "colonização alemã Santa Catarina casa",
+   "São Pedro de Alcântara Santa Catarina"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "sc-blumenau-1850",
+  "pagina": "cultura.html",
+  "destino": "assets/cultura/blumenau-historico.jpg",
+  "largura": 700,
+  "altura": 500,
+  "alt": "Construção enxaimel com vigas de madeira escuras formando desenhos geométricos na fachada.",
+  "busca": [
+   "Blumenau histórico século XIX",
+   "Blumenau antiga fotografia"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "sc-italianos-videira",
+  "pagina": "cultura.html",
+  "destino": "assets/cultura/italianos-videira.jpg",
+  "largura": 700,
+  "altura": 500,
+  "alt": "Parreiral de uvas em encosta com casa rural de pedra ao fundo.",
+  "busca": [
+   "Videira Santa Catarina",
+   "vineyard Brazil",
+   "parreiral uva"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "sc-festa-tipica",
+  "pagina": "cultura.html",
+  "destino": "assets/cultura/festa-tipica.jpg",
+  "largura": 700,
+  "altura": 500,
+  "alt": "Grupo de pessoas em trajes típicos dançando em festa cultural com bandeirinhas coloridas.",
+  "busca": [
+   "Oktoberfest in Blumenau",
+   "Oktoberfest Blumenau",
+   "German folk dance costume"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-enxaimel-detalhe",
+  "pagina": "cultura.html",
+  "destino": "assets/cidades/enxaimel-detalhe.jpg",
+  "largura": 900,
+  "altura": 700,
+  "alt": "Detalhe de fachada enxaimel: vigas de madeira escura cruzadas sobre parede branca de tijolo.",
+  "busca": [
+   "Fachwerkhäuser in Brasilien",
+   "enxaimel",
+   "Fachwerk Brazil"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "cur-neve-urupema",
+  "pagina": "curiosidades.html",
+  "destino": "assets/serra/urupema-neve.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Paisagem rural com camada fina de neve sobre a grama e cercas de madeira.",
+  "busca": [
+   "Urupema neve",
+   "neve Santa Catarina campo"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "cur-ostra-cultivo",
+  "pagina": "curiosidades.html",
+  "destino": "assets/litoral/ostras-cultivo.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Estruturas de cultivo de ostras flutuando em baía calma ao amanhecer.",
+  "busca": [
+   "Oyster farming",
+   "maricultura Santa Catarina",
+   "oyster farm sea"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "cur-tordesilhas-laguna",
+  "pagina": "curiosidades.html",
+  "destino": "assets/litoral/marco-tordesilhas.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Marco de pedra antigo à beira-mar em dia nublado.",
+  "busca": [
+   "marco de Tordesilhas Laguna",
+   "Laguna Santa Catarina marco"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "cur-boto-laguna",
+  "pagina": "curiosidades.html",
+  "destino": "assets/litoral/boto-laguna.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Boto emergindo perto de pescador com tarrafa em água rasa.",
+  "busca": [
+   "Tursiops truncatus",
+   "pescador tarrafa Brasil",
+   "boto golfinho Brasil"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "cur-bolshoi",
+  "pagina": "curiosidades.html",
+  "destino": "assets/cultura/bolshoi.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Bailarinos em sapatilhas durante ensaio em sala de dança com barra de apoio.",
+  "busca": [
+   "Escola Bolshoi Joinville",
+   "bailarinos ensaio Joinville"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "cur-vinho-altitude",
+  "pagina": "curiosidades.html",
+  "destino": "assets/serra/vinho-altitude.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Taça de vinho tinto ao lado de parreiral em região de altitude.",
+  "busca": [
+   "vinhedo São Joaquim Santa Catarina",
+   "vinícola altitude Santa Catarina"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "cur-pomerode-lingua",
+  "pagina": "curiosidades.html",
+  "destino": "assets/cidades/pomerode-placa.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Placa de rua em cidade de colonização alemã cercada por flores.",
+  "busca": [
+   "Pomerode",
+   "Pomerode Santa Catarina",
+   "German language sign Brazil"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "cur-praias-500",
+  "pagina": "curiosidades.html",
+  "destino": "assets/litoral/praias-aereo.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Vista aérea de várias enseadas e praias sucessivas ao longo de uma costa recortada.",
+  "busca": [
+   "Florianópolis",
+   "praias Florianópolis vista aérea",
+   "costa Santa Catarina aérea"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "enxaimel-pomerode-casa",
+  "pagina": "curiosidades.html",
+  "destino": "assets/cidades/enxaimel-pomerode.jpg",
+  "largura": 900,
+  "altura": 700,
+  "alt": "Casa enxaimel de dois andares com vigas de madeira escura formando triângulos sobre parede clara.",
+  "busca": [
+   "Pomerode enxaimel casa",
+   "Fachwerkhaus Pomerode"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-litoral-praia",
+  "pagina": "index.html",
+  "destino": "assets/litoral/litoral-praia.jpg",
+  "largura": 1600,
+  "altura": 900,
+  "alt": "Praia de areia clara com mar aberto e morros cobertos de vegetação ao fundo, no litoral de Santa Catarina.",
+  "busca": [
+   "praia Santa Catarina litoral",
+   "Santa Catarina beach coast"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-serra-estrada",
+  "pagina": "index.html",
+  "destino": "assets/serra/serra-estrada.jpg",
+  "largura": 1600,
+  "altura": 900,
+  "alt": "Estrada sinuosa descendo uma serra alta entre paredões de rocha e nuvens baixas.",
+  "busca": [
+   "Serra do Rio do Rastro",
+   "Serra do Rio do Rastro curvas"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-araucaria-campo",
+  "pagina": "index.html",
+  "destino": "assets/serra/araucarias-campo.jpg",
+  "largura": 1600,
+  "altura": 900,
+  "alt": "Campos de altitude com araucárias isoladas e geada leve sobre a vegetação, no planalto serrano.",
+  "busca": [
+   "Araucaria angustifolia campo Santa Catarina",
+   "campos de altitude araucária"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "floripa-ponte",
+  "pagina": "index.html",
+  "destino": "assets/cidades/florianopolis-ponte.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Vista aérea de Florianópolis com a ponte pênsil ligando a ilha ao continente e o mar ao redor.",
+  "busca": [
+   "Ponte Hercílio Luz Florianópolis",
+   "Hercílio Luz bridge aerial"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "blumenau-enxaimel",
+  "pagina": "index.html",
+  "destino": "assets/cidades/blumenau-enxaimel.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Prédios de arquitetura enxaimel, com vigas de madeira aparentes, em rua de Blumenau.",
+  "busca": [
+   "Blumenau",
+   "Blumenau Santa Catarina architecture",
+   "Fachwerk Blumenau"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "bc-predios-praia",
+  "pagina": "index.html",
+  "destino": "assets/cidades/balneario-camboriu-praia.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Praia com faixa de areia estreita e fileira de edifícios altos ao fundo, em Balneário Camboriú.",
+  "busca": [
+   "Balneário Camboriú praia central",
+   "Balneário Camboriú beach buildings"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-praia-verao",
+  "pagina": "index.html",
+  "destino": "assets/litoral/praia-verao.jpg",
+  "largura": 900,
+  "altura": 520,
+  "alt": "Praia ensolarada com mar esverdeado, coqueiros e banhistas ao longe.",
+  "busca": [
+   "praia Florianópolis verão",
+   "praia Santa Catarina coqueiros"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-serra-geada",
+  "pagina": "index.html",
+  "destino": "assets/serra/serra-geada.jpg",
+  "largura": 900,
+  "altura": 520,
+  "alt": "Campo de altitude coberto de geada ao amanhecer, com araucárias e cerca de madeira.",
+  "busca": [
+   "Urupema",
+   "São Joaquim Santa Catarina inverno",
+   "geada Santa Catarina"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-neve-serra",
+  "pagina": "index.html",
+  "destino": "assets/serra/neve-serra.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Galhos e cerca cobertos por uma fina camada de neve em região serrana.",
+  "busca": [
+   "neve São Joaquim Santa Catarina",
+   "snow Santa Catarina Brazil"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-ostras-prato",
+  "pagina": "index.html",
+  "destino": "assets/gastronomia/ostras-prato.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Prato com ostras frescas servidas sobre gelo e limão.",
+  "busca": [
+   "ostras servidas prato",
+   "oysters served plate"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-pomerode-casa",
+  "pagina": "index.html",
+  "destino": "assets/cidades/pomerode-jardim.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Casa de arquitetura enxaimel com jardim florido em cidade de colonização alemã.",
+  "busca": [
+   "Pomerode casa alemã jardim",
+   "Pomerode arquitetura"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "sc-laguna-farol",
+  "pagina": "index.html",
+  "destino": "assets/cidades/laguna-farol.jpg",
+  "largura": 600,
+  "altura": 700,
+  "alt": "Farol antigo à beira-mar em dia de céu nublado, na cidade de Laguna.",
+  "busca": [
+   "Farol Santa Marta Laguna",
+   "Farol de Santa Marta"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "prato-cuca-farofa",
+  "pagina": "panorama.html",
+  "destino": "assets/gastronomia/cuca.jpg",
+  "largura": 700,
+  "altura": 470,
+  "alt": "Cuca fatiada com farofa de açúcar por cima, sobre tábua de madeira.",
+  "busca": [
+   "cuca bolo alemão Brasil",
+   "Streuselkuchen"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "prato-marreco",
+  "pagina": "panorama.html",
+  "destino": "assets/gastronomia/marreco.jpg",
+  "largura": 700,
+  "altura": 470,
+  "alt": "Travessa com marreco assado dourado servido com repolho roxo.",
+  "busca": [
+   "marreco recheado Santa Catarina",
+   "pato assado repolho roxo"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "prato-ostras-gratinadas",
+  "pagina": "panorama.html",
+  "destino": "assets/gastronomia/ostras-gratinadas.jpg",
+  "largura": 700,
+  "altura": 470,
+  "alt": "Ostras gratinadas em conchas, servidas quentes em prato branco.",
+  "busca": [
+   "ostras gratinadas",
+   "gratinated oysters"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "prato-sequencia-camarao",
+  "pagina": "panorama.html",
+  "destino": "assets/gastronomia/camarao.jpg",
+  "largura": 700,
+  "altura": 470,
+  "alt": "Mesa com vários pratos de camarão preparados de formas diferentes.",
+  "busca": [
+   "Fried shrimp",
+   "camarão prato",
+   "shrimp dish"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "prato-pinhao-entrevero",
+  "pagina": "panorama.html",
+  "destino": "assets/gastronomia/entrevero.jpg",
+  "largura": 700,
+  "altura": 470,
+  "alt": "Panela de ferro com entrevero de carnes e pinhão sobre fogo de chão.",
+  "busca": [
+   "Araucaria angustifolia (seeds)",
+   "pinhão",
+   "pine nuts pot"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "prato-polenta-galeto",
+  "pagina": "panorama.html",
+  "destino": "assets/gastronomia/polenta-galeto.jpg",
+  "largura": 700,
+  "altura": 470,
+  "alt": "Prato com polenta frita e galeto assado ao lado de queijo e salame.",
+  "busca": [
+   "Polenta",
+   "polenta prato",
+   "roast chicken polenta"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "gal-joaquina",
+  "pagina": "turismo.html",
+  "destino": "assets/litoral/joaquina.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Dunas de areia clara com mar ao fundo na Praia da Joaquina, Florianópolis.",
+  "busca": [
+   "Praia da Joaquina dunas",
+   "Praia da Joaquina Florianópolis"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-bombinhas",
+  "pagina": "turismo.html",
+  "destino": "assets/litoral/bombinhas.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Enseada de água transparente cercada por morros verdes em Bombinhas.",
+  "busca": [
+   "Bombinhas Santa Catarina praia",
+   "Bombinhas enseada"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-guarda-embau",
+  "pagina": "turismo.html",
+  "destino": "assets/litoral/guarda-do-embau.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Rio encontrando o mar entre um morro e uma faixa de areia, na Guarda do Embaú.",
+  "busca": [
+   "Guarda do Embaú",
+   "Praia da Guarda do Embaú"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-rio-do-rastro",
+  "pagina": "turismo.html",
+  "destino": "assets/serra/rio-do-rastro.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Curvas da Serra do Rio do Rastro vistas do mirante, com nuvens abaixo da estrada.",
+  "busca": [
+   "Serra do Rio do Rastro mirante",
+   "Serra do Rio do Rastro estrada"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-morro-da-igreja",
+  "pagina": "turismo.html",
+  "destino": "assets/serra/morro-da-igreja.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Formação rochosa Pedra Furada vista do alto do Morro da Igreja, em Urubici.",
+  "busca": [
+   "Morro da Igreja Pedra Furada",
+   "Pedra Furada Urubici"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-araucarias-geada",
+  "pagina": "turismo.html",
+  "destino": "assets/serra/araucarias-geada.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Floresta de araucárias sob geada, com campo esbranquiçado ao amanhecer.",
+  "busca": [
+   "Araucaria angustifolia",
+   "Araucaria angustifolia forest",
+   "araucária floresta"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-ponte-hercilio",
+  "pagina": "turismo.html",
+  "destino": "assets/cidades/ponte-hercilio-luz.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Ponte Hercílio Luz iluminada ao anoitecer, ligando a ilha ao continente.",
+  "busca": [
+   "Ponte Hercílio Luz iluminada",
+   "Hercílio Luz bridge night"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-blumenau-centro",
+  "pagina": "turismo.html",
+  "destino": "assets/cidades/blumenau-centro.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Prédio de estilo germânico com torre de relógio no centro de Blumenau.",
+  "busca": [
+   "Blumenau Prefeitura torre relógio",
+   "Castelinho Blumenau"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-bc-teleferico",
+  "pagina": "turismo.html",
+  "destino": "assets/cidades/bc-teleferico.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Cabine de teleférico sobre morro arborizado com vista para a praia de Balneário Camboriú.",
+  "busca": [
+   "Teleférico Balneário Camboriú",
+   "Parque Unipraias"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-ostras",
+  "pagina": "turismo.html",
+  "destino": "assets/gastronomia/ostras-bandeja.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Bandeja de ostras frescas abertas, servidas com limão.",
+  "busca": [
+   "ostras frescas limão",
+   "fresh oysters lemon"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "gal-cuca",
+  "pagina": "turismo.html",
+  "destino": "assets/gastronomia/cuca-fatia.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Pedaço de cuca com farofa doce por cima, sobre prato de cerâmica.",
+  "busca": [
+   "cuca fatia bolo",
+   "Streuselkuchen slice"
+  ],
+  "incerta": true
+ },
+ {
+  "seed": "gal-pinhao",
+  "pagina": "turismo.html",
+  "destino": "assets/gastronomia/pinhao.jpg",
+  "largura": 600,
+  "altura": 450,
+  "alt": "Pinhões cozidos em panela de ferro, ainda com casca escura.",
+  "busca": [
+   "pinhão cozido panela",
+   "pinhão araucária semente"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "rot-praias",
+  "pagina": "turismo.html",
+  "destino": "assets/litoral/trilha-praia.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Trilha costeira levando a uma praia isolada entre morros de mata.",
+  "busca": [
+   "trilha costeira Florianópolis",
+   "Lagoinha do Leste"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "rot-serra-inverno",
+  "pagina": "turismo.html",
+  "destino": "assets/serra/serra-inverno.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Estrada de terra entre campos de altitude cobertos de geada, com araucárias ao longe.",
+  "busca": [
+   "Serra Catarinense",
+   "campos de altitude",
+   "highland grassland Brazil"
+  ],
+  "incerta": false
+ },
+ {
+  "seed": "rot-vale-europeu",
+  "pagina": "turismo.html",
+  "destino": "assets/cidades/vale-europeu.jpg",
+  "largura": 800,
+  "altura": 500,
+  "alt": "Rua de cidade colonial alemã com casas de madeira e flores nas janelas.",
+  "busca": [
+   "Vale Europeu Santa Catarina",
+   "Timbó Santa Catarina centro"
+  ],
+  "incerta": false
+ }
+]

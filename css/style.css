@@ -1537,7 +1537,10 @@ html:not(.js) .navegacao[hidden] {
 }
 
 .marco__foto {
-  aspect-ratio: 16 / 9;
+  /* 7/5 é a proporção dos arquivos em assets/: com 16/9 o object-fit
+     recortava outros 21% da altura, por cima do recorte já feito ao
+     gerar a foto. Acima de 48rem quem manda é a altura do cartão. */
+  aspect-ratio: 7 / 5;
 }
 
 .marco__foto img {
@@ -1980,6 +1983,21 @@ tbody tr:nth-child(even) {
   margin-top: 0.2rem;
   font-size: 0.92rem;
   color: var(--cor-texto-suave);
+}
+
+/* Creditos das fotos: sao 58 itens curtos — em coluna unica viravam
+   uma parede de texto de varias telas de altura. */
+.fontes--creditos {
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.fontes--creditos li {
+  border-left-color: var(--cor-secundaria);
+}
+
+.fontes--creditos a {
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
 }
 
 

@@ -1,0 +1,26 @@
+# ---------------------------------------------------------------
+# Ferramentas de imagem (pasta ferramentas/)
+# ---------------------------------------------------------------
+# Cache das fotos originais baixadas do Commons: pesado (dezenas de
+# MB) e refeito sozinho quando o baixar_imagens.py roda de novo.
+ferramentas/_cache/
+ferramentas/__pycache__/
+
+# Logs e despejos de depuracao das buscas
+ferramentas/_*.log
+ferramentas/_bruto.json
+
+# Folha de contato: 180 KB gerados pelo contato.py a partir do
+# candidatas.json, que esta versionado — da para regerar quando precisar.
+ferramentas/contato.html
+
+# Copias de seguranca e arquivos pela metade
+*.bak
+*.tmp
+
+# ---------------------------------------------------------------
+# Lixo do sistema operacional
+# ---------------------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store
