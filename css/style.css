@@ -126,10 +126,42 @@ a:hover {
   --largura-texto: 42rem;    /* leitura confortável */
   --raio: 0.875rem;
   --raio-pequeno: 0.5rem;
-  --sombra: 0 0.25rem 1rem rgba(14, 60, 76, 0.12);
-  --sombra-forte: 0 0.75rem 2rem rgba(14, 60, 76, 0.22);
+  --sombra: 0 0.25rem 1rem rgb(14 60 76 / 0.12);
+  --sombra-forte: 0 0.75rem 2rem rgb(14 60 76 / 0.22);
   --altura-header: 4rem;
   --transicao: 0.25s ease;
+
+  /* --- Texto claro sobre fundo escuro (banner, hero, comparativo) --- */
+  --cor-texto-claro: #F2F6F7;
+  --cor-texto-claro-suave: #D8E6EA;
+
+  /* --- Acentos e superfícies --- */
+  --cor-areia: #FFD9A8;        /* selos manuscritos e marcadores */
+  --cor-zebra: #F6F8F9;        /* linhas alternadas das tabelas */
+  --cor-img-vazia: #dfe7ea;    /* fundo enquanto a foto não carrega */
+  --cor-mapa-regiao: #C7E4EC;
+  --cor-mapa-regiao-hover: #8FCBDD;
+
+  /* --- Rodapé (paleta escura própria) --- */
+  --cor-rodape-fundo: #0B3A49;
+  --cor-rodape-texto: #E6EEF1;
+  --cor-rodape-link: #BFE3EE;
+  --cor-rodape-titulo: #9FCEDC;
+  --cor-rodape-base: #C4D6DC;
+
+  /* --- Componentes de cor usados com alfa variável --- */
+  --cor-veu: 10 45 58;         /* véu escuro sobre fotos */
+  --cor-cabecalho: rgb(250 249 246 / 0.96);
+  --cor-sombra: 14 60 76;
+
+  /* --- Escala de espaçamento --- */
+  --espaco-xs: 0.5rem;
+  --espaco-sm: 0.75rem;
+  --espaco-md: 1.25rem;
+  --espaco-lg: 2rem;
+  --espaco-xl: 3rem;
+  --borda-fina: 0.0625rem;
+  --raio-pilula: 999px;
 }
 
 
@@ -208,7 +240,7 @@ strong {
   display: inline-block;
   margin-bottom: 0.6rem;
   padding: 0.25rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background-color: var(--cor-principal-clara);
   color: var(--cor-principal-escura);
   font-family: var(--fonte-titulo);
@@ -219,7 +251,7 @@ strong {
 }
 
 .subtitulo-secao {
-  margin-top: 0.75rem;
+  margin-top: var(--espaco-sm);
   color: var(--cor-texto-suave);
   font-size: 1.05rem;
 }
@@ -228,7 +260,7 @@ strong {
 .botao {
   display: inline-block;
   padding: 0.85rem 1.6rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   font-family: var(--fonte-titulo);
   font-size: 1rem;
   font-weight: 700;
@@ -289,6 +321,21 @@ strong {
 }
 
 
+
+/* --- Utilitárias de espaçamento vertical ---
+   Substituem os 34 atributos style= que existiam nas páginas. --- */
+.esp-topo-0 { margin-top: 0; }
+.esp-topo-1 { margin-top: 1rem; }
+.esp-topo-2 { margin-top: var(--espaco-md); }
+.esp-topo-3 { margin-top: 1.5rem; }
+.esp-topo-4 { margin-top: 1.75rem; }
+.esp-topo-5 { margin-top: var(--espaco-lg); }
+.esp-topo-6 { margin-top: 2.5rem; }
+.esp-topo-7 { margin-top: var(--espaco-xl); }
+
+.canto-pequeno { border-radius: var(--raio-pequeno); }
+
+
 /* ==========================================================================
    04. ACESSIBILIDADE
    ========================================================================== */
@@ -345,6 +392,20 @@ main {
 }
 
 
+/* Sem JavaScript o menu nasce fechado (o [hidden] está no HTML) e nada o
+   reabriria: a partir de 62rem devolvemos a barra de navegação.
+   Com JS, o módulo 01 põe .js no <html> e quem manda é o script. */
+html:not(.js) .navegacao[hidden] {
+  display: none;
+}
+
+@media (min-width: 62rem) {
+  html:not(.js) .navegacao[hidden] {
+    display: block;
+  }
+}
+
+
 /* ==========================================================================
    05. HEADER E MENU STICKY
    ========================================================================== */
@@ -353,9 +414,9 @@ main {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(250, 249, 246, 0.96);
+  background-color: var(--cor-cabecalho);
   backdrop-filter: blur(0.5rem);
-  border-bottom: 0.0625rem solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
 }
 
 .cabecalho__interno {
@@ -407,9 +468,9 @@ main {
 .menu-botao {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--espaco-xs);
   padding: 0.5rem 0.7rem;
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   border-radius: var(--raio-pequeno);
   background-color: var(--cor-branco);
   font-family: var(--fonte-titulo);
@@ -434,7 +495,7 @@ main {
   left: 0;
   width: 100%;
   height: 0.15rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background-color: currentColor;
   transition: transform var(--transicao), opacity var(--transicao);
 }
@@ -464,7 +525,7 @@ main {
   max-height: calc(100vh - var(--altura-header));
   overflow-y: auto;
   background-color: var(--cor-fundo);
-  border-bottom: 0.0625rem solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
 }
 
@@ -482,7 +543,7 @@ main {
 .navegacao__lista a {
   display: block;
   padding: 0.7rem 0.25rem;
-  border-bottom: 0.0625rem solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
   font-family: var(--fonte-titulo);
   font-size: 0.95rem;
   font-weight: 600;
@@ -551,9 +612,9 @@ main {
   z-index: -1;
   background: linear-gradient(
     180deg,
-    rgba(10, 45, 58, 0.35) 0%,
-    rgba(10, 45, 58, 0.55) 45%,
-    rgba(10, 45, 58, 0.88) 100%
+    rgb(var(--cor-veu) / 0.35) 0%,
+    rgb(var(--cor-veu) / 0.55) 45%,
+    rgb(var(--cor-veu) / 0.88) 100%
   );
 }
 
@@ -570,23 +631,23 @@ main {
 
 .banner__selo {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--espaco-xs);
   font-family: var(--fonte-manuscrita);
   font-size: 1.65rem;
-  color: #FFD9A8;
+  color: var(--cor-areia);
 }
 
 .banner__texto {
   max-width: 46ch;
   margin-top: 1rem;
   font-size: 1.1rem;
-  color: #F2F6F7;
+  color: var(--cor-texto-claro);
 }
 
 .banner__acoes {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--espaco-sm);
   margin-top: 1.75rem;
 }
 
@@ -602,17 +663,18 @@ main {
 
 /* Legenda do slide atual */
 .banner__legenda {
-  margin-top: 2rem;
+  margin-top: var(--espaco-lg);
   font-size: 0.9rem;
-  color: #DCE7EA;
+  color: var(--cor-texto-claro-suave);
 }
 
 /* --- Controles do banner --- */
 .banner__controles {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
+  gap: var(--espaco-xs);
+  margin-top: var(--espaco-md);
 }
 
 .banner__pontos {
@@ -621,26 +683,43 @@ main {
 }
 
 .banner__ponto {
+  /* A área clicável tem 2.5rem x 1.5rem (WCAG 2.5.8 pede 24x24px);
+     o traço visível de 0.3rem é desenhado pelo ::before. */
   width: 2.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.banner__ponto::before {
+  content: "";
+  width: 100%;
   height: 0.3rem;
-  border-radius: 999px;
-  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: var(--raio-pilula);
+  background-color: rgba(255, 255, 255, 0.45);
+  /* Contorno garante contraste contra fotos claras (WCAG 1.4.11) */
+  outline: 0.0625rem solid rgb(var(--cor-veu) / 0.55);
   transition: background-color var(--transicao);
 }
 
-.banner__ponto[aria-selected="true"] {
+.banner__ponto[aria-pressed="true"]::before {
   background-color: var(--cor-branco);
+  height: 0.45rem;
 }
 
 .banner__seta,
 .banner__pausa {
   display: grid;
   place-items: center;
+  flex: 0 0 auto;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.6);
-  background-color: rgba(10, 45, 58, 0.45);
+  border: var(--borda-fina) solid rgba(255, 255, 255, 0.6);
+  background-color: rgb(var(--cor-veu) / 0.45);
   color: var(--cor-branco);
   font-size: 1rem;
   line-height: 1;
@@ -696,7 +775,7 @@ main {
 .hero-pagina p {
   max-width: 52ch;
   margin-top: 1rem;
-  color: #EAF2F4;
+  color: var(--cor-texto-claro);
   font-size: 1.1rem;
 }
 
@@ -710,7 +789,7 @@ main {
   font-size: 0.9rem;
   padding-block: 0.9rem;
   background-color: var(--cor-branco);
-  border-bottom: 0.0625rem solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
 }
 
 .trilha ol {
@@ -732,15 +811,15 @@ main {
 
 .duas-colunas {
   display: grid;
-  gap: 2rem;
+  gap: var(--espaco-lg);
   align-items: start;
 }
 
 .mapa-quadro {
-  padding: 1.25rem;
+  padding: var(--espaco-md);
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
 }
 
@@ -766,7 +845,7 @@ main {
   padding: 1.2rem;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   border-top: 0.25rem solid var(--cor-principal);
 }
 
@@ -837,7 +916,7 @@ main {
   overflow: hidden;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
   transition: transform var(--transicao), box-shadow var(--transicao);
 }
@@ -871,7 +950,7 @@ main {
   left: 0.75rem;
   bottom: 0.75rem;
   padding: 0.2rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background-color: var(--cor-principal-escura);
   color: var(--cor-branco);
   font-family: var(--fonte-titulo);
@@ -909,7 +988,7 @@ main {
 
 .etiqueta-dado {
   padding: 0.2rem 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background-color: var(--cor-secundaria-clara);
   color: var(--cor-secundaria-escura);
   font-size: 0.78rem;
@@ -923,7 +1002,7 @@ main {
 
 .comparativo {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--espaco-md);
   align-items: stretch;
 }
 
@@ -952,7 +1031,7 @@ main {
   position: absolute;
   inset: auto 0 0 0;
   padding: 2.5rem 1.25rem 1rem;
-  background: linear-gradient(180deg, transparent, rgba(10, 45, 58, 0.9));
+  background: linear-gradient(180deg, transparent, rgb(var(--cor-veu) / 0.9));
 }
 
 .comparativo__titulo h3 {
@@ -963,7 +1042,7 @@ main {
 .comparativo__titulo span {
   font-family: var(--fonte-manuscrita);
   font-size: 1.3rem;
-  color: #FFD9A8;
+  color: var(--cor-areia);
 }
 
 .comparativo__lado--litoral .comparativo__corpo {
@@ -976,17 +1055,17 @@ main {
 
 .comparativo__corpo {
   flex: 1;
-  padding: 1.25rem;
+  padding: var(--espaco-md);
 }
 
 .comparativo__corpo p {
-  color: #EDF4F6;
+  color: var(--cor-texto-claro);
   font-size: 0.98rem;
 }
 
 .comparativo__indices {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--espaco-sm);
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 1rem;
 }
@@ -1003,7 +1082,7 @@ main {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #D8E6EA;
+  color: var(--cor-texto-claro-suave);
 }
 
 .comparativo__indices dd {
@@ -1018,7 +1097,7 @@ main {
   gap: 0.35rem;
   margin-top: 1rem;
   font-size: 0.95rem;
-  color: #EDF4F6;
+  color: var(--cor-texto-claro);
 }
 
 .comparativo__lista li {
@@ -1030,7 +1109,7 @@ main {
   content: "\25B8";
   position: absolute;
   left: 0;
-  color: #FFD9A8;
+  color: var(--cor-areia);
 }
 
 /* Divisor central "vs." */
@@ -1045,24 +1124,23 @@ main {
 
 /* ==========================================================================
    11. FLIP CARDS (curiosidades)
-   Vira no hover (desktop) e no toque/clique ou Enter (mobile e teclado):
-   o JS alterna a classe .flip-card--virado
+   O card é uma div; quem é interativo é o <button class="flip-card__gatilho">
+   dentro do <h3> da frente, esticado por ::after para cobrir o card inteiro.
+   Vira no hover (só onde há ponteiro de verdade) e pela classe
+   .flip-card--virado, que o JS alterna no clique.
    ========================================================================== */
 
 .grade-flip {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--espaco-md);
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
 .flip-card {
   position: relative;
-  min-height: 15rem;
+  /* 15rem cortava o verso mais longo entre ~992px e ~1120px e em zoom 200% */
+  min-height: 17rem;
   perspective: 62.5rem;
-  border: 0;
-  padding: 0;
-  background: none;
-  text-align: left;
   border-radius: var(--raio);
 }
 
@@ -1075,11 +1153,55 @@ main {
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-/* Vira no hover (ponteiro) e quando o JS marca o estado */
-.flip-card:hover .flip-card__interno,
-.flip-card:focus-visible .flip-card__interno,
+/* O estado é só a classe. O hover é um atalho para quem tem ponteiro:
+   num aparelho de toque ele "gruda" depois do dedo sair, e antes o
+   :focus-visible virava o card pelas costas do JS — tabular já virava,
+   e daí o Enter nunca conseguia desvirar. */
 .flip-card--virado .flip-card__interno {
   transform: rotateY(180deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .flip-card:hover .flip-card__interno {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card:hover.flip-card--virado .flip-card__interno {
+    transform: none;
+  }
+}
+
+/* Gatilho: o texto da pergunta é o nome acessível; o ::after estica a área
+   clicável por cima do card todo, então o clique continua valendo em
+   qualquer ponto. */
+.flip-card__titulo {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.flip-card__gatilho {
+  border: 0;
+  padding: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  color: var(--cor-branco);
+  cursor: pointer;
+}
+
+.flip-card__gatilho::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.flip-card__gatilho:focus-visible {
+  outline: 0.1875rem solid var(--cor-branco);
+  outline-offset: 0.25rem;
+  border-radius: var(--raio-pequeno);
 }
 
 .flip-card__face {
@@ -1088,12 +1210,14 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 0.5rem;
-  padding: 1.25rem;
+  gap: var(--espaco-xs);
+  padding: var(--espaco-md);
   border-radius: var(--raio);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  overflow: hidden;
+  /* auto em vez de hidden: se o texto do verso passar da altura do card,
+     ele rola em vez de ser cortado (WCAG 1.4.4) */
+  overflow: auto;
   box-shadow: var(--sombra);
 }
 
@@ -1117,24 +1241,59 @@ main {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(10, 45, 58, 0.15), rgba(10, 45, 58, 0.88));
+  background: linear-gradient(180deg, rgb(var(--cor-veu) / 0.15), rgb(var(--cor-veu) / 0.88));
 }
 
-.flip-card__frente h3,
+.flip-card__frente .flip-card__titulo,
 .flip-card__frente span {
   position: relative;
   z-index: 2;
   color: var(--cor-branco);
 }
 
-.flip-card__frente h3 {
-  font-size: 1.2rem;
-}
-
 .flip-card__dica {
   font-family: var(--fonte-manuscrita);
   font-size: 1.2rem;
-  color: #FFD9A8;
+  color: var(--cor-areia);
+}
+
+/* A face escondida sai da árvore de acessibilidade. O atraso na transição
+   faz a troca acontecer no meio do giro, não no começo. */
+.flip-card__face {
+  transition: visibility 0s linear 0.325s;
+}
+
+.flip-card__verso {
+  visibility: hidden;
+}
+
+.flip-card--virado .flip-card__verso {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.flip-card--virado .flip-card__frente {
+  visibility: hidden;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .flip-card:hover:not(.flip-card--virado) .flip-card__verso {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .flip-card:hover:not(.flip-card--virado) .flip-card__frente {
+    visibility: hidden;
+  }
+
+  .flip-card:hover.flip-card--virado .flip-card__verso {
+    visibility: hidden;
+  }
+
+  .flip-card:hover.flip-card--virado .flip-card__frente {
+    visibility: visible;
+    transition-delay: 0s;
+  }
 }
 
 /* --- Verso: o fato surpreendente --- */
@@ -1145,7 +1304,7 @@ main {
   border: 0.125rem solid var(--cor-destaque);
 }
 
-.flip-card__verso h4 {
+.flip-card__rotulo {
   font-family: var(--fonte-manuscrita);
   font-size: 1.7rem;
   color: var(--cor-destaque-escura);
@@ -1177,7 +1336,7 @@ main {
   top: 0.5rem;
   bottom: 0.5rem;
   width: 0.1875rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background: linear-gradient(
     180deg,
     var(--cor-secundaria),
@@ -1215,7 +1374,7 @@ main {
   overflow: hidden;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
 }
 
@@ -1236,9 +1395,9 @@ main {
 
 .marco__periodo {
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--espaco-xs);
   padding: 0.2rem 0.65rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background-color: var(--cor-principal-escura);
   color: var(--cor-branco);
   font-family: var(--fonte-titulo);
@@ -1253,7 +1412,7 @@ main {
 .marco__heranca {
   margin-top: 0.9rem;
   padding-top: 0.9rem;
-  border-top: 0.0625rem dashed var(--cor-borda);
+  border-top: var(--borda-fina) dashed var(--cor-borda);
   font-family: var(--fonte-manuscrita);
   font-size: 1.25rem;
   color: var(--cor-secundaria-escura);
@@ -1273,7 +1432,7 @@ main {
   padding: 1rem;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
 }
 
@@ -1284,7 +1443,7 @@ main {
 
 /* Cada região é um <path>/<g> clicável */
 .regiao {
-  fill: #C7E4EC;
+  fill: var(--cor-mapa-regiao);
   stroke: var(--cor-principal-escura);
   stroke-width: 1.25;
   cursor: pointer;
@@ -1297,7 +1456,7 @@ main {
 }
 
 .regiao:hover {
-  fill: #8FCBDD;
+  fill: var(--cor-mapa-regiao-hover);
 }
 
 .regiao[aria-pressed="true"],
@@ -1334,13 +1493,13 @@ main {
 .regiao-botoes {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--espaco-xs);
   margin-top: 1rem;
 }
 
 .regiao-botao {
   padding: 0.5rem 0.9rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   border: 0.0938rem solid var(--cor-principal);
   background-color: var(--cor-branco);
   color: var(--cor-principal-escura);
@@ -1364,7 +1523,7 @@ main {
   padding: 1.5rem;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   border-left: 0.35rem solid var(--cor-destaque);
   box-shadow: var(--sombra);
 }
@@ -1372,13 +1531,13 @@ main {
 .painel-regiao__cidades {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--espaco-xs);
   margin-block: 1rem;
 }
 
 .painel-regiao__cidades li {
   padding: 0.3rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background-color: var(--cor-principal-clara);
   color: var(--cor-principal-escura);
   font-size: 0.9rem;
@@ -1406,13 +1565,13 @@ main {
 .filtros {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--espaco-xs);
   margin-bottom: 1.5rem;
 }
 
 .filtro-botao {
   padding: 0.55rem 1.1rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   border: 0.0938rem solid var(--cor-borda);
   background-color: var(--cor-branco);
   color: var(--cor-texto);
@@ -1469,7 +1628,7 @@ main {
   position: absolute;
   inset: auto 0 0 0;
   padding: 2rem 0.9rem 0.85rem;
-  background: linear-gradient(180deg, transparent, rgba(10, 45, 58, 0.9));
+  background: linear-gradient(180deg, transparent, rgb(var(--cor-veu) / 0.9));
   color: var(--cor-branco);
   font-size: 0.9rem;
 }
@@ -1482,7 +1641,7 @@ main {
 }
 
 .galeria__item figcaption span {
-  color: #FFD9A8;
+  color: var(--cor-areia);
   font-family: var(--fonte-manuscrita);
   font-size: 1.05rem;
 }
@@ -1507,7 +1666,7 @@ main {
 .lista-topicos {
   display: grid;
   gap: 0.85rem;
-  margin-top: 1.25rem;
+  margin-top: var(--espaco-md);
 }
 
 .lista-topicos li {
@@ -1535,7 +1694,7 @@ main {
 /* Cards simples de conteúdo (economia, vegetação, fauna) */
 .grade-blocos {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--espaco-md);
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
@@ -1543,7 +1702,7 @@ main {
   padding: 1.4rem;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
 }
 
@@ -1577,7 +1736,7 @@ main {
 /* Cards de prato típico */
 .grade-pratos {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--espaco-md);
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
@@ -1587,7 +1746,7 @@ main {
   overflow: hidden;
   border-radius: var(--raio);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   box-shadow: var(--sombra);
 }
 
@@ -1618,7 +1777,7 @@ main {
   overflow-x: auto;
   margin-top: 1.5rem;
   border-radius: var(--raio);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   background-color: var(--cor-branco);
 }
 
@@ -1638,7 +1797,7 @@ caption {
 th, td {
   padding: 0.7rem 1rem;
   text-align: left;
-  border-bottom: 0.0625rem solid var(--cor-borda);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
 }
 
 thead th {
@@ -1653,7 +1812,7 @@ tbody tr:last-child td {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #F6F8F9;
+  background-color: var(--cor-zebra);
 }
 
 /* Lista de fontes */
@@ -1667,7 +1826,7 @@ tbody tr:nth-child(even) {
   padding: 1rem 1.15rem;
   border-radius: var(--raio-pequeno);
   background-color: var(--cor-branco);
-  border: 0.0625rem solid var(--cor-borda);
+  border: var(--borda-fina) solid var(--cor-borda);
   border-left: 0.25rem solid var(--cor-principal);
 }
 
@@ -1689,8 +1848,8 @@ tbody tr:nth-child(even) {
 
 .rodape {
   padding-block: 3rem 1.5rem;
-  background-color: #0B3A49;   /* azul profundo — contraste AA com texto claro */
-  color: #E6EEF1;
+  background-color: var(--cor-rodape-fundo);   /* azul profundo — contraste AA com texto claro */
+  color: var(--cor-rodape-texto);
 }
 
 .rodape h2,
@@ -1699,27 +1858,27 @@ tbody tr:nth-child(even) {
 }
 
 .rodape a {
-  color: #BFE3EE;
+  color: var(--cor-rodape-link);
 }
 
 .rodape a:hover {
-  color: #FFD9A8;
+  color: var(--cor-areia);
 }
 
 .rodape__grade {
   display: grid;
-  gap: 2rem;
+  gap: var(--espaco-lg);
 }
 
 .rodape__sobre p {
-  margin-top: 0.75rem;
+  margin-top: var(--espaco-sm);
   font-size: 0.95rem;
   max-width: 40ch;
 }
 
 .rodape__mapa-estado {
   max-width: 11rem;
-  margin-top: 1.25rem;
+  margin-top: var(--espaco-md);
 }
 
 .rodape__mapa-estado svg {
@@ -1729,7 +1888,7 @@ tbody tr:nth-child(even) {
 
 .rodape__mapa-estado .regiao {
   fill: rgba(191, 227, 238, 0.45);
-  stroke: #BFE3EE;
+  stroke: var(--cor-rodape-link);
   stroke-width: 1;
   cursor: default;
 }
@@ -1740,13 +1899,13 @@ tbody tr:nth-child(even) {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #9FCEDC;
+  color: var(--cor-rodape-titulo);
   margin-bottom: 0.85rem;
 }
 
 .rodape__lista {
   display: grid;
-  gap: 0.5rem;
+  gap: var(--espaco-xs);
   font-size: 0.95rem;
 }
 
@@ -1796,16 +1955,16 @@ tbody tr:nth-child(even) {
   justify-content: space-between;
   align-items: center;
   margin-top: 2.5rem;
-  padding-top: 1.25rem;
-  border-top: 0.0625rem solid rgba(255, 255, 255, 0.18);
+  padding-top: var(--espaco-md);
+  border-top: var(--borda-fina) solid rgba(255, 255, 255, 0.18);
   font-size: 0.88rem;
-  color: #C4D6DC;
+  color: var(--cor-rodape-base);
 }
 
 .rodape__assinatura {
   font-family: var(--fonte-manuscrita);
   font-size: 1.3rem;
-  color: #FFD9A8;
+  color: var(--cor-areia);
 }
 
 /* Botão "voltar ao topo" */
@@ -1975,7 +2134,7 @@ tbody tr:nth-child(even) {
 
   .duas-colunas {
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: var(--espaco-xl);
   }
 
   /* Litoral | vs. | Serra */
@@ -1985,7 +2144,9 @@ tbody tr:nth-child(even) {
   }
 
   .grade-flip {
-    grid-template-columns: repeat(4, 1fr);
+    /* Era repeat(4, 1fr): a 992px cada card ficava com ~217px e o verso
+       mais longo era cortado. auto-fit respeita o mínimo legível. */
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }
 

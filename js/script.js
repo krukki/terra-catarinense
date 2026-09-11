@@ -26,9 +26,17 @@
      ==================================================================== */
   document.documentElement.classList.add("js");
 
-  var preferemenosMovimento = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  var consultaMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var preferemenosMovimento = consultaMovimento.matches;
+
+  // A preferência pode mudar durante a sessão; quem precisa reagir se inscreve
+  var ouvintesDeMovimento = [];
+  consultaMovimento.addEventListener("change", function (evento) {
+    preferemenosMovimento = evento.matches;
+    ouvintesDeMovimento.forEach(function (fn) {
+      fn(preferemenosMovimento);
+    });
+  });
 
 
   /* ========================================================================
@@ -41,12 +49,12 @@
 
     var consultaDesktop = window.matchMedia("(min-width: 62rem)");
 
+    var rotulo = botao.querySelector("[data-menu-rotulo]");
+
     function abrir(estado) {
       botao.setAttribute("aria-expanded", String(estado));
       nav.hidden = !estado;
-      botao.querySelector("[data-menu-rotulo]").textContent = estado
-        ? "Fechar"
-        : "Menu";
+      if (rotulo) rotulo.textContent = estado ? "Fechar" : "Menu";
     }
 
     // No desktop o menu é sempre visível; no mobile começa fechado.
@@ -107,8 +115,10 @@
     var intervalo = null;
     var TEMPO = 6000;
     var pausadoPeloUsuario = false;
+    var ponteiroEmCima = false;
+    var temFoco = false;
 
-    function mostrar(indice) {
+    function mostrar(indice, anunciar) {
       atual = (indice + slides.length) % slides.length;
 
       slides.forEach(function (slide, i) {
@@ -119,19 +129,22 @@
       });
 
       pontos.forEach(function (ponto, i) {
-        ponto.setAttribute("aria-selected", String(i === atual));
+        ponto.setAttribute("aria-pressed", String(i === atual));
       });
 
-      if (legenda) {
+      // 1.7: a legenda é uma live region. Só anunciamos quando a troca parte
+      // do usuário — senão o leitor de tela repetiria o texto a cada 6s.
+      if (legenda && anunciar) {
         legenda.textContent = slides[atual].getAttribute("data-legenda") || "";
       }
     }
 
-    function iniciarRotacao() {
-      if (intervalo || pausadoPeloUsuario || preferemenosMovimento) return;
-      intervalo = window.setInterval(function () {
-        mostrar(atual + 1);
-      }, TEMPO);
+    // Troca iniciada pelo usuário: anuncia e reinicia a contagem do timer,
+    // para o slide seguinte não entrar logo em seguida (1.6).
+    function irPara(indice) {
+      mostrar(indice, true);
+      pararRotacao();
+      atualizarRotacao();
     }
 
     function pararRotacao() {
@@ -139,23 +152,56 @@
       intervalo = null;
     }
 
+    // Uma única fonte de verdade: a rotação só corre se NENHUMA das condições
+    // de pausa valer. Antes, mouseleave/focusout/visibilitychange religavam o
+    // timer sem olhar para as outras condições.
+    function atualizarRotacao() {
+      var podeGirar =
+        !pausadoPeloUsuario &&
+        !preferemenosMovimento &&
+        !ponteiroEmCima &&
+        !temFoco &&
+        !document.hidden;
+
+      if (!podeGirar) {
+        pararRotacao();
+        return;
+      }
+      if (intervalo) return;
+      intervalo = window.setInterval(function () {
+        mostrar(atual + 1, false);
+      }, TEMPO);
+    }
+
     // --- Controles ---
     banner.querySelectorAll("[data-banner-anterior]").forEach(function (b) {
       b.addEventListener("click", function () {
-        mostrar(atual - 1);
+        irPara(atual - 1);
       });
     });
 
     banner.querySelectorAll("[data-banner-proximo]").forEach(function (b) {
       b.addEventListener("click", function () {
-        mostrar(atual + 1);
+        irPara(atual + 1);
       });
     });
 
     pontos.forEach(function (ponto, i) {
       ponto.addEventListener("click", function () {
-        mostrar(i);
+        irPara(i);
       });
+    });
+
+    // Com movimento reduzido não há rotação para pausar: o botão sumiria
+    // como controle morto (apertava e nada acontecia).
+    function ajustarBotaoPausa() {
+      if (!botaoPausa) return;
+      botaoPausa.hidden = preferemenosMovimento;
+    }
+    ajustarBotaoPausa();
+    ouvintesDeMovimento.push(function () {
+      ajustarBotaoPausa();
+      atualizarRotacao();
     });
 
     if (botaoPausa) {
@@ -169,65 +215,66 @@
             ? "Retomar rotação automática das fotos"
             : "Pausar rotação automática das fotos"
         );
-        if (pausadoPeloUsuario) pararRotacao();
-        else iniciarRotacao();
+        atualizarRotacao();
       });
     }
 
     // --- Pausas automáticas ---
-    banner.addEventListener("mouseenter", pararRotacao);
-    banner.addEventListener("mouseleave", iniciarRotacao);
-    banner.addEventListener("focusin", pararRotacao);
-    banner.addEventListener("focusout", iniciarRotacao);
-
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) pararRotacao();
-      else iniciarRotacao();
+    banner.addEventListener("mouseenter", function () {
+      ponteiroEmCima = true;
+      atualizarRotacao();
+    });
+    banner.addEventListener("mouseleave", function () {
+      ponteiroEmCima = false;
+      atualizarRotacao();
+    });
+    banner.addEventListener("focusin", function () {
+      temFoco = true;
+      atualizarRotacao();
+    });
+    banner.addEventListener("focusout", function (evento) {
+      // Tabular ENTRE os botões do próprio banner não é "sair" dele
+      if (banner.contains(evento.relatedTarget)) return;
+      temFoco = false;
+      atualizarRotacao();
     });
 
-    // Setas do teclado quando o banner tem foco
-    banner.addEventListener("keydown", function (evento) {
-      if (evento.key === "ArrowLeft") mostrar(atual - 1);
-      if (evento.key === "ArrowRight") mostrar(atual + 1);
+    document.addEventListener("visibilitychange", atualizarRotacao);
+
+    // Setas do teclado: só nos controles do banner. Antes o listener estava
+    // na <section> inteira e agia com o foco nos links do slide, e sem
+    // preventDefault a página ainda rolava para o lado.
+    var controles = banner.querySelector("[data-banner-controles]") || banner;
+    controles.addEventListener("keydown", function (evento) {
+      if (evento.key !== "ArrowLeft" && evento.key !== "ArrowRight") return;
+      evento.preventDefault();
+      irPara(evento.key === "ArrowLeft" ? atual - 1 : atual + 1);
     });
 
-    mostrar(0);
-    iniciarRotacao();
+    mostrar(0, false);
+    atualizarRotacao();
   }
 
 
   /* ========================================================================
      04. FLIP CARDS
-     O giro no desktop é CSS (:hover). Aqui tratamos toque e teclado:
-     cada card é um <button> que alterna a classe e o aria-pressed.
-     O clique só fica registrado em dispositivos sem hover de verdade (toque):
-     num mouse, clicar deixaria o card "preso" virado mesmo depois do
-     ponteiro sair, brigando com o :hover do CSS.
+     Cada card é um <button> de verdade, então Enter e Espaço já funcionam
+     sozinhos — não há handler de teclado aqui. O giro por ponteiro é o
+     :hover do CSS, restrito a quem tem hover de verdade; o clique vale em
+     qualquer dispositivo (um notebook com tela sensível ao toque tem hover
+     E toque, e antes ficava sem nenhuma forma de virar no dedo).
      ==================================================================== */
   function iniciarFlipCards() {
     var cards = document.querySelectorAll("[data-flip]");
     if (!cards.length) return;
 
-    var temHoverDeVerdade = window.matchMedia(
-      "(hover: hover) and (pointer: fine)"
-    ).matches;
+    cards.forEach(function (gatilho) {
+      var card = gatilho.closest(".flip-card");
+      if (!card) return;
 
-    cards.forEach(function (card) {
-      function virar() {
+      gatilho.addEventListener("click", function () {
         var virado = card.classList.toggle("flip-card--virado");
-        card.setAttribute("aria-pressed", String(virado));
-      }
-
-      if (!temHoverDeVerdade) {
-        card.addEventListener("click", virar);
-      }
-
-      // Como o card é uma div com role="button", o teclado precisa ser tratado
-      card.addEventListener("keydown", function (evento) {
-        if (evento.key === "Enter" || evento.key === " ") {
-          evento.preventDefault();
-          virar();
-        }
+        gatilho.setAttribute("aria-expanded", String(virado));
       });
     });
   }
@@ -310,17 +357,28 @@
       var dados = REGIOES[chave];
       if (!dados) return;
 
-      elNome.textContent = dados.nome;
-      elResumo.textContent = dados.resumo;
-      elCuriosidade.innerHTML =
-        "<strong>Você sabia?</strong> " + dados.curiosidade;
+      if (elNome) elNome.textContent = dados.nome;
+      if (elResumo) elResumo.textContent = dados.resumo;
 
-      elCidades.innerHTML = "";
-      dados.cidades.forEach(function (cidade) {
-        var li = document.createElement("li");
-        li.textContent = cidade;
-        elCidades.appendChild(li);
-      });
+      if (elCuriosidade) {
+        // Sem innerHTML: monta o "Você sabia?" pelo DOM
+        elCuriosidade.textContent = "";
+        var rotulo = document.createElement("strong");
+        rotulo.textContent = "Você sabia?";
+        elCuriosidade.appendChild(rotulo);
+        elCuriosidade.appendChild(
+          document.createTextNode(" " + dados.curiosidade)
+        );
+      }
+
+      if (elCidades) {
+        elCidades.textContent = "";
+        dados.cidades.forEach(function (cidade) {
+          var li = document.createElement("li");
+          li.textContent = cidade;
+          elCidades.appendChild(li);
+        });
+      }
 
       // Marca o estado em TODOS os gatilhos da mesma região (mapa + botão)
       gatilhos.forEach(function (gatilho) {
@@ -335,7 +393,11 @@
         selecionar(gatilho.getAttribute("data-regiao"));
       });
 
-      // Elementos SVG não disparam clique com Enter/Espaço por conta própria
+      // Só os <path> do SVG precisam disso: um <button> nativo já dispara
+      // click com Enter/Espaço, e o handler duplicado fazia Enter selecionar
+      // duas vezes enquanto Espaço selecionava uma.
+      if (gatilho.tagName.toLowerCase() === "button") return;
+
       gatilho.addEventListener("keydown", function (evento) {
         if (evento.key === "Enter" || evento.key === " ") {
           evento.preventDefault();

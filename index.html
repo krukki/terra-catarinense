@@ -41,7 +41,7 @@
         <span data-menu-rotulo>Menu</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html" aria-current="page">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -102,19 +102,19 @@
         </p>
 
         <!-- Controles do carrossel -->
-        <div class="banner__controles">
+        <div class="banner__controles" data-banner-controles>
           <button class="banner__seta" type="button" data-banner-anterior
                   aria-label="Foto anterior">&#8249;</button>
           <button class="banner__seta" type="button" data-banner-proximo
                   aria-label="Próxima foto">&#8250;</button>
 
-          <div class="banner__pontos" role="tablist" aria-label="Escolher foto do banner">
-            <button class="banner__ponto" type="button" data-ponto role="tab"
-                    aria-selected="true" aria-label="Foto 1: litoral"></button>
-            <button class="banner__ponto" type="button" data-ponto role="tab"
-                    aria-selected="false" aria-label="Foto 2: serra do Rio do Rastro"></button>
-            <button class="banner__ponto" type="button" data-ponto role="tab"
-                    aria-selected="false" aria-label="Foto 3: araucárias"></button>
+          <div class="banner__pontos" role="group" aria-label="Escolher foto do banner">
+            <button class="banner__ponto" type="button" data-ponto
+                    aria-pressed="true" aria-label="Foto 1: litoral"></button>
+            <button class="banner__ponto" type="button" data-ponto
+                    aria-pressed="false" aria-label="Foto 2: serra do Rio do Rastro"></button>
+            <button class="banner__ponto" type="button" data-ponto
+                    aria-pressed="false" aria-label="Foto 3: araucárias"></button>
           </div>
 
           <button class="banner__pausa" type="button" data-banner-pausa
@@ -245,7 +245,9 @@
             </dl>
 
             <aside class="voce-sabia">
-              <h3>Você sabia?</h3>
+              <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
+                        type="button" data-flip aria-expanded="false"
+                        aria-controls="vs-home-1">Você sabia?</h3>
               <p>
                 Santa Catarina ocupa cerca de 1% do território brasileiro, mas
                 aparece entre os primeiros lugares nacionais em IDH, expectativa
@@ -342,7 +344,7 @@
           </article>
         </div>
 
-        <p class="revelar" style="margin-top:1.75rem">
+        <p class="esp-topo-4 revelar" >
           <a class="link-seta" href="cidades.html">
             Ver todas as cidades e o mapa interativo das regiões
           </a>
@@ -459,7 +461,7 @@
           </article>
         </div>
 
-        <p class="centralizado revelar" style="margin-top:2rem">
+        <p class="esp-topo-5 centralizado revelar" >
           <a class="link-seta" href="turismo.html#clima">
             Entender o clima e a natureza catarinense em detalhe
           </a>
@@ -485,17 +487,17 @@
 
         <div class="grade-flip">
 
-          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+          <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="https://picsum.photos/seed/sc-neve-serra/600/700"
                      alt="Galhos e cerca cobertos por uma fina camada de neve em região serrana."
                      width="600" height="700" loading="lazy">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3>Neve no Brasil?</h3>
+                <h3>Neve no Brasil?</button></h3>
               </div>
-              <div class="flip-card__face flip-card__verso">
-                <h4>Você sabia?</h4>
+              <div class="flip-card__face flip-card__verso" id="vs-home-1">
+                <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Santa Catarina é o estado brasileiro onde <strong>mais neva</strong>.
                   Em São Joaquim, Urupema e Bom Jardim da Serra, a neve aparece em
@@ -505,17 +507,19 @@
             </div>
           </div>
 
-          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+          <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="https://picsum.photos/seed/sc-ostras-prato/600/700"
                      alt="Prato com ostras frescas servidas sobre gelo e limão."
                      width="600" height="700" loading="lazy">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3>Capital das ostras</h3>
+                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
+                        type="button" data-flip aria-expanded="false"
+                        aria-controls="vs-home-2">Capital das ostras</button></h3>
               </div>
-              <div class="flip-card__face flip-card__verso">
-                <h4>Você sabia?</h4>
+              <div class="flip-card__face flip-card__verso" id="vs-home-2">
+                <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   A maior parte das <strong>ostras cultivadas no Brasil</strong> sai
                   das baías de Florianópolis. A cidade tem até uma festa dedicada ao
@@ -525,17 +529,19 @@
             </div>
           </div>
 
-          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+          <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="https://picsum.photos/seed/sc-pomerode-casa/600/700"
                      alt="Casa de arquitetura enxaimel com jardim florido em cidade de colonização alemã."
                      width="600" height="700" loading="lazy">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3>Alemão como língua viva</h3>
+                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
+                        type="button" data-flip aria-expanded="false"
+                        aria-controls="vs-home-3">Alemão como língua viva</button></h3>
               </div>
-              <div class="flip-card__face flip-card__verso">
-                <h4>Você sabia?</h4>
+              <div class="flip-card__face flip-card__verso" id="vs-home-3">
+                <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em <strong>Pomerode</strong>, o dialeto pomerano ainda é falado em
                   casa e no comércio — e é reconhecido como língua cooficial do
@@ -545,17 +551,19 @@
             </div>
           </div>
 
-          <div class="flip-card revelar" data-flip role="button" tabindex="0" aria-pressed="false">
+          <div class="flip-card revelar">
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="https://picsum.photos/seed/sc-laguna-farol/600/700"
                      alt="Farol antigo à beira-mar em dia de céu nublado, na cidade de Laguna."
                      width="600" height="700" loading="lazy">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3>Uma república de 4 meses</h3>
+                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
+                        type="button" data-flip aria-expanded="false"
+                        aria-controls="vs-home-4">Uma república de 4 meses</button></h3>
               </div>
-              <div class="flip-card__face flip-card__verso">
-                <h4>Você sabia?</h4>
+              <div class="flip-card__face flip-card__verso" id="vs-home-4">
+                <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em 1839, Laguna foi capital da <strong>República Juliana</strong>,
                   país independente que durou apenas quatro meses, no contexto da
@@ -566,7 +574,7 @@
           </div>
         </div>
 
-        <p class="centralizado revelar" style="margin-top:2rem">
+        <p class="esp-topo-5 centralizado revelar" >
           <a class="link-seta" href="curiosidades.html">
             Ver todas as curiosidades e a gastronomia típica
           </a>
@@ -687,7 +695,7 @@
             <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
           </ul>
 
-          <h3 class="rodape__titulo" style="margin-top:1.5rem">Redes sociais</h3>
+          <h3 class="esp-topo-3 rodape__titulo" >Redes sociais</h3>
           <ul class="redes">
             <li>
               <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
