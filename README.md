@@ -68,7 +68,8 @@ terra-catarinense/
 │                             (menu, tema claro/escuro, banner, flip, mapa,
 │                             timeline, galeria, scroll-reveal, voltar ao
 │                             topo, ano do rodapé).
-├── assets/
+├── assets/ ................. As 58 fotos do site, cada uma ja gravada no
+│   │                         tamanho exato em que aparece na pagina
 │   ├── favicon.svg ......... Ícone da aba (selo "SC" com o gradiente da marca)
 │   ├── mapa-sc.svg ......... Contorno do estado usado no rodapé
 │   ├── litoral/ ............ Fotos de praias e do litoral
@@ -80,6 +81,8 @@ terra-catarinense/
 │                             recortaram as fotos (ver a seção 6). Não
 │                             fazem parte do site: podem ser apagados sem
 │                             quebrar nada.
+├── cfonts/ ................. Prints das páginas de onde saíram as fotos
+│                             escolhidas à mão, para conferir a origem.
 └── README.md ............... Este arquivo
 ```
 
@@ -149,6 +152,21 @@ Os scripts que fizeram esse trabalho estão em `ferramentas/`, nesta ordem:
 | `aplicar_escolhas.py` | devolve as escolhas da folha para o `candidatas.json` |
 | `baixar_imagens.py` | baixa e recorta no tamanho exato de cada vaga |
 | `trocar_html.py` | troca os endereços no HTML e gera a lista de créditos |
+
+Dez fotos não vieram do Commons: foram escolhidas à mão em sites de turismo,
+de notícia e de enciclopédia. A origem de cada uma está em
+`ferramentas/fontes_manuais.json`, e os prints das páginas em `cfonts/`. O
+`trocar_html.py` lê esse arquivo ao montar os créditos, então essas fontes não
+se perdem quando a lista é gerada de novo:
+
+```bash
+python ferramentas/trocar_html.py --creditos
+```
+
+> **Atenção:** dessas dez, só a foto da Catedral de Chapecó tem licença livre
+> declarada (CC BY-SA 4.0). As outras são material protegido, usado aqui como
+> trabalho escolar e com a origem creditada — creditar não é o mesmo que ter
+> licença de uso.
 
 Para trocar alguma foto: abra `ferramentas/contato.html` (gerado pelo `contato.py`),
 escolha outra opção, salve o `escolhas.json` em `ferramentas/` e rode
