@@ -118,6 +118,7 @@ a:hover {
   --cor-texto-suave: #55595C;
   --cor-borda: #DCD9D2;
   --cor-branco: #FFFFFF;        /* texto/ícone sobre fundo escuro */
+  --cor-sobre-principal: #FFFFFF; /* texto por cima de --cor-principal */
   --cor-superficie: #FFFFFF;    /* fundo de cards e painéis */
 
   /* --- Tipografia --- */
@@ -188,6 +189,7 @@ a:hover {
     color-scheme: dark;
 
     --cor-principal: #4FB3D0;
+    --cor-sobre-principal: #06232D;
     --cor-secundaria: #77B584;
     --cor-destaque: #F07076;
   --cor-destaque-fundo: #C1272D;
@@ -226,6 +228,7 @@ a:hover {
   color-scheme: dark;
 
   --cor-principal: #4FB3D0;
+  --cor-sobre-principal: #06232D;
   --cor-secundaria: #77B584;
   --cor-destaque: #F07076;
   --cor-destaque-fundo: #C1272D;
@@ -434,7 +437,7 @@ strong {
 
 .botao--contorno:hover {
   background-color: var(--cor-principal);
-  color: var(--cor-branco);
+  color: var(--cor-sobre-principal);
 }
 
 /* Feedback de "pressionado" — antes nenhum botão do site tinha :active,
@@ -647,7 +650,7 @@ html:not(.js) .navegacao[hidden] {
   flex: 0 0 auto;
   border-radius: 0.7rem;
   background: linear-gradient(140deg, var(--cor-principal), var(--cor-secundaria));
-  color: var(--cor-branco);
+  color: var(--cor-sobre-principal);
   font-size: 1.15rem;
 }
 
@@ -1669,7 +1672,7 @@ html:not(.js) .navegacao[hidden] {
 
 .regiao-botao[aria-pressed="true"] {
   background-color: var(--cor-principal);
-  color: var(--cor-branco);
+  color: var(--cor-sobre-principal);
 }
 
 /* Painel de resultado do mapa */
@@ -2318,6 +2321,24 @@ tbody tr:nth-child(even) {
     display: none !important;
   }
 
+  /* No papel sempre a paleta clara, mesmo com o tema escuro na tela */
+  :root,
+  :root[data-tema="escuro"] {
+    --cor-fundo: #FFFFFF;
+    --cor-superficie: #FFFFFF;
+    --cor-texto: #000000;
+    --cor-texto-suave: #333333;
+    --cor-texto-claro: #000000;
+    --cor-texto-claro-suave: #333333;
+    --cor-rodape-fundo: #FFFFFF;
+    --cor-rodape-texto: #000000;
+    --cor-rodape-titulo: #000000;
+    --cor-rodape-link: #000000;
+    --cor-rodape-base: #333333;
+    --sombra: none;
+    --sombra-forte: none;
+  }
+
   body {
     background: #fff;
     color: #000;
@@ -2326,5 +2347,38 @@ tbody tr:nth-child(even) {
   .js .revelar {
     opacity: 1;
     transform: none;
+  }
+
+  /* Os dois lados do card precisam sair no papel: impresso, o card vira
+     uma ficha com a pergunta e a resposta, uma abaixo da outra. */
+  .flip-card,
+  .flip-card__interno {
+    min-height: 0;
+    transform: none !important;
+  }
+
+  .flip-card__face {
+    position: static;
+    backface-visibility: visible;
+    box-shadow: none;
+  }
+
+  .flip-card__frente img,
+  .flip-card__dica {
+    display: none;
+  }
+
+  .flip-card__frente {
+    color: #000;
+    background: none;
+  }
+
+  .flip-card__frente::after {
+    display: none;
+  }
+
+  .flip-card__titulo,
+  .flip-card__gatilho {
+    color: #000;
   }
 }
