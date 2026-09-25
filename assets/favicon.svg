@@ -1,11 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Terra Catarinense">
   <title>Terra Catarinense</title>
-  <!-- Selo circular em terracota sobre papel, igual ao logo do cabeçalho -->
-  <circle cx="32" cy="32" r="31" fill="#F3EEE4"/>
-  <circle cx="32" cy="32" r="28" fill="none" stroke="#B5452B" stroke-width="3.5"/>
-  <circle cx="32" cy="32" r="22.5" fill="none" stroke="#B5452B" stroke-width="1.5" stroke-dasharray="3 2.5"/>
-  <text x="32" y="33" fill="#B5452B"
+  <!-- Mesmo selo do logo do cabeçalho (.logo__marca), na escala 64:38,4.
+       O fundo de papel garante leitura em abas claras e escuras. -->
+  <circle cx="32" cy="32" r="32" fill="#F3EEE4"/>
+  <!-- borda de 2px -->
+  <circle cx="32" cy="32" r="30.3" fill="none" stroke="#B5452B" stroke-width="3.4"/>
+  <!-- contorno tracejado de 1px, recuado 6px -->
+  <circle cx="32" cy="32" r="21.2" fill="none" stroke="#B5452B" stroke-width="1.7" stroke-dasharray="3.4 3.4"/>
+  <text x="32" y="32.5" fill="#B5452B"
         font-family="'JetBrains Mono', Consolas, 'Courier New', monospace"
-        font-size="20" font-weight="700"
+        font-size="19" font-weight="700" letter-spacing="0.8"
         text-anchor="middle" dominant-baseline="central">SC</text>
 </svg>
