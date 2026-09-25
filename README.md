@@ -23,8 +23,8 @@ e não precisa de nenhuma etapa de build.
 ## 2. Como abrir o site
 
 Basta dar dois cliques no arquivo `index.html`. Ele abre no navegador padrão e o site
-funciona por completo, inclusive o menu, o banner rotativo, o mapa interativo, a
-galeria com filtro e os cards que viram.
+funciona por completo, inclusive o menu, o banner rotativo, o atlas interativo, o
+quiz, a galeria com filtro e os cards que viram.
 
 Não é necessário instalar nada, rodar servidor nem compilar.
 
@@ -48,29 +48,31 @@ terra-catarinense/
 │                             Catarina", mapa + números do estado, cidades em
 │                             destaque, painel "Duas Santa Catarinas",
 │                             economia e prévia das curiosidades.
-├── cidades.html ............ Cidades e regiões + MAPA INTERATIVO das seis
-│                             regiões (clique numa região e o painel troca).
+├── cidades.html ............ Cidades e regiões + ATLAS INTERATIVO: zoom nas
+│                             seis regiões, camada de clima e "Monte seu
+│                             roteiro" com distância entre as cidades.
 ├── cultura.html ............ Cultura e imigração + LINHA DO TEMPO animada
 │                             conforme a rolagem da página.
 ├── panorama.html ........... Geografia e clima, gastronomia típica e economia
 │                             do estado, com tabelas de dados.
 ├── turismo.html ............ Geografia, clima, vegetação, fauna, roteiros e
 │                             GALERIA DE FOTOS COM FILTRO por categoria.
-├── curiosidades.html ....... Cards com EFEITO FLIP, gastronomia típica,
-│                             arquitetura enxaimel e as fontes de pesquisa.
+├── curiosidades.html ....... Cards com EFEITO FLIP, QUIZ "Qual Santa
+│                             Catarina é a sua?", arquitetura enxaimel e os
+│                             créditos das fotos.
 ├── css/
 │   └── style.css ........... Toda a estilização, organizada em seções
 │                             comentadas (reset, variáveis de cor, tema
 │                             escuro, header, banner, cards, timeline,
 │                             galeria, flip cards, footer, media queries).
 ├── js/
-│   └── script.js ........... Todo o JavaScript, em 11 módulos comentados
-│                             (menu, tema claro/escuro, banner, flip, mapa,
+│   └── script.js ........... Todo o JavaScript, em módulos comentados
+│                             (menu, tema claro/escuro, banner, flip, atlas,
 │                             timeline, galeria, scroll-reveal, voltar ao
-│                             topo, ano do rodapé).
+│                             topo, ano do rodapé, passaporte e quiz).
 ├── assets/ ................. As 58 fotos do site, cada uma ja gravada no
 │   │                         tamanho exato em que aparece na pagina
-│   ├── favicon.svg ......... Ícone da aba (selo "SC" com o gradiente da marca)
+│   ├── favicon.svg ......... Ícone da aba (selo circular "SC" em terracota)
 │   ├── mapa-sc.svg ......... Contorno do estado usado no rodapé
 │   ├── litoral/ ............ Fotos de praias e do litoral
 │   ├── serra/ .............. Fotos da serra, araucárias e geada
@@ -90,30 +92,53 @@ Cada foto em `assets/` já está gravada exatamente no tamanho dos atributos
 `width` e `height` da tag que a usa, para o navegador reservar o espaço certo e
 a página não dar solavanco enquanto carrega.
 
-## 4. Identidade visual
+## 4. Identidade visual — "Atlas de campo"
+
+O site imita um atlas geográfico impresso: papel com textura, fios finos no
+lugar de sombras, seções numeradas ("01 — Mapa interativo") e rótulos em fonte
+monoespaçada, como as legendas de uma prancha cartográfica. As curvas de nível
+atrás dos títulos e a textura do papel são SVG escrito direto no CSS, sem
+nenhum arquivo de imagem a mais.
 
 Paleta (definida em `:root`, no início do `style.css`):
 
 | Cor | Hex | Papel |
 | --- | --- | --- |
-| Azul Atlântico | `#0E7C9C` | cor principal |
-| Verde Araucária | `#2F6B3A` | cor secundária |
-| Vermelho Enxaimel | `#C1272D` | cor de destaque |
-| Branco Neve | `#FAF9F6` | fundo |
-| Cinza Grafite | `#2E2E2E` | texto |
+| Papel de atlas | `#F3EEE4` | fundo |
+| Tinta | `#1B1F1D` | texto e fios |
+| Azul Oceano | `#1F4E5F` | cor principal |
+| Verde Araucária | `#3F5B3A` | cor secundária |
+| Terracota Enxaimel | `#B5452B` | cor de destaque |
 
 Tipografia (Google Fonts):
 
 | Fonte | Uso |
 | --- | --- |
-| Montserrat | títulos |
-| Nunito Sans | texto corrido |
-| Caveat | selos e "Você sabia?" |
+| Fraunces | títulos e destaques em itálico |
+| Inter | texto corrido |
+| JetBrains Mono | etiquetas, legendas, dados e botões |
 
-Todas as cores do site são variáveis CSS no `:root`. O tema escuro só redefine essas
-variáveis — nenhum componente precisa saber que ele existe. O botão de tema fica no
-cabeçalho e a escolha é guardada no navegador; sem escolha, o site segue a preferência
-do sistema operacional.
+Todas as cores do site são variáveis CSS no `:root`. O tema escuro ("carta
+náutica noturna") só redefine essas variáveis — nenhum componente precisa saber
+que ele existe. O botão de tema fica no cabeçalho e a escolha é guardada no
+navegador; sem escolha, o site segue a preferência do sistema operacional.
+Todas as combinações de texto e fundo passam no contraste AA da WCAG, nos dois
+temas.
+
+## 4b. Diferenciais
+
+| # | Diferencial | Onde |
+| --- | --- | --- |
+| 1 | **Atlas interativo**: mapa com relevo, oceano, graticulado, rosa dos ventos e escala gráfica. Clicar numa região aproxima o mapa (animação do `viewBox`), acende os pinos das 28 cidades e troca o painel com foto e dados. Setas do teclado andam entre regiões vizinhas; Esc volta ao estado inteiro. A escala gráfica se ajusta sozinha ao zoom. | `cidades.html` |
+| 2 | **Camada de clima**: os botões Verão/Inverno repintam as regiões pela temperatura média, com legenda — "praia de manhã, neve à tarde" em forma de dado. | `cidades.html` |
+| 3 | **Monte seu roteiro**: no modo roteiro, clicar nos pinos (ou escolher na lista) cria paradas; o mapa traça a rota e soma a distância em linha reta (fórmula de haversine). O roteiro fica salvo no navegador. | `cidades.html` |
+| 4 | **Quiz "Qual Santa Catarina é a sua?"**: cinco perguntas, uma por vez; o resultado leva ao atlas já aproximado na região (`cidades.html?regiao=serra#mapa`). | `curiosidades.html` |
+| 5 | **Passaporte catarinense**: cada página visitada e o quiz rendem um carimbo no rodapé. | todas as páginas |
+| 6 | Linha do tempo animada, galeria com filtro, flip cards, painel "Duas Santa Catarinas" e banner rotativo (já existiam, agora no visual novo). | várias |
+
+Os pinos das cidades são posicionados pela latitude e longitude reais, com a
+mesma projeção do contorno do estado (`x = 20 + (lon + 53,84) / 5,49 × 485`,
+`y = 20 + (−25,95 − lat) / 3,4 × 340`, conferida com a posição da capital).
 
 ## 5. Acessibilidade
 
@@ -122,7 +147,7 @@ do sistema operacional.
 - Um único `h1` por página e hierarquia `h2`/`h3`/`h4` em cascata.
 - Link "pular para o conteúdo principal" como primeiro item tabulável.
 - Foco visível (`:focus-visible`) em todos os elementos interativos.
-- Mapa interativo, galeria, banner e flip cards funcionam por teclado.
+- Atlas, quiz, roteiro, galeria, banner e flip cards funcionam por teclado.
 - Links com texto descritivo — nenhum "clique aqui".
 - Tags semânticas: `header`, `nav`, `main`, `section`, `article`, `aside`, `footer`.
 - Respeita a preferência `prefers-reduced-motion` do sistema.
@@ -185,5 +210,6 @@ Se a lista de fotos mudar, rode o `trocar_html.py` de novo e cole a lista nova d
       habitantes de cada cidade em
       [cidades.ibge.gov.br/brasil/sc/panorama](https://cidades.ibge.gov.br/brasil/sc/panorama).
 - [ ] **Temperaturas:** conferir as médias climáticas no INMET (as tabelas de
-      `turismo.html` usam valores aproximados).
+      `turismo.html` e a camada de clima do atlas, no objeto `REGIOES` do
+      `script.js`, usam valores aproximados).
 - [ ] **Textos:** revisão final de ortografia e concordância com o professor.

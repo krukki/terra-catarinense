@@ -9,12 +9,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Favicon: selo "SC" com o gradiente da marca -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="theme-color" content="#0E7C9C" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#10171B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
 
@@ -594,6 +594,17 @@
           </ul>
         </div>
       </div>
+
+      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
+           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
+           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
+      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+        <div class="passaporte__texto">
+          <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
+          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+        </div>
+        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+      </section>
 
       <div class="rodape__base">
         <p>

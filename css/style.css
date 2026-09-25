@@ -16,13 +16,14 @@
    10. Painel "Duas Santa Catarinas"
    11. Flip cards (curiosidades)
    12. Linha do tempo (cultura.html)
-   13. Mapa interativo (cidades.html)
+   13. Atlas interativo (cidades.html): mapa, clima e roteiro
    14. Galeria com filtro (turismo.html)
    15. Blocos de conteúdo (economia, fauna, gastronomia, fontes)
-   16. Footer
-   17. Animações de scroll-reveal
-   18. Media queries (tablet / desktop)
-   19. Preferências do usuário (movimento reduzido, impressão)
+   16. Quiz "Qual Santa Catarina é a sua?" (curiosidades.html)
+   17. Footer e passaporte catarinense
+   18. Animações de scroll-reveal
+   19. Media queries (tablet / desktop)
+   20. Preferências do usuário (movimento reduzido, impressão)
    ========================================================================== */
 
 
@@ -94,70 +95,87 @@ a:hover {
 
 /* ==========================================================================
    02. VARIÁVEIS (:root)
-   Paleta oficial da identidade visual do projeto
+   Identidade "Atlas de campo": papel, tinta, oceano, araucária e terracota.
    ========================================================================== */
 
 :root {
   /* --- Paleta principal --- */
-  --cor-principal: #0E7C9C;   /* Azul Atlântico  */
-  --cor-secundaria: #2F6B3A;  /* Verde Araucária */
-  --cor-destaque: #C1272D;      /* Vermelho Enxaimel — texto/borda */
-  --cor-destaque-fundo: #C1272D; /* fundo com texto branco por cima */
-  --cor-fundo: #FAF9F6;       /* Branco Neve */
-  --cor-texto: #2E2E2E;       /* Cinza Grafite */
+  --cor-principal: #1F4E5F;   /* Azul Oceano      */
+  --cor-secundaria: #3F5B3A;  /* Verde Araucária  */
+  --cor-destaque: #B5452B;      /* Terracota Enxaimel — texto/borda */
+  --cor-destaque-fundo: #A63D25; /* fundo com texto branco por cima */
+  --cor-fundo: #F3EEE4;       /* Papel de atlas   */
+  --cor-texto: #1B1F1D;       /* Tinta            */
 
   /* --- Variações derivadas (usadas para garantir contraste AA) --- */
-  --cor-principal-escura: #0A5F78;  /* superfície escura */
-  --cor-acento: #0A5F78;            /* texto/traço de destaque */
-  --cor-principal-clara: #E4F1F5;
-  --cor-secundaria-escura: #24502C;  /* texto verde sobre fundo claro */
-  --cor-secundaria-fundo: #24502C;   /* fundo com texto claro por cima */
-  --cor-secundaria-clara: #E8F1E9;
-  --cor-destaque-escura: #9A1F24;
-  --cor-destaque-clara: #FBE9E9;
-  --cor-texto-suave: #55595C;
-  --cor-borda: #DCD9D2;
+  --cor-principal-escura: #173C49;  /* superfície escura */
+  --cor-acento: #1F4E5F;            /* texto/traço de destaque */
+  --cor-principal-clara: #E3E6DF;
+  --cor-secundaria-escura: #34502F;  /* texto verde sobre fundo claro */
+  --cor-secundaria-fundo: #34502F;   /* fundo com texto claro por cima */
+  --cor-secundaria-clara: #E7E6D6;
+  --cor-destaque-escura: #8E3219;
+  --cor-destaque-clara: #F3E0D6;
+  --cor-texto-suave: #5A5A52;
+  --cor-borda: #CFC5B3;         /* fio sépia das réguas e molduras */
   --cor-branco: #FFFFFF;        /* texto/ícone sobre fundo escuro */
   --cor-sobre-principal: #FFFFFF; /* texto por cima de --cor-principal */
-  --cor-superficie: #FFFFFF;    /* fundo de cards e painéis */
+  --cor-superficie: #FAF7F0;    /* fundo de cards e painéis */
 
   /* --- Tipografia --- */
-  --fonte-titulo: "Montserrat", "Segoe UI", system-ui, sans-serif;
-  --fonte-texto: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
-  --fonte-manuscrita: "Caveat", "Segoe Script", cursive;
+  --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
+  --fonte-texto: "Inter", "Segoe UI", system-ui, sans-serif;
+  --fonte-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  /* Antes era a Caveat. Os "selos" agora são a serifada em itálico. */
+  --fonte-manuscrita: var(--fonte-titulo);
 
   /* --- Espaçamento e formas --- */
-  --largura-max: 75rem;      /* 1200px */
+  --largura-max: 76rem;
   --largura-texto: 42rem;    /* leitura confortável */
-  --raio: 0.875rem;
-  --raio-pequeno: 0.5rem;
-  --sombra: 0 0.25rem 1rem rgb(14 60 76 / 0.12);
-  --sombra-forte: 0 0.75rem 2rem rgb(14 60 76 / 0.22);
+  --raio: 0.125rem;          /* atlas impresso: cantos quase retos */
+  --raio-pequeno: 0.125rem;
+  --sombra: none;
+  --sombra-forte: 0 1.25rem 2.5rem -1.25rem rgb(27 31 29 / 0.45);
   --altura-header: 4rem;
   --transicao: 0.25s ease;
 
   /* --- Texto claro sobre fundo escuro (banner, hero, comparativo) --- */
-  --cor-texto-claro: #F2F6F7;
-  --cor-texto-claro-suave: #D8E6EA;
+  --cor-texto-claro: #F3EEE4;
+  --cor-texto-claro-suave: #D9CFBC;
 
   /* --- Acentos e superfícies --- */
-  --cor-areia: #FFD9A8;        /* selos manuscritos e marcadores */
-  --cor-zebra: #F6F8F9;        /* linhas alternadas das tabelas */
-  --cor-img-vazia: #dfe7ea;    /* fundo enquanto a foto não carrega */
-  --cor-mapa-regiao: #C7E4EC;
-  --cor-mapa-regiao-hover: #8FCBDD;
+  --cor-areia: #E9C98F;        /* selos e marcadores sobre fundo escuro */
+  --cor-zebra: transparent;    /* tabelas agora só com fios entre linhas */
+  --cor-img-vazia: #E2DACB;    /* fundo enquanto a foto não carrega */
+  --cor-mapa-regiao: #E6DFCF;
+  --cor-mapa-regiao-hover: #D6CCB5;
+  --cor-mapa-oceano: #1F4E5F;  /* hachura do oceano */
+  --cor-mapa-linha: #8C8472;   /* graticulado, escala e rosa dos ventos */
+  --relevo-opacidade: 0.3;     /* sombreado de relevo por cima das regiões */
+
+  /* Escala do clima (mapa): do frio ao quente */
+  --clima-1: #2F5D8C;
+  --clima-2: #6F9CB8;
+  --clima-3: #CFC7A8;
+  --clima-4: #D9925B;
+  --clima-5: #B5452B;
 
   /* --- Rodapé (paleta escura própria) --- */
-  --cor-rodape-fundo: #0B3A49;
-  --cor-rodape-texto: #E6EEF1;
-  --cor-rodape-link: #BFE3EE;
-  --cor-rodape-titulo: #9FCEDC;
-  --cor-rodape-base: #C4D6DC;
+  --cor-rodape-fundo: #16211F;
+  --cor-rodape-texto: #E6DFD0;
+  --cor-rodape-link: #D9CFBC;
+  --cor-rodape-titulo: #B8AE98;
+  --cor-rodape-base: #B8AE98;
+  --cor-rodape-carimbo: #F0A88E; /* carimbos do passaporte */
 
   /* --- Componentes de cor usados com alfa variável --- */
-  --cor-veu: 10 45 58;         /* véu escuro sobre fotos */
-  --cor-cabecalho: rgb(250 249 246 / 0.96);
-  --cor-sombra: 14 60 76;
+  --cor-veu: 18 26 24;         /* véu escuro sobre fotos */
+  --cor-cabecalho: rgb(243 238 228 / 0.94);
+  --cor-sombra: 27 31 29;
+
+  /* Textura de papel e curvas de nível (SVG inline, sem arquivo extra) */
+  --textura-papel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --curvas-nivel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300' viewBox='0 0 600 300' fill='none' stroke='%238C8472' stroke-opacity='.3'%3E%3Cpath d='M-20 250C60 200 120 240 200 190S340 120 420 150 560 210 640 160'/%3E%3Cpath d='M-20 220C70 170 130 205 205 160S335 90 420 118 555 180 640 130'/%3E%3Cpath d='M-20 190C80 140 140 170 210 130S330 62 420 88 550 150 640 100'/%3E%3Cpath d='M-20 160C90 112 150 136 215 102S325 36 420 58 545 120 640 70'/%3E%3Cpath d='M150 110c30-26 80-40 120-30s40 40 0 52-100 6-120-22z'/%3E%3Cpath d='M175 108c20-14 55-22 80-15s24 24 0 31-66 2-80-16z'/%3E%3Cpath d='M-20 280C70 240 140 270 215 228S350 160 430 186 565 240 640 196'/%3E%3C/svg%3E");
 
   /* --- Escala de espaçamento --- */
   --espaco-xs: 0.5rem;
@@ -172,7 +190,7 @@ a:hover {
 
 
 /* ==========================================================================
-   02b. TEMA ESCURO
+   02b. TEMA ESCURO — "carta náutica noturna"
    Só os tokens mudam — nenhum componente precisa saber que o tema existe.
    Três estados: escolha explícita (data-tema no <html>), preferência do
    sistema, e o claro como padrão.
@@ -188,77 +206,78 @@ a:hover {
   :root:not([data-tema="claro"]) {
     color-scheme: dark;
 
-    --cor-principal: #4FB3D0;
-    --cor-sobre-principal: #06232D;
-    --cor-secundaria: #77B584;
-    --cor-destaque: #F07076;
-  --cor-destaque-fundo: #C1272D;
-    --cor-destaque-fundo: #C1272D;
+    --cor-principal: #7FB3C0;
+    --cor-sobre-principal: #0B1A1E;
+    --cor-secundaria: #9DB88F;
+    --cor-destaque: #E58A6C;
+    --cor-destaque-fundo: #A63D25;
 
-    --cor-fundo: #10171B;
-    --cor-superficie: #18232A;
-    --cor-texto: #E7ECEE;
+    --cor-fundo: #0F1614;
+    --cor-superficie: #16201D;
+    --cor-texto: #EAE3D4;
 
-    --cor-principal-escura: #0C4457;
-    --cor-acento: #8FD3E8;
-    --cor-principal-clara: #14303B;
-    --cor-secundaria-escura: #9BD3A8;
-    --cor-secundaria-fundo: #1C4526;
-    --cor-secundaria-clara: #16301D;
-    --cor-destaque-escura: #F7A3A7;
-    --cor-destaque-clara: #35191B;
+    --cor-principal-escura: #173C49;
+    --cor-acento: #9CC7D1;
+    --cor-principal-clara: #1A2A29;
+    --cor-secundaria-escura: #B5CFA6;
+    --cor-secundaria-fundo: #2A3F28;
+    --cor-secundaria-clara: #1B2620;
+    --cor-destaque-escura: #F0A88E;
+    --cor-destaque-clara: #2E1C16;
 
-    --cor-texto-suave: #A7B4BA;
-    --cor-borda: #2A3940;
+    --cor-texto-suave: #A9A392;
+    --cor-borda: #2E3A35;
 
-    --cor-zebra: #1D2930;
-    --cor-img-vazia: #22303A;
-    --cor-mapa-regiao: #1E4453;
-    --cor-mapa-regiao-hover: #2F6B81;
+    --cor-img-vazia: #1E2825;
+    --cor-mapa-regiao: #1D2A27;
+    --cor-mapa-regiao-hover: #26403C;
+    --cor-mapa-oceano: #7FB3C0;
+    --cor-mapa-linha: #5E6B63;
+    --relevo-opacidade: 0.14;
 
-    --cor-rodape-fundo: #0A1418;
-    --cor-cabecalho: rgb(16 23 27 / 0.96);
+    --cor-rodape-fundo: #0A0F0E;
+    --cor-cabecalho: rgb(15 22 20 / 0.94);
 
-    --sombra: 0 0.25rem 1rem rgb(0 0 0 / 0.45);
-    --sombra-forte: 0 0.75rem 2rem rgb(0 0 0 / 0.6);
+    --sombra-forte: 0 1.25rem 2.5rem -1.25rem rgb(0 0 0 / 0.8);
   }
 }
 
 :root[data-tema="escuro"] {
   color-scheme: dark;
 
-  --cor-principal: #4FB3D0;
-  --cor-sobre-principal: #06232D;
-  --cor-secundaria: #77B584;
-  --cor-destaque: #F07076;
-  --cor-destaque-fundo: #C1272D;
+  --cor-principal: #7FB3C0;
+  --cor-sobre-principal: #0B1A1E;
+  --cor-secundaria: #9DB88F;
+  --cor-destaque: #E58A6C;
+  --cor-destaque-fundo: #A63D25;
 
-  --cor-fundo: #10171B;
-  --cor-superficie: #18232A;
-  --cor-texto: #E7ECEE;
+  --cor-fundo: #0F1614;
+  --cor-superficie: #16201D;
+  --cor-texto: #EAE3D4;
 
-  --cor-principal-escura: #0C4457;
-  --cor-acento: #8FD3E8;
-  --cor-principal-clara: #14303B;
-  --cor-secundaria-escura: #9BD3A8;
-  --cor-secundaria-fundo: #1C4526;
-  --cor-secundaria-clara: #16301D;
-  --cor-destaque-escura: #F7A3A7;
-  --cor-destaque-clara: #35191B;
+  --cor-principal-escura: #173C49;
+  --cor-acento: #9CC7D1;
+  --cor-principal-clara: #1A2A29;
+  --cor-secundaria-escura: #B5CFA6;
+  --cor-secundaria-fundo: #2A3F28;
+  --cor-secundaria-clara: #1B2620;
+  --cor-destaque-escura: #F0A88E;
+  --cor-destaque-clara: #2E1C16;
 
-  --cor-texto-suave: #A7B4BA;
-  --cor-borda: #2A3940;
+  --cor-texto-suave: #A9A392;
+  --cor-borda: #2E3A35;
 
-  --cor-zebra: #1D2930;
-  --cor-img-vazia: #22303A;
-  --cor-mapa-regiao: #1E4453;
-  --cor-mapa-regiao-hover: #2F6B81;
+  --cor-img-vazia: #1E2825;
+  --cor-mapa-regiao: #1D2A27;
+  --cor-mapa-regiao-hover: #26403C;
+  --cor-mapa-oceano: #7FB3C0;
+  --cor-mapa-linha: #5E6B63;
+  --relevo-opacidade: 0.14;
 
-  --cor-rodape-fundo: #0A1418;
-  --cor-cabecalho: rgb(16 23 27 / 0.96);
+  --cor-rodape-fundo: #0A0F0E;
+  --cor-cabecalho: rgb(15 22 20 / 0.94);
 
-  --sombra: 0 0.25rem 1rem rgb(0 0 0 / 0.45);
-  --sombra-forte: 0 0.75rem 2rem rgb(0 0 0 / 0.6);
+  --sombra-forte: 0 1.25rem 2.5rem -1.25rem rgb(0 0 0 / 0.8);
 }
 
 
@@ -282,17 +301,18 @@ html.trocando-tema *::after {
   width: 2.5rem;
   height: 2.5rem;
   border: var(--borda-fina) solid var(--cor-borda);
-  border-radius: 50%;
+  border-radius: var(--raio);
   background-color: transparent;
-  color: var(--cor-acento);
+  color: var(--cor-texto);
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
-  transition: background-color var(--transicao), color var(--transicao);
+  transition: background-color var(--transicao), color var(--transicao),
+              border-color var(--transicao);
 }
 
 .tema-botao:hover {
-  background-color: var(--cor-principal-clara);
+  border-color: var(--cor-texto);
 }
 
 /* Sem JavaScript não há como alternar: o site segue a preferência do sistema */
@@ -318,35 +338,53 @@ html:not(.js) .tema-botao {
 
 body {
   font-family: var(--fonte-texto);
-  font-size: 1.0625rem;      /* 17px */
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.7;
   color: var(--cor-texto);
   background-color: var(--cor-fundo);
+  /* grão de papel, bem de leve, por cima da cor de fundo */
+  background-image: var(--textura-papel);
+  /* numeração automática das seções: "01 — Mapa", "02 — Cidades"... */
+  counter-reset: secao;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--fonte-titulo);
-  font-weight: 700;
-  line-height: 1.18;
-  color: var(--cor-acento);
+  font-weight: 560;
+  font-optical-sizing: auto;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--cor-texto);
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(1.9rem, 6vw, 3.25rem);
-  letter-spacing: -0.015em;
+  font-size: clamp(2.3rem, 7vw, 4.25rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 4.2vw, 2.25rem);
+  font-size: clamp(1.85rem, 4.6vw, 3rem);
+  font-weight: 500;
 }
 
 h3 {
-  font-size: clamp(1.15rem, 3vw, 1.4rem);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
 }
 
 h4 {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+}
+
+/* Palavra em destaque dentro de um título: itálico em terracota */
+h1 em,
+h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--cor-destaque);
 }
 
 p + p {
@@ -354,15 +392,17 @@ p + p {
 }
 
 strong {
-  font-weight: 700;
-  color: var(--cor-acento);
+  font-weight: 650;
+  color: var(--cor-texto);
 }
 
-/* Selo manuscrito — "Você sabia?", assinaturas e destaques leves */
+/* Selo — "Você sabia?", assinaturas e destaques leves, em serifa itálica */
 .selo {
   font-family: var(--fonte-manuscrita);
-  font-size: 1.6rem;
-  line-height: 1.2;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
   color: var(--cor-destaque);
 }
 
@@ -370,7 +410,7 @@ strong {
   width: 100%;
   max-width: var(--largura-max);
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 1rem;
 }
 
 .texto-medida {
@@ -382,69 +422,87 @@ strong {
   margin-inline: auto;
 }
 
-/* Etiqueta de categoria acima dos títulos de seção */
-.etiqueta {
-  display: inline-block;
-  margin-bottom: 0.6rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: var(--raio-pilula);
-  background-color: var(--cor-principal-clara);
-  color: var(--cor-acento);
-  font-family: var(--fonte-titulo);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+/* Rótulo técnico: fonte mono, caixa alta, espaçada. É a "voz" do atlas
+   em etiquetas, legendas, dados e botões. */
+.etiqueta,
+.rotulo-mono {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
   text-transform: uppercase;
+  color: var(--cor-destaque);
 }
 
 .subtitulo-secao {
-  margin-top: var(--espaco-sm);
+  margin-top: 1rem;
+  max-width: 40rem;
   color: var(--cor-texto-suave);
   font-size: 1.05rem;
 }
 
-/* Botões */
+.centralizado .subtitulo-secao {
+  margin-inline: auto;
+}
+
+/* Botões: retos, com rótulo mono */
 .botao {
-  display: inline-block;
-  padding: 0.85rem 1.6rem;
-  border-radius: var(--raio-pilula);
-  font-family: var(--fonte-titulo);
-  font-size: 1rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0.8rem 1.35rem;
+  border: var(--borda-fina) solid transparent;
+  border-radius: var(--raio);
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-align: center;
   text-decoration: none;
   transition: transform var(--transicao), background-color var(--transicao),
-              box-shadow var(--transicao);
+              color var(--transicao), border-color var(--transicao);
+}
+
+.botao:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .botao--destaque {
   background-color: var(--cor-destaque-fundo);
   color: var(--cor-branco);
-  box-shadow: var(--sombra-forte);
 }
 
-.botao--destaque:hover {
-  background-color: var(--cor-destaque-escura);
+.botao--destaque:hover:not(:disabled) {
+  background-color: var(--cor-principal-escura);
   color: var(--cor-branco);
-  transform: translateY(-0.125rem);
 }
 
 .botao--contorno {
-  border: 0.125rem solid var(--cor-principal);
+  border-color: var(--cor-texto);
   background-color: transparent;
-  color: var(--cor-acento);
+  color: var(--cor-texto);
 }
 
-.botao--contorno:hover {
-  background-color: var(--cor-principal);
-  color: var(--cor-sobre-principal);
+.botao--contorno:hover:not(:disabled) {
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
 }
 
 /* Feedback de "pressionado" — antes nenhum botão do site tinha :active,
    então o clique não dava nenhuma resposta tátil. */
-.botao:active,
+.botao:active:not(:disabled),
 .regiao-botao:active,
 .filtro-botao:active,
+.atlas__opcao:active,
 .banner__seta:active,
 .banner__pausa:active,
 .tema-botao:active,
@@ -457,13 +515,16 @@ strong {
 .link-seta {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-family: var(--fonte-titulo);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--cor-acento);
+  gap: 0.5rem;
+  padding-bottom: 0.2rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto);
   text-decoration: none;
-  border-bottom: 0.125rem solid transparent;
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
 }
 
 .link-seta::after {
@@ -511,6 +572,15 @@ strong {
    ========================================================================== */
 
 /* Texto visível só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Link "pular para o conteúdo" — primeiro item tabulável da página */
 .pular-conteudo {
   position: absolute;
@@ -519,11 +589,10 @@ strong {
   z-index: 200;
   transform: translate(-50%, -120%);
   padding: 0.75rem 1.25rem;
-  border-radius: 0 0 var(--raio-pequeno) var(--raio-pequeno);
   background-color: var(--cor-destaque-fundo);
   color: var(--cor-branco);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
   text-decoration: none;
   transition: transform var(--transicao);
 }
@@ -537,7 +606,7 @@ strong {
 :focus-visible {
   outline: 0.1875rem solid var(--cor-destaque);
   outline-offset: 0.1875rem;
-  border-radius: 0.25rem;
+  border-radius: 0.125rem;
 }
 
 /* Compensa o header fixo ao pular para uma âncora */
@@ -556,9 +625,10 @@ strong {
   }
 }
 
-/* Em telas muito estreitas o rótulo textual do hambúrguer sai de cena:
-   o ícone de barras já identifica o botão, e o aria-label continua lá. */
-@media (max-width: 22.5rem) {
+/* Em telas estreitas o rótulo textual do hambúrguer sai de cena para o
+   nome do site caber numa linha: o ícone de barras já identifica o botão,
+   e o texto continua lá para leitores de tela. */
+@media (max-width: 26rem) {
   .menu-botao [data-menu-rotulo] {
     position: absolute;
     width: 1px;
@@ -597,7 +667,8 @@ html:not(.js) .navegacao[hidden] {
   z-index: 100;
   background-color: var(--cor-cabecalho);
   backdrop-filter: blur(0.5rem);
-  border-bottom: var(--borda-fina) solid var(--cor-borda);
+  /* fio duplo, como o cabeçalho de uma prancha impressa */
+  border-bottom: 0.1875rem double var(--cor-borda);
 }
 
 .cabecalho__interno {
@@ -625,41 +696,67 @@ html:not(.js) .navegacao[hidden] {
   }
 }
 
-/* --- Logo --- */
+/* --- Logo: selo circular "SC" + nome em serifa --- */
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.7rem;
   font-family: var(--fonte-titulo);
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--cor-acento);
+  font-size: 1.2rem;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  color: var(--cor-texto);
   text-decoration: none;
 }
 
 .logo:hover {
-  color: var(--cor-acento);
+  color: var(--cor-texto);
 }
 
 .logo__marca {
   display: grid;
   place-items: center;
-  width: 2.3rem;
-  height: 2.3rem;
+  width: 2.4rem;
+  height: 2.4rem;
   flex: 0 0 auto;
-  border-radius: 0.7rem;
-  background: linear-gradient(140deg, var(--cor-principal), var(--cor-secundaria));
-  color: var(--cor-sobre-principal);
-  font-size: 1.15rem;
+  border: 0.125rem solid var(--cor-destaque);
+  border-radius: 50%;
+  outline: var(--borda-fina) dashed var(--cor-destaque);
+  outline-offset: -0.375rem;
+  color: var(--cor-destaque);
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: transform 0.4s ease;
+}
+
+.logo:hover .logo__marca {
+  transform: rotate(-12deg);
 }
 
 .logo__texto small {
   display: block;
-  font-family: var(--fonte-manuscrita);
-  font-size: 0.95rem;
+  margin-top: 0.2rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.6rem;
   font-weight: 400;
-  color: var(--cor-destaque);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+/* No celular o subtítulo quebrava em duas linhas e espremia o nome:
+   abaixo de 30rem fica só o nome, numa linha. */
+@media (max-width: 29.99rem) {
+  .logo__texto small {
+    display: none;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
 }
 
 /* --- Botão hamburguer (só no mobile) --- */
@@ -667,16 +764,17 @@ html:not(.js) .navegacao[hidden] {
   display: inline-flex;
   align-items: center;
   gap: var(--espaco-xs);
+  min-height: 2.5rem;
   padding: 0.5rem 0.7rem;
-  border: var(--borda-fina) solid var(--cor-borda);
-  border-radius: var(--raio-pequeno);
-  background-color: var(--cor-superficie);
-  font-family: var(--fonte-titulo);
-  font-size: 0.8rem;
-  font-weight: 700;
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-radius: var(--raio);
+  background-color: transparent;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--cor-acento);
+  letter-spacing: 0.1em;
+  color: var(--cor-texto);
 }
 
 .menu-botao__barras {
@@ -692,8 +790,7 @@ html:not(.js) .navegacao[hidden] {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 0.15rem;
-  border-radius: var(--raio-pilula);
+  height: 0.125rem;
   background-color: currentColor;
   transition: transform var(--transicao), opacity var(--transicao);
 }
@@ -724,8 +821,7 @@ html:not(.js) .navegacao[hidden] {
   max-height: calc(100dvh - var(--altura-header));
   overflow-y: auto;
   background-color: var(--cor-fundo);
-  border-bottom: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
 }
 
 /* Fechado no mobile; o JS alterna o atributo hidden */
@@ -736,18 +832,33 @@ html:not(.js) .navegacao[hidden] {
 .navegacao__lista {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 1.25rem 1.25rem;
+  padding: 0.5rem 1rem 1.25rem;
+  counter-reset: item-menu;
 }
 
 .navegacao__lista a {
-  display: block;
-  padding: 0.7rem 0.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.85rem 0.25rem;
   border-bottom: var(--borda-fina) solid var(--cor-borda);
   font-family: var(--fonte-titulo);
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 450;
   color: var(--cor-texto);
   text-decoration: none;
+}
+
+/* No celular o menu vira um índice numerado, como o sumário de um atlas */
+.navegacao__lista li {
+  counter-increment: item-menu;
+}
+
+.navegacao__lista a::before {
+  content: counter(item-menu, decimal-leading-zero);
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  color: var(--cor-texto-suave);
 }
 
 .navegacao__lista a:hover {
@@ -756,34 +867,149 @@ html:not(.js) .navegacao[hidden] {
 
 /* Página atual — marcada com aria-current="page" no HTML */
 .navegacao__lista a[aria-current="page"] {
-  color: var(--cor-acento);
-  border-bottom-color: var(--cor-principal);
-}
-
-.navegacao__lista a[aria-current="page"]::before {
-  content: "\2022\00a0";
   color: var(--cor-destaque);
+  font-style: italic;
 }
 
 
 /* ==========================================================================
    06. BANNER ROTATIVO (apenas index.html)
+   Capa editorial: título grande no papel e as fotos numa "prancha"
+   emoldurada ao lado. O carrossel continua o mesmo; só mudou a moldura.
    ========================================================================== */
 
 .banner {
   position: relative;
-  min-height: 32rem;
-  display: grid;
-  align-items: end;
-  overflow: hidden;
   isolation: isolate;
-  background-color: var(--cor-principal-escura);
+  padding-block: 2.5rem 3rem;
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
+  overflow: hidden;
+}
+
+/* Curvas de nível ao fundo, saindo da borda direita */
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--curvas-nivel) right -12rem top 1rem / 60rem auto no-repeat;
+  opacity: 0.9;
+}
+
+.banner__grade {
+  display: grid;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.banner__conteudo h1 {
+  max-width: 12ch;
+  font-size: clamp(2.6rem, 9vw, 5.5rem);
+  line-height: 0.98;
+}
+
+.banner__selo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
+}
+
+.banner__selo span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: var(--borda-fina);
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background-color: currentColor;
+}
+
+.banner__coord {
+  color: var(--cor-texto-suave);
+}
+
+.banner__texto {
+  max-width: 44ch;
+  margin-top: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--cor-texto-suave);
+}
+
+.banner__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-sm);
+  margin-top: 1.75rem;
+}
+
+/* Três números logo abaixo, separados por fios */
+.banner__numeros {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  margin-top: 2.25rem;
+  border-top: var(--borda-fina) solid var(--cor-borda);
+}
+
+.banner__numeros div {
+  padding: 0.8rem 1.25rem 0 0;
+}
+
+.banner__numeros div + div {
+  padding-left: 1.25rem;
+  border-left: var(--borda-fina) solid var(--cor-borda);
+}
+
+.banner__numeros dt {
+  font-family: var(--fonte-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.banner__numeros dd {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  font-weight: 450;
+  line-height: 1.2;
+}
+
+/* --- A prancha com as fotos --- */
+.banner__prancha {
+  position: relative;
+  padding: 0.6rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-superficie);
+  box-shadow: var(--sombra-forte);
+}
+
+.banner__marca {
+  position: absolute;
+  top: -0.7rem;
+  left: 1rem;
+  z-index: 2;
+  padding: 0.1rem 0.5rem;
+  background-color: var(--cor-fundo);
+  font-family: var(--fonte-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
 }
 
 .banner__slides {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--cor-img-vazia);
 }
 
 .banner__slide {
@@ -801,70 +1027,32 @@ html:not(.js) .navegacao[hidden] {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.04);
+  transition: transform 6s linear;
 }
 
-/* Véu escuro: garante contraste AA do texto branco sobre a foto */
-.banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    180deg,
-    rgb(var(--cor-veu) / 0.35) 0%,
-    rgb(var(--cor-veu) / 0.55) 45%,
-    rgb(var(--cor-veu) / 0.88) 100%
-  );
+/* Um zoom lento enquanto a foto está no ar (desligado com movimento reduzido) */
+.banner__slide[data-ativo="true"] img {
+  transform: scale(1);
 }
 
-.banner__conteudo {
-  padding-block: 5rem 2rem;
-  color: var(--cor-branco);
-}
-
-.banner__conteudo h1 {
-  color: var(--cor-branco);
-  max-width: 24ch;
-  text-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.45);
-}
-
-.banner__selo {
-  display: block;
-  margin-bottom: var(--espaco-xs);
-  font-family: var(--fonte-manuscrita);
-  font-size: 1.65rem;
-  color: var(--cor-areia);
-}
-
-.banner__texto {
-  max-width: 46ch;
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: var(--cor-texto-claro);
-}
-
-.banner__acoes {
+.banner__rodape {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--espaco-sm);
-  margin-top: 1.75rem;
-}
-
-.banner__acoes .botao--contorno {
-  border-color: var(--cor-branco);
-  color: var(--cor-branco);
-}
-
-.banner__acoes .botao--contorno:hover {
-  background-color: var(--cor-superficie);
-  color: var(--cor-acento);
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-top: 0.6rem;
 }
 
 /* Legenda do slide atual */
 .banner__legenda {
-  margin-top: var(--espaco-lg);
-  font-size: 0.9rem;
-  color: var(--cor-texto-claro-suave);
+  flex: 1 1 12rem;
+  min-height: 1.2em;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-suave);
 }
 
 /* --- Controles do banner --- */
@@ -872,19 +1060,18 @@ html:not(.js) .navegacao[hidden] {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--espaco-xs);
-  margin-top: var(--espaco-md);
+  gap: 0.3rem;
 }
 
 .banner__pontos {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.2rem;
 }
 
 .banner__ponto {
-  /* A área clicável tem 2.5rem x 1.5rem (WCAG 2.5.8 pede 24x24px);
-     o traço visível de 0.3rem é desenhado pelo ::before. */
-  width: 2.5rem;
+  /* A área clicável tem 2rem x 1.5rem (WCAG 2.5.8 pede 24x24px);
+     o traço visível é desenhado pelo ::before. */
+  width: 2rem;
   height: 1.5rem;
   display: grid;
   place-items: center;
@@ -896,17 +1083,14 @@ html:not(.js) .navegacao[hidden] {
 .banner__ponto::before {
   content: "";
   width: 100%;
-  height: 0.3rem;
-  border-radius: var(--raio-pilula);
-  background-color: rgba(255, 255, 255, 0.45);
-  /* Contorno garante contraste contra fotos claras (WCAG 1.4.11) */
-  outline: 0.0625rem solid rgb(var(--cor-veu) / 0.55);
-  transition: background-color var(--transicao);
+  height: 0.125rem;
+  background-color: var(--cor-borda);
+  transition: background-color var(--transicao), height var(--transicao);
 }
 
 .banner__ponto[aria-pressed="true"]::before {
-  background-color: var(--cor-superficie);
-  height: 0.45rem;
+  height: 0.25rem;
+  background-color: var(--cor-destaque);
 }
 
 .banner__seta,
@@ -914,20 +1098,21 @@ html:not(.js) .navegacao[hidden] {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: var(--borda-fina) solid rgba(255, 255, 255, 0.6);
-  background-color: rgb(var(--cor-veu) / 0.45);
-  color: var(--cor-branco);
+  width: 2.25rem;
+  height: 2.25rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: transparent;
+  color: var(--cor-texto);
   font-size: 1rem;
   line-height: 1;
 }
 
 .banner__seta:hover,
 .banner__pausa:hover {
-  background-color: var(--cor-destaque-fundo);
-  border-color: var(--cor-destaque);
+  border-color: var(--cor-texto);
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
 }
 
 
@@ -941,6 +1126,7 @@ html:not(.js) .navegacao[hidden] {
 
 .secao--clara {
   background-color: var(--cor-superficie);
+  border-block: var(--borda-fina) solid var(--cor-borda);
 }
 
 .secao--principal {
@@ -951,44 +1137,68 @@ html:not(.js) .navegacao[hidden] {
   background-color: var(--cor-secundaria-clara);
 }
 
+/* Cabeçalho de seção: fio de tinta em cima e número automático na
+   etiqueta ("01 — Mapa interativo"), como os capítulos de um atlas. */
 .secao__cabecalho {
-  max-width: 46rem;
-  margin-bottom: 2.25rem;
+  max-width: 50rem;
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+  border-top: var(--borda-fina) solid var(--cor-texto);
+  counter-increment: secao;
 }
 
-/* Cabeçalho das páginas internas (hero simples) */
+.secao__cabecalho.centralizado {
+  border-top-color: transparent;
+}
+
+.secao__cabecalho .etiqueta::before {
+  content: counter(secao, decimal-leading-zero) " \2014";
+  color: var(--cor-texto-suave);
+}
+
+/* Cabeçalho das páginas internas: papel com curvas de nível */
 .hero-pagina {
   position: relative;
-  padding-block: 3.5rem;
-  color: var(--cor-branco);
-  background:
-    linear-gradient(120deg, rgba(10, 95, 120, 0.92), rgba(36, 80, 44, 0.88)),
-    url("https://picsum.photos/seed/sc-hero/1600/600") center / cover no-repeat;
-  /* TROCAR: usar foto definitiva em assets/ (ex.: assets/serra/panorama.jpg) */
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 3.25rem 2.75rem;
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
+}
+
+.hero-pagina::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--curvas-nivel) right -14rem center / 56rem auto no-repeat;
 }
 
 .hero-pagina h1 {
-  color: var(--cor-branco);
+  max-width: 18ch;
 }
 
 .hero-pagina p {
   max-width: 52ch;
-  margin-top: 1rem;
-  color: var(--cor-texto-claro);
+  margin-top: 1.25rem;
+  color: var(--cor-texto-suave);
   font-size: 1.1rem;
 }
 
-.hero-pagina .etiqueta {
-  background-color: rgba(255, 255, 255, 0.16);
-  color: var(--cor-branco);
+.hero-pagina .etiqueta::before {
+  content: "";
+  width: 2rem;
+  height: var(--borda-fina);
+  background-color: currentColor;
 }
 
 /* Trilha de navegação */
 .trilha {
-  font-size: 0.9rem;
-  padding-block: 0.9rem;
-  background-color: var(--cor-superficie);
+  padding-block: 0.8rem;
   border-bottom: var(--borda-fina) solid var(--cor-borda);
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .trilha ol {
@@ -996,6 +1206,10 @@ html:not(.js) .navegacao[hidden] {
   flex-wrap: wrap;
   gap: 0.4rem;
   color: var(--cor-texto-suave);
+}
+
+.trilha a {
+  color: var(--cor-texto);
 }
 
 .trilha li + li::before {
@@ -1015,17 +1229,23 @@ html:not(.js) .navegacao[hidden] {
 }
 
 .mapa-quadro {
-  padding: var(--espaco-md);
-  border-radius: var(--raio);
-  background-color: var(--cor-superficie);
-  border: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
+  padding: 0.75rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-fundo);
 }
 
 .mapa-quadro figcaption {
-  margin-top: 0.85rem;
-  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: var(--borda-fina) solid var(--cor-borda);
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  line-height: 1.6;
   color: var(--cor-texto-suave);
+}
+
+.mapa-quadro__link {
+  margin-top: 0.9rem;
 }
 
 .mapa-quadro svg {
@@ -1033,152 +1253,153 @@ html:not(.js) .navegacao[hidden] {
   height: auto;
 }
 
-/* Cards de dados (área, população, capital...) */
+/* Números do estado: sem caixas, só fios e tipografia */
 .cards-dados {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem 1.25rem;
   grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 
 .card-dado {
-  padding: 1.2rem;
-  border-radius: var(--raio);
-  background-color: var(--cor-superficie);
-  border: var(--borda-fina) solid var(--cor-borda);
-  border-top: 0.25rem solid var(--cor-principal);
-}
-
-.card-dado:nth-child(even) {
-  border-top-color: var(--cor-secundaria);
+  padding-top: 0.7rem;
+  border-top: var(--borda-fina) solid var(--cor-texto);
 }
 
 .card-dado dt {
-  font-family: var(--fonte-titulo);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cor-texto-suave);
 }
 
 .card-dado dd {
-  margin-top: 0.35rem;
+  margin-top: 0.3rem;
   font-family: var(--fonte-titulo);
-  /* clamp porque "Florianópolis" a 1.45rem transbordava a caixa de 130px
-     na grade de três colunas */
-  font-size: clamp(1.1rem, 1.1rem + 0.8vw, 1.45rem);
-  font-weight: 700;
-  color: var(--cor-acento);
+  /* clamp porque "Florianópolis" transbordava a coluna estreita */
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+  font-weight: 450;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--cor-texto);
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .card-dado dd small {
   display: block;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
   font-family: var(--fonte-texto);
   font-size: 0.8rem;
   font-weight: 400;
+  letter-spacing: 0;
   color: var(--cor-texto-suave);
 }
 
 /* Caixa "Você sabia?" */
 .voce-sabia {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   padding: 1.15rem 1.25rem;
-  border-radius: var(--raio);
   background-color: var(--cor-destaque-clara);
-  border-left: 0.3rem solid var(--cor-destaque);
+  border-left: 0.1875rem solid var(--cor-destaque);
 }
 
 .voce-sabia h3 {
   font-family: var(--fonte-manuscrita);
-  font-size: 1.7rem;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 400;
   color: var(--cor-destaque-escura);
 }
 
 .voce-sabia p {
-  margin-top: 0.25rem;
-  font-size: 1rem;
+  margin-top: 0.35rem;
+  font-size: 0.98rem;
 }
 
 
 /* ==========================================================================
    09. CARDS DE CIDADES / REGIÕES
+   Numerados como figuras de um livro ("Fig. 01"), com foto emoldurada
+   por um fio e texto direto no papel.
    ========================================================================== */
 
 .grade-cards {
   display: grid;
-  gap: 1.5rem;
+  gap: 2.25rem 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  counter-reset: figura;
 }
 
 .card-cidade {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  border-radius: var(--raio);
-  background-color: var(--cor-superficie);
-  border: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
-  transition: transform var(--transicao), box-shadow var(--transicao);
-}
-
-.card-cidade:hover,
-.card-cidade:focus-within {
-  transform: translateY(-0.3rem);
-  box-shadow: var(--sombra-forte);
+  counter-increment: figura;
 }
 
 .card-cidade__foto {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  outline: var(--borda-fina) solid var(--cor-borda);
+  outline-offset: 0.3rem;
 }
 
 .card-cidade__foto img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  filter: saturate(0.9);
+  transition: transform 0.6s ease, filter 0.6s ease;
 }
 
 .card-cidade:hover .card-cidade__foto img {
-  transform: scale(1.06);
+  transform: scale(1.04);
+  filter: saturate(1.05);
 }
 
 .card-cidade__regiao {
   position: absolute;
-  left: 0.75rem;
-  bottom: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--raio-pilula);
-  background-color: var(--cor-principal-escura);
-  color: var(--cor-branco);
-  font-family: var(--fonte-titulo);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  left: 0;
+  bottom: 0;
+  padding: 0.3rem 0.6rem;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .card-cidade__corpo {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.55rem;
   flex: 1;
-  padding: 1.1rem 1.2rem 1.3rem;
+  padding-top: 1.1rem;
+}
+
+.card-cidade__corpo::before {
+  content: "Fig. " counter(figura, decimal-leading-zero);
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
 }
 
 /* h4 aparece quando o card está dentro de um grupo de região (h3) */
+.card-cidade__corpo h3,
 .card-cidade__corpo h4,
 .bloco h4 {
-  font-size: clamp(1.15rem, 3vw, 1.4rem);
-  color: var(--cor-acento);
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
+  font-weight: 500;
 }
 
 .card-cidade__corpo p {
-  font-size: 0.98rem;
+  font-size: 0.97rem;
+  color: var(--cor-texto-suave);
 }
 
 .card-cidade__dados {
@@ -1186,15 +1407,16 @@ html:not(.js) .navegacao[hidden] {
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-top: auto;
+  padding-top: 0.5rem;
 }
 
 .etiqueta-dado {
-  padding: 0.2rem 0.55rem;
-  border-radius: var(--raio-pilula);
-  background-color: var(--cor-secundaria-clara);
-  color: var(--cor-secundaria-escura);
-  font-size: 0.78rem;
-  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
 }
 
 
@@ -1212,7 +1434,6 @@ html:not(.js) .navegacao[hidden] {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: var(--raio);
   color: var(--cor-branco);
   box-shadow: var(--sombra-forte);
 }
@@ -1237,12 +1458,14 @@ html:not(.js) .navegacao[hidden] {
 
 .comparativo__titulo h3 {
   color: var(--cor-branco);
-  font-size: 1.35rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
 }
 
 .comparativo__titulo span {
   font-family: var(--fonte-manuscrita);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  font-style: italic;
   color: var(--cor-areia);
 }
 
@@ -1261,37 +1484,39 @@ html:not(.js) .navegacao[hidden] {
 
 .comparativo__corpo p {
   color: var(--cor-texto-claro);
-  font-size: 0.98rem;
+  font-size: 0.97rem;
 }
 
 .comparativo__indices {
   display: grid;
-  gap: var(--espaco-sm);
   /* Abaixo de 30rem as três colunas fixas deixavam ~80px por índice,
      apertando o rótulo em maiúsculas. Aqui elas empilham. */
   grid-template-columns: 1fr;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+  border-block: var(--borda-fina) solid rgb(255 255 255 / 0.22);
 }
 
 .comparativo__indices div {
-  padding: 0.6rem;
-  border-radius: var(--raio-pequeno);
-  background-color: rgba(255, 255, 255, 0.14);
+  padding: 0.65rem 0.5rem;
   text-align: center;
 }
 
+.comparativo__indices div + div {
+  border-top: var(--borda-fina) solid rgb(255 255 255 / 0.22);
+}
+
 .comparativo__indices dt {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-family: var(--fonte-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cor-texto-claro);
+  color: var(--cor-texto-claro-suave);
 }
 
 .comparativo__indices dd {
   font-family: var(--fonte-titulo);
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 450;
   color: var(--cor-branco);
 }
 
@@ -1309,7 +1534,7 @@ html:not(.js) .navegacao[hidden] {
 }
 
 .comparativo__lista li::before {
-  content: "\25B8";
+  content: "\2192";
   position: absolute;
   left: 0;
   color: var(--cor-areia);
@@ -1320,7 +1545,8 @@ html:not(.js) .navegacao[hidden] {
   display: grid;
   place-items: center;
   font-family: var(--fonte-manuscrita);
-  font-size: 2rem;
+  font-size: 2.4rem;
+  font-style: italic;
   color: var(--cor-destaque);
 }
 
@@ -1336,9 +1562,8 @@ html:not(.js) .navegacao[hidden] {
 .flip-card {
   position: relative;
   /* 15rem cortava o verso mais longo entre ~992px e ~1120px e em zoom 200% */
-  min-height: 17rem;
+  min-height: 18rem;
   perspective: 62.5rem;
-  border-radius: var(--raio);
 }
 
 .flip-card__interno {
@@ -1347,7 +1572,7 @@ html:not(.js) .navegacao[hidden] {
   height: 100%;
   min-height: inherit;
   transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 /* O estado é só a classe. O hover é um atalho para quem tem ponteiro:
@@ -1375,7 +1600,8 @@ html:not(.js) .navegacao[hidden] {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 1.2rem;
+  font-size: clamp(1.3rem, 2.5vw, 1.55rem);
+  font-weight: 500;
 }
 
 .flip-card__gatilho {
@@ -1398,7 +1624,6 @@ html:not(.js) .navegacao[hidden] {
 .flip-card__gatilho:focus-visible {
   outline: 0.1875rem solid var(--cor-branco);
   outline-offset: 0.25rem;
-  border-radius: var(--raio-pequeno);
 }
 
 .flip-card__face {
@@ -1409,13 +1634,11 @@ html:not(.js) .navegacao[hidden] {
   justify-content: flex-end;
   gap: var(--espaco-xs);
   padding: var(--espaco-md);
-  border-radius: var(--raio);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   /* auto em vez de hidden: se o texto do verso passar da altura do card,
      ele rola em vez de ser cortado (WCAG 1.4.4) */
   overflow: auto;
-  box-shadow: var(--sombra);
 }
 
 /* --- Frente: foto + título --- */
@@ -1438,7 +1661,7 @@ html:not(.js) .navegacao[hidden] {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgb(var(--cor-veu) / 0.15), rgb(var(--cor-veu) / 0.88));
+  background: linear-gradient(180deg, rgb(var(--cor-veu) / 0.1) 30%, rgb(var(--cor-veu) / 0.9));
 }
 
 .flip-card__frente .flip-card__titulo,
@@ -1449,27 +1672,38 @@ html:not(.js) .navegacao[hidden] {
 }
 
 .flip-card__dica {
-  font-family: var(--fonte-manuscrita);
-  font-size: 1.2rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--cor-areia);
 }
 
-/* --- Verso: o fato surpreendente --- */
+.flip-card__dica::before {
+  content: "\21BB\00a0";  /* ↻ */
+}
+
+/* --- Verso: o fato surpreendente, como uma ficha catalográfica --- */
 .flip-card__verso {
   transform: rotateY(180deg);
   justify-content: center;
   background-color: var(--cor-superficie);
-  border: 0.125rem solid var(--cor-destaque);
+  background-image: repeating-linear-gradient(
+    180deg, transparent 0 1.6rem, rgb(var(--cor-sombra) / 0.06) 1.6rem calc(1.6rem + 1px)
+  );
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-top: 0.3rem solid var(--cor-destaque);
 }
 
 .flip-card__rotulo {
   font-family: var(--fonte-manuscrita);
-  font-size: 1.7rem;
+  font-size: 1.35rem;
+  font-style: italic;
   color: var(--cor-destaque-escura);
 }
 
 .flip-card__verso p {
-  font-size: 0.98rem;
+  font-size: 0.96rem;
 }
 
 .flip-card__verso strong {
@@ -1479,6 +1713,8 @@ html:not(.js) .navegacao[hidden] {
 
 /* ==========================================================================
    12. LINHA DO TEMPO (cultura.html)
+   O trilho virou uma "estrada" tracejada, e cada marco é um losango que
+   acende quando entra na tela. O período aparece como um carimbo.
    ========================================================================== */
 
 .linha-tempo {
@@ -1493,36 +1729,30 @@ html:not(.js) .navegacao[hidden] {
   left: 0.6rem;
   top: 0.5rem;
   bottom: 0.5rem;
-  width: 0.1875rem;
-  border-radius: var(--raio-pilula);
-  background: linear-gradient(
-    180deg,
-    var(--cor-secundaria),
-    var(--cor-principal),
-    var(--cor-destaque)
-  );
+  border-left: 0.125rem dashed var(--cor-texto-suave);
 }
 
 .marco {
   position: relative;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Bolinha do marco */
+/* Losango do marco */
 .marco::before {
   content: "";
   position: absolute;
-  left: -2.05rem;
+  left: -2.1rem;
   top: 1.4rem;
-  width: 1.05rem;
-  height: 1.05rem;
-  border-radius: 50%;
-  background-color: var(--cor-superficie);
-  border: 0.25rem solid var(--cor-principal);
-  box-shadow: 0 0 0 0.25rem var(--cor-fundo);
+  width: 0.9rem;
+  height: 0.9rem;
+  background-color: var(--cor-fundo);
+  border: 0.125rem solid var(--cor-texto);
+  transform: rotate(45deg);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .marco--visivel::before {
+  background-color: var(--cor-destaque);
   border-color: var(--cor-destaque);
 }
 
@@ -1530,10 +1760,8 @@ html:not(.js) .navegacao[hidden] {
   display: grid;
   gap: 1rem;
   overflow: hidden;
-  border-radius: var(--raio);
   background-color: var(--cor-superficie);
   border: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
 }
 
 .marco__foto {
@@ -1555,18 +1783,20 @@ html:not(.js) .navegacao[hidden] {
 
 .marco__periodo {
   display: inline-block;
-  margin-bottom: var(--espaco-xs);
-  padding: 0.2rem 0.65rem;
-  border-radius: var(--raio-pilula);
-  background-color: var(--cor-principal-escura);
-  color: var(--cor-branco);
-  font-family: var(--fonte-titulo);
-  font-size: 0.78rem;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border: 0.125rem solid var(--cor-destaque);
+  color: var(--cor-destaque);
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
 }
 
 .marco__corpo p {
-  font-size: 0.99rem;
+  font-size: 0.98rem;
 }
 
 .marco__heranca {
@@ -1574,40 +1804,90 @@ html:not(.js) .navegacao[hidden] {
   padding-top: 0.9rem;
   border-top: var(--borda-fina) dashed var(--cor-borda);
   font-family: var(--fonte-manuscrita);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  font-style: italic;
   color: var(--cor-secundaria-escura);
 }
 
 
 /* ==========================================================================
-   13. MAPA INTERATIVO DE REGIÕES (cidades.html)
+   13. ATLAS INTERATIVO (cidades.html) — diferenciais 1, 2 e 3
+   O SVG usa unidades próprias (viewBox 600 x 380). Quando o JS dá zoom, ele
+   grava em --zoom quantos pixels de tela vale uma unidade do mapa; textos,
+   pinos e traços dividem o próprio tamanho por esse número e ficam sempre
+   do mesmo tamanho na tela, em qualquer zoom e em qualquer largura.
    ========================================================================== */
 
-.mapa-interativo {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.mapa-interativo__figura {
-  padding: 1rem;
-  border-radius: var(--raio);
-  background-color: var(--cor-superficie);
-  border: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
-}
-
 .mapa-svg {
+  --zoom: 1;
+  /* No celular o estado inteiro fica pequeno: abaixo de 0,75 os textos
+     param de compensar e encolhem junto com o mapa, senão se atropelam. */
+  --zoom-texto: max(var(--zoom), 0.75);
   width: 100%;
   height: auto;
+  overflow: hidden;
 }
 
-/* Cada região é um <path>/<g> clicável */
+/* --- Vestimenta cartográfica (também usada no mapa estático da home) --- */
+.mapa-oceano {
+  fill: url(#hachura-mar);
+  opacity: 0.35;
+}
+
+.hachura-linha {
+  stroke: var(--cor-mapa-oceano);
+  stroke-width: 0.8;
+}
+
+.mapa-graticula line {
+  stroke: var(--cor-mapa-linha);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 3;
+  opacity: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+
+.mapa-coord,
+.mapa-vizinhos text {
+  font-family: var(--fonte-mono);
+  fill: var(--cor-texto-suave);
+  pointer-events: none;
+}
+
+.mapa-coord {
+  font-size: calc(9px / var(--zoom-texto));
+}
+
+.mapa-vizinhos text {
+  font-size: calc(10px / var(--zoom-texto));
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.mapa-vizinhos .mapa-vizinhos__mar {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  letter-spacing: 0.12em;
+  fill: var(--cor-acento);
+}
+
+/* Mapa estreito: os vizinhos saem, só o oceano fica */
+@media (max-width: 30rem) {
+  .mapa-vizinhos text:not(.mapa-vizinhos__mar) {
+    display: none;
+  }
+}
+
+/* --- Regiões --- */
 .regiao {
   fill: var(--cor-mapa-regiao);
-  stroke: var(--cor-acento);
-  stroke-width: 1.25;
+  stroke: var(--cor-texto);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
   cursor: pointer;
-  transition: fill var(--transicao), stroke var(--transicao), transform var(--transicao);
+  transition: fill 0.35s ease, opacity 0.35s ease;
 }
 
 /* Mapa ilustrativo (não interativo) da home: sem cursor de clique */
@@ -1622,8 +1902,6 @@ html:not(.js) .navegacao[hidden] {
 .regiao[aria-pressed="true"],
 .regiao--ativa {
   fill: var(--cor-principal);
-  stroke: var(--cor-branco);
-  stroke-width: 1.5;
 }
 
 /* Sem contorno feio no clique do mouse — só aparece com navegação por teclado */
@@ -1632,89 +1910,771 @@ html:not(.js) .navegacao[hidden] {
 }
 
 .regiao:focus-visible {
-  outline: 0.1875rem solid var(--cor-destaque);
-  outline-offset: 0.125rem;
+  outline: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 3;
+}
+
+/* Sombreado de relevo por cima das regiões (não recebe clique) */
+.mapa-relevo {
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: var(--relevo-opacidade);
+}
+
+.mapa-rotulo,
+.mapa-temp {
+  font-family: var(--fonte-mono);
+  text-transform: uppercase;
+  fill: var(--cor-texto);
+  pointer-events: none;
+  /* halo da cor do papel, para ler por cima de qualquer preenchimento */
+  paint-order: stroke;
+  stroke: var(--cor-fundo);
+  stroke-width: calc(3px / var(--zoom-texto));
+  stroke-linejoin: round;
 }
 
 .mapa-rotulo {
-  font-family: var(--fonte-titulo);
-  font-size: 0.75rem;
+  font-size: calc(10.5px / var(--zoom-texto));
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.mapa-rotulo--ativa {
+  fill: var(--cor-destaque);
   font-weight: 700;
-  fill: var(--cor-acento);
+}
+
+.mapa-temp {
+  font-size: calc(12px / var(--zoom-texto));
+  font-weight: 700;
+  display: none;
+}
+
+/* --- Camada de clima (diferencial 2): a cor vem da escala --- */
+.atlas--clima .mapa-temp {
+  display: inline;
+}
+
+.atlas--clima .regiao {
+  fill: var(--cor-regiao-clima, var(--cor-mapa-regiao));
+}
+
+.atlas--clima .regiao[aria-pressed="true"] {
+  fill: var(--cor-regiao-clima, var(--cor-principal));
+  stroke-width: 2.5;
+}
+
+/* --- Pinos das cidades --- */
+.pino {
   pointer-events: none;
 }
 
-.regiao[aria-pressed="true"] + .mapa-rotulo,
-.regiao--ativa + .mapa-rotulo {
-  fill: var(--cor-branco);
+/* O corpo do pino é desenhado na origem e encolhe na mesma proporção do
+   zoom: fica sempre do mesmo tamanho na tela. */
+.pino__corpo {
+  transform: scale(calc(1 / var(--zoom-texto)));
+  transition: opacity 0.3s ease;
 }
+
+.pino__marca {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 1.3;
+  transition: fill 0.3s ease;
+}
+
+.pino--capital .pino__marca {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-fundo);
+  stroke-width: 1;
+  transform: scale(1.25);
+}
+
+.pino__nome {
+  font-family: var(--fonte-texto);
+  font-size: 10.5px;
+  font-weight: 600;
+  fill: var(--cor-texto);
+  paint-order: stroke;
+  stroke: var(--cor-fundo);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Pinos da região selecionada: marca cheia e nome à mostra */
+.pino--ativo .pino__marca {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-fundo);
+}
+
+.pino--ativo .pino__nome,
+.pino--capital .pino__nome {
+  opacity: 1;
+}
+
+.atlas:not(.atlas--rota) .pino:not(.pino--ativo):not(.pino--capital) .pino__corpo {
+  opacity: 0.55;
+}
+
+/* No modo roteiro todo pino vira alvo de clique */
+.atlas--rota .pino {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.atlas--rota .pino:hover .pino__nome,
+.atlas--rota .pino:focus-visible .pino__nome,
+.atlas--rota .pino--parada .pino__nome {
+  opacity: 1;
+}
+
+/* O número da parada cobre o pino: o nome se afasta para não ficar embaixo */
+.atlas--rota .pino--parada .pino__nome {
+  transform: translateX(4px);
+}
+
+.atlas--rota .pino--parada .pino__nome[text-anchor="end"] {
+  transform: translateX(-4px);
+}
+
+.atlas--rota .pino:focus {
+  outline: none;
+}
+
+.atlas--rota .pino:focus-visible .pino__marca {
+  stroke: var(--cor-destaque);
+  stroke-width: 3;
+}
+
+/* --- Rota (diferencial 3) --- */
+.rota-linha {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  animation: rota-marcha 1.2s linear infinite;
+}
+
+@keyframes rota-marcha {
+  to { stroke-dashoffset: -22; }
+}
+
+/* A rota fica guardada, mas só aparece com o modo roteiro ligado */
+.atlas:not(.atlas--rota) .rota-linha,
+.atlas:not(.atlas--rota) .rota-paradas {
+  display: none;
+}
+
+.rota-parada circle {
+  fill: var(--cor-destaque-fundo);
+  stroke: var(--cor-fundo);
+  stroke-width: 1.5;
+}
+
+.rota-parada text {
+  font-family: var(--fonte-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  fill: var(--cor-branco);
+  text-anchor: middle;
+}
+
+.rota-parada > g {
+  transform: scale(calc(1 / var(--zoom-texto)));
+}
+
+/* --- Estrutura da página do atlas --- */
+.atlas {
+  display: grid;
+  gap: 2rem;
+}
+
+.atlas__prancha {
+  min-width: 0;
+}
+
+.atlas__barra {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+html:not(.js) .atlas__barra {
+  display: none;
+}
+
+.atlas__camadas {
+  display: inline-flex;
+  border: var(--borda-fina) solid var(--cor-texto);
+}
+
+.atlas__opcao {
+  min-height: 2.4rem;
+  padding: 0.45rem 0.85rem;
+  border: 0;
+  background-color: transparent;
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color var(--transicao), color var(--transicao);
+}
+
+.atlas__camadas .atlas__opcao + .atlas__opcao {
+  border-left: var(--borda-fina) solid var(--cor-texto);
+}
+
+.atlas__opcao:hover {
+  background-color: var(--cor-principal-clara);
+}
+
+.atlas__opcao[aria-pressed="true"] {
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+.atlas__opcao--rota {
+  border: var(--borda-fina) solid var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+.atlas__opcao--rota::before {
+  content: "\25CB\2009\2013\2009\25CF\00a0\00a0"; /* ○ – ● */
+  letter-spacing: 0;
+}
+
+.atlas__opcao--rota[aria-pressed="true"] {
+  background-color: var(--cor-destaque-fundo);
+  border-color: var(--cor-destaque-fundo);
+  color: var(--cor-branco);
+}
+
+/* O quadro do mapa: fundo de papel, moldura de tinta e overlays */
+.atlas__quadro {
+  position: relative;
+  overflow: hidden;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-fundo);
+  touch-action: manipulation;
+}
+
+.atlas__quadro::after {
+  /* marcas de canto, como nas pranchas impressas */
+  content: "";
+  position: absolute;
+  inset: 0.4rem;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--cor-texto), var(--cor-texto)) top left / 0.9rem 1px no-repeat,
+    linear-gradient(var(--cor-texto), var(--cor-texto)) top left / 1px 0.9rem no-repeat,
+    linear-gradient(var(--cor-texto), var(--cor-texto)) bottom right / 0.9rem 1px no-repeat,
+    linear-gradient(var(--cor-texto), var(--cor-texto)) bottom right / 1px 0.9rem no-repeat;
+  opacity: 0.6;
+}
+
+.atlas__rosa {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 2.6rem;
+  width: 2.6rem;
+  height: auto;
+  pointer-events: none;
+}
+
+.atlas__rosa circle {
+  fill: none;
+  stroke: var(--cor-mapa-linha);
+  stroke-width: 0.8;
+}
+
+.atlas__rosa path {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 0.8;
+}
+
+.atlas__rosa .atlas__rosa-norte {
+  fill: var(--cor-texto);
+}
+
+.atlas__rosa text {
+  font-family: var(--fonte-mono);
+  font-size: 7px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--cor-texto);
+}
+
+.atlas__escala {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.62rem;
+  color: var(--cor-texto);
+  pointer-events: none;
+}
+
+/* Barra quadriculada preto/papel, como nas escalas gráficas */
+.atlas__escala-barra {
+  display: block;
+  width: var(--largura-escala, 5.5rem);
+  height: 0.35rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background: linear-gradient(90deg, var(--cor-texto) 50%, var(--cor-fundo) 50%) 0 0 / 50% 100%;
+  transition: width 0.3s ease;
+}
+
+.atlas__recentrar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.75rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.atlas__recentrar::before {
+  content: "\2922\00a0"; /* ⤢ */
+}
+
+.atlas__recentrar:hover {
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+.atlas__recentrar[hidden] {
+  display: none;
+}
+
+/* Dica flutuante que segue o mouse */
+.atlas__dica {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  min-width: 9rem;
+  padding: 0.45rem 0.65rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-superficie);
+  box-shadow: var(--sombra-forte);
+  pointer-events: none;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  transform: translate(var(--dica-x, 0), var(--dica-y, 0));
+}
+
+.atlas__dica[hidden] {
+  display: none;
+}
+
+.atlas__dica strong {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: 1rem;
+  font-weight: 560;
+}
+
+.atlas__dica span {
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-suave);
+}
+
+.atlas__prancha figcaption {
+  margin-top: 0.75rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  line-height: 1.6;
+  color: var(--cor-texto-suave);
+}
+
+/* Legenda da escala de clima */
+.atlas__legenda {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  background-color: var(--cor-superficie);
+}
+
+.atlas__legenda[hidden] {
+  display: none;
+}
+
+.atlas__legenda-titulo {
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.escala-clima {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.5rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+}
+
+.escala-clima li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.escala-clima__cor {
+  width: 1.1rem;
+  height: 0.75rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+}
+
+.escala-clima__cor--1 { background-color: var(--clima-1); }
+.escala-clima__cor--2 { background-color: var(--clima-2); }
+.escala-clima__cor--3 { background-color: var(--clima-3); }
+.escala-clima__cor--4 { background-color: var(--clima-4); }
+.escala-clima__cor--5 { background-color: var(--clima-5); }
 
 /* Botões de região (alternativa acessível ao mapa, visível em todas as telas) */
 .regiao-botoes {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--espaco-xs);
+  gap: 0.35rem;
   margin-top: 1rem;
 }
 
 .regiao-botao {
-  padding: 0.5rem 0.9rem;
-  border-radius: var(--raio-pilula);
-  border: 0.0938rem solid var(--cor-principal);
-  background-color: var(--cor-superficie);
-  color: var(--cor-acento);
-  font-family: var(--fonte-titulo);
-  font-size: 0.85rem;
-  font-weight: 700;
-  transition: background-color var(--transicao), color var(--transicao);
+  min-height: 2.25rem;
+  padding: 0.4rem 0.75rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  background-color: transparent;
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color var(--transicao), color var(--transicao),
+              border-color var(--transicao);
 }
 
 .regiao-botao:hover {
-  background-color: var(--cor-principal-clara);
+  border-color: var(--cor-texto);
 }
 
 .regiao-botao[aria-pressed="true"] {
   background-color: var(--cor-principal);
+  border-color: var(--cor-principal);
   color: var(--cor-sobre-principal);
 }
 
-/* Painel de resultado do mapa */
+/* --- Painel da região --- */
+.atlas__lateral {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+  min-width: 0;
+}
+
 .painel-regiao {
-  padding: 1.5rem;
-  border-radius: var(--raio);
   background-color: var(--cor-superficie);
-  border: var(--borda-fina) solid var(--cor-borda);
-  border-left: 0.35rem solid var(--cor-destaque);
-  box-shadow: var(--sombra);
+  border: var(--borda-fina) solid var(--cor-texto);
+}
+
+.painel-regiao__foto {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
+}
+
+.painel-regiao__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.painel-regiao__corpo {
+  padding: 1.25rem 1.35rem 1.5rem;
+}
+
+/* Troca de região: o conteúdo some e volta, em vez de pular */
+.painel-regiao--trocando .painel-regiao__foto img,
+.painel-regiao--trocando .painel-regiao__corpo {
+  animation: painel-troca 0.45s ease;
+}
+
+@keyframes painel-troca {
+  from { opacity: 0; transform: translateY(0.4rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+.painel-regiao__sobre {
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
+}
+
+.painel-regiao h3 {
+  margin-block: 0.35rem 0.65rem;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 500;
+}
+
+.painel-regiao__corpo > p {
+  font-size: 0.97rem;
+  color: var(--cor-texto-suave);
+}
+
+.painel-regiao__dados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  margin-block: 1.1rem;
+  border-block: var(--borda-fina) solid var(--cor-borda);
+}
+
+.painel-regiao__dados div {
+  padding: 0.6rem 0.75rem 0.6rem 0;
+}
+
+.painel-regiao__dados dt {
+  font-family: var(--fonte-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.painel-regiao__dados dd {
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.painel-regiao h4 {
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
 }
 
 .painel-regiao__cidades {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--espaco-xs);
-  margin-block: 1rem;
+  gap: 0.35rem 0.9rem;
+  margin-block: 0.5rem 1.1rem;
 }
 
 .painel-regiao__cidades li {
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--raio-pilula);
-  background-color: var(--cor-principal-clara);
-  color: var(--cor-acento);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+}
+
+.painel-regiao__cidades li:not(:last-child)::after {
+  content: "\00b7";
+  margin-left: 0.9rem;
+  color: var(--cor-destaque);
 }
 
 .painel-regiao__curiosidade {
-  padding: 0.9rem 1rem;
-  border-radius: var(--raio-pequeno);
+  margin-bottom: 1.25rem;
+  padding: 0.8rem 0.95rem;
   background-color: var(--cor-secundaria-clara);
-  font-size: 0.98rem;
+  border-left: 0.1875rem solid var(--cor-secundaria);
+  font-size: 0.95rem;
 }
 
 .painel-regiao__curiosidade strong {
   font-family: var(--fonte-manuscrita);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 500;
   color: var(--cor-secundaria-escura);
+}
+
+/* --- Caderno do roteiro (diferencial 3) --- */
+.roteiro {
+  padding: 1.25rem 1.35rem 1.5rem;
+  background-color: var(--cor-superficie);
+  background-image: repeating-linear-gradient(
+    180deg, transparent 0 1.75rem, rgb(var(--cor-sombra) / 0.06) 1.75rem calc(1.75rem + 1px)
+  );
+  border: var(--borda-fina) solid var(--cor-destaque);
+  border-top-width: 0.3rem;
+}
+
+.roteiro[hidden] {
+  display: none;
+}
+
+/* Com o modo roteiro ligado, o caderno sobe para o topo da coluna */
+.atlas--rota .roteiro {
+  order: -1;
+}
+
+.roteiro h3 {
+  margin-block: 0.35rem 0.5rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.roteiro__ajuda {
+  font-size: 0.93rem;
+  color: var(--cor-texto-suave);
+}
+
+.roteiro__adicionar {
+  margin-top: 1rem;
+}
+
+.roteiro__adicionar label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.roteiro__campo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.roteiro__campo select {
+  flex: 1 1 11rem;
+  min-height: 2.9rem;
+  padding: 0.5rem 0.65rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-radius: var(--raio);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.roteiro__paradas {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1.1rem;
+  counter-reset: parada;
+}
+
+.roteiro__paradas li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  counter-increment: parada;
+  padding: 0.35rem 0;
+  border-bottom: var(--borda-fina) dashed var(--cor-borda);
+  animation: painel-troca 0.35s ease;
+}
+
+.roteiro__paradas li::before {
+  content: counter(parada);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--cor-destaque-fundo);
+  color: var(--cor-branco);
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.roteiro__nome {
+  flex: 1;
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+}
+
+.roteiro__trecho {
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  color: var(--cor-texto-suave);
+}
+
+.roteiro__remover {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: var(--borda-fina) solid transparent;
+  color: var(--cor-texto-suave);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.roteiro__remover:hover {
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+.roteiro__total {
+  margin-top: 1rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+}
+
+.roteiro__total:empty {
+  display: none;
+}
+
+.roteiro__total strong {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--cor-destaque);
+}
+
+.roteiro__total small {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: 0.64rem;
+  color: var(--cor-texto-suave);
+}
+
+.roteiro__limpar {
+  margin-top: 0.9rem;
+  padding: 0.3rem 0;
+  border-bottom: var(--borda-fina) solid currentColor;
+  color: var(--cor-texto-suave);
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.roteiro__limpar:hover {
+  color: var(--cor-destaque);
 }
 
 
@@ -1725,32 +2685,33 @@ html:not(.js) .navegacao[hidden] {
 .filtros {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--espaco-xs);
+  gap: 0.35rem;
   margin-bottom: 1.5rem;
 }
 
 .filtro-botao {
-  padding: 0.55rem 1.1rem;
-  border-radius: var(--raio-pilula);
-  border: 0.0938rem solid var(--cor-borda);
-  background-color: var(--cor-superficie);
+  min-height: 2.4rem;
+  padding: 0.45rem 0.9rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  background-color: transparent;
   color: var(--cor-texto);
-  font-family: var(--fonte-titulo);
-  font-size: 0.88rem;
-  font-weight: 700;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   transition: background-color var(--transicao), color var(--transicao),
               border-color var(--transicao);
 }
 
 .filtro-botao:hover {
-  border-color: var(--cor-principal);
-  color: var(--cor-acento);
+  border-color: var(--cor-texto);
 }
 
 .filtro-botao[aria-pressed="true"] {
-  background-color: var(--cor-principal-escura);
-  border-color: var(--cor-acento);
-  color: var(--cor-branco);
+  background-color: var(--cor-texto);
+  border-color: var(--cor-texto);
+  color: var(--cor-fundo);
 }
 
 .galeria {
@@ -1762,8 +2723,6 @@ html:not(.js) .navegacao[hidden] {
 .galeria__item {
   position: relative;
   overflow: hidden;
-  border-radius: var(--raio);
-  box-shadow: var(--sombra);
   animation: aparecer 0.4s ease both;
 }
 
@@ -1776,38 +2735,43 @@ html:not(.js) .navegacao[hidden] {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
 .galeria__item:hover img {
-  transform: scale(1.07);
+  transform: scale(1.05);
 }
 
 .galeria__item figcaption {
   position: absolute;
   inset: auto 0 0 0;
-  padding: 2rem 0.9rem 0.85rem;
+  padding: 2.25rem 0.9rem 0.8rem;
   background: linear-gradient(180deg, transparent, rgb(var(--cor-veu) / 0.9));
   color: var(--cor-branco);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .galeria__item figcaption strong {
   display: block;
   font-family: var(--fonte-titulo);
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   color: var(--cor-branco);
 }
 
 .galeria__item figcaption span {
+  font-family: var(--fonte-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--cor-areia);
-  font-family: var(--fonte-manuscrita);
-  font-size: 1.05rem;
 }
 
 .galeria-contador {
   margin-bottom: 1rem;
-  font-size: 0.92rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   color: var(--cor-texto-suave);
 }
 
@@ -1821,7 +2785,7 @@ html:not(.js) .navegacao[hidden] {
    15. BLOCOS DE CONTEÚDO (economia, fauna, gastronomia, fontes)
    ========================================================================== */
 
-/* Lista de tópicos com ícone/marcador colorido */
+/* Lista de tópicos com marcador em seta */
 .lista-topicos {
   display: grid;
   gap: 0.85rem;
@@ -1830,32 +2794,24 @@ html:not(.js) .navegacao[hidden] {
 
 .lista-topicos li {
   position: relative;
-  padding-left: 1.75rem;
+  padding-left: 1.6rem;
 }
 
 .lista-topicos li::before {
-  content: "\2713";
+  content: "\2192";
   position: absolute;
   left: 0;
   top: 0;
-  display: grid;
-  place-items: center;
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-top: 0.22rem;
-  border-radius: 50%;
-  background-color: var(--cor-secundaria);
-  color: var(--cor-branco);
-  font-size: 0.7rem;
+  font-family: var(--fonte-mono);
   font-weight: 700;
+  color: var(--cor-destaque);
 }
 
 .bloco {
   padding: 1.4rem;
-  border-radius: var(--raio);
   background-color: var(--cor-superficie);
   border: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
+  border-top: 0.125rem solid var(--cor-texto);
 }
 
 .bloco__icone {
@@ -1864,9 +2820,9 @@ html:not(.js) .navegacao[hidden] {
   width: 2.75rem;
   height: 2.75rem;
   margin-bottom: 0.85rem;
-  border-radius: 0.8rem;
-  background-color: var(--cor-principal-clara);
-  font-size: 1.4rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-radius: 50%;
+  font-size: 1.3rem;
 }
 
 .bloco h3,
@@ -1874,14 +2830,19 @@ html:not(.js) .navegacao[hidden] {
   margin-bottom: 0.45rem;
 }
 
+.bloco h3 {
+  font-weight: 500;
+}
+
 .bloco p {
-  font-size: 0.98rem;
+  font-size: 0.97rem;
 }
 
 .bloco__nota {
   margin-top: 0.8rem;
   font-family: var(--fonte-manuscrita);
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  font-style: italic;
   color: var(--cor-destaque);
 }
 
@@ -1889,10 +2850,8 @@ html:not(.js) .navegacao[hidden] {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: var(--raio);
   background-color: var(--cor-superficie);
   border: var(--borda-fina) solid var(--cor-borda);
-  box-shadow: var(--sombra);
 }
 
 .prato img {
@@ -1905,24 +2864,27 @@ html:not(.js) .navegacao[hidden] {
   padding: 1.1rem 1.2rem 1.3rem;
 }
 
+.prato__corpo h3 {
+  font-weight: 500;
+}
+
 .prato__origem {
   display: inline-block;
   margin-bottom: 0.4rem;
-  font-family: var(--fonte-titulo);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cor-destaque-escura);
 }
 
-/* Tabela de dados (clima, economia) */
+/* Tabela de dados (clima, economia): só fios, números em mono */
 .tabela-envolvida {
   overflow-x: auto;
   margin-top: 1.5rem;
-  border-radius: var(--raio);
-  border: var(--borda-fina) solid var(--cor-borda);
-  background-color: var(--cor-superficie);
+  border-top: 0.125rem solid var(--cor-texto);
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
 }
 
 table {
@@ -1932,25 +2894,41 @@ table {
 }
 
 caption {
-  padding: 0.9rem 1rem;
+  padding: 0.8rem 0;
+  caption-side: bottom;
   text-align: left;
-  font-size: 0.9rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
   color: var(--cor-texto-suave);
 }
 
 th, td {
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 1rem 0.7rem 0;
   text-align: left;
   border-bottom: var(--borda-fina) solid var(--cor-borda);
 }
 
-thead th {
-  background-color: var(--cor-principal-escura);
-  color: var(--cor-branco);
-  font-family: var(--fonte-titulo);
-  font-size: 0.85rem;
+td {
+  font-variant-numeric: tabular-nums;
 }
 
+thead th {
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+  border-bottom-color: var(--cor-texto);
+}
+
+tbody th {
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+tbody tr:last-child th,
 tbody tr:last-child td {
   border-bottom: 0;
 }
@@ -1962,21 +2940,26 @@ tbody tr:nth-child(even) {
 /* Lista de fontes */
 .fontes {
   display: grid;
-  gap: 0.85rem;
+  gap: 0;
   margin-top: 1.5rem;
+  border-top: var(--borda-fina) solid var(--cor-texto);
 }
 
 .fontes li {
-  padding: 1rem 1.15rem;
-  border-radius: var(--raio-pequeno);
-  background-color: var(--cor-superficie);
-  border: var(--borda-fina) solid var(--cor-borda);
-  border-left: 0.25rem solid var(--cor-principal);
+  padding: 1rem 0;
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
 }
 
 .fontes a {
   font-family: var(--fonte-titulo);
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--cor-texto);
+  text-decoration-color: var(--cor-destaque);
+}
+
+.fontes a:hover {
+  color: var(--cor-destaque);
 }
 
 .fontes p {
@@ -1989,10 +2972,7 @@ tbody tr:nth-child(even) {
    uma parede de texto de varias telas de altura. */
 .fontes--creditos {
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-}
-
-.fontes--creditos li {
-  border-left-color: var(--cor-secundaria);
+  column-gap: 1.5rem;
 }
 
 .fontes--creditos a {
@@ -2002,18 +2982,229 @@ tbody tr:nth-child(even) {
 
 
 /* ==========================================================================
-   16. FOOTER
+   16. QUIZ "QUAL SANTA CATARINA É A SUA?" (curiosidades.html) — diferencial 4
+   ========================================================================== */
+
+/* Precisa de JavaScript: sem ele, a seção inteira fica de fora */
+html:not(.js) .quiz {
+  display: none;
+}
+
+.quiz__cartao {
+  max-width: 44rem;
+  padding: 1.5rem 1.35rem 1.35rem;
+  background-color: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-texto);
+  box-shadow: var(--sombra-forte);
+}
+
+.quiz__cartao[hidden] {
+  display: none;
+}
+
+.quiz__progresso {
+  height: 0.25rem;
+  background-color: var(--cor-borda);
+}
+
+.quiz__progresso-barra {
+  display: block;
+  width: var(--progresso, 20%);
+  height: 100%;
+  background-color: var(--cor-destaque);
+  transition: width 0.4s ease;
+}
+
+.quiz__contador {
+  margin-top: 0.8rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.quiz__pergunta {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+  animation: painel-troca 0.35s ease;
+}
+
+.quiz__pergunta[hidden] {
+  display: none;
+}
+
+.quiz__pergunta legend {
+  margin-block: 0.4rem 1rem;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.quiz__opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 0.9rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  cursor: pointer;
+  transition: border-color var(--transicao), background-color var(--transicao);
+}
+
+.quiz__opcao + .quiz__opcao {
+  margin-top: 0.45rem;
+}
+
+.quiz__opcao:hover {
+  border-color: var(--cor-texto);
+}
+
+/* O rádio nativo continua lá (teclado e leitor de tela); só ganhou cara */
+.quiz__opcao input {
+  appearance: none;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-radius: 50%;
+}
+
+.quiz__opcao input::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background-color: var(--cor-destaque);
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.quiz__opcao input:checked::before {
+  transform: scale(1);
+}
+
+.quiz__opcao:has(input:checked) {
+  border-color: var(--cor-destaque);
+  background-color: var(--cor-destaque-clara);
+}
+
+.quiz__acoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.quiz__resultado {
+  display: grid;
+  max-width: 52rem;
+  background-color: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-texto);
+  box-shadow: var(--sombra-forte);
+  animation: painel-troca 0.5s ease;
+}
+
+.quiz__resultado[hidden] {
+  display: none;
+}
+
+.quiz__resultado:focus {
+  outline: none;
+}
+
+.quiz__resultado-foto {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.quiz__resultado-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Carimbo "aprovado" por cima da foto */
+.quiz__resultado-foto::after {
+  content: "SC \2605  confere";
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.35rem 0.6rem;
+  border: 0.1875rem double var(--cor-branco);
+  color: var(--cor-branco);
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+  text-shadow: 0 0 0.5rem rgb(0 0 0 / 0.6);
+  animation: carimbar 0.5s 0.2s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.quiz__resultado-corpo {
+  padding: 1.4rem 1.35rem 1.5rem;
+}
+
+.quiz__resultado h3 {
+  margin-block: 0.3rem 0.7rem;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 500;
+}
+
+.quiz__resultado-corpo > p:not(.painel-regiao__sobre) {
+  color: var(--cor-texto-suave);
+}
+
+.quiz__resultado-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+@keyframes carimbar {
+  from { opacity: 0; transform: rotate(-8deg) scale(1.8); }
+  to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+
+
+/* ==========================================================================
+   17. FOOTER (com o passaporte — diferencial 5)
    ========================================================================== */
 
 .rodape {
-  padding-block: 3rem 1.5rem;
-  background-color: var(--cor-rodape-fundo);   /* azul profundo — contraste AA com texto claro */
+  position: relative;
+  isolation: isolate;
+  padding-block: 3.5rem 1.5rem;
+  background-color: var(--cor-rodape-fundo);   /* tinta escura — contraste AA com texto claro */
   color: var(--cor-rodape-texto);
+}
+
+.rodape::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--curvas-nivel) right -10rem bottom -4rem / 50rem auto no-repeat;
+  opacity: 0.6;
 }
 
 .rodape h2,
 .rodape h3 {
-  color: var(--cor-branco);
+  color: var(--cor-rodape-texto);
+}
+
+.rodape h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
 }
 
 .rodape a {
@@ -2038,6 +3229,7 @@ tbody tr:nth-child(even) {
 .rodape__mapa-estado {
   max-width: 11rem;
   margin-top: var(--espaco-md);
+  opacity: 0.8;
 }
 
 .rodape__mapa-estado img {
@@ -2049,13 +3241,17 @@ tbody tr:nth-child(even) {
 }
 
 .rodape__titulo {
-  font-family: var(--fonte-titulo);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cor-rodape-titulo);
   margin-bottom: 0.85rem;
+}
+
+.rodape .rodape__titulo {
+  color: var(--cor-rodape-titulo);
 }
 
 .rodape__lista {
@@ -2076,7 +3272,7 @@ tbody tr:nth-child(even) {
 .redes {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
   margin-top: 0.25rem;
 }
 
@@ -2085,22 +3281,85 @@ tbody tr:nth-child(even) {
   place-items: center;
   width: 2.6rem;
   height: 2.6rem;
+  border: var(--borda-fina) solid rgb(255 255 255 / 0.25);
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--cor-branco);
-  transition: background-color var(--transicao), transform var(--transicao);
+  color: var(--cor-rodape-texto);
+  transition: background-color var(--transicao), border-color var(--transicao);
 }
 
 .redes a:hover {
   background-color: var(--cor-destaque-fundo);
+  border-color: var(--cor-destaque-fundo);
   color: var(--cor-branco);
-  transform: translateY(-0.15rem);
 }
 
 .redes svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.15rem;
+  height: 1.15rem;
   fill: currentColor;
+}
+
+/* --- Passaporte catarinense --- */
+.passaporte {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  border: var(--borda-fina) dashed rgb(255 255 255 / 0.3);
+}
+
+.passaporte[hidden] {
+  display: none;
+}
+
+.passaporte__texto p {
+  font-size: 0.9rem;
+  color: var(--cor-rodape-texto);
+}
+
+.passaporte__carimbos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.carimbo {
+  display: grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  padding: 0.3rem;
+  border: 0.125rem dashed rgb(255 255 255 / 0.22);
+  border-radius: 50%;
+  color: rgb(255 255 255 / 0.35);
+  font-family: var(--fonte-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.carimbo__icone {
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.carimbo--ganho {
+  border: 0.1875rem double var(--cor-rodape-carimbo);
+  color: var(--cor-rodape-carimbo);
+  transform: rotate(var(--giro, -6deg));
+}
+
+/* Carimbo recém-ganho nesta visita: bate no papel */
+.carimbo--novo {
+  animation: carimbar-passaporte 0.55s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+@keyframes carimbar-passaporte {
+  from { opacity: 0; transform: rotate(var(--giro, -6deg)) scale(2); }
+  to   { opacity: 1; transform: rotate(var(--giro, -6deg)) scale(1); }
 }
 
 .rodape__base {
@@ -2111,14 +3370,15 @@ tbody tr:nth-child(even) {
   align-items: center;
   margin-top: 2.5rem;
   padding-top: var(--espaco-md);
-  border-top: var(--borda-fina) solid rgba(255, 255, 255, 0.18);
-  font-size: 0.88rem;
+  border-top: var(--borda-fina) solid rgb(255 255 255 / 0.18);
+  font-size: 0.85rem;
   color: var(--cor-rodape-base);
 }
 
 .rodape__assinatura {
   font-family: var(--fonte-manuscrita);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  font-style: italic;
   color: var(--cor-areia);
 }
 
@@ -2132,16 +3392,17 @@ tbody tr:nth-child(even) {
   place-items: center;
   width: 2.9rem;
   height: 2.9rem;
+  border: var(--borda-fina) solid var(--cor-fundo);
   border-radius: 50%;
-  background-color: var(--cor-principal-escura);
-  color: var(--cor-branco);
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
   font-size: 1.1rem;
   box-shadow: var(--sombra-forte);
   opacity: 0;
   visibility: hidden;
   transform: translateY(0.75rem);
   transition: opacity var(--transicao), transform var(--transicao),
-              visibility var(--transicao);
+              visibility var(--transicao), background-color var(--transicao);
 }
 
 .voltar-topo--visivel {
@@ -2152,46 +3413,66 @@ tbody tr:nth-child(even) {
 
 .voltar-topo:hover {
   background-color: var(--cor-destaque-fundo);
+  color: var(--cor-branco);
 }
 
 
 /* ==========================================================================
-   17. SCROLL-REVEAL
+   18. SCROLL-REVEAL
    Estado inicial aplicado só quando o JS está ativo (classe js no <html>),
-   para o conteúdo continuar visível sem JavaScript.
+   para o conteúdo continuar visível sem JavaScript. A entrada é uma
+   "cortina" de cima para baixo; como é uma animação (e não transição), o
+   clip-path some quando ela termina e não corta foco nem sombras depois.
    ========================================================================== */
 
 .js .revelar {
   opacity: 0;
-  transform: translateY(1.5rem);
-  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .js .revelar--visivel {
   opacity: 1;
-  transform: none;
+  animation: revelar-cortina 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) backwards;
+}
+
+@keyframes revelar-cortina {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
 }
 
 
 /* ==========================================================================
-   18. MEDIA QUERIES — mobile-first (base = ~360px)
+   19. MEDIA QUERIES — mobile-first (base = ~360px)
    ========================================================================== */
 
-/* --- Telas pequenas: números dos índices comparativos maiores --- */
+/* --- Telas pequenas: índices comparativos lado a lado --- */
 @media (min-width: 30rem) {
   .comparativo__indices {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .comparativo__indices dd {
-    font-size: 1.2rem;
+  .comparativo__indices div + div {
+    border-top: 0;
+    border-left: var(--borda-fina) solid rgb(255 255 255 / 0.22);
+  }
+
+  .passaporte {
+    grid-template-columns: minmax(12rem, 1fr) auto;
+    align-items: center;
   }
 }
 
 /* --- Tablet --- */
 @media (min-width: 48rem) {
   body {
-    font-size: 1.09375rem;
+    font-size: 1.0625rem;
   }
 
   .container {
@@ -2199,15 +3480,15 @@ tbody tr:nth-child(even) {
   }
 
   .secao {
-    padding-block: 4.5rem;
-  }
-
-  .hero-pagina {
     padding-block: 5rem;
   }
 
-  .banner__conteudo {
-    padding-block: 8rem 3rem;
+  .hero-pagina {
+    padding-block: 5rem 3.5rem;
+  }
+
+  .banner {
+    padding-block: 3.5rem 4rem;
   }
 
   .marco__cartao {
@@ -2225,17 +3506,25 @@ tbody tr:nth-child(even) {
     padding: 1.5rem;
   }
 
-  .mapa-interativo {
-    grid-template-columns: 1.1fr 1fr;
-    align-items: start;
-  }
-
   .rodape__grade {
     grid-template-columns: 1.4fr 1fr 1fr;
   }
+
+  .quiz__resultado {
+    grid-template-columns: 1fr 1.1fr;
+  }
+
+  .quiz__resultado-foto {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .quiz__cartao {
+    padding: 2rem 2rem 1.75rem;
+  }
 }
 
-/* --- Desktop: menu horizontal e comparativo lado a lado --- */
+/* --- Desktop: menu horizontal, capa em duas colunas e atlas com painel --- */
 @media (min-width: 62rem) {
   :root {
     --altura-header: 4.75rem;
@@ -2252,7 +3541,6 @@ tbody tr:nth-child(even) {
     overflow: visible;
     background: none;
     border: 0;
-    box-shadow: none;
   }
 
   /* Anula o hidden herdado do mobile no desktop */
@@ -2264,31 +3552,40 @@ tbody tr:nth-child(even) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 0.15rem;
+    gap: 0.1rem 1.1rem;
     padding: 0;
   }
 
   .navegacao__lista a {
-    padding: 0.4rem 0.6rem;
-    border-bottom: 0.1875rem solid transparent;
-    border-radius: var(--raio-pequeno);
-    font-size: 0.9rem;
+    padding: 0.35rem 0;
+    border-bottom: 0.125rem solid transparent;
+    font-family: var(--fonte-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  .navegacao__lista a:hover {
-    background-color: var(--cor-principal-clara);
-  }
-
-  .navegacao__lista a[aria-current="page"] {
-    border-bottom-color: var(--cor-destaque);
-  }
-
-  .navegacao__lista a[aria-current="page"]::before {
+  .navegacao__lista a::before {
     content: none;
   }
 
-  .banner {
-    min-height: 40rem;
+  .navegacao__lista a[aria-current="page"] {
+    font-style: normal;
+    border-bottom-color: var(--cor-destaque);
+  }
+
+  .banner__grade {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem;
+  }
+
+  .banner__slides {
+    aspect-ratio: 4 / 5;
+  }
+
+  .banner__prancha {
+    transform: rotate(1.2deg);
   }
 
   .duas-colunas {
@@ -2321,11 +3618,23 @@ tbody tr:nth-child(even) {
   .grade-blocos--duas {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Atlas: mapa grande à esquerda, painel fixo à direita enquanto rola */
+  .atlas {
+    grid-template-columns: minmax(0, 1.55fr) minmax(19rem, 1fr);
+    align-items: start;
+    gap: 2.5rem;
+  }
+
+  .atlas__lateral {
+    position: sticky;
+    top: calc(var(--altura-header) + 1.25rem);
+  }
 }
 
 
 /* ==========================================================================
-   19. PREFERÊNCIAS DO USUÁRIO
+   20. PREFERÊNCIAS DO USUÁRIO
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2343,6 +3652,9 @@ tbody tr:nth-child(even) {
 
   .js .revelar {
     opacity: 1;
+  }
+
+  .banner__slide img {
     transform: none;
   }
 }
@@ -2353,6 +3665,10 @@ tbody tr:nth-child(even) {
   .voltar-topo,
   .filtros,
   .regiao-botoes,
+  .atlas__barra,
+  .atlas__recentrar,
+  .passaporte,
+  .quiz,
   .rodape__mapa-estado {
     display: none !important;
   }
@@ -2382,7 +3698,7 @@ tbody tr:nth-child(even) {
 
   .js .revelar {
     opacity: 1;
-    transform: none;
+    animation: none;
   }
 
   /* Os dois lados do card precisam sair no papel: impresso, o card vira

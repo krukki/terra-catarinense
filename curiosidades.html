@@ -9,12 +9,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Favicon: selo "SC" com o gradiente da marca -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="theme-color" content="#0E7C9C" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#10171B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
 
@@ -293,6 +293,97 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
+         DIFERENCIAL 4 — QUIZ "QUAL SANTA CATARINA É A SUA?"
+         Cinco perguntas, uma por vez. Cada resposta soma pontos para uma
+         ou mais regiões (data-pontos); a que somar mais vira o resultado,
+         com link para o atlas já aproximado nela. Precisa de JavaScript,
+         então a seção inteira só aparece quando ele está ativo.
+         ================================================================= -->
+    <section class="secao secao--principal quiz" id="quiz">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Quiz</span>
+          <h2>Qual Santa Catarina é <em>a sua</em>?</h2>
+          <p class="subtitulo-secao">
+            Cinco perguntas rápidas sobre férias, comida e paisagem. No fim,
+            descubra com qual das seis regiões você combina mais.
+          </p>
+        </div>
+
+        <form class="quiz__cartao revelar" data-quiz novalidate>
+          <div class="quiz__progresso" aria-hidden="true">
+            <span class="quiz__progresso-barra" data-quiz-barra></span>
+          </div>
+          <p class="quiz__contador" data-quiz-contador aria-live="polite">Pergunta 1 de 5</p>
+
+          <fieldset class="quiz__pergunta" data-quiz-pergunta>
+            <legend>Férias perfeitas em julho:</legend>
+            <label class="quiz__opcao"><input type="radio" name="q1" value="a" data-pontos="serra">Lareira, pinhão e torcer para nevar</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" value="b" data-pontos="litoral">Sol de inverno na praia, com a cidade por perto</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" value="c" data-pontos="vale">Festas típicas e cidades com cara de Europa</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" value="d" data-pontos="oeste">Estrada no campo e cidade do interior</label>
+          </fieldset>
+
+          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+            <legend>No prato, você escolhe:</legend>
+            <label class="quiz__opcao"><input type="radio" name="q2" value="a" data-pontos="litoral">Ostras frescas e tainha</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" value="b" data-pontos="vale">Marreco recheado e cuca de sobremesa</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" value="c" data-pontos="sul oeste">Galeto com polenta e um vinho colonial</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" value="d" data-pontos="serra">Entrevero de pinhão</label>
+          </fieldset>
+
+          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+            <legend>A paisagem que faz você parar o carro:</legend>
+            <label class="quiz__opcao"><input type="radio" name="q3" value="a" data-pontos="serra sul">As curvas da Serra do Rio do Rastro</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" value="b" data-pontos="litoral">Uma baía com barcos de pesca</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" value="c" data-pontos="oeste">Lavouras e silos a perder de vista</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" value="d" data-pontos="vale norte">Rios, morros e Mata Atlântica</label>
+          </fieldset>
+
+          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+            <legend>O seu ritmo é:</legend>
+            <label class="quiz__opcao"><input type="radio" name="q4" value="a" data-pontos="norte">Indústria, porto e cidade grande</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" value="b" data-pontos="oeste">Agro, cooperativa e acordar cedo</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" value="c" data-pontos="litoral">Turismo, praia e movimento</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" value="d" data-pontos="sul norte">Centro histórico e casario antigo</label>
+          </fieldset>
+
+          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+            <legend>Uma lembrança para levar para casa:</legend>
+            <label class="quiz__opcao"><input type="radio" name="q5" value="a" data-pontos="serra">Uma garrafa de vinho de altitude</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" value="b" data-pontos="vale">Um caneco de chope da Oktoberfest</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" value="c" data-pontos="sul">Uma peça de cerâmica</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" value="d" data-pontos="norte">Um ingresso do Festival de Dança de Joinville</label>
+          </fieldset>
+
+          <div class="quiz__acoes">
+            <button class="botao botao--contorno" type="button" data-quiz-voltar disabled>Voltar</button>
+            <button class="botao botao--destaque" type="submit" data-quiz-avancar disabled>Próxima</button>
+          </div>
+        </form>
+
+        <!-- Resultado, preenchido pelo JS -->
+        <article class="quiz__resultado" data-quiz-resultado hidden tabindex="-1"
+                 aria-labelledby="quiz-resultado-titulo">
+          <div class="quiz__resultado-foto">
+            <img data-quiz-foto src="assets/cidades/ponte-hercilio-luz.jpg" alt=""
+                 width="600" height="450" loading="lazy" decoding="async">
+          </div>
+          <div class="quiz__resultado-corpo">
+            <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+            <h3 id="quiz-resultado-titulo" data-quiz-nome>Litoral</h3>
+            <p data-quiz-resumo></p>
+            <p class="quiz__resultado-acoes">
+              <a class="botao botao--destaque" data-quiz-link href="cidades.html#mapa">Ver no atlas</a>
+              <button class="botao botao--contorno" type="button" data-quiz-refazer>Refazer o quiz</button>
+            </p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -681,6 +772,17 @@
           </ul>
         </div>
       </div>
+
+      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
+           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
+           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
+      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+        <div class="passaporte__texto">
+          <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
+          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+        </div>
+        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+      </section>
 
       <div class="rodape__base">
         <p>
