@@ -50,9 +50,11 @@ terra-catarinense/
 │                             economia e prévia das curiosidades.
 ├── cidades.html ............ Cidades e regiões + ATLAS INTERATIVO: zoom nas
 │                             seis regiões, camada de clima e "Monte seu
-│                             roteiro" com distância entre as cidades.
+│                             roteiro" com distância entre as cidades, e o
+│                             COMPARADOR de duas cidades lado a lado.
 ├── cultura.html ............ Cultura e imigração + LINHA DO TEMPO animada
-│                             conforme a rolagem da página.
+│                             conforme a rolagem da página e CALENDÁRIO DE
+│                             FESTAS mês a mês.
 ├── panorama.html ........... Geografia e clima, gastronomia típica e economia
 │                             do estado, com tabelas de dados.
 ├── turismo.html ............ Geografia, clima, vegetação, fauna, roteiros e
@@ -69,7 +71,8 @@ terra-catarinense/
 │   └── script.js ........... Todo o JavaScript, em módulos comentados
 │                             (menu, tema claro/escuro, banner, flip, atlas,
 │                             timeline, galeria, scroll-reveal, voltar ao
-│                             topo, ano do rodapé, passaporte e quiz).
+│                             topo, ano do rodapé, passaporte, quiz,
+│                             calendário e comparador).
 ├── assets/ ................. As 58 fotos do site, cada uma ja gravada no
 │   │                         tamanho exato em que aparece na pagina
 │   ├── favicon.svg ......... Ícone da aba (selo circular "SC" em terracota)
@@ -135,6 +138,8 @@ temas.
 | 4 | **Quiz "Qual Santa Catarina é a sua?"**: cinco perguntas, uma por vez; o resultado leva ao atlas já aproximado na região (`cidades.html?regiao=serra#mapa`). | `curiosidades.html` |
 | 5 | **Passaporte catarinense**: cada página visitada e o quiz rendem um carimbo no rodapé. | todas as páginas |
 | 6 | Linha do tempo animada, galeria com filtro, flip cards, painel "Duas Santa Catarinas" e banner rotativo (já existiam, agora no visual novo). | várias |
+| 7 | **Calendário de festas**: os doze meses com festas, safras e fenômenos da natureza (Oktoberfest, Festa do Pinhão, baleia-franca, neve na serra...). Abre no mês atual; setas do teclado trocam o mês e o link guarda o mês escolhido (`cultura.html?mes=7`). Cada evento leva ao atlas com a cidade destacada (`cidades.html?cidade=blumenau#mapa`). Sem JavaScript, aparece a lista inteira. | `cultura.html` |
+| 8 | **Comparador de cidades**: duas das 28 cidades do atlas lado a lado — região, herança, população, altitude, fundação, clima e distância — com selo em quem "vence" cada linha e uma frase-resumo ("São Joaquim fica 1.350 m mais alta que Florianópolis..."). Um botão destaca as duas no atlas. A escolha fica salva no navegador. | `cidades.html` |
 
 Os pinos das cidades são posicionados pela latitude e longitude reais, com a
 mesma projeção do contorno do estado (`x = 20 + (lon + 53,84) / 5,49 × 485`,
@@ -212,4 +217,9 @@ Se a lista de fotos mudar, rode o `trocar_html.py` de novo e cole a lista nova d
 - [ ] **Temperaturas:** conferir as médias climáticas no INMET (as tabelas de
       `turismo.html` e a camada de clima do atlas, no objeto `REGIOES` do
       `script.js`, usam valores aproximados).
+- [ ] **Cidades do comparador:** conferir população (Censo 2022), altitude e ano
+      de fundação/emancipação das 28 cidades no objeto `CIDADES` do `script.js`.
+- [ ] **Calendário de festas:** conferir o mês de cada festa em `cultura.html`
+      (seção `#calendario`) nos sites oficiais — algumas mudam de mês ou só
+      acontecem a cada dois anos (Festa Nacional da Maçã, Festa da Uva, Fenaostra).
 - [ ] **Textos:** revisão final de ortografia e concordância com o professor.

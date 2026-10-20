@@ -349,6 +349,343 @@
 
 
     <!-- ================================================================
+         DIFERENCIAL 7 — CALENDÁRIO DE FESTAS
+         Os doze meses ficam no HTML: sem JavaScript aparece a lista inteira.
+         Com JS, a barra mostra um mês por vez (abre no mês atual).
+         ================================================================= -->
+    <section class="secao secao--principal" id="calendario" data-calendario
+             aria-labelledby="titulo-calendario">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Calendário</span>
+          <h2 id="titulo-calendario">O que acontece <em>no mês</em> da sua viagem</h2>
+          <p class="subtitulo-secao">
+            Festas, safras e fenômenos da natureza, mês a mês. As datas mudam um
+            pouco a cada ano: confira no site oficial de cada festa antes de
+            viajar.
+          </p>
+        </div>
+
+        <div class="calendario__barra" role="group" aria-label="Escolha o mês"
+             data-calendario-barra>
+          <button class="calendario__botao" type="button" data-mes-botao="1" aria-pressed="false" aria-label="Janeiro">Jan</button>
+          <button class="calendario__botao" type="button" data-mes-botao="2" aria-pressed="false" aria-label="Fevereiro">Fev</button>
+          <button class="calendario__botao" type="button" data-mes-botao="3" aria-pressed="false" aria-label="Março">Mar</button>
+          <button class="calendario__botao" type="button" data-mes-botao="4" aria-pressed="false" aria-label="Abril">Abr</button>
+          <button class="calendario__botao" type="button" data-mes-botao="5" aria-pressed="false" aria-label="Maio">Mai</button>
+          <button class="calendario__botao" type="button" data-mes-botao="6" aria-pressed="false" aria-label="Junho">Jun</button>
+          <button class="calendario__botao" type="button" data-mes-botao="7" aria-pressed="false" aria-label="Julho">Jul</button>
+          <button class="calendario__botao" type="button" data-mes-botao="8" aria-pressed="false" aria-label="Agosto">Ago</button>
+          <button class="calendario__botao" type="button" data-mes-botao="9" aria-pressed="false" aria-label="Setembro">Set</button>
+          <button class="calendario__botao" type="button" data-mes-botao="10" aria-pressed="false" aria-label="Outubro">Out</button>
+          <button class="calendario__botao" type="button" data-mes-botao="11" aria-pressed="false" aria-label="Novembro">Nov</button>
+          <button class="calendario__botao" type="button" data-mes-botao="12" aria-pressed="false" aria-label="Dezembro">Dez</button>
+        </div>
+        <p class="calendario__status" data-calendario-status aria-live="polite"></p>
+
+        <ol class="calendario__meses">
+          <li class="calendario__mes" data-mes="1">
+            <h3>Janeiro</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Pomerode</p>
+                <h4>Festa Pomerana</h4>
+                <p>
+                  Celebra a colonização pomerana com desfiles, bandinhas,
+                  comida típica e jogos tradicionais trazidos da Europa.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=pomerode#mapa">Ver Pomerode no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Litoral</p>
+                <h4>Procissão de Navegantes</h4>
+                <p>
+                  Barcos enfeitados levam a imagem de Nossa Senhora dos
+                  Navegantes pelo mar, tradição herdada dos açorianos.
+                </p>
+                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="2">
+            <h3>Fevereiro</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Florianópolis</p>
+                <h4>Carnaval da Ilha</h4>
+                <p>
+                  Desfile das escolas de samba na Passarela Nego Quirido e
+                  blocos de rua espalhados pela Ilha.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Laguna</p>
+                <h4>Carnaval de Laguna</h4>
+                <p>
+                  Um dos carnavais de rua mais tradicionais do Sul, com blocos
+                  que lotam o centro histórico.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=laguna#mapa">Ver Laguna no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Videira</p>
+                <h4>Festa da Uva</h4>
+                <p>
+                  A capital catarinense da uva comemora a colheita com desfile,
+                  vinho colonial e cozinha italiana.
+                </p>
+                <a class="link-seta" href="cidades.html?regiao=oeste#mapa">Ver o Oeste no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="3">
+            <h3>Março</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Época · São Joaquim</p>
+                <h4>Colheita da maçã</h4>
+                <p>
+                  Os pomares da serra estão carregados: é a melhor época para
+                  visitar e colher a fruta direto do pé.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=sao-joaquim#mapa">Ver São Joaquim no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Época · Planalto Serrano</p>
+                <h4>Vindima dos vinhos de altitude</h4>
+                <p>
+                  As vinícolas acima de 900 metros colhem a uva e abrem as
+                  portas para visitas e degustações.
+                </p>
+                <a class="link-seta" href="cidades.html?regiao=serra#mapa">Ver a Serra no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="4">
+            <h3>Abril</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Pomerode</p>
+                <h4>Osterfest</h4>
+                <p>
+                  A festa de Páscoa enche a cidade de ovos pintados à mão,
+                  pendurados em árvores gigantes.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=pomerode#mapa">Ver Pomerode no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · São Joaquim</p>
+                <h4>Festa Nacional da Maçã</h4>
+                <p>
+                  Fecha a safra com a fruta em todas as formas — doce, suco,
+                  sidra — além de shows e cultura campeira.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=sao-joaquim#mapa">Ver São Joaquim no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="5">
+            <h3>Maio</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Época · Florianópolis</p>
+                <h4>Safra da tainha</h4>
+                <p>
+                  De maio a julho, os pescadores artesanais vigiam o mar e
+                  cercam os cardumes no arrastão de praia.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Litoral açoriano</p>
+                <h4>Festa do Divino Espírito Santo</h4>
+                <p>
+                  Cortejo com a bandeira do Divino, coroação do imperador e
+                  distribuição de massa, nas freguesias antigas da Ilha.
+                </p>
+                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="6">
+            <h3>Junho</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Lages</p>
+                <h4>Festa Nacional do Pinhão</h4>
+                <p>
+                  Celebra a semente da araucária e a cultura campeira, com
+                  rodeio, música regional e pinhão de todo jeito.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=lages#mapa">Ver Lages no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Época · Urubici</p>
+                <h4>Geada nos campos</h4>
+                <p>
+                  Nas madrugadas abaixo de zero, os campos de altitude
+                  amanhecem cobertos de branco.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=urubici#mapa">Ver Urubici no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="7">
+            <h3>Julho</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Joinville</p>
+                <h4>Festival de Dança de Joinville</h4>
+                <p>
+                  Um dos maiores festivais de dança do mundo, com palcos
+                  espalhados pela cidade e apresentações gratuitas.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=joinville#mapa">Ver Joinville no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Época · Urupema</p>
+                <h4>Chance de neve</h4>
+                <p>
+                  Quando a frente fria é forte, pode nevar no planalto —
+                  Urupema e São Joaquim são os lugares mais prováveis.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=urupema#mapa">Ver Urupema no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="8">
+            <h3>Agosto</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Época · Garopaba</p>
+                <h4>Temporada da baleia-franca</h4>
+                <p>
+                  Entre julho e novembro as baleias vêm ao litoral sul para ter
+                  os filhotes, e dá para vê-las da praia.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=garopaba#mapa">Ver Garopaba no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="9">
+            <h3>Setembro</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Lages e Oeste</p>
+                <h4>Semana Farroupilha</h4>
+                <p>
+                  Os centros de tradição gaúcha celebram com cavalgadas,
+                  chimarrão e churrasco de chão, até o 20 de setembro.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=lages#mapa">Ver Lages no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="10">
+            <h3>Outubro</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Blumenau</p>
+                <h4>Oktoberfest</h4>
+                <p>
+                  A maior festa alemã das Américas: bandas típicas, desfiles,
+                  chope artesanal e concurso de trajes.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=blumenau#mapa">Ver Blumenau no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Itajaí</p>
+                <h4>Marejada</h4>
+                <p>
+                  Festa portuguesa e do pescado, com bacalhau, frutos do mar e
+                  danças folclóricas.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=itajai#mapa">Ver Itajaí no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Brusque</p>
+                <h4>Fenarreco</h4>
+                <p>
+                  O marreco recheado com repolho roxo é o prato principal desta
+                  festa de tradição alemã.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=brusque#mapa">Ver Brusque no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Jaraguá do Sul</p>
+                <h4>Schützenfest</h4>
+                <p>
+                  A festa dos atiradores mantém a tradição das sociedades de
+                  tiro trazidas pelos imigrantes alemães.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=jaragua-do-sul#mapa">Ver Jaraguá do Sul no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="11">
+            <h3>Novembro</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Florianópolis</p>
+                <h4>Fenaostra</h4>
+                <p>
+                  Festival da ostra e da cultura açoriana, com gastronomia,
+                  terno de reis e ratoeira.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Joinville</p>
+                <h4>Festa das Flores</h4>
+                <p>
+                  Exposição de orquídeas e flores que ajudou a dar a Joinville
+                  o apelido de Cidade das Flores.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=joinville#mapa">Ver Joinville no atlas</a>
+              </article>
+            </div>
+          </li>
+
+          <li class="calendario__mes" data-mes="12">
+            <h3>Dezembro</h3>
+            <div class="calendario__eventos">
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Blumenau</p>
+                <h4>Natal no Vale</h4>
+                <p>
+                  A Vila Germânica vira vila de Natal, com desfiles, luzes e
+                  música nas ruas do centro.
+                </p>
+                <a class="link-seta" href="cidades.html?cidade=blumenau#mapa">Ver Blumenau no atlas</a>
+              </article>
+              <article class="calendario__evento">
+                <p class="calendario__onde">Festa · Litoral</p>
+                <h4>Boi-de-mamão e Terno de Reis</h4>
+                <p>
+                  Do Natal ao Dia de Reis, grupos cantam de casa em casa e o
+                  boi-de-mamão sai às ruas.
+                </p>
+                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+              </article>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ================================================================
          LÍNGUA E ARQUITETURA
          ================================================================= -->
     <section class="secao" id="heranca">
