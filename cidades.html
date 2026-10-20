@@ -407,6 +407,67 @@
 
 
 <!-- ================================================================
+         DIFERENCIAL 8 — COMPARADOR DE CIDADES
+         Só existe com JavaScript: nasce com hidden e o script.js mostra.
+         ================================================================= -->
+    <section class="secao secao--principal" id="comparar" data-comparador hidden
+             aria-labelledby="titulo-comparar">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Comparador</span>
+          <h2 id="titulo-comparar">Uma cidade <em>ao lado</em> da outra</h2>
+          <p class="subtitulo-secao">
+            Escolha duas das 28 cidades do atlas e veja, lado a lado, quantas
+            pessoas moram em cada uma, a que altura ficam, o clima da região e a
+            distância entre elas.
+          </p>
+        </div>
+
+        <div class="comparador revelar">
+          <div class="comparador__escolha">
+            <div class="comparador__campo">
+              <label for="comparar-a">Cidade A</label>
+              <select id="comparar-a" data-comparador-cidade></select>
+            </div>
+            <button class="comparador__inverter" type="button" data-comparador-inverter
+                    aria-label="Inverter as duas cidades" title="Inverter">
+              <span aria-hidden="true">⇄</span>
+            </button>
+            <div class="comparador__campo">
+              <label for="comparar-b">Cidade B</label>
+              <select id="comparar-b" data-comparador-cidade></select>
+            </div>
+          </div>
+
+          <div class="tabela-envolvida">
+            <table class="comparador__tabela">
+              <caption>
+                População do Censo 2022 (IBGE), arredondada. Fundação: ano da
+                fundação ou da emancipação. Temperaturas: média aproximada da
+                região, em °C.
+              </caption>
+              <thead>
+                <tr>
+                  <td></td>
+                  <th scope="col" data-comparador-nome>Cidade A</th>
+                  <th scope="col" data-comparador-nome>Cidade B</th>
+                </tr>
+              </thead>
+              <tbody data-comparador-corpo></tbody>
+            </table>
+          </div>
+
+          <p class="comparador__resumo" data-comparador-resumo aria-live="polite"></p>
+
+          <button class="botao botao--contorno" type="button" data-comparador-atlas>
+            Mostrar as duas no atlas
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+<!-- ================================================================
          CIDADES POR REGIÃO
          ================================================================= -->
     <section class="secao secao--clara" id="cidades">
