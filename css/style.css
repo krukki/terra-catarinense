@@ -194,18 +194,18 @@ a:hover {
 /* ==========================================================================
    02b. TEMA ESCURO — "carta náutica noturna"
    Só os tokens mudam — nenhum componente precisa saber que o tema existe.
-   Três estados: escolha explícita (data-tema no <html>), preferência do
-   sistema, e o claro como padrão.
+   Sem JavaScript: o site segue a preferência do sistema, e o checkbox
+   #tema do cabeçalho inverte essa preferência (lido com :has). A escolha
+   vale para a página aberta e não fica salva entre páginas.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 }
 
-/* Os valores ficam num único lugar e são aplicados nos dois seletores
-   abaixo, para o botão vencer o sistema nas duas direções. */
+/* Sistema escuro e checkbox desmarcado: tema escuro */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) {
+  :root:not(:has(#tema:checked)) {
     color-scheme: dark;
 
     --cor-principal: #7FB3C0;
@@ -244,7 +244,9 @@ a:hover {
   }
 }
 
-:root[data-tema="escuro"] {
+/* Sistema claro e checkbox marcado: tema escuro */
+@media not (prefers-color-scheme: dark) {
+:root:has(#tema:checked) {
   color-scheme: dark;
 
   --cor-principal: #7FB3C0;
@@ -281,17 +283,6 @@ a:hover {
 
   --sombra-forte: 0 1.25rem 2.5rem -1.25rem rgb(0 0 0 / 0.8);
 }
-
-
-/* Durante a troca de tema as transições são desligadas. Sem isto, todo
-   elemento que tenha transition na mesma propriedade que muda de cor fica
-   preso no valor do tema anterior (comportamento do Chrome com
-   transition + var()), e os botões ficam com a cor errada. */
-html.trocando-tema,
-html.trocando-tema *,
-html.trocando-tema *::before,
-html.trocando-tema *::after {
-  transition: none !important;
 }
 
 
@@ -317,21 +308,32 @@ html.trocando-tema *::after {
   border-color: var(--cor-texto);
 }
 
-/* Sem JavaScript não há como alternar: o site segue a preferência do sistema */
-html:not(.js) .tema-botao {
-  display: none;
+/* O checkbox fica invisível dentro do rótulo, mas continua focável: o
+   foco do teclado aparece no botão inteiro */
+.tema-botao__caixa {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
+.tema-botao:has(:focus-visible) {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+/* Lua no tema claro, sol no escuro */
 .tema-botao__icone--escuro { display: none; }
 
-:root[data-tema="escuro"] .tema-botao__icone--claro { display: none; }
-:root[data-tema="escuro"] .tema-botao__icone--escuro { display: block; }
+@media not (prefers-color-scheme: dark) {
+  :root:has(#tema:checked) .tema-botao__icone--claro { display: none; }
+  :root:has(#tema:checked) .tema-botao__icone--escuro { display: block; }
+}
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) .tema-botao__icone--claro { display: none; }
-  :root:not([data-tema="claro"]) .tema-botao__icone--escuro { display: block; }
-  :root[data-tema="claro"] .tema-botao__icone--claro { display: block; }
-  :root[data-tema="claro"] .tema-botao__icone--escuro { display: none; }
+  :root:not(:has(#tema:checked)) .tema-botao__icone--claro { display: none; }
+  :root:not(:has(#tema:checked)) .tema-botao__icone--escuro { display: block; }
 }
 
 /* ==========================================================================
@@ -617,21 +619,11 @@ strong {
 }
 
 
-/* O <nav> nasce com [hidden] no HTML: sem JavaScript o menu ficaria aberto
-   por cima do conteúdo no celular. A partir de 62rem ele é sempre a barra
-   de navegação — o CSS devolve a visibilidade sem esperar o script, o que
-   também evita o menu piscar no carregamento. */
-@media (min-width: 62rem) {
-  .navegacao[hidden] {
-    display: block;
-  }
-}
-
 /* Em telas estreitas o rótulo textual do hambúrguer sai de cena para o
    nome do site caber numa linha: o ícone de barras já identifica o botão,
    e o texto continua lá para leitores de tela. */
 @media (max-width: 26rem) {
-  .menu-botao [data-menu-rotulo] {
+  .menu-botao__rotulo {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -642,21 +634,6 @@ strong {
 }
 
 
-/* Sem JavaScript o hambúrguer não abriria nada: em vez de esconder o menu,
-   ele vira uma lista estática logo abaixo do cabeçalho — navegável em
-   qualquer largura, e sem cobrir o conteúdo. */
-html:not(.js) .menu-botao,
-html:not(.js) .tema-botao {
-  display: none;
-}
-
-html:not(.js) .navegacao[hidden] {
-  display: block;
-  position: static;
-  max-height: none;
-  overflow: visible;
-  box-shadow: none;
-}
 
 
 /* ==========================================================================
@@ -801,33 +778,49 @@ html:not(.js) .navegacao[hidden] {
 .menu-botao__barras span    { top: 0.3rem; }
 .menu-botao__barras::after  { top: 0.6rem; }
 
-.menu-botao[aria-expanded="true"] .menu-botao__barras::before {
+/* O rótulo troca de "Menu" para "Fechar" com o menu aberto */
+.menu-botao__rotulo--fechar,
+:root:has(.navegacao:popover-open) .menu-botao__rotulo--abrir {
+  display: none;
+}
+
+:root:has(.navegacao:popover-open) .menu-botao__rotulo--fechar {
+  display: inline;
+}
+
+:root:has(.navegacao:popover-open) .menu-botao__barras::before {
   transform: translateY(0.3rem) rotate(45deg);
 }
 
-.menu-botao[aria-expanded="true"] .menu-botao__barras span {
+:root:has(.navegacao:popover-open) .menu-botao__barras span {
   opacity: 0;
 }
 
-.menu-botao[aria-expanded="true"] .menu-botao__barras::after {
+:root:has(.navegacao:popover-open) .menu-botao__barras::after {
   transform: translateY(-0.3rem) rotate(-45deg);
 }
 
-/* --- Lista de navegação --- */
+/* --- Lista de navegação ---
+   No celular o <nav> é um popover: o botão abre (popovertarget), e Esc ou
+   um clique fora fecham, tudo nativo do navegador. Ele aparece na camada
+   de cima, logo abaixo do cabeçalho. */
 .navegacao {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
+  position: fixed;
+  inset: var(--altura-header) 0 auto 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
   max-height: calc(100vh - var(--altura-header));
   max-height: calc(100dvh - var(--altura-header));
   overflow-y: auto;
+  color: inherit;
   background-color: var(--cor-fundo);
   border-bottom: var(--borda-fina) solid var(--cor-texto);
 }
 
-/* Fechado no mobile; o JS alterna o atributo hidden */
-.navegacao[hidden] {
+.navegacao:not(:popover-open) {
   display: none;
 }
 
@@ -1021,21 +1014,10 @@ html:not(.js) .navegacao[hidden] {
   transition: opacity 0.9s ease;
 }
 
-.banner__slide[data-ativo="true"] {
-  opacity: 1;
-}
-
 .banner__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.04);
-  transition: transform 6s linear;
-}
-
-/* Um zoom lento enquanto a foto está no ar (desligado com movimento reduzido) */
-.banner__slide[data-ativo="true"] img {
-  transform: scale(1);
 }
 
 .banner__rodape {
@@ -1090,10 +1072,6 @@ html:not(.js) .navegacao[hidden] {
   transition: background-color var(--transicao), height var(--transicao);
 }
 
-.banner__ponto[aria-pressed="true"]::before {
-  height: 0.25rem;
-  background-color: var(--cor-destaque);
-}
 
 .banner__seta,
 .banner__pausa {
@@ -1108,6 +1086,12 @@ html:not(.js) .navegacao[hidden] {
   color: var(--cor-texto);
   font-size: 1rem;
   line-height: 1;
+}
+
+.banner__seta,
+.banner__pausa,
+.banner__ponto {
+  cursor: pointer;
 }
 
 .banner__seta:hover,
@@ -1555,10 +1539,10 @@ html:not(.js) .navegacao[hidden] {
 
 /* ==========================================================================
    11. FLIP CARDS (curiosidades)
-   O card é uma div; quem é interativo é o <button class="flip-card__gatilho">
-   dentro do <h3> da frente, esticado por ::after para cobrir o card inteiro.
-   Vira no hover (só onde há ponteiro de verdade) e pela classe
-   .flip-card--virado, que o JS alterna no clique.
+   O card é uma div; quem é interativo é o rótulo .flip-card__gatilho, com
+   um checkbox invisível dentro, no <h3> da frente (esticado por ::after
+   para cobrir o card inteiro). Vira no hover (só onde há ponteiro de
+   verdade) e com o checkbox marcado — clique, toque, Espaço.
    ========================================================================== */
 
 .flip-card {
@@ -1577,11 +1561,9 @@ html:not(.js) .navegacao[hidden] {
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-/* O estado é só a classe. O hover é um atalho para quem tem ponteiro:
-   num aparelho de toque ele "gruda" depois do dedo sair, e antes o
-   :focus-visible virava o card pelas costas do JS — tabular já virava,
-   e daí o Enter nunca conseguia desvirar. */
-.flip-card--virado .flip-card__interno {
+/* O estado é o checkbox. O hover é um atalho para quem tem ponteiro (num
+   aparelho de toque ele "gruda" depois do dedo sair). */
+.flip-card:has(.flip-card__estado:checked) .flip-card__interno {
   transform: rotateY(180deg);
 }
 
@@ -1590,7 +1572,7 @@ html:not(.js) .navegacao[hidden] {
     transform: rotateY(180deg);
   }
 
-  .flip-card:hover.flip-card--virado .flip-card__interno {
+  .flip-card:hover:has(.flip-card__estado:checked) .flip-card__interno {
     transform: none;
   }
 }
@@ -1623,7 +1605,7 @@ html:not(.js) .navegacao[hidden] {
   z-index: 3;
 }
 
-.flip-card__gatilho:focus-visible {
+.flip-card__gatilho:has(:focus-visible) {
   outline: 0.1875rem solid var(--cor-branco);
   outline-offset: 0.25rem;
 }
@@ -1753,9 +1735,12 @@ html:not(.js) .navegacao[hidden] {
   transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
-.marco--visivel::before {
-  background-color: var(--cor-destaque);
-  border-color: var(--cor-destaque);
+/* Sem animação guiada pela rolagem, os marcos já nascem acesos */
+@supports not (animation-timeline: view()) {
+  .marco::before {
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+  }
 }
 
 .marco__cartao {
@@ -1814,10 +1799,11 @@ html:not(.js) .navegacao[hidden] {
 
 /* ==========================================================================
    13. ATLAS INTERATIVO (cidades.html) — diferenciais 1, 2 e 3
-   O SVG usa unidades próprias (viewBox 600 x 380). Quando o JS dá zoom, ele
-   grava em --zoom quantos pixels de tela vale uma unidade do mapa; textos,
-   pinos e traços dividem o próprio tamanho por esse número e ficam sempre
-   do mesmo tamanho na tela, em qualquer zoom e em qualquer largura.
+   O SVG usa unidades próprias (viewBox 600 x 380). --zoom diz quantos
+   pixels de tela vale uma unidade do mapa (calculado no CSS, ver
+   estados.css); textos, pinos e traços dividem o próprio tamanho por esse
+   número e ficam sempre do mesmo tamanho na tela, em qualquer zoom e em
+   qualquer largura.
    ========================================================================== */
 
 .mapa-svg {
@@ -1901,18 +1887,13 @@ html:not(.js) .navegacao[hidden] {
   fill: var(--cor-mapa-regiao-hover);
 }
 
-.regiao[aria-pressed="true"],
-.regiao--ativa {
-  fill: var(--cor-principal);
-}
-
-/* Sem contorno feio no clique do mouse — só aparece com navegação por teclado */
-.regiao:focus {
+/* Cada região é um link (<a> do SVG) para a âncora dela. Sem contorno
+   feio no clique — só aparece com navegação por teclado */
+.regiao-link:focus {
   outline: none;
 }
 
-.regiao:focus-visible {
-  outline: none;
+.regiao-link:focus-visible .regiao {
   stroke: var(--cor-destaque);
   stroke-width: 3;
 }
@@ -1943,29 +1924,18 @@ html:not(.js) .navegacao[hidden] {
   letter-spacing: 0.08em;
 }
 
-.mapa-rotulo--ativa {
-  fill: var(--cor-destaque);
-  font-weight: 700;
-}
-
 .mapa-temp {
   font-size: calc(12px / var(--zoom-texto));
   font-weight: 700;
   display: none;
 }
 
-/* --- Camada de clima (diferencial 2): a cor vem da escala --- */
-.atlas--clima .mapa-temp {
+/* --- Camada de clima (diferencial 2): a cor de cada região vem da
+   escala (regras geradas em estados.css); a temperatura da estação
+   escolhida aparece por cima --- */
+.atlas:has(#camada-verao:checked) .mapa-temp--verao,
+.atlas:has(#camada-inverno:checked) .mapa-temp--inverno {
   display: inline;
-}
-
-.atlas--clima .regiao {
-  fill: var(--cor-regiao-clima, var(--cor-mapa-regiao));
-}
-
-.atlas--clima .regiao[aria-pressed="true"] {
-  fill: var(--cor-regiao-clima, var(--cor-principal));
-  stroke-width: 2.5;
 }
 
 /* --- Pinos das cidades --- */
@@ -2007,69 +1977,30 @@ html:not(.js) .navegacao[hidden] {
   transition: opacity 0.3s ease;
 }
 
-/* Pinos da região selecionada: marca cheia e nome à mostra */
-.pino--ativo .pino__marca {
-  fill: var(--cor-destaque);
-  stroke: var(--cor-fundo);
-}
-
-.pino--ativo .pino__nome,
+/* Pinos da região selecionada: marca cheia e nome à mostra (regras
+   geradas em estados.css). A capital sempre mostra o nome. */
 .pino--capital .pino__nome {
   opacity: 1;
 }
 
-.atlas:not(.atlas--rota) .pino:not(.pino--ativo):not(.pino--capital):not(.pino--destaque) .pino__corpo {
+.atlas:not(:has(.estado--rota:checked)) .pino:not(.pino--capital) .pino__corpo {
   opacity: 0.55;
 }
 
-/* Cidade pedida pelo calendário (?cidade=) ou pelo comparador: marca em
-   terracota, nome sempre à mostra e um pulso curto para achar no mapa */
-.pino--destaque .pino__marca {
-  fill: var(--cor-destaque);
-  stroke: var(--cor-fundo);
-  stroke-width: 6;
-  stroke-opacity: 0.8;
-  paint-order: stroke; /* o anel fica atrás da marca, sem engolir o miolo */
-  animation: pino-pulso 1.4s ease-in-out 3;
-}
-
-.pino--destaque .pino__nome {
-  opacity: 1;
-  font-weight: 700;
-}
-
+/* Cidade pedida pelo calendário (#cidade-...) ou pelo comparador: o
+   anel claro (regras em estados.css) pulsa três vezes */
 @keyframes pino-pulso {
   50% { stroke-width: 9; stroke-opacity: 0.3; }
 }
 
-/* No modo roteiro todo pino vira alvo de clique */
-.atlas--rota .pino {
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.atlas--rota .pino:hover .pino__nome,
-.atlas--rota .pino:focus-visible .pino__nome,
-.atlas--rota .pino--parada .pino__nome {
-  opacity: 1;
-}
-
-/* O número da parada cobre o pino: o nome se afasta para não ficar embaixo */
-.atlas--rota .pino--parada .pino__nome {
+/* Roteiro sugerido: os nomes das paradas aparecem e se afastam do
+   número que cobre o pino */
+.atlas:has(.estado--rota:checked) .pino__nome {
   transform: translateX(4px);
 }
 
-.atlas--rota .pino--parada .pino__nome[text-anchor="end"] {
+.atlas:has(.estado--rota:checked) .pino__nome[text-anchor="end"] {
   transform: translateX(-4px);
-}
-
-.atlas--rota .pino:focus {
-  outline: none;
-}
-
-.atlas--rota .pino:focus-visible .pino__marca {
-  stroke: var(--cor-destaque);
-  stroke-width: 3;
 }
 
 /* --- Rota (diferencial 3) --- */
@@ -2089,9 +2020,10 @@ html:not(.js) .navegacao[hidden] {
   to { stroke-dashoffset: -22; }
 }
 
-/* A rota fica guardada, mas só aparece com o modo roteiro ligado */
-.atlas:not(.atlas--rota) .rota-linha,
-.atlas:not(.atlas--rota) .rota-paradas {
+/* Cada roteiro só aparece quando está escolhido (regras em estados.css) */
+.rota-linha,
+.rota-paradas > g,
+.roteiro__detalhe {
   display: none;
 }
 
@@ -2131,9 +2063,6 @@ html:not(.js) .navegacao[hidden] {
   margin-bottom: 0.75rem;
 }
 
-html:not(.js) .atlas__barra {
-  display: none;
-}
 
 .atlas__camadas {
   display: inline-flex;
@@ -2154,7 +2083,7 @@ html:not(.js) .atlas__barra {
   transition: background-color var(--transicao), color var(--transicao);
 }
 
-.atlas__camadas .atlas__opcao + .atlas__opcao {
+.atlas__camadas .atlas__opcao:not(:first-of-type) {
   border-left: var(--borda-fina) solid var(--cor-texto);
 }
 
@@ -2162,7 +2091,14 @@ html:not(.js) .atlas__barra {
   background-color: var(--cor-principal-clara);
 }
 
-.atlas__opcao[aria-pressed="true"] {
+.atlas__opcao {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Rótulo do rádio/checkbox marcado = botão "pressionado" */
+:checked + .atlas__opcao {
   background-color: var(--cor-texto);
   color: var(--cor-fundo);
 }
@@ -2177,7 +2113,7 @@ html:not(.js) .atlas__barra {
   letter-spacing: 0;
 }
 
-.atlas__opcao--rota[aria-pressed="true"] {
+:checked + .atlas__opcao--rota {
   background-color: var(--cor-destaque-fundo);
   border-color: var(--cor-destaque-fundo);
   color: var(--cor-branco);
@@ -2286,43 +2222,14 @@ html:not(.js) .atlas__barra {
   color: var(--cor-fundo);
 }
 
-.atlas__recentrar[hidden] {
+/* Só aparece com uma região aproximada */
+.atlas__recentrar {
   display: none;
+  text-decoration: none;
 }
 
-/* Dica flutuante que segue o mouse */
-.atlas__dica {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 3;
-  min-width: 9rem;
-  padding: 0.45rem 0.65rem;
-  border: var(--borda-fina) solid var(--cor-texto);
-  background-color: var(--cor-superficie);
-  box-shadow: var(--sombra-forte);
-  pointer-events: none;
-  font-size: 0.8rem;
-  line-height: 1.35;
-  transform: translate(var(--dica-x, 0), var(--dica-y, 0));
-}
-
-.atlas__dica[hidden] {
-  display: none;
-}
-
-.atlas__dica strong {
+.atlas:has(.atlas__alvo:not(.atlas__alvo--comparar):target) .atlas__recentrar {
   display: block;
-  font-family: var(--fonte-titulo);
-  font-size: 1rem;
-  font-weight: 560;
-}
-
-.atlas__dica span {
-  font-family: var(--fonte-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.04em;
-  color: var(--cor-texto-suave);
 }
 
 .atlas__prancha figcaption {
@@ -2341,8 +2248,19 @@ html:not(.js) .atlas__barra {
   background-color: var(--cor-superficie);
 }
 
-.atlas__legenda[hidden] {
+.atlas__legenda,
+.atlas__legenda-verao,
+.atlas__legenda-inverno {
   display: none;
+}
+
+.atlas:has(.estado--clima:checked) .atlas__legenda {
+  display: block;
+}
+
+.atlas:has(#camada-verao:checked) .atlas__legenda-verao,
+.atlas:has(#camada-inverno:checked) .atlas__legenda-inverno {
+  display: inline;
 }
 
 .atlas__legenda-titulo {
@@ -2407,10 +2325,10 @@ html:not(.js) .atlas__barra {
   border-color: var(--cor-texto);
 }
 
-.regiao-botao[aria-pressed="true"] {
-  background-color: var(--cor-principal);
-  border-color: var(--cor-principal);
-  color: var(--cor-sobre-principal);
+.regiao-botao {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 /* --- Painel da região --- */
@@ -2421,7 +2339,9 @@ html:not(.js) .atlas__barra {
   min-width: 0;
 }
 
+/* Seis painéis no HTML; só o da região escolhida aparece (estados.css) */
 .painel-regiao {
+  display: none;
   background-color: var(--cor-superficie);
   border: var(--borda-fina) solid var(--cor-texto);
 }
@@ -2442,9 +2362,9 @@ html:not(.js) .atlas__barra {
   padding: 1.25rem 1.35rem 1.5rem;
 }
 
-/* Troca de região: o conteúdo some e volta, em vez de pular */
-.painel-regiao--trocando .painel-regiao__foto img,
-.painel-regiao--trocando .painel-regiao__corpo {
+/* Troca de região: o conteúdo entra suave, em vez de pular */
+.painel-regiao .painel-regiao__foto img,
+.painel-regiao .painel-regiao__corpo {
   animation: painel-troca 0.45s ease;
 }
 
@@ -2551,12 +2471,13 @@ html:not(.js) .atlas__barra {
   border-top-width: 0.3rem;
 }
 
-.roteiro[hidden] {
+/* Só aparece com "Roteiros sugeridos" marcado, no topo da coluna */
+.roteiro {
   display: none;
 }
 
-/* Com o modo roteiro ligado, o caderno sobe para o topo da coluna */
-.atlas--rota .roteiro {
+.atlas:has(.estado--rota:checked) .roteiro {
+  display: block;
   order: -1;
 }
 
@@ -2571,34 +2492,43 @@ html:not(.js) .atlas__barra {
   color: var(--cor-texto-suave);
 }
 
-.roteiro__adicionar {
+.roteiro__opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
   margin-top: 1rem;
 }
 
-.roteiro__adicionar label {
-  display: block;
-  margin-bottom: 0.35rem;
+.roteiro__opcao {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.7rem;
+  border: var(--borda-fina) solid var(--cor-destaque);
+  color: var(--cor-destaque);
   font-family: var(--fonte-mono);
   font-size: 0.66rem;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--cor-texto-suave);
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao);
 }
 
-.roteiro__campo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.roteiro__opcao:hover {
+  background-color: var(--cor-destaque-clara);
 }
 
-.roteiro__campo select {
-  flex: 1 1 11rem;
-  min-height: 2.9rem;
-  padding: 0.5rem 0.65rem;
-  border: var(--borda-fina) solid var(--cor-texto);
-  border-radius: var(--raio);
-  background-color: var(--cor-fundo);
-  color: var(--cor-texto);
+:checked + .roteiro__opcao {
+  background-color: var(--cor-destaque-fundo);
+  border-color: var(--cor-destaque-fundo);
+  color: var(--cor-branco);
+}
+
+.roteiro__resumo {
+  margin-top: 1rem;
+  font-family: var(--fonte-titulo);
+  font-style: italic;
 }
 
 .roteiro__paradas {
@@ -2645,30 +2575,10 @@ html:not(.js) .atlas__barra {
   color: var(--cor-texto-suave);
 }
 
-.roteiro__remover {
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border: var(--borda-fina) solid transparent;
-  color: var(--cor-texto-suave);
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.roteiro__remover:hover {
-  border-color: var(--cor-destaque);
-  color: var(--cor-destaque);
-}
-
 .roteiro__total {
   margin-top: 1rem;
   font-family: var(--fonte-titulo);
   font-size: 1.15rem;
-}
-
-.roteiro__total:empty {
-  display: none;
 }
 
 .roteiro__total strong {
@@ -2684,20 +2594,6 @@ html:not(.js) .atlas__barra {
   color: var(--cor-texto-suave);
 }
 
-.roteiro__limpar {
-  margin-top: 0.9rem;
-  padding: 0.3rem 0;
-  border-bottom: var(--borda-fina) solid currentColor;
-  color: var(--cor-texto-suave);
-  font-family: var(--fonte-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.roteiro__limpar:hover {
-  color: var(--cor-destaque);
-}
 
 
 /* ==========================================================================
@@ -2730,7 +2626,13 @@ html:not(.js) .atlas__barra {
   border-color: var(--cor-texto);
 }
 
-.filtro-botao[aria-pressed="true"] {
+.filtro-botao {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+:checked + .filtro-botao {
   background-color: var(--cor-texto);
   border-color: var(--cor-texto);
   color: var(--cor-fundo);
@@ -2748,10 +2650,6 @@ html:not(.js) .atlas__barra {
   animation: aparecer 0.4s ease both;
 }
 
-/* O JS aplica hidden nos itens fora do filtro */
-.galeria__item[hidden] {
-  display: none;
-}
 
 .galeria__item img {
   width: 100%;
@@ -2787,6 +2685,27 @@ html:not(.js) .atlas__barra {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cor-areia);
+}
+
+/* Filtros, contador e fotos: no HTML o contador vem por último (o
+   contador CSS precisa passar pelas fotos antes); aqui ele volta para o
+   meio. Itens escondidos (display: none) não entram na soma. */
+.galeria-filtrada {
+  display: flex;
+  flex-direction: column;
+  counter-reset: fotos;
+}
+
+.galeria-filtrada .filtros { order: 0; }
+.galeria-filtrada .galeria-contador { order: 1; }
+.galeria-filtrada .galeria { order: 2; }
+
+.galeria__item {
+  counter-increment: fotos;
+}
+
+.galeria-contador::before {
+  content: counter(fotos) " fotos encontradas.";
 }
 
 .galeria-contador {
@@ -3007,21 +2926,12 @@ tbody tr:nth-child(even) {
    16. QUIZ "QUAL SANTA CATARINA É A SUA?" (curiosidades.html) — diferencial 4
    ========================================================================== */
 
-/* Precisa de JavaScript: sem ele, a seção inteira fica de fora */
-html:not(.js) .quiz {
-  display: none;
-}
-
 .quiz__cartao {
   max-width: 44rem;
   padding: 1.5rem 1.35rem 1.35rem;
   background-color: var(--cor-superficie);
   border: var(--borda-fina) solid var(--cor-texto);
   box-shadow: var(--sombra-forte);
-}
-
-.quiz__cartao[hidden] {
-  display: none;
 }
 
 .quiz__progresso {
@@ -3052,10 +2962,6 @@ html:not(.js) .quiz {
   border: 0;
   min-width: 0;
   animation: painel-troca 0.35s ease;
-}
-
-.quiz__pergunta[hidden] {
-  display: none;
 }
 
 .quiz__pergunta legend {
@@ -3124,6 +3030,25 @@ html:not(.js) .quiz {
   margin-top: 1.25rem;
 }
 
+.quiz__voltar,
+.quiz__proxima {
+  cursor: pointer;
+}
+
+/* Na 1ª pergunta não há para onde voltar */
+.quiz__voltar--inativo {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.quiz__carimbo {
+  margin-top: 1rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .quiz__resultado {
   display: grid;
   max-width: 52rem;
@@ -3131,14 +3056,6 @@ html:not(.js) .quiz {
   border: var(--borda-fina) solid var(--cor-texto);
   box-shadow: var(--sombra-forte);
   animation: painel-troca 0.5s ease;
-}
-
-.quiz__resultado[hidden] {
-  display: none;
-}
-
-.quiz__resultado:focus {
-  outline: none;
 }
 
 .quiz__resultado-foto {
@@ -3203,12 +3120,6 @@ html:not(.js) .quiz {
    16b. CALENDÁRIO DE FESTAS (cultura.html) — diferencial 7
    ========================================================================== */
 
-/* A barra de meses só existe com JavaScript: sem ele, a lista inteira */
-html:not(.js) .calendario__barra,
-html:not(.js) .calendario__status {
-  display: none;
-}
-
 /* Doze casas como uma folhinha: 6 x 2 no celular, uma linha no tablet */
 .calendario__barra {
   display: grid;
@@ -3218,6 +3129,9 @@ html:not(.js) .calendario__status {
 }
 
 .calendario__botao {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
   min-height: 2.75rem;
   padding: 0.45rem 0.25rem;
   border-right: var(--borda-fina) solid var(--cor-texto);
@@ -3235,7 +3149,7 @@ html:not(.js) .calendario__status {
   background-color: var(--cor-superficie);
 }
 
-.calendario__botao[aria-pressed="true"] {
+:checked + .calendario__botao {
   background-color: var(--cor-texto);
   color: var(--cor-fundo);
 }
@@ -3255,7 +3169,7 @@ html:not(.js) .calendario__status {
   margin-top: 1.5rem;
 }
 
-.js .calendario__mes {
+.calendario__mes {
   animation: painel-troca 0.35s ease;
 }
 
@@ -3342,6 +3256,7 @@ html:not(.js) .calendario__status {
   color: var(--cor-texto);
 }
 
+/* O "×" entre as duas escolhas */
 .comparador__inverter {
   display: grid;
   place-items: center;
@@ -3349,13 +3264,8 @@ html:not(.js) .calendario__status {
   height: 2.9rem;
   border: var(--borda-fina) solid var(--cor-texto);
   border-radius: 50%;
-  font-size: 1.15rem;
-  transition: background-color var(--transicao), color var(--transicao);
-}
-
-.comparador__inverter:hover {
-  background-color: var(--cor-texto);
-  color: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
 }
 
 /* Os nomes das cidades viram títulos de coluna, na serifada */
@@ -3386,10 +3296,6 @@ html:not(.js) .calendario__status {
   display: inline-block;
   margin-right: 0.45rem;
   vertical-align: -0.05rem;
-}
-
-.comparador__vence {
-  font-weight: 600;
 }
 
 .comparador__selo {
@@ -3552,10 +3458,6 @@ html:not(.js) .calendario__status {
   border: var(--borda-fina) dashed rgb(255 255 255 / 0.3);
 }
 
-.passaporte[hidden] {
-  display: none;
-}
-
 .passaporte__texto p {
   font-size: 0.9rem;
   color: var(--cor-rodape-texto);
@@ -3567,13 +3469,16 @@ html:not(.js) .calendario__status {
   gap: 0.6rem;
 }
 
-.carimbo {
+/* Cada carimbo é um link para a página. Ainda não visitado: tracejado e
+   apagado. Visitado (a:visited): tinta de carimbo. O navegador só deixa
+   :visited trocar cores, por isso a diferença é toda feita de cor. */
+.passaporte .carimbo {
   display: grid;
   place-items: center;
   width: 4.6rem;
   height: 4.6rem;
   padding: 0.3rem;
-  border: 0.125rem dashed rgb(255 255 255 / 0.22);
+  border: 0.1875rem dashed rgb(255 255 255 / 0.22);
   border-radius: 50%;
   color: rgb(255 255 255 / 0.35);
   font-family: var(--fonte-mono);
@@ -3581,8 +3486,28 @@ html:not(.js) .calendario__status {
   letter-spacing: 0.08em;
   line-height: 1.25;
   text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
+  transform: rotate(var(--giro, -6deg));
+  transition: transform var(--transicao);
 }
+
+.passaporte .carimbo:visited {
+  border-color: var(--cor-rodape-carimbo);
+  color: var(--cor-rodape-carimbo);
+}
+
+.passaporte .carimbo:hover {
+  transform: rotate(0deg) scale(1.06);
+}
+
+.passaporte__carimbos li:nth-child(1) .carimbo { --giro: -8deg; }
+.passaporte__carimbos li:nth-child(2) .carimbo { --giro: 5deg; }
+.passaporte__carimbos li:nth-child(3) .carimbo { --giro: -3deg; }
+.passaporte__carimbos li:nth-child(4) .carimbo { --giro: 7deg; }
+.passaporte__carimbos li:nth-child(5) .carimbo { --giro: -6deg; }
+.passaporte__carimbos li:nth-child(6) .carimbo { --giro: 4deg; }
+.passaporte__carimbos li:nth-child(7) .carimbo { --giro: -2deg; }
 
 .carimbo__icone {
   display: block;
@@ -3590,21 +3515,6 @@ html:not(.js) .calendario__status {
   line-height: 1;
 }
 
-.carimbo--ganho {
-  border: 0.1875rem double var(--cor-rodape-carimbo);
-  color: var(--cor-rodape-carimbo);
-  transform: rotate(var(--giro, -6deg));
-}
-
-/* Carimbo recém-ganho nesta visita: bate no papel */
-.carimbo--novo {
-  animation: carimbar-passaporte 0.55s cubic-bezier(0.3, 1.6, 0.5, 1) both;
-}
-
-@keyframes carimbar-passaporte {
-  from { opacity: 0; transform: rotate(var(--giro, -6deg)) scale(2); }
-  to   { opacity: 1; transform: rotate(var(--giro, -6deg)) scale(1); }
-}
 
 .rodape__base {
   display: flex;
@@ -3642,17 +3552,31 @@ html:not(.js) .calendario__status {
   color: var(--cor-fundo);
   font-size: 1.1rem;
   box-shadow: var(--sombra-forte);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(0.75rem);
-  transition: opacity var(--transicao), transform var(--transicao),
-              visibility var(--transicao), background-color var(--transicao);
+  text-decoration: none;
+  transition: background-color var(--transicao);
 }
 
-.voltar-topo--visivel {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
+/* Aparece depois de rolar ~600px: animação presa à rolagem da página.
+   Sem suporte, o botão fica sempre visível. */
+@supports (animation-timeline: scroll()) {
+  .voltar-topo {
+    animation: topo-aparece linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 540px 660px;
+  }
+}
+
+@keyframes topo-aparece {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
 }
 
 .voltar-topo:hover {
@@ -3663,19 +3587,41 @@ html:not(.js) .calendario__status {
 
 /* ==========================================================================
    18. SCROLL-REVEAL
-   Estado inicial aplicado só quando o JS está ativo (classe js no <html>),
-   para o conteúdo continuar visível sem JavaScript. A entrada é uma
-   "cortina" de cima para baixo; como é uma animação (e não transição), o
-   clip-path some quando ela termina e não corta foco nem sombras depois.
+   Sem JavaScript: animação guiada pela rolagem (animation-timeline: view()).
+   A "cortina" abre enquanto o bloco entra na tela. Navegador sem suporte,
+   ou quem prefere menos movimento, vê tudo parado e visível.
    ========================================================================== */
 
-.js .revelar {
-  opacity: 0;
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .revelar {
+      animation: revelar-cortina linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    /* O losango da linha do tempo acende quando o marco chega ao meio */
+    .marco {
+      view-timeline: --marco block;
+    }
+
+    .marco::before {
+      animation: marco-acende linear both;
+      animation-timeline: --marco;
+      animation-range: entry 100% cover 45%;
+    }
+  }
 }
 
-.js .revelar--visivel {
-  opacity: 1;
-  animation: revelar-cortina 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) backwards;
+@keyframes marco-acende {
+  from {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-texto);
+  }
+  to {
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+  }
 }
 
 @keyframes revelar-cortina {
@@ -3791,8 +3737,8 @@ html:not(.js) .calendario__status {
     border: 0;
   }
 
-  /* Anula o hidden herdado do mobile no desktop */
-  .navegacao[hidden] {
+  /* No desktop o popover vira a barra fixa do cabeçalho, sempre aberta */
+  .navegacao:not(:popover-open) {
     display: block;
   }
 
@@ -3898,10 +3844,6 @@ html:not(.js) .calendario__status {
     transition-duration: 0.01ms !important;
   }
 
-  .js .revelar {
-    opacity: 1;
-  }
-
   .banner__slide img {
     transform: none;
   }
@@ -3926,13 +3868,14 @@ html:not(.js) .calendario__status {
   }
 
   /* No papel o calendário sai inteiro, não só o mês escolhido */
-  .calendario__mes[hidden] {
+  .calendario .calendario__mes {
     display: list-item !important;
   }
 
   /* No papel sempre a paleta clara, mesmo com o tema escuro na tela */
   :root,
-  :root[data-tema="escuro"] {
+  :root:has(#tema:checked),
+  :root:not(:has(#tema:checked)) {
     --cor-fundo: #FFFFFF;
     --cor-superficie: #FFFFFF;
     --cor-texto: #000000;
@@ -3953,7 +3896,8 @@ html:not(.js) .calendario__status {
     color: #000;
   }
 
-  .js .revelar {
+  .revelar,
+  .marco::before {
     opacity: 1;
     animation: none;
   }
