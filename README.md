@@ -16,15 +16,20 @@ geografia, clima, história da colonização, cidades e regiões, cultura, gastr
 turismo e economia. O público-alvo são estudantes, turistas e público em geral, por
 isso a linguagem é simples, direta e ilustrada.
 
-Feito com HTML5 semântico, CSS puro (Flexbox e CSS Grid) e JavaScript vanilla.
-Não usa nenhum framework nem biblioteca externa (sem React, Bootstrap ou Tailwind)
-e não precisa de nenhuma etapa de build.
+Feito **só com HTML5 semântico e CSS puro** — esta versão não tem nenhuma linha de
+JavaScript. Tudo o que é interativo (menu, tema, banner, atlas, quiz, calendário,
+comparador...) usa controles nativos do HTML (rádios, checkboxes, `<select>`,
+âncoras e `popover`) e CSS moderno (`:has()`, `:target`, `@property`, style
+queries, animações guiadas pela rolagem e funções matemáticas como `sin()` e
+`sqrt()`). Não usa nenhum framework nem biblioteca externa e não precisa de
+nenhuma etapa de build.
 
 ## 2. Como abrir o site
 
 Basta dar dois cliques no arquivo `index.html`. Ele abre no navegador padrão e o site
 funciona por completo, inclusive o menu, o banner rotativo, o atlas interativo, o
-quiz, a galeria com filtro e os cards que viram.
+quiz, a galeria com filtro e os cards que viram — mesmo com o JavaScript desligado
+no navegador, porque o site não usa JavaScript.
 
 Não é necessário instalar nada, rodar servidor nem compilar.
 
@@ -63,16 +68,15 @@ terra-catarinense/
 │                             Catarina é a sua?", arquitetura enxaimel e os
 │                             créditos das fotos.
 ├── css/
-│   └── style.css ........... Toda a estilização, organizada em seções
-│                             comentadas (reset, variáveis de cor, tema
-│                             escuro, header, banner, cards, timeline,
-│                             galeria, flip cards, footer, media queries).
-├── js/
-│   └── script.js ........... Todo o JavaScript, em módulos comentados
-│                             (menu, tema claro/escuro, banner, flip, atlas,
-│                             timeline, galeria, scroll-reveal, voltar ao
-│                             topo, ano do rodapé, passaporte, quiz,
-│                             calendário e comparador).
+│   ├── style.css ........... Toda a identidade visual, organizada em seções
+│   │                         comentadas (reset, variáveis de cor, tema
+│   │                         escuro, header, banner, cards, timeline,
+│   │                         galeria, flip cards, footer, media queries).
+│   └── estados.css ......... O que antes era JavaScript: os estados lidos
+│                             pelo CSS (banner, zoom do atlas, clima,
+│                             roteiros, comparador, calendário, galeria e
+│                             quiz). Parte das regras foi gerada a partir dos
+│                             dados das regiões e das cidades.
 ├── assets/ ................. As 58 fotos do site, cada uma ja gravada no
 │   │                         tamanho exato em que aparece na pagina
 │   ├── favicon.svg ......... Ícone da aba (selo circular "SC" em terracota)
@@ -123,8 +127,9 @@ Tipografia (Google Fonts):
 
 Todas as cores do site são variáveis CSS no `:root`. O tema escuro ("carta
 náutica noturna") só redefine essas variáveis — nenhum componente precisa saber
-que ele existe. O botão de tema fica no cabeçalho e a escolha é guardada no
-navegador; sem escolha, o site segue a preferência do sistema operacional.
+que ele existe. O site segue a preferência do sistema operacional; o botão de tema
+no cabeçalho é um checkbox que inverte essa preferência (lido com `:has()`). Sem
+JavaScript a escolha vale só para a página aberta e não fica guardada.
 Todas as combinações de texto e fundo passam no contraste AA da WCAG, nos dois
 temas.
 
@@ -132,14 +137,14 @@ temas.
 
 | # | Diferencial | Onde |
 | --- | --- | --- |
-| 1 | **Atlas interativo**: mapa com relevo, oceano, graticulado, rosa dos ventos e escala gráfica. Clicar numa região aproxima o mapa (animação do `viewBox`), acende os pinos das 28 cidades e troca o painel com foto e dados. Setas do teclado andam entre regiões vizinhas; Esc volta ao estado inteiro. A escala gráfica se ajusta sozinha ao zoom. | `cidades.html` |
-| 2 | **Camada de clima**: os botões Verão/Inverno repintam as regiões pela temperatura média, com legenda — "praia de manhã, neve à tarde" em forma de dado. | `cidades.html` |
-| 3 | **Monte seu roteiro**: no modo roteiro, clicar nos pinos (ou escolher na lista) cria paradas; o mapa traça a rota e soma a distância em linha reta (fórmula de haversine). O roteiro fica salvo no navegador. | `cidades.html` |
-| 4 | **Quiz "Qual Santa Catarina é a sua?"**: cinco perguntas, uma por vez; o resultado leva ao atlas já aproximado na região (`cidades.html?regiao=serra#mapa`). | `curiosidades.html` |
-| 5 | **Passaporte catarinense**: cada página visitada e o quiz rendem um carimbo no rodapé. | todas as páginas |
+| 1 | **Atlas interativo**: mapa com relevo, oceano, graticulado, rosa dos ventos e escala gráfica. Cada região é um link para uma âncora (`#regiao-serra`): o `:target` aproxima o mapa (um `transform` com transição, calculado para cada região), acende os pinos e mostra o painel com foto e dados. "Ver o estado inteiro" volta ao mapa todo. A escala gráfica e o tamanho dos textos acompanham o zoom, com a largura do mapa lida em CSS (`100cqw / 600px`). | `cidades.html` |
+| 2 | **Camada de clima**: rádios Verão/Inverno repintam as regiões pela temperatura média, com legenda — "praia de manhã, neve à tarde" em forma de dado. | `cidades.html` |
+| 3 | **Roteiros sugeridos**: quatro percursos prontos (Rota Germânica, Serra, Litoral, Do mar ao Oeste). O mapa traça o caminho e numera as paradas, e o caderno mostra cada trecho e a distância total em linha reta (fórmula de haversine, calculada antes). | `cidades.html` |
+| 4 | **Quiz "Qual Santa Catarina é a sua?"**: cinco perguntas, uma por vez ("Próxima" e "Voltar" são rótulos de checkboxes). Cada resposta soma pontos em variáveis CSS (`@property`), e uma *style query* mostra a região vencedora, com link para o atlas já aproximado nela (`cidades.html#regiao-serra`). "Refazer" é um botão `reset`. | `curiosidades.html` |
+| 5 | **Passaporte catarinense**: cada carimbo do rodapé é um link para uma página; os já visitados (`a:visited`) ganham a cor de tinta de carimbo. O quiz rende o sétimo carimbo. | todas as páginas |
 | 6 | Linha do tempo animada, galeria com filtro, flip cards, painel "Duas Santa Catarinas" e banner rotativo (já existiam, agora no visual novo). | várias |
-| 7 | **Calendário de festas**: os doze meses com festas, safras e fenômenos da natureza (Oktoberfest, Festa do Pinhão, baleia-franca, neve na serra...). Abre no mês atual; setas do teclado trocam o mês e o link guarda o mês escolhido (`cultura.html?mes=7`). Cada evento leva ao atlas com a cidade destacada (`cidades.html?cidade=blumenau#mapa`). Sem JavaScript, aparece a lista inteira. | `cultura.html` |
-| 8 | **Comparador de cidades**: duas das 28 cidades do atlas lado a lado — região, herança, população, altitude, fundação, clima e distância — com selo em quem "vence" cada linha e uma frase-resumo ("São Joaquim fica 1.350 m mais alta que Florianópolis..."). Um botão destaca as duas no atlas. A escolha fica salva no navegador. | `cidades.html` |
+| 7 | **Calendário de festas**: os doze meses com festas, safras e fenômenos da natureza (Oktoberfest, Festa do Pinhão, baleia-franca, neve na serra...). A barra de meses é um grupo de rádios (abre em outubro; as setas do teclado trocam o mês). Cada evento leva ao atlas com a cidade destacada (`cidades.html#cidade-blumenau`). | `cultura.html` |
+| 8 | **Comparador de cidades**: duas das 28 cidades do atlas lado a lado — região, herança, população, altitude, fundação, clima e distância — com selo em quem "vence" cada linha e uma frase-resumo ("São Joaquim fica 1.350 m mais alta que Florianópolis..."). O CSS lê a opção marcada de cada `<select>`, faz as contas (inclusive a distância, com `sin`, `cos` e `sqrt`) e escreve os números com contadores. Um link destaca as duas no atlas. | `cidades.html` |
 
 Os pinos das cidades são posicionados pela latitude e longitude reais, com a
 mesma projeção do contorno do estado (`x = 20 + (lon + 53,84) / 5,49 × 485`,
@@ -159,8 +164,10 @@ mesma projeção do contorno do estado (`x = 20 + (lon + 53,84) / 5,49 × 485`,
 - Mobile-first, testado a partir de 360px de largura.
 - Tema claro e escuro, seguindo `prefers-color-scheme` quando o usuário não escolhe
   manualmente.
-- Sem JavaScript o site continua utilizável: o menu nasce fechado no celular e vira
-  barra de navegação no desktop, e o painel de regiões já vem preenchido no HTML.
+- Não depende de JavaScript: todo controle é um elemento nativo (link, rádio,
+  checkbox, `<select>`, botão com `popovertarget`), então funciona por teclado e é
+  anunciado pelos leitores de tela. Rádios e checkboxes ficam invisíveis, mas
+  focáveis, e o foco aparece no rótulo que faz as vezes de botão.
 - Alvos de toque de no mínimo 24x24px (WCAG 2.5.8).
 
 ## 6. Fotos e créditos
@@ -215,10 +222,11 @@ Se a lista de fotos mudar, rode o `trocar_html.py` de novo e cole a lista nova d
       habitantes de cada cidade em
       [cidades.ibge.gov.br/brasil/sc/panorama](https://cidades.ibge.gov.br/brasil/sc/panorama).
 - [ ] **Temperaturas:** conferir as médias climáticas no INMET (as tabelas de
-      `turismo.html` e a camada de clima do atlas, no objeto `REGIOES` do
-      `script.js`, usam valores aproximados).
+      `turismo.html` e a camada de clima do atlas, nos painéis de `cidades.html` e
+      nas regras de clima do `estados.css`, usam valores aproximados).
 - [ ] **Cidades do comparador:** conferir população (Censo 2022), altitude e ano
-      de fundação/emancipação das 28 cidades no objeto `CIDADES` do `script.js`.
+      de fundação/emancipação das 28 cidades (variáveis `--a-*`/`--b-*` no fim do
+      `estados.css`).
 - [ ] **Calendário de festas:** conferir o mês de cada festa em `cultura.html`
       (seção `#calendario`) nos sites oficiais — algumas mudam de mês ou só
       acontecem a cada dois anos (Festa Nacional da Maçã, Festa da Uva, Fenaostra).
