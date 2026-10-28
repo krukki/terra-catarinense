@@ -428,8 +428,7 @@ strong {
 
 /* Rótulo técnico: fonte mono, caixa alta, espaçada. É a "voz" do atlas
    em etiquetas, legendas, dados e botões. */
-.etiqueta,
-.rotulo-mono {
+.etiqueta {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -575,16 +574,6 @@ strong {
    04. ACESSIBILIDADE
    ========================================================================== */
 
-/* Texto visível só para leitores de tela */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 /* Link "pular para o conteúdo" — primeiro item tabulável da página */
 .pular-conteudo {
   position: absolute;
@@ -658,25 +647,18 @@ strong {
   min-height: var(--altura-header);
 }
 
-/* O logo é quem cede espaço quando a barra aperta (320px com o botão de
-   tema ao lado do hambúrguer), em vez de empurrar os botões para fora. */
-.logo {
-  min-width: 0;
-  flex: 0 1 auto;
-}
-
-.logo__texto {
-  min-width: 0;
-}
-
 @media (min-width: 30rem) {
   .cabecalho__interno {
     gap: 1rem;
   }
 }
 
-/* --- Logo: selo circular "SC" + nome em serifa --- */
+/* --- Logo: selo circular "SC" + nome em serifa ---
+   O logo é quem cede espaço quando a barra aperta (320px com o botão de
+   tema ao lado do hambúrguer), em vez de empurrar os botões para fora. */
 .logo {
+  min-width: 0;
+  flex: 0 1 auto;
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -687,6 +669,10 @@ strong {
   line-height: 1.05;
   color: var(--cor-texto);
   text-decoration: none;
+}
+
+.logo__texto {
+  min-width: 0;
 }
 
 .logo:hover {
@@ -2070,6 +2056,8 @@ strong {
 }
 
 .atlas__opcao {
+  display: inline-flex;
+  align-items: center;
   min-height: 2.4rem;
   padding: 0.45rem 0.85rem;
   border: 0;
@@ -2081,6 +2069,7 @@ strong {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: background-color var(--transicao), color var(--transicao);
+  cursor: pointer;
 }
 
 .atlas__camadas .atlas__opcao:not(:first-of-type) {
@@ -2089,12 +2078,6 @@ strong {
 
 .atlas__opcao:hover {
   background-color: var(--cor-principal-clara);
-}
-
-.atlas__opcao {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
 }
 
 /* Rótulo do rádio/checkbox marcado = botão "pressionado" */
@@ -2198,7 +2181,9 @@ strong {
   transition: width 0.3s ease;
 }
 
+/* Só aparece com uma região aproximada */
 .atlas__recentrar {
+  display: none;
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
@@ -2211,6 +2196,7 @@ strong {
   font-size: 0.66rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .atlas__recentrar::before {
@@ -2220,12 +2206,6 @@ strong {
 .atlas__recentrar:hover {
   background-color: var(--cor-texto);
   color: var(--cor-fundo);
-}
-
-/* Só aparece com uma região aproximada */
-.atlas__recentrar {
-  display: none;
-  text-decoration: none;
 }
 
 .atlas:has(.atlas__alvo:not(.atlas__alvo--comparar):target) .atlas__recentrar {
@@ -2307,6 +2287,8 @@ strong {
 }
 
 .regiao-botao {
+  display: inline-flex;
+  align-items: center;
   min-height: 2.25rem;
   padding: 0.4rem 0.75rem;
   border: var(--borda-fina) solid var(--cor-borda);
@@ -2316,6 +2298,7 @@ strong {
   font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.08em;
+  text-decoration: none;
   text-transform: uppercase;
   transition: background-color var(--transicao), color var(--transicao),
               border-color var(--transicao);
@@ -2323,12 +2306,6 @@ strong {
 
 .regiao-botao:hover {
   border-color: var(--cor-texto);
-}
-
-.regiao-botao {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
 }
 
 /* --- Painel da região --- */
@@ -2460,8 +2437,10 @@ strong {
   color: var(--cor-secundaria-escura);
 }
 
-/* --- Caderno do roteiro (diferencial 3) --- */
+/* --- Caderno do roteiro (diferencial 3): só aparece com "Roteiros
+   sugeridos" marcado, no topo da coluna --- */
 .roteiro {
+  display: none;
   padding: 1.25rem 1.35rem 1.5rem;
   background-color: var(--cor-superficie);
   background-image: repeating-linear-gradient(
@@ -2469,11 +2448,6 @@ strong {
   );
   border: var(--borda-fina) solid var(--cor-destaque);
   border-top-width: 0.3rem;
-}
-
-/* Só aparece com "Roteiros sugeridos" marcado, no topo da coluna */
-.roteiro {
-  display: none;
 }
 
 .atlas:has(.estado--rota:checked) .roteiro {
@@ -2608,6 +2582,8 @@ strong {
 }
 
 .filtro-botao {
+  display: inline-flex;
+  align-items: center;
   min-height: 2.4rem;
   padding: 0.45rem 0.9rem;
   border: var(--borda-fina) solid var(--cor-borda);
@@ -2620,16 +2596,11 @@ strong {
   text-transform: uppercase;
   transition: background-color var(--transicao), color var(--transicao),
               border-color var(--transicao);
+  cursor: pointer;
 }
 
 .filtro-botao:hover {
   border-color: var(--cor-texto);
-}
-
-.filtro-botao {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
 }
 
 :checked + .filtro-botao {
@@ -2648,8 +2619,8 @@ strong {
   position: relative;
   overflow: hidden;
   animation: aparecer 0.4s ease both;
+  counter-increment: fotos;
 }
-
 
 .galeria__item img {
   width: 100%;
@@ -2699,10 +2670,6 @@ strong {
 .galeria-filtrada .filtros { order: 0; }
 .galeria-filtrada .galeria-contador { order: 1; }
 .galeria-filtrada .galeria { order: 2; }
-
-.galeria__item {
-  counter-increment: fotos;
-}
 
 .galeria-contador::before {
   content: counter(fotos) " fotos encontradas.";
@@ -3313,11 +3280,6 @@ tbody tr:nth-child(even) {
   vertical-align: 0.1rem;
 }
 
-.comparador__destaque {
-  font-family: var(--fonte-titulo);
-  font-style: italic;
-}
-
 .comparador__resumo {
   max-width: var(--largura-texto);
   margin-block: 1.25rem;
@@ -3863,7 +3825,7 @@ tbody tr:nth-child(even) {
   .calendario__barra,
   .calendario__status,
   .comparador__inverter,
-  [data-comparador-atlas] {
+  .comparador > .botao {
     display: none !important;
   }
 
