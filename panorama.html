@@ -321,9 +321,11 @@
           </p>
         </div>
 
+        <!-- DIFERENCIAL 13 — As receitas abrem com <details>, sem JavaScript.
+             O script.js só acrescenta os botões de ajuste de porções. -->
         <div class="grade-pratos">
 
-          <article class="prato revelar">
+          <article class="prato revelar" id="prato-cuca">
             <img src="assets/gastronomia/cuca.jpg"
                  alt="Cuca fatiada com farofa de açúcar por cima, sobre tábua de madeira."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -335,10 +337,43 @@
                 uva ou goiabada. Acompanha o café colonial em qualquer cidade do
                 Vale do Itajaí.
               </p>
+              <details class="receita" data-receita data-porcoes="8" data-passo="4">
+                <summary>Ver a receita</summary>
+                <div class="receita__topo">
+                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>8</span> fatias</p>
+                </div>
+                <h4>Massa</h4>
+                <ul>
+                  <li><span data-qtd="5" data-um="banana" data-varios="bananas">5 bananas</span> em fatias no comprimento</li>
+                  <li><span data-qtd="180" data-um="g" data-varios="g">180 g</span> de farinha de trigo</li>
+                  <li><span data-qtd="160" data-um="g" data-varios="g">160 g</span> de açúcar</li>
+                  <li><span data-qtd="120" data-um="ml" data-varios="ml">120 ml</span> de leite</li>
+                  <li><span data-qtd="20" data-um="g" data-varios="g">20 g</span> de margarina</li>
+                  <li><span data-qtd="2" data-um="ovo" data-varios="ovos">2 ovos</span></li>
+                  <li><span data-qtd="5" data-um="g" data-varios="g">5 g</span> de fermento em pó</li>
+                </ul>
+                <h4>Farofa</h4>
+                <ul>
+                  <li><span data-qtd="100" data-um="g" data-varios="g">100 g</span> de farinha de trigo</li>
+                  <li><span data-qtd="90" data-um="g" data-varios="g">90 g</span> de açúcar</li>
+                  <li><span data-qtd="40" data-um="g" data-varios="g">40 g</span> de margarina</li>
+                  <li>Canela em pó a gosto</li>
+                </ul>
+                <h4>Como fazer</h4>
+                <ol>
+                  <li>Unte e enfarinhe uma forma de 18 × 28 cm e preaqueça o forno a 180 °C.</li>
+                  <li>Bata os ovos com o açúcar por uns 5 minutos, até clarear. Junte o leite e a margarina.</li>
+                  <li>Acrescente a farinha aos poucos, sem deixar empelotar. Por último, misture o fermento com delicadeza.</li>
+                  <li>Para a farofa, esfarele com os dedos a farinha, o açúcar, a canela e a margarina.</li>
+                  <li>Espalhe a massa na forma, cubra com as bananas e depois com a farofa.</li>
+                  <li>Asse por cerca de 35 minutos, até dourar, e espere esfriar antes de cortar.</li>
+                </ol>
+                <p class="receita__fonte">Adaptada de <a href="https://www.receiteria.com.br/receita/cuca-de-banana-com-farofa/" rel="external noopener" target="_blank">Receiteria</a>. O número de fatias é uma estimativa.</p>
+              </details>
             </div>
           </article>
 
-          <article class="prato revelar">
+          <article class="prato revelar" id="prato-marreco">
             <img src="assets/gastronomia/marreco.jpg"
                  alt="Travessa com marreco assado dourado servido com repolho roxo."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -350,10 +385,40 @@
                 pão, servido com repolho roxo e purê de maçã. Tem festival próprio
                 na cidade.
               </p>
+              <details class="receita" data-receita data-porcoes="6" data-passo="6">
+                <summary>Ver a receita</summary>
+                <div class="receita__topo">
+                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>6</span> porções</p>
+                </div>
+                <h4>Ingredientes</h4>
+                <ul>
+                  <li><span data-qtd="1" data-um="marreco com os miúdos" data-varios="marrecos com os miúdos">1 marreco com os miúdos</span></li>
+                  <li><span data-qtd="100" data-um="g" data-varios="g">100 g</span> de lombinho suíno</li>
+                  <li><span data-qtd="50" data-um="g" data-varios="g">50 g</span> de bacon</li>
+                  <li><span data-qtd="1" data-um="cebola média" data-varios="cebolas médias">1 cebola média</span></li>
+                  <li><span data-qtd="1" data-um="dente de alho" data-varios="dentes de alho">1 dente de alho</span></li>
+                  <li><span data-qtd="1" data-um="tomate" data-varios="tomates">1 tomate</span></li>
+                  <li><span data-qtd="0.5" data-um="maçã" data-varios="maçãs">½ maçã</span></li>
+                  <li><span data-qtd="1" data-um="pãozinho" data-varios="pãezinhos">1 pãozinho</span></li>
+                  <li><span data-qtd="1" data-um="ovo" data-varios="ovos">1 ovo</span></li>
+                  <li><span data-qtd="2" data-um="col. (sopa)" data-varios="col. (sopa)">2 col. (sopa)</span> de farinha de trigo</li>
+                  <li>Sal, pimenta-do-reino e cebolinha a gosto</li>
+                </ul>
+                <h4>Como fazer</h4>
+                <ol>
+                  <li>Tempere o marreco por dentro e por fora com sal, pimenta e cebolinha, e deixe marinar por pelo menos 12 horas.</li>
+                  <li>Moa os miúdos com a cebola, o tomate, o bacon, o lombinho, a maçã e o alho.</li>
+                  <li>Misture o ovo, o pão molhado em água, a farinha, mais cebolinha, sal e pimenta.</li>
+                  <li>Recheie o marreco e costure a abertura com linha grossa.</li>
+                  <li>Coloque com o peito para cima numa assadeira funda, com meia xícara de água, cubra com papel-alumínio e asse a 180 °C por cerca de 1h30.</li>
+                  <li>Descubra e deixe dourar, regando com o molho da assadeira. Espere 10 minutos, corte em pedaços e fatie o recheio.</li>
+                </ol>
+                <p class="receita__fonte">Adaptada de <a href="https://www.comidaereceitas.com.br/aves/marreco-recheado-tipica-de-santa-catarina.html" rel="external noopener" target="_blank">Comida e Receitas</a>; forno conforme o <a href="https://www.em.com.br/degusta/2026/03/7369014-marreco-recheado-aprenda-um-prato-tipico-alemao-que-voce-precisa-provar.html" rel="external noopener" target="_blank">Estado de Minas</a>. O número de porções é uma estimativa.</p>
+              </details>
             </div>
           </article>
 
-          <article class="prato revelar">
+          <article class="prato revelar" id="prato-ostras">
             <img src="assets/gastronomia/ostras-gratinadas.jpg"
                  alt="Ostras gratinadas em conchas, servidas quentes em prato branco."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -365,10 +430,33 @@
                 cultivos das baías de Florianópolis, ao lado de mexilhões,
                 camarões e da tainha do inverno.
               </p>
+              <details class="receita" data-receita data-porcoes="12" data-passo="6">
+                <summary>Ver a receita</summary>
+                <div class="receita__topo">
+                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>12</span> ostras gratinadas</p>
+                </div>
+                <h4>Ingredientes</h4>
+                <ul>
+                  <li><span data-qtd="12" data-um="ostra" data-varios="ostras">12 ostras</span></li>
+                  <li><span data-qtd="1" data-um="caixinha de creme de leite" data-varios="caixinhas de creme de leite">1 caixinha de creme de leite</span></li>
+                  <li><span data-qtd="1" data-um="pacote de parmesão ralado" data-varios="pacotes de parmesão ralado">1 pacote de parmesão ralado</span></li>
+                  <li><span data-qtd="2" data-um="dente de alho amassado" data-varios="dentes de alho amassados">2 dentes de alho amassados</span></li>
+                  <li>Salsinha e sal a gosto</li>
+                  <li>Algumas gotas de limão (opcional)</li>
+                </ul>
+                <h4>Como fazer</h4>
+                <ol>
+                  <li>Cozinhe as ostras numa panela com meio copo de água até as cascas abrirem. Reserve as ostras e lave bem as cascas.</li>
+                  <li>Misture o creme de leite com o alho, a salsinha, o sal e o limão.</li>
+                  <li>Coloque uma ostra em cada casca, cubra com o creme e polvilhe o parmesão.</li>
+                  <li>Leve ao forno quente numa assadeira até gratinar.</li>
+                </ol>
+                <p class="receita__fonte">Adaptada de <a href="https://www.tudogostoso.com.br/receita/51679-ostras-gratinadas.html" rel="external noopener" target="_blank">TudoGostoso</a>.</p>
+              </details>
             </div>
           </article>
 
-          <article class="prato revelar">
+          <article class="prato revelar" id="prato-camarao">
             <img src="assets/gastronomia/camarao.jpg"
                  alt="Mesa com vários pratos de camarão preparados de formas diferentes."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -379,10 +467,41 @@
                 Tradição de Bombinhas e Penha: o camarão chega à mesa em várias
                 preparações seguidas — frito, ensopado, com pirão e em bolinho.
               </p>
+              <details class="receita" data-receita data-porcoes="4" data-passo="2">
+                <summary>Ver a receita</summary>
+                <div class="receita__topo">
+                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>4</span> porções</p>
+                </div>
+                <h4>Camarão escaldado</h4>
+                <ul>
+                  <li><span data-qtd="1" data-um="kg" data-varios="kg">1 kg</span> de camarão médio, sem a cabeça</li>
+                  <li><span data-qtd="2" data-um="limão (o suco)" data-varios="limões (o suco)">2 limões (o suco)</span></li>
+                  <li><span data-qtd="1" data-um="cebola grande" data-varios="cebolas grandes">1 cebola grande</span></li>
+                  <li><span data-qtd="2" data-um="tomate" data-varios="tomates">2 tomates</span></li>
+                  <li><span data-qtd="1" data-um="pimentão" data-varios="pimentões">1 pimentão</span></li>
+                  <li><span data-qtd="4" data-um="ramo de coentro" data-varios="ramos de coentro">4 ramos de coentro</span></li>
+                  <li>Sal a gosto</li>
+                </ul>
+                <h4>Pirão</h4>
+                <ul>
+                  <li><span data-qtd="2" data-um="xíc." data-varios="xíc.">2 xíc.</span> de farinha de mandioca torrada</li>
+                  <li>Azeite de dendê, só para umedecer a farinha</li>
+                  <li>Sal a gosto</li>
+                </ul>
+                <h4>Como fazer</h4>
+                <ol>
+                  <li>Lave o camarão duas vezes com água e o suco de limão.</li>
+                  <li>Numa panela, em fogo médio, coloque o camarão, a cebola, o tomate, o pimentão, o coentro e o sal. Cubra com água e cozinhe até o camarão ficar rosado.</li>
+                  <li>Separe o camarão e os legumes do caldo e reserve tudo.</li>
+                  <li>Misture a farinha com o dendê até virar uma farofa úmida. Despeje aos poucos o caldo fervente, mexendo até o pirão ficar liso.</li>
+                  <li>Acerte o sal e sirva com o camarão e os legumes.</li>
+                </ol>
+                <p class="receita__fonte">Adaptada de <a href="https://www.tudogostoso.com.br/receita/127516-escaldado-de-camarao-com-pirao.html" rel="external noopener" target="_blank">TudoGostoso</a>. É uma das etapas da sequência, em versão geral: não é a receita de um restaurante catarinense.</p>
+              </details>
             </div>
           </article>
 
-          <article class="prato revelar">
+          <article class="prato revelar" id="prato-entrevero">
             <img src="assets/gastronomia/entrevero.jpg"
                  alt="Panela de ferro com entrevero de carnes e pinhão sobre fogo de chão."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -394,10 +513,34 @@
                 mistura de carnes, linguiça e legumes feita na panela de ferro,
                 herança dos tropeiros.
               </p>
+              <details class="receita" data-receita data-porcoes="4" data-passo="2">
+                <summary>Ver a receita</summary>
+                <div class="receita__topo">
+                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>4</span> porções</p>
+                </div>
+                <h4>Ingredientes</h4>
+                <ul>
+                  <li><span data-qtd="300" data-um="g" data-varios="g">300 g</span> de pinhão cozido e descascado</li>
+                  <li><span data-qtd="200" data-um="g" data-varios="g">200 g</span> de carne bovina em tiras</li>
+                  <li><span data-qtd="200" data-um="g" data-varios="g">200 g</span> de carne suína em tiras</li>
+                  <li><span data-qtd="200" data-um="g" data-varios="g">200 g</span> de linguiça calabresa em rodelas</li>
+                  <li><span data-qtd="1" data-um="pimentão vermelho" data-varios="pimentões vermelhos">1 pimentão vermelho</span></li>
+                  <li><span data-qtd="1" data-um="cebola" data-varios="cebolas">1 cebola</span></li>
+                  <li>Sal, pimenta e temperos a gosto</li>
+                </ul>
+                <h4>Como fazer</h4>
+                <ol>
+                  <li>Doure as carnes numa panela grande até ficarem bem cozidas.</li>
+                  <li>Junte a cebola e o pimentão picados e refogue.</li>
+                  <li>Acrescente o pinhão e misture com cuidado.</li>
+                  <li>Acerte os temperos e sirva bem quente.</li>
+                </ol>
+                <p class="receita__fonte">Adaptada do <a href="https://www.nsctotal.com.br/?p=7462966" rel="external noopener" target="_blank">NSC Total</a>. O número de porções é uma estimativa.</p>
+              </details>
             </div>
           </article>
 
-          <article class="prato revelar">
+          <article class="prato revelar" id="prato-galeto">
             <img src="assets/gastronomia/galeto-polenta.jpg"
                  alt="Prato com pedaços de galeto assado e bastões de polenta frita."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -408,6 +551,37 @@
                 No sul e no oeste, a cozinha italiana serve polenta frita, galeto
                 no espeto, queijos, salames e vinho colonial produzido em casa.
               </p>
+              <details class="receita" data-receita data-porcoes="8" data-passo="4">
+                <summary>Ver a receita</summary>
+                <div class="receita__topo">
+                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>8</span> porções</p>
+                </div>
+                <h4>Galeto</h4>
+                <ul>
+                  <li><span data-qtd="2" data-um="galeto" data-varios="galetos">2 galetos</span></li>
+                  <li>Sal grosso, manjericão, salsinha, sálvia e alho picados a gosto</li>
+                  <li>Pimenta-do-reino, noz-moscada e vinho branco seco a gosto</li>
+                </ul>
+                <h4>Polenta frita</h4>
+                <ul>
+                  <li><span data-qtd="450" data-um="g" data-varios="g">450 g</span> de fubá, e mais um pouco para empanar</li>
+                  <li><span data-qtd="1" data-um="litro de água" data-varios="litros de água">1 litro de água</span></li>
+                  <li><span data-qtd="15" data-um="ml" data-varios="ml">15 ml</span> de banha ou óleo</li>
+                  <li><span data-qtd="0.5" data-um="cebola grande" data-varios="cebolas grandes">½ cebola grande</span></li>
+                  <li><span data-qtd="3" data-um="dente de alho" data-varios="dentes de alho">3 dentes de alho</span></li>
+                  <li>Sal a gosto e óleo para fritar</li>
+                </ul>
+                <h4>Como fazer</h4>
+                <ol>
+                  <li>Tempere os galetos com o sal, as ervas, o alho, a pimenta, a noz-moscada e o vinho, e deixe marinar por 2 horas.</li>
+                  <li>Prenda no espeto e asse na brasa por cerca de 1 hora, virando sempre.</li>
+                  <li>Dissolva o fubá em metade da água. Doure a cebola e o alho na banha, junte o resto da água e o sal e aqueça.</li>
+                  <li>Acrescente o fubá dissolvido e mexa sem parar até firmar, por pelo menos 5 minutos.</li>
+                  <li>Espalhe numa forma e leve à geladeira por cerca de 2 horas.</li>
+                  <li>Corte em tiras, passe no fubá e frite em óleo bem quente até dourar.</li>
+                </ol>
+                <p class="receita__fonte">Adaptada de <a href="https://www.agazeta.com.br/entretenimento/gastronomia/galeto-al-primo-canto-confira-receita-para-arrasar-no-churrasco-1120" rel="external noopener" target="_blank">A Gazeta</a> (galeto) e <a href="https://www.receiteria.com.br/receita/polenta-frita/" rel="external noopener" target="_blank">Receiteria</a> (polenta).</p>
+              </details>
             </div>
           </article>
         </div>
@@ -513,7 +687,7 @@
       <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
         </div>
         <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
       </section>

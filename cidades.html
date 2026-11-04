@@ -106,6 +106,8 @@
             pela temperatura média (mapa coroplético com legenda).
          3. Monte seu roteiro: no modo roteiro, os pinos viram paradas; o
             mapa traça a rota e soma a distância em linha reta.
+         9. Desafio do mapa: os pinos somem e a pessoa marca onde fica cada
+            cidade; o mapa mede o erro em km e dá os pontos.
          Os botões abaixo do mapa fazem o mesmo que clicar nas regiões e
          garantem uso por teclado e em telas pequenas.
          ================================================================= -->
@@ -131,8 +133,12 @@
                 <button class="atlas__opcao" type="button" data-camada="verao" aria-pressed="false">Verão</button>
                 <button class="atlas__opcao" type="button" data-camada="inverno" aria-pressed="false">Inverno</button>
               </div>
-              <button class="atlas__opcao atlas__opcao--rota" type="button" data-rota-botao
-                      aria-pressed="false" aria-controls="roteiro">Monte seu roteiro</button>
+              <div class="atlas__modos">
+                <button class="atlas__opcao atlas__opcao--rota" type="button" data-rota-botao
+                        aria-pressed="false" aria-controls="roteiro">Monte seu roteiro</button>
+                <button class="atlas__opcao atlas__opcao--desafio" type="button" data-desafio-botao
+                        aria-pressed="false" aria-controls="desafio">Desafio do mapa</button>
+              </div>
             </div>
 
             <div class="atlas__quadro" data-atlas-quadro>
@@ -274,6 +280,17 @@
                 <g class="pino" data-pino="ararangua" data-regiao-pino="sul" data-lat="-28.935" data-lon="-49.486" transform="translate(404.6 318.5)"><g class="pino__corpo"><circle class="pino__marca" r="3"></circle><text class="pino__nome" x="-6" text-anchor="end" y="3.5">Araranguá</text></g></g>
               </g>
               <g class="rota-paradas" data-rota-paradas aria-hidden="true"></g>
+
+              <!-- Diferencial 9: palpite do desafio e a linha até a resposta -->
+              <line class="desafio-linha" data-desafio-linha aria-hidden="true"></line>
+              <g class="desafio-mira" data-desafio-mira role="application" transform="translate(300 190)"
+                 aria-label="Mira do desafio. Use as setas para mover e Enter para confirmar. Shift com as setas dá passos maiores.">
+                <g class="desafio-mira__corpo">
+                  <circle r="7"></circle>
+                  <line x1="-12" y1="0" x2="12" y2="0"></line>
+                  <line x1="0" y1="-12" x2="0" y2="12"></line>
+                </g>
+              </g>
             </svg>
 
               <!-- Rosa dos ventos e escala gráfica, por cima do mapa -->
@@ -398,7 +415,47 @@
 
               <p class="roteiro__total" data-roteiro-total aria-live="polite"></p>
 
+              <div class="roteiro__compartilhar" data-roteiro-compartilhar hidden>
+                <button class="botao botao--contorno" type="button" data-roteiro-copiar>Copiar link do roteiro</button>
+                <input class="roteiro__link" type="text" readonly data-roteiro-link
+                       aria-label="Link do roteiro" hidden>
+                <p class="roteiro__aviso" data-roteiro-aviso aria-live="polite"></p>
+              </div>
+
               <button class="roteiro__limpar" type="button" data-roteiro-limpar>Limpar roteiro</button>
+            </section>
+
+            <!-- DIFERENCIAL 9 — Desafio do mapa (aparece com o modo desafio) -->
+            <section class="desafio" id="desafio" data-desafio hidden
+                     aria-labelledby="titulo-desafio">
+              <p class="painel-regiao__sobre">Prova de campo</p>
+              <h3 id="titulo-desafio">Desafio do mapa</h3>
+
+              <div data-desafio-jogo>
+                <p class="desafio__contador">
+                  <span data-desafio-contador>Rodada 1 de 10</span>
+                  <span data-desafio-placar>0 pontos</span>
+                </p>
+                <p class="desafio__pergunta" aria-live="polite">
+                  Onde fica <strong data-desafio-cidade>...</strong>?
+                </p>
+                <p class="desafio__ajuda" data-desafio-ajuda>
+                  Clique ou toque no mapa para marcar o seu palpite. No teclado,
+                  mova a mira com as setas.
+                </p>
+                <p class="desafio__mira" data-desafio-mira-status aria-live="polite"></p>
+                <p class="desafio__resultado" data-desafio-resultado aria-live="polite"></p>
+                <button class="botao botao--destaque" type="button" data-desafio-confirmar disabled>Confirmar palpite</button>
+                <button class="botao botao--destaque" type="button" data-desafio-proxima hidden>Próxima cidade</button>
+              </div>
+
+              <div data-desafio-fim tabindex="-1" hidden>
+                <p class="desafio__total"><strong data-desafio-total>0</strong> de 1.000 pontos</p>
+                <h4 class="desafio__titulo" data-desafio-titulo></h4>
+                <p class="desafio__recorde" data-desafio-recorde></p>
+                <ol class="desafio__lista" data-desafio-lista></ol>
+                <button class="botao botao--destaque" type="button" data-desafio-repetir>Jogar de novo</button>
+              </div>
             </section>
           </div>
         </div>
@@ -801,7 +858,7 @@
       <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
         </div>
         <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
       </section>

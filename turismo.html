@@ -436,6 +436,39 @@
     <!-- ================================================================
          ROTEIROS
          ================================================================= -->
+    <!-- ================================================================
+         DIFERENCIAL 10 — PLANEJADOR DE VIAGEM
+         Só existe com JavaScript: nasce com hidden e o script.js mostra.
+         ================================================================= -->
+    <section class="secao secao--clara" id="planejador" data-planejador hidden
+             aria-labelledby="titulo-planejador">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Planejador</span>
+          <h2 id="titulo-planejador">Para onde ir <em>no mês</em> da sua viagem</h2>
+          <p class="subtitulo-secao">
+            Escolha o mês e o que você quer fazer. O planejador cruza o clima das
+            regiões com as festas do calendário e sugere um destino.
+          </p>
+        </div>
+
+        <div class="planejador__escolha">
+          <div class="comparador__campo">
+            <label for="planejador-mes">Mês da viagem</label>
+            <select id="planejador-mes" data-planejador-mes></select>
+          </div>
+          <div class="comparador__campo">
+            <label for="planejador-interesse">O que você quer fazer</label>
+            <select id="planejador-interesse" data-planejador-interesse></select>
+          </div>
+        </div>
+        <p class="planejador__status" data-planejador-status aria-live="polite"></p>
+
+        <div class="planejador__resultado" data-planejador-resultado></div>
+      </div>
+    </section>
+
+
     <section class="secao" id="roteiros">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -601,7 +634,7 @@
       <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
         </div>
         <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
       </section>

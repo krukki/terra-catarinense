@@ -9,7 +9,7 @@
    02b. Tema claro/escuro
    03. Banner rotativo (index.html)
    04. Flip cards (toque/clique/teclado)
-   05. Atlas interativo: zoom, clima e roteiro (cidades.html)
+   05. Atlas interativo: zoom, clima, roteiro e desafio (cidades.html)
    06. Linha do tempo com scroll-reveal (cultura.html)
    07. Galeria com filtro por categoria (turismo.html)
    08. Scroll-reveal genérico
@@ -19,6 +19,10 @@
    12. Quiz "Qual Santa Catarina é a sua?" (curiosidades.html)
    13. Calendário de festas (cultura.html)
    14. Comparador de cidades (cidades.html)
+   15. Planejador de viagem (turismo.html)
+   16. Busca no site (todas as páginas)
+   17. Glossário de sotaques (cultura.html)
+   18. Receitas com ajuste de porções (panorama.html)
    ========================================================================== */
 
 (function () {
@@ -382,7 +386,8 @@
      Clicar numa região do SVG (ou no botão equivalente) troca o painel
      lateral e aproxima o mapa, animando o viewBox. A barra de cima troca a
      camada (regiões, clima de verão, clima de inverno) e liga o modo
-     roteiro, em que os pinos das cidades viram paradas de viagem.
+     roteiro, em que os pinos das cidades viram paradas de viagem, ou o
+     desafio do mapa (diferencial 9), em que os pinos somem.
      ==================================================================== */
 
   // Dados de cada região. "clima" são médias aproximadas em °C (conferir
@@ -518,39 +523,40 @@
   };
 
   // Dados das 28 cidades do atlas, com a mesma chave do data-pino do SVG.
-  // Nome, região e coordenadas não se repetem aqui: vêm do próprio pino.
+  // Região e coordenadas não se repetem aqui: vêm do próprio pino. O nome
+  // também está no pino, mas a busca precisa dele nas páginas sem atlas.
   // populacao: Censo 2022 do IBGE, arredondada (as cidades que têm card
   // usam o mesmo número do card). altitude: da sede, em metros.
   // fundacao: ano da fundação ou da emancipação. Conferir no IBGE.
   var CIDADES = {
-    "florianopolis": { populacao: 540000, altitude: 3, fundacao: 1726, destaque: "Capital, ostras e tainha" },
-    "sao-jose": { populacao: 270000, altitude: 5, fundacao: 1750, destaque: "Casario açoriano" },
-    "balneario-camboriu": { populacao: 150000, altitude: 2, fundacao: 1964, destaque: "Arranha-céus à beira-mar" },
-    "itajai": { populacao: 264000, altitude: 2, fundacao: 1860, destaque: "Porto e Marejada" },
-    "bombinhas": { populacao: 25000, altitude: 10, fundacao: 1992, destaque: "Mergulho e enseadas" },
-    "garopaba": { populacao: 30000, altitude: 5, fundacao: 1961, destaque: "Surfe e baleia-franca" },
-    "blumenau": { populacao: 360000, altitude: 21, fundacao: 1850, destaque: "Oktoberfest e enxaimel" },
-    "pomerode": { populacao: 34000, altitude: 85, fundacao: 1959, destaque: "Cidade mais alemã do Brasil" },
-    "brusque": { populacao: 141000, altitude: 21, fundacao: 1860, destaque: "Berço da fiação" },
-    "timbo": { populacao: 46000, altitude: 68, fundacao: 1934, destaque: "Pérola do Vale" },
-    "indaial": { populacao: 72000, altitude: 70, fundacao: 1934, destaque: "Às margens do Itajaí-Açu" },
-    "joinville": { populacao: 600000, altitude: 4, fundacao: 1851, destaque: "Cidade das Flores e da Dança" },
-    "sao-bento-do-sul": { populacao: 83000, altitude: 838, fundacao: 1873, destaque: "Móveis e serra fria" },
-    "jaragua-do-sul": { populacao: 183000, altitude: 30, fundacao: 1876, destaque: "Indústria e Schützenfest" },
-    "sao-francisco-do-sul": { populacao: 53000, altitude: 7, fundacao: 1658, destaque: "Centro histórico tombado" },
-    "lages": { populacao: 165000, altitude: 884, fundacao: 1766, destaque: "Festa do Pinhão" },
-    "sao-joaquim": { populacao: 27000, altitude: 1353, fundacao: 1886, destaque: "Maçã, vinho e neve" },
-    "urubici": { populacao: 11000, altitude: 1000, fundacao: 1956, destaque: "Morro da Igreja" },
-    "urupema": { populacao: 2500, altitude: 1425, fundacao: 1988, destaque: "Disputa a cidade mais fria" },
-    "bom-jardim-da-serra": { populacao: 4700, altitude: 1245, fundacao: 1967, destaque: "Serra do Rio do Rastro" },
-    "chapeco": { populacao: 254000, altitude: 674, fundacao: 1917, destaque: "Capital do agronegócio" },
-    "concordia": { populacao: 82000, altitude: 550, fundacao: 1934, destaque: "Aves e suínos" },
-    "xanxere": { populacao: 51000, altitude: 800, fundacao: 1954, destaque: "Festa do Milho" },
-    "sao-miguel-do-oeste": { populacao: 44000, altitude: 645, fundacao: 1954, destaque: "Fronteira com a Argentina" },
-    "criciuma": { populacao: 214000, altitude: 46, fundacao: 1880, destaque: "Carvão e cerâmica" },
-    "tubarao": { populacao: 110000, altitude: 9, fundacao: 1870, destaque: "Às margens do rio Tubarão" },
-    "laguna": { populacao: 46000, altitude: 2, fundacao: 1676, destaque: "Pesca com botos" },
-    "ararangua": { populacao: 71000, altitude: 13, fundacao: 1880, destaque: "Dunas e lagoas" }
+    "florianopolis": { nome: "Florianópolis", populacao: 540000, altitude: 3, fundacao: 1726, destaque: "Capital, ostras e tainha" },
+    "sao-jose": { nome: "São José", populacao: 270000, altitude: 5, fundacao: 1750, destaque: "Casario açoriano" },
+    "balneario-camboriu": { nome: "Balneário Camboriú", populacao: 150000, altitude: 2, fundacao: 1964, destaque: "Arranha-céus à beira-mar" },
+    "itajai": { nome: "Itajaí", populacao: 264000, altitude: 2, fundacao: 1860, destaque: "Porto e Marejada" },
+    "bombinhas": { nome: "Bombinhas", populacao: 25000, altitude: 10, fundacao: 1992, destaque: "Mergulho e enseadas" },
+    "garopaba": { nome: "Garopaba", populacao: 30000, altitude: 5, fundacao: 1961, destaque: "Surfe e baleia-franca" },
+    "blumenau": { nome: "Blumenau", populacao: 360000, altitude: 21, fundacao: 1850, destaque: "Oktoberfest e enxaimel" },
+    "pomerode": { nome: "Pomerode", populacao: 34000, altitude: 85, fundacao: 1959, destaque: "Cidade mais alemã do Brasil" },
+    "brusque": { nome: "Brusque", populacao: 141000, altitude: 21, fundacao: 1860, destaque: "Berço da fiação" },
+    "timbo": { nome: "Timbó", populacao: 46000, altitude: 68, fundacao: 1934, destaque: "Pérola do Vale" },
+    "indaial": { nome: "Indaial", populacao: 72000, altitude: 70, fundacao: 1934, destaque: "Às margens do Itajaí-Açu" },
+    "joinville": { nome: "Joinville", populacao: 600000, altitude: 4, fundacao: 1851, destaque: "Cidade das Flores e da Dança" },
+    "sao-bento-do-sul": { nome: "São Bento do Sul", populacao: 83000, altitude: 838, fundacao: 1873, destaque: "Móveis e serra fria" },
+    "jaragua-do-sul": { nome: "Jaraguá do Sul", populacao: 183000, altitude: 30, fundacao: 1876, destaque: "Indústria e Schützenfest" },
+    "sao-francisco-do-sul": { nome: "São Francisco do Sul", populacao: 53000, altitude: 7, fundacao: 1658, destaque: "Centro histórico tombado" },
+    "lages": { nome: "Lages", populacao: 165000, altitude: 884, fundacao: 1766, destaque: "Festa do Pinhão" },
+    "sao-joaquim": { nome: "São Joaquim", populacao: 27000, altitude: 1353, fundacao: 1886, destaque: "Maçã, vinho e neve" },
+    "urubici": { nome: "Urubici", populacao: 11000, altitude: 1000, fundacao: 1956, destaque: "Morro da Igreja" },
+    "urupema": { nome: "Urupema", populacao: 2500, altitude: 1425, fundacao: 1988, destaque: "Disputa a cidade mais fria" },
+    "bom-jardim-da-serra": { nome: "Bom Jardim da Serra", populacao: 4700, altitude: 1245, fundacao: 1967, destaque: "Serra do Rio do Rastro" },
+    "chapeco": { nome: "Chapecó", populacao: 254000, altitude: 674, fundacao: 1917, destaque: "Capital do agronegócio" },
+    "concordia": { nome: "Concórdia", populacao: 82000, altitude: 550, fundacao: 1934, destaque: "Aves e suínos" },
+    "xanxere": { nome: "Xanxerê", populacao: 51000, altitude: 800, fundacao: 1954, destaque: "Festa do Milho" },
+    "sao-miguel-do-oeste": { nome: "São Miguel do Oeste", populacao: 44000, altitude: 645, fundacao: 1954, destaque: "Fronteira com a Argentina" },
+    "criciuma": { nome: "Criciúma", populacao: 214000, altitude: 46, fundacao: 1880, destaque: "Carvão e cerâmica" },
+    "tubarao": { nome: "Tubarão", populacao: 110000, altitude: 9, fundacao: 1870, destaque: "Às margens do rio Tubarão" },
+    "laguna": { nome: "Laguna", populacao: 46000, altitude: 2, fundacao: 1676, destaque: "Pesca com botos" },
+    "ararangua": { nome: "Araranguá", populacao: 71000, altitude: 13, fundacao: 1880, destaque: "Dunas e lagoas" }
   };
 
   // Lê os pinos do SVG: posição (do transform) e coordenadas reais (dos
@@ -689,6 +695,7 @@
     var quadroAnimacao = null;
     var regiaoAtual = null;
     var camada = "regioes";
+    var modoDesafio = false;
 
     /* --- Zoom: anima o viewBox até a caixa de destino --- */
     function aplicarCaixa(caixa) {
@@ -971,7 +978,9 @@
     gatilhos.forEach(function (gatilho) {
       var chave = gatilho.getAttribute("data-regiao");
 
+      // No desafio, clicar numa região é dar um palpite (ver mais abaixo)
       gatilho.addEventListener("click", function () {
+        if (modoDesafio) return;
         selecionar(chave, true);
       });
 
@@ -980,11 +989,13 @@
       if (gatilho.tagName.toLowerCase() === "button") return;
 
       gatilho.addEventListener("pointermove", function (evento) {
+        if (modoDesafio) return;
         moverDica(evento, chave);
       });
       gatilho.addEventListener("pointerleave", esconderDica);
 
       gatilho.addEventListener("keydown", function (evento) {
+        if (modoDesafio) return;
         if (evento.key === "Enter" || evento.key === " ") {
           evento.preventDefault();
           selecionar(chave, true);
@@ -1038,13 +1049,33 @@
       var seletor = roteiro.querySelector("[data-roteiro-select]");
       var botaoAdicionar = roteiro.querySelector("[data-roteiro-adicionar]");
       var botaoLimpar = roteiro.querySelector("[data-roteiro-limpar]");
+      var compartilhar = roteiro.querySelector("[data-roteiro-compartilhar]");
+      var botaoCopiar = roteiro.querySelector("[data-roteiro-copiar]");
+      var campoLink = roteiro.querySelector("[data-roteiro-link]");
+      var avisoLink = roteiro.querySelector("[data-roteiro-aviso]");
+
+      var cidadeExiste = function (id) {
+        return Object.prototype.hasOwnProperty.call(pinoPorId, id);
+      };
 
       // Recupera o roteiro salvo, descartando ids que não existem mais
       var salvo = lerGuardado(CHAVE_ROTEIRO);
       if (Array.isArray(salvo)) {
-        paradas = salvo.filter(function (id) {
-          return Object.prototype.hasOwnProperty.call(pinoPorId, id);
+        paradas = salvo.filter(cidadeExiste);
+      }
+
+      // cidades.html?roteiro=florianopolis,blumenau#mapa abre um roteiro
+      // compartilhado. Ele só substitui o salvo quando a pessoa o editar.
+      var roteiroDoLink = false;
+      var linkRecebido = /[?&]roteiro=([a-z,-]+)/.exec(window.location.search);
+      if (linkRecebido) {
+        var paradasDoLink = linkRecebido[1].split(",").filter(function (id, i, todas) {
+          return cidadeExiste(id) && id !== todas[i - 1];
         });
+        if (paradasDoLink.length) {
+          paradas = paradasDoLink;
+          roteiroDoLink = true;
+        }
       }
 
       // Lista de cidades agrupada por região, para quem usa teclado
@@ -1147,11 +1178,59 @@
           total.appendChild(nota);
         }
         if (botaoLimpar) botaoLimpar.hidden = pontos.length === 0;
+
+        // O link só faz sentido a partir de duas paradas, e fica velho a cada
+        // mudança: some o campo e o aviso da cópia anterior
+        compartilhar.hidden = pontos.length < 2;
+        campoLink.hidden = true;
+        avisoLink.textContent = "";
       };
 
       var salvarRoteiro = function () {
         guardar(CHAVE_ROTEIRO, paradas);
+
+        // Editou o roteiro do link: tira o ?roteiro= da URL, senão recarregar
+        // a página traria de volta o roteiro antigo
+        if (!roteiroDoLink) return;
+        roteiroDoLink = false;
+        try {
+          var busca = window.location.search.replace(/[?&]roteiro=[^&]*/, "").replace(/^&/, "?");
+          window.history.replaceState(null, "", window.location.pathname + busca + window.location.hash);
+        } catch (e) {
+          // segue sem limpar (alguns navegadores recusam em file://)
+        }
       };
+
+      var linkDoRoteiro = function () {
+        return window.location.href.split(/[?#]/)[0] + "?roteiro=" + paradas.join(",") + "#mapa";
+      };
+
+      // A área de transferência só existe em https, localhost e, no Chrome,
+      // em file://. Mas o link de um site aberto com dois cliques só funciona
+      // neste computador: aí ele aparece num campo, junto com esse aviso.
+      var mostrarCampoDoLink = function (link) {
+        campoLink.value = link;
+        campoLink.hidden = false;
+        campoLink.focus();
+        campoLink.select();
+        avisoLink.textContent = window.location.protocol === "file:"
+          ? "Copie o link acima. Com o site aberto do próprio computador, ele só funciona nesta máquina."
+          : "Copie o link acima.";
+      };
+
+      botaoCopiar.addEventListener("click", function () {
+        var link = linkDoRoteiro();
+        if (window.location.protocol === "file:" || !navigator.clipboard || !window.isSecureContext) {
+          mostrarCampoDoLink(link);
+          return;
+        }
+        navigator.clipboard.writeText(link).then(function () {
+          campoLink.hidden = true;
+          avisoLink.textContent = "Link copiado. É só colar para quem vai viajar com você.";
+        }, function () {
+          mostrarCampoDoLink(link);
+        });
+      });
 
       var adicionarParada = function (id) {
         if (!pinoPorId[id]) return;
@@ -1163,6 +1242,7 @@
       };
 
       var ligarModoRota = function (ligar) {
+        if (ligar && modoDesafio) ligarDesafio(false);
         modoRota = ligar;
         botaoRota.setAttribute("aria-pressed", String(ligar));
         atlas.classList.toggle("atlas--rota", ligar);
@@ -1216,6 +1296,297 @@
       }
 
       desenharRoteiro();
+      if (roteiroDoLink) ligarModoRota(true);
+    }
+
+    /* --- Desafio do mapa (diferencial 9) ---
+       Os pinos somem, a pessoa marca onde acha que a cidade fica e o mapa
+       mede o erro em km. Com mouse ou toque o palpite vem do clique; com
+       teclado, das setas. Nos dois casos ele só vale depois de confirmado,
+       para um toque sem querer no celular não gastar a rodada. */
+    var desafio = atlas.querySelector("[data-desafio]");
+    var botaoDesafio = atlas.querySelector("[data-desafio-botao]");
+    var ligarDesafio = function () {};
+
+    if (desafio && botaoDesafio) {
+      var CHAVE_DESAFIO = "terra-catarinense:desafio";
+      var RODADAS = 10;
+      var PASSO_MIRA = 5;
+      var PASSO_MIRA_GRANDE = 25;
+      var TITULOS_DESAFIO = [
+        { minimo: 800, nome: "Cartógrafo catarinense" },
+        { minimo: 550, nome: "Guia de campo" },
+        { minimo: 300, nome: "Viajante curioso" },
+        { minimo: 0, nome: "Turista de primeira viagem" }
+      ];
+
+      var mira = svg.querySelector("[data-desafio-mira]");
+      var linhaDesafio = svg.querySelector("[data-desafio-linha]");
+      var jogo = desafio.querySelector("[data-desafio-jogo]");
+      var fim = desafio.querySelector("[data-desafio-fim]");
+      var elContador = desafio.querySelector("[data-desafio-contador]");
+      var elPlacar = desafio.querySelector("[data-desafio-placar]");
+      var elCidade = desafio.querySelector("[data-desafio-cidade]");
+      var elAjuda = desafio.querySelector("[data-desafio-ajuda]");
+      var elMira = desafio.querySelector("[data-desafio-mira-status]");
+      var elResultado = desafio.querySelector("[data-desafio-resultado]");
+      var botaoConfirmar = desafio.querySelector("[data-desafio-confirmar]");
+      var botaoProxima = desafio.querySelector("[data-desafio-proxima]");
+
+      var sorteio = [];
+      var rodada = 0;
+      var respostas = [];
+      var palpite = null;
+      var respondida = false;
+
+      // A conta do README ao contrário: de x, y do mapa para longitude e latitude
+      var coordenadasDoPonto = function (ponto) {
+        return {
+          lon: (ponto.x - 20) / 485 * 5.49 - 53.84,
+          lat: -25.95 - (ponto.y - 20) / 340 * 3.4
+        };
+      };
+
+      // 100 pontos até 10 km de erro, caindo em linha reta até 0 em 150 km
+      var pontosDoErro = function (km) {
+        if (km <= 10) return 100;
+        if (km >= 150) return 0;
+        return Math.round((150 - km) / 140 * 100);
+      };
+
+      var textoDePontos = function (n) {
+        return n.toLocaleString("pt-BR") + (n === 1 ? " ponto" : " pontos");
+      };
+
+      var somaDosPontos = function () {
+        return respostas.reduce(function (soma, r) {
+          return soma + r.pontos;
+        }, 0);
+      };
+
+      var embaralhar = function (lista) {
+        var copia = lista.slice();
+        for (var i = copia.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var troca = copia[i];
+          copia[i] = copia[j];
+          copia[j] = troca;
+        }
+        return copia;
+      };
+
+      // Diz em que região a mira está: é o retorno de quem não vê o mapa
+      var regiaoDoPonto = function (ponto) {
+        var alvo = svg.createSVGPoint();
+        alvo.x = ponto.x;
+        alvo.y = ponto.y;
+        for (var i = 0; i < caminhos.length; i++) {
+          if (caminhos[i].isPointInFill(alvo)) {
+            return REGIOES[caminhos[i].getAttribute("data-regiao")].nome;
+          }
+        }
+        return "fora do estado";
+      };
+
+      var marcarPalpite = function (ponto) {
+        palpite = {
+          x: Math.min(Math.max(ponto.x, 0), CAIXA_INICIAL.w),
+          y: Math.min(Math.max(ponto.y, 0), CAIXA_INICIAL.h)
+        };
+        mira.setAttribute("transform", "translate(" + palpite.x + " " + palpite.y + ")");
+        mira.classList.add("desafio-mira--marcada");
+        elMira.textContent = "Palpite em: " + regiaoDoPonto(palpite);
+        botaoConfirmar.disabled = false;
+      };
+
+      var limparResposta = function () {
+        linhaDesafio.classList.remove("desafio-linha--visivel");
+        pinos.forEach(function (p) {
+          p.el.classList.remove("pino--destaque");
+        });
+      };
+
+      var mostrarRodada = function () {
+        var alvo = sorteio[rodada];
+        palpite = null;
+        respondida = false;
+        limparResposta();
+
+        elContador.textContent = "Rodada " + (rodada + 1) + " de " + RODADAS;
+        elPlacar.textContent = textoDePontos(somaDosPontos());
+        elCidade.textContent = alvo.nome;
+        elMira.textContent = "";
+        elResultado.textContent = "";
+        // A explicação só faz falta na primeira rodada; depois, ela só empurra
+        // o botão para longe do mapa no celular
+        elAjuda.hidden = rodada > 0;
+
+        // A mira recomeça no meio do mapa, ainda sem valer como palpite
+        mira.setAttribute("transform", "translate(" + CAIXA_INICIAL.w / 2 + " " + CAIXA_INICIAL.h / 2 + ")");
+        mira.classList.remove("desafio-mira--marcada");
+        mira.removeAttribute("hidden");
+        botaoConfirmar.hidden = false;
+        botaoConfirmar.disabled = true;
+        botaoProxima.hidden = true;
+      };
+
+      var confirmarPalpite = function () {
+        if (!palpite || respondida) return;
+        var alvo = sorteio[rodada];
+        var km = distanciaKm(coordenadasDoPonto(palpite), alvo);
+        var pontos = pontosDoErro(km);
+        respondida = true;
+        respostas.push({ nome: alvo.nome, km: km, pontos: pontos });
+
+        linhaDesafio.setAttribute("x1", palpite.x);
+        linhaDesafio.setAttribute("y1", palpite.y);
+        linhaDesafio.setAttribute("x2", alvo.x);
+        linhaDesafio.setAttribute("y2", alvo.y);
+        linhaDesafio.classList.add("desafio-linha--visivel");
+        alvo.el.classList.add("pino--destaque");
+
+        elPlacar.textContent = textoDePontos(somaDosPontos());
+        elAjuda.hidden = true;
+        elMira.textContent = "";
+        elResultado.textContent =
+          (km < 1 ? "Na mosca" : "Errou por " + formatarKm(km)) + ": " + textoDePontos(pontos) + ". " +
+          alvo.nome + ": " + CIDADES[alvo.id].destaque + ".";
+
+        botaoConfirmar.hidden = true;
+        botaoProxima.hidden = false;
+        botaoProxima.textContent = rodada === RODADAS - 1 ? "Ver resultado" : "Próxima cidade";
+        // Sem rolar: no celular o mapa não pode sair da tela bem na hora da resposta
+        botaoProxima.focus({ preventScroll: true });
+      };
+
+      var mostrarFim = function () {
+        var total = somaDosPontos();
+        var guardado = lerGuardado(CHAVE_DESAFIO);
+        var recordeAntigo = guardado && typeof guardado.melhor === "number" ? guardado.melhor : null;
+        var novoRecorde = recordeAntigo === null || total > recordeAntigo;
+        if (novoRecorde) guardar(CHAVE_DESAFIO, { melhor: total });
+
+        var titulo = TITULOS_DESAFIO.filter(function (t) {
+          return total >= t.minimo;
+        })[0];
+
+        limparResposta();
+        mira.setAttribute("hidden", ""); // SVG não tem a propriedade .hidden
+        desafio.querySelector("[data-desafio-total]").textContent = total.toLocaleString("pt-BR");
+        desafio.querySelector("[data-desafio-titulo]").textContent = titulo.nome;
+        desafio.querySelector("[data-desafio-recorde]").textContent = novoRecorde
+          ? "Seu melhor resultado até agora."
+          : "Seu recorde: " + textoDePontos(recordeAntigo) + ".";
+
+        var listaFim = desafio.querySelector("[data-desafio-lista]");
+        listaFim.textContent = "";
+        respostas.forEach(function (r) {
+          var li = document.createElement("li");
+          var nome = document.createElement("span");
+          nome.className = "roteiro__nome";
+          nome.textContent = r.nome;
+          var dados = document.createElement("span");
+          dados.className = "roteiro__trecho";
+          dados.textContent = formatarKm(r.km) + " · " + textoDePontos(r.pontos);
+          li.appendChild(nome);
+          li.appendChild(dados);
+          listaFim.appendChild(li);
+        });
+
+        jogo.hidden = true;
+        fim.hidden = false;
+        fim.focus();
+        carimbarPassaporte("desafio");
+      };
+
+      var comecarDesafio = function () {
+        sorteio = embaralhar(pinos).slice(0, RODADAS);
+        rodada = 0;
+        respostas = [];
+        fim.hidden = true;
+        jogo.hidden = false;
+        mostrarRodada();
+      };
+
+      ligarDesafio = function (ligar) {
+        if (ligar && modoRota && ligarModoRota) ligarModoRota(false);
+        modoDesafio = ligar;
+        botaoDesafio.setAttribute("aria-pressed", String(ligar));
+        atlas.classList.toggle("atlas--desafio", ligar);
+        desafio.hidden = !ligar;
+        esconderDica();
+
+        // Os caminhos saem do Tab: no desafio, quem anda pelo mapa é a mira
+        caminhos.forEach(function (caminho) {
+          caminho.setAttribute("tabindex", ligar ? "-1" : "0");
+        });
+
+        if (ligar) {
+          mira.setAttribute("tabindex", "0");
+          verEstadoInteiro();
+          comecarDesafio();
+          mira.focus({ preventScroll: true });
+          // Com o caderno embaixo do mapa, deixa os dois juntos na tela
+          if (quadro && window.matchMedia("(max-width: 61.99rem)").matches) {
+            quadro.scrollIntoView({ block: "start", behavior: preferemenosMovimento ? "auto" : "smooth" });
+          }
+        } else {
+          mira.removeAttribute("tabindex");
+          limparResposta();
+        }
+      };
+
+      botaoDesafio.addEventListener("click", function () {
+        ligarDesafio(!modoDesafio);
+      });
+
+      svg.addEventListener("click", function (evento) {
+        if (!modoDesafio || respondida || !fim.hidden) return;
+        var matriz = svg.getScreenCTM();
+        if (!matriz) return;
+        var ponto = svg.createSVGPoint();
+        ponto.x = evento.clientX;
+        ponto.y = evento.clientY;
+        marcarPalpite(ponto.matrixTransform(matriz.inverse()));
+      });
+
+      mira.addEventListener("keydown", function (evento) {
+        if (!modoDesafio || respondida) return;
+        if (evento.key === "Enter" || evento.key === " ") {
+          evento.preventDefault();
+          confirmarPalpite();
+          return;
+        }
+        var passo = evento.shiftKey ? PASSO_MIRA_GRANDE : PASSO_MIRA;
+        var direcoes = {
+          ArrowLeft: [-passo, 0],
+          ArrowRight: [passo, 0],
+          ArrowUp: [0, -passo],
+          ArrowDown: [0, passo]
+        };
+        var direcao = direcoes[evento.key];
+        if (!direcao) return;
+        evento.preventDefault();
+        var atual = palpite || { x: CAIXA_INICIAL.w / 2, y: CAIXA_INICIAL.h / 2 };
+        marcarPalpite({ x: atual.x + direcao[0], y: atual.y + direcao[1] });
+      });
+
+      botaoConfirmar.addEventListener("click", confirmarPalpite);
+
+      botaoProxima.addEventListener("click", function () {
+        rodada++;
+        if (rodada >= RODADAS) {
+          mostrarFim();
+          return;
+        }
+        mostrarRodada();
+        mira.focus({ preventScroll: true });
+      });
+
+      desafio.querySelector("[data-desafio-repetir]").addEventListener("click", function () {
+        comecarDesafio();
+        mira.focus({ preventScroll: true });
+      });
     }
 
     /* --- Estado inicial --- */
@@ -1225,6 +1596,7 @@
     // Destaca uma ou mais cidades: se forem da mesma região, aproxima nela;
     // se não, mostra o estado inteiro para as duas caberem.
     function destacarCidades(ids) {
+      if (modoDesafio) ligarDesafio(false);
       var alvos = ids
         .map(function (id) { return pinoPorId[id]; })
         .filter(Boolean);
@@ -1407,8 +1779,8 @@
 
   /* ========================================================================
      11. PASSAPORTE CATARINENSE (rodapé de todas as páginas) — diferencial 5
-     Cada página visitada rende um carimbo, e terminar o quiz rende outro.
-     Tudo fica no localStorage do navegador; se ele estiver bloqueado, o
+     Cada página visitada rende um carimbo, e terminar o quiz ou o desafio do
+     mapa rende outro. Tudo fica no localStorage do navegador; se ele estiver bloqueado, o
      bloco continua escondido e nada quebra.
      ==================================================================== */
   var CARIMBOS = [
@@ -1418,7 +1790,8 @@
     { id: "cultura", nome: "Cultura", icone: "✿" },
     { id: "turismo", nome: "Turismo", icone: "☀" },
     { id: "curiosidades", nome: "Curiosidades", icone: "?" },
-    { id: "quiz", nome: "Quiz", icone: "★" }
+    { id: "quiz", nome: "Quiz", icone: "★" },
+    { id: "desafio", nome: "Desafio", icone: "⌖" }
   ];
   var GIROS = [-8, 5, -3, 7, -6, 4, -2];
   var CHAVE_PASSAPORTE = "terra-catarinense:passaporte";
@@ -1497,11 +1870,10 @@
     });
 
     bloco.hidden = false;
-    if (existe) {
-      carimbarPassaporte(pagina);
-    } else {
-      desenhar();
-    }
+    if (existe) carimbarPassaporte(pagina);
+    // Sempre desenha: quem volta a uma página já carimbada não ganha carimbo
+    // novo, e o passaporte ficaria vazio
+    desenhar();
   }
 
 
@@ -1941,6 +2313,640 @@
 
 
   /* ========================================================================
+     15. PLANEJADOR DE VIAGEM (turismo.html) — diferencial 10
+     A pessoa escolhe o mês e o que quer fazer; o planejador cruza as
+     temperaturas do atlas com as festas do calendário e sugere uma região.
+     Só existe com JS (o bloco nasce com hidden, como o comparador).
+     ==================================================================== */
+
+  // Cópia do calendário de cultura.html (seção #calendario). Quando o site
+  // abre em file://, o JS de uma página não consegue ler o HTML de outra.
+  // Mudou uma festa lá? Mude aqui também.
+  var FESTAS = [
+    { mes: 1, tipo: "Festa", titulo: "Festa Pomerana", lugar: "Pomerode", regiao: "vale" },
+    { mes: 1, tipo: "Festa", titulo: "Procissão de Navegantes", lugar: "Litoral", regiao: "litoral" },
+    { mes: 2, tipo: "Festa", titulo: "Carnaval da Ilha", lugar: "Florianópolis", regiao: "litoral" },
+    { mes: 2, tipo: "Festa", titulo: "Carnaval de Laguna", lugar: "Laguna", regiao: "sul" },
+    { mes: 2, tipo: "Festa", titulo: "Festa da Uva", lugar: "Videira", regiao: "oeste" },
+    { mes: 3, tipo: "Época", titulo: "Colheita da maçã", lugar: "São Joaquim", regiao: "serra" },
+    { mes: 3, tipo: "Época", titulo: "Vindima dos vinhos de altitude", lugar: "Planalto Serrano", regiao: "serra" },
+    { mes: 4, tipo: "Festa", titulo: "Osterfest", lugar: "Pomerode", regiao: "vale" },
+    { mes: 4, tipo: "Festa", titulo: "Festa Nacional da Maçã", lugar: "São Joaquim", regiao: "serra" },
+    { mes: 5, tipo: "Época", titulo: "Safra da tainha", lugar: "Florianópolis", regiao: "litoral" },
+    { mes: 5, tipo: "Festa", titulo: "Festa do Divino Espírito Santo", lugar: "Litoral açoriano", regiao: "litoral" },
+    { mes: 6, tipo: "Festa", titulo: "Festa Nacional do Pinhão", lugar: "Lages", regiao: "serra" },
+    { mes: 6, tipo: "Época", titulo: "Geada nos campos", lugar: "Urubici", regiao: "serra" },
+    { mes: 7, tipo: "Festa", titulo: "Festival de Dança de Joinville", lugar: "Joinville", regiao: "norte" },
+    { mes: 7, tipo: "Época", titulo: "Chance de neve", lugar: "Urupema", regiao: "serra" },
+    { mes: 8, tipo: "Época", titulo: "Temporada da baleia-franca", lugar: "Garopaba", regiao: "litoral" },
+    { mes: 9, tipo: "Festa", titulo: "Semana Farroupilha", lugar: "Lages e Oeste", regiao: "serra" },
+    { mes: 10, tipo: "Festa", titulo: "Oktoberfest", lugar: "Blumenau", regiao: "vale" },
+    { mes: 10, tipo: "Festa", titulo: "Marejada", lugar: "Itajaí", regiao: "litoral" },
+    { mes: 10, tipo: "Festa", titulo: "Fenarreco", lugar: "Brusque", regiao: "vale" },
+    { mes: 10, tipo: "Festa", titulo: "Schützenfest", lugar: "Jaraguá do Sul", regiao: "norte" },
+    { mes: 11, tipo: "Festa", titulo: "Fenaostra", lugar: "Florianópolis", regiao: "litoral" },
+    { mes: 11, tipo: "Festa", titulo: "Festa das Flores", lugar: "Joinville", regiao: "norte" },
+    { mes: 12, tipo: "Festa", titulo: "Natal no Vale", lugar: "Blumenau", regiao: "vale" },
+    { mes: 12, tipo: "Festa", titulo: "Boi-de-mamão e Terno de Reis", lugar: "Litoral", regiao: "litoral" }
+  ];
+
+  var NOMES_MESES = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+    "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
+
+  // pesos: o quanto cada região combina com o interesse. pesoFesta: quanto
+  // vale cada festa da região no mês. calor: 1 prefere o quente, -1 o frio.
+  var INTERESSES = {
+    praia: {
+      nome: "Praia e mar",
+      pesos: { litoral: 5, sul: 4, norte: 2, vale: 1, serra: 0, oeste: 0 },
+      pesoFesta: 0.5,
+      calor: 1,
+      levar: "Roupa de banho",
+      nota: function (mes) {
+        if (mes === 12 || mes <= 3) return "É a alta temporada: mar mais quente e praias cheias, então reserve com antecedência.";
+        if (mes >= 6 && mes <= 9) return "O mar fica frio para o banho: nesta época, a viagem vale mais pela paisagem e pelas trilhas.";
+        return "Meia-estação: praias mais vazias, com a água ainda fresca.";
+      }
+    },
+    serra: {
+      nome: "Serra e frio",
+      pesos: { serra: 6, oeste: 2, norte: 2, sul: 1, vale: 0, litoral: 0 },
+      pesoFesta: 0.5,
+      calor: -1,
+      levar: "Bota ou tênis para caminhar",
+      nota: function (mes) {
+        if (mes >= 6 && mes <= 8) return "É a época de geada e, com sorte, de neve.";
+        if (mes >= 3 && mes <= 5) return "Outono de colheita, com a maçã e os vinhos de altitude.";
+        if (mes >= 9 && mes <= 11) return "Primavera de campos verdes e noites ainda frias.";
+        return "Verão ameno, boa fuga do calor, mas sem neve.";
+      }
+    },
+    festas: {
+      nome: "Festas e tradição",
+      pesos: { litoral: 1, vale: 1, norte: 1, serra: 1, oeste: 1, sul: 1 },
+      pesoFesta: 3,
+      calor: 0,
+      levar: "Calçado confortável para o dia inteiro",
+      nota: function () {
+        return "As datas mudam um pouco a cada ano: confira no site oficial de cada festa.";
+      }
+    },
+    comida: {
+      nome: "Comida típica",
+      pesos: { litoral: 3, vale: 3, serra: 2, oeste: 2, sul: 1, norte: 1 },
+      pesoFesta: 1,
+      calor: 0,
+      levar: "Bom apetite",
+      nota: function (mes, regiao) {
+        return "Para provar na região: " + PRATO_DA_REGIAO[regiao] + ".";
+      }
+    },
+    natureza: {
+      nome: "Natureza e trilhas",
+      pesos: { serra: 4, litoral: 3, sul: 3, vale: 2, oeste: 1, norte: 1 },
+      pesoFesta: 0.25,
+      calor: 0,
+      levar: "Tênis de trilha e garrafa de água",
+      nota: function (mes) {
+        if (mes === 12 || mes <= 2) return "Comece cedo: no meio do dia o calor aperta.";
+        if (mes >= 6 && mes <= 8) return "Dias frios e bons para os mirantes: leve agasalho até para a trilha.";
+        return "Temperatura boa para caminhar o dia inteiro.";
+      }
+    }
+  };
+
+  var PRATO_DA_REGIAO = {
+    litoral: "ostras e sequência de camarão",
+    vale: "cuca e marreco recheado",
+    norte: "cozinha de herança alemã, como a cuca",
+    serra: "pinhão e entrevero",
+    oeste: "polenta e galeto",
+    sul: "polenta e galeto"
+  };
+
+  // O que levar, pela mesma faixa de temperatura do mapa de clima
+  var MALA_POR_FAIXA = {
+    1: ["Casaco pesado e gorro", "Luvas e cachecol", "Meias grossas e calçado fechado"],
+    2: ["Casaco e malha", "Calça comprida", "Calçado fechado"],
+    3: ["Agasalho para a noite", "Roupa leve para o dia", "Capa de chuva pequena"],
+    4: ["Roupa leve", "Casaco fino para a noite", "Protetor solar"],
+    5: ["Roupa leve e chapéu", "Protetor solar", "Repelente"]
+  };
+
+  // REGIOES só guarda verão e inverno: os outros meses são estimados por uma
+  // curva suave com o pico em janeiro e o vale em julho.
+  function temperaturaDoMes(clima, mes) {
+    var media = (clima.verao + clima.inverno) / 2;
+    var amplitude = (clima.verao - clima.inverno) / 2;
+    return Math.round(media + amplitude * Math.cos((mes - 1) / 12 * 2 * Math.PI));
+  }
+
+  function criarElemento(tag, classe, texto) {
+    var el = document.createElement(tag);
+    if (classe) el.className = classe;
+    if (texto !== undefined) el.textContent = texto;
+    return el;
+  }
+
+  function iniciarPlanejador() {
+    var bloco = document.querySelector("[data-planejador]");
+    if (!bloco) return;
+
+    var campoMes = bloco.querySelector("[data-planejador-mes]");
+    var campoInteresse = bloco.querySelector("[data-planejador-interesse]");
+    var status = bloco.querySelector("[data-planejador-status]");
+    var resultado = bloco.querySelector("[data-planejador-resultado]");
+
+    NOMES_MESES.forEach(function (nome, i) {
+      var opcao = criarElemento("option", "", nome);
+      opcao.value = String(i + 1);
+      campoMes.appendChild(opcao);
+    });
+    Object.keys(INTERESSES).forEach(function (chave) {
+      var opcao = criarElemento("option", "", INTERESSES[chave].nome);
+      opcao.value = chave;
+      campoInteresse.appendChild(opcao);
+    });
+
+    function festasDoMes(mes) {
+      return FESTAS.filter(function (f) {
+        return f.mes === mes;
+      });
+    }
+
+    // Empate fica com a primeira na ordem do atlas (o sort mantém a ordem)
+    function classificar(mes, interesse) {
+      var festas = festasDoMes(mes);
+      return ORDEM_REGIOES.map(function (chave) {
+        var graus = temperaturaDoMes(REGIOES[chave].clima, mes);
+        var quantas = festas.filter(function (f) {
+          return f.regiao === chave;
+        }).length;
+        return {
+          chave: chave,
+          graus: graus,
+          nota: interesse.pesos[chave] + quantas * interesse.pesoFesta + (graus - 20) / 5 * interesse.calor
+        };
+      }).sort(function (a, b) {
+        return b.nota - a.nota;
+      });
+    }
+
+    function adicionarDado(lista, rotulo, valor) {
+      var linha = document.createElement("div");
+      linha.appendChild(criarElemento("dt", "", rotulo));
+      linha.appendChild(criarElemento("dd", "", valor));
+      lista.appendChild(linha);
+    }
+
+    function desenhar(mes, chaveInteresse) {
+      var interesse = INTERESSES[chaveInteresse];
+      var ordem = classificar(mes, interesse);
+      var primeira = ordem[0];
+      var dados = REGIOES[primeira.chave];
+      var nomeMes = NOMES_MESES[mes - 1];
+
+      resultado.textContent = "";
+
+      var foto = document.createElement("img");
+      foto.className = "planejador__foto";
+      foto.src = dados.foto.src;
+      foto.alt = dados.foto.alt;
+      foto.width = dados.foto.largura;
+      foto.height = dados.foto.altura;
+      resultado.appendChild(foto);
+
+      var destino = criarElemento("div", "planejador__destino");
+      destino.appendChild(criarElemento("p", "painel-regiao__sobre", "Sugestão para " + nomeMes.toLowerCase()));
+      destino.appendChild(criarElemento("h3", "", dados.nome));
+      destino.appendChild(criarElemento("p", "", interesse.nota(mes, primeira.chave)));
+
+      var lista = criarElemento("dl", "painel-regiao__dados");
+      adicionarDado(lista, "Temperatura estimada", "cerca de " + primeira.graus + " °C");
+      adicionarDado(lista, "Também vale ir para", REGIOES[ordem[1].chave].nome);
+      destino.appendChild(lista);
+      destino.appendChild(criarElemento(
+        "p", "planejador__nota",
+        "Estimativa a partir das médias de verão e inverno da região. Não é previsão do tempo."
+      ));
+
+      var linkAtlas = criarElemento("a", "link-seta", "Ver " + dados.nome + " no atlas");
+      linkAtlas.href = "cidades.html?regiao=" + primeira.chave + "#mapa";
+      destino.appendChild(linkAtlas);
+      resultado.appendChild(destino);
+
+      // As festas da região sugerida vêm primeiro
+      var festas = festasDoMes(mes).sort(function (a, b) {
+        return (b.regiao === primeira.chave) - (a.regiao === primeira.chave);
+      });
+      var extras = criarElemento("div", "planejador__extras");
+      extras.appendChild(criarElemento("h4", "", "O que acontece no mês"));
+      var listaFestas = criarElemento("ul", "planejador__festas");
+      festas.forEach(function (f) {
+        var li = document.createElement("li");
+        li.appendChild(criarElemento("strong", "", f.titulo));
+        li.appendChild(document.createTextNode(" · " + f.lugar));
+        listaFestas.appendChild(li);
+      });
+      extras.appendChild(listaFestas);
+
+      var linkCalendario = criarElemento("a", "link-seta", "Ver " + nomeMes.toLowerCase() + " no calendário");
+      linkCalendario.href = "cultura.html?mes=" + mes + "#calendario";
+      extras.appendChild(linkCalendario);
+
+      extras.appendChild(criarElemento("h4", "", "O que levar"));
+      var listaMala = criarElemento("ul", "planejador__mala");
+      MALA_POR_FAIXA[faixaDeClima(primeira.graus)].concat(interesse.levar).forEach(function (item) {
+        listaMala.appendChild(criarElemento("li", "", item));
+      });
+      extras.appendChild(listaMala);
+      resultado.appendChild(extras);
+
+      status.textContent = "Sugestão: " + dados.nome + ", cerca de " + primeira.graus + " °C.";
+    }
+
+    // Guarda a escolha na URL para dar para compartilhar (mesmo cuidado do
+    // calendário com file://)
+    function aoMudar() {
+      desenhar(Number(campoMes.value), campoInteresse.value);
+      try {
+        var busca = "?mes=" + campoMes.value + "&interesse=" + campoInteresse.value;
+        window.history.replaceState(null, "", window.location.pathname + busca + "#planejador");
+      } catch (e) {
+        // segue sem guardar
+      }
+    }
+
+    campoMes.addEventListener("change", aoMudar);
+    campoInteresse.addEventListener("change", aoMudar);
+
+    var mesPedido = /[?&]mes=(\d{1,2})/.exec(window.location.search);
+    var interessePedido = /[?&]interesse=([a-z]+)/.exec(window.location.search);
+    var mes = mesPedido ? Number(mesPedido[1]) : 0;
+    campoMes.value = String(mes >= 1 && mes <= 12 ? mes : new Date().getMonth() + 1);
+    campoInteresse.value = interessePedido && INTERESSES[interessePedido[1]] ? interessePedido[1] : "praia";
+
+    desenhar(Number(campoMes.value), campoInteresse.value);
+    bloco.hidden = false;
+  }
+
+
+  /* ========================================================================
+     16. BUSCA NO SITE (todas as páginas) — diferencial 11
+     Só existe com JS, então o botão e a janela são criados aqui em vez de
+     repetidos no cabeçalho das seis páginas. O índice junta os dados que já
+     existem (CIDADES, REGIOES, FESTAS) com a lista abaixo.
+     ==================================================================== */
+  var ENTRADAS_BUSCA = [
+    { tipo: "Prato", titulo: "Cuca", descricao: "Bolo alemão com farofa doce, com receita", url: "panorama.html#prato-cuca" },
+    { tipo: "Prato", titulo: "Marreco recheado", descricao: "Prato símbolo de Blumenau, com receita", url: "panorama.html#prato-marreco" },
+    { tipo: "Prato", titulo: "Ostras e frutos do mar", descricao: "Cultivos das baías de Florianópolis, com receita", url: "panorama.html#prato-ostras" },
+    { tipo: "Prato", titulo: "Sequência de camarão", descricao: "Tradição de Bombinhas e Penha, com receita", url: "panorama.html#prato-camarao" },
+    { tipo: "Prato", titulo: "Pinhão e entrevero", descricao: "Panela de ferro dos tropeiros da serra, com receita", url: "panorama.html#prato-entrevero" },
+    { tipo: "Prato", titulo: "Polenta e galeto", descricao: "Cozinha italiana do sul e do oeste, com receita", url: "panorama.html#prato-galeto" },
+    { tipo: "Curiosidade", titulo: "O lugar mais frio do Brasil", descricao: "Urupema e São Joaquim, com geada e neve", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "Capital nacional da ostra", descricao: "Florianópolis", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "A linha de Tordesilhas", descricao: "O marco em Laguna", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "Pescaria com botos", descricao: "Laguna", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "Bolshoi fora da Rússia", descricao: "A escola de balé de Joinville", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "Vinho de altitude", descricao: "As vinícolas da serra", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "Uma língua cooficial", descricao: "O pomerano em Pomerode", url: "curiosidades.html#cards" },
+    { tipo: "Curiosidade", titulo: "Mais de 500 praias", descricao: "O litoral catarinense", url: "curiosidades.html#cards" },
+    { tipo: "Seção", titulo: "Atlas interativo", descricao: "Mapa das seis regiões e clima no verão e no inverno", url: "cidades.html#mapa" },
+    { tipo: "Seção", titulo: "Monte seu roteiro", descricao: "Paradas de viagem e distância entre as cidades", url: "cidades.html#mapa" },
+    { tipo: "Seção", titulo: "Desafio do mapa", descricao: "Jogo: acerte onde fica cada cidade", url: "cidades.html#mapa" },
+    { tipo: "Seção", titulo: "Comparador de cidades", descricao: "Duas cidades lado a lado", url: "cidades.html#comparar" },
+    { tipo: "Seção", titulo: "Linha do tempo", descricao: "História e imigração, da ocupação indígena às festas", url: "cultura.html#linha-do-tempo" },
+    { tipo: "Seção", titulo: "Festas, danças e manifestações", descricao: "Boi-de-mamão e outras tradições", url: "cultura.html#festas" },
+    { tipo: "Seção", titulo: "Calendário de festas", descricao: "O que acontece em cada mês", url: "cultura.html#calendario" },
+    { tipo: "Seção", titulo: "Sotaques e glossário", descricao: "Manezês, pomerano, talian e alemão de colônia", url: "cultura.html#heranca" },
+    { tipo: "Seção", titulo: "Geografia e relevo", descricao: "Litoral, serra e planalto", url: "panorama.html#geografia" },
+    { tipo: "Seção", titulo: "Economia", descricao: "Indústria, turismo e agronegócio", url: "panorama.html#economia" },
+    { tipo: "Seção", titulo: "Gastronomia e receitas", descricao: "A mesa catarinense", url: "panorama.html#gastronomia" },
+    { tipo: "Seção", titulo: "Clima e estações", descricao: "Temperaturas ao longo do ano", url: "turismo.html#clima" },
+    { tipo: "Seção", titulo: "Vegetação e fauna", descricao: "Araucárias, baleia-franca e outros", url: "turismo.html#natureza" },
+    { tipo: "Seção", titulo: "Galeria de fotos", descricao: "Litoral, serra, cidades e gastronomia", url: "turismo.html#galeria" },
+    { tipo: "Seção", titulo: "Planejador de viagem", descricao: "Mês e interesse viram uma sugestão de região", url: "turismo.html#planejador" },
+    { tipo: "Seção", titulo: "Roteiros de viagem", descricao: "Três formas de conhecer o estado", url: "turismo.html#roteiros" },
+    { tipo: "Seção", titulo: "Quiz: qual Santa Catarina é a sua?", descricao: "Cinco perguntas e uma região", url: "curiosidades.html#quiz" },
+    { tipo: "Seção", titulo: "Arquitetura enxaimel", descricao: "A casa que se monta como um quebra-cabeça", url: "curiosidades.html#enxaimel" },
+    { tipo: "Seção", titulo: "Créditos das fotos", descricao: "Autor e licença de cada foto", url: "curiosidades.html#creditos" },
+    { tipo: "Seção", titulo: "Fontes de pesquisa", descricao: "De onde vieram os dados do site", url: "index.html#fontes" }
+  ];
+  var MAXIMO_RESULTADOS = 12;
+
+  // "Florianópolis" vira "florianopolis": a busca ignora acento e maiúscula
+  function normalizar(texto) {
+    return texto.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  }
+
+  function montarIndiceDaBusca() {
+    var indice = ENTRADAS_BUSCA.slice();
+
+    Object.keys(CIDADES).forEach(function (id) {
+      indice.push({
+        tipo: "Cidade",
+        titulo: CIDADES[id].nome,
+        descricao: CIDADES[id].destaque,
+        url: "cidades.html?cidade=" + id + "#mapa"
+      });
+    });
+
+    ORDEM_REGIOES.forEach(function (chave) {
+      var dados = REGIOES[chave];
+      indice.push({
+        tipo: "Região",
+        titulo: dados.nome,
+        descricao: dados.economia + " · herança " + dados.heranca.toLowerCase(),
+        url: "cidades.html?regiao=" + chave + "#mapa"
+      });
+    });
+
+    FESTAS.forEach(function (f) {
+      indice.push({
+        tipo: f.tipo,
+        titulo: f.titulo,
+        descricao: f.lugar + " · " + NOMES_MESES[f.mes - 1].toLowerCase(),
+        url: "cultura.html?mes=" + f.mes + "#calendario"
+      });
+    });
+
+    return indice.map(function (item) {
+      item.tituloBusca = normalizar(item.titulo);
+      item.textoBusca = normalizar(item.titulo + " " + item.tipo + " " + item.descricao);
+      return item;
+    });
+  }
+
+  function iniciarBusca() {
+    var tema = document.querySelector(".cabecalho__interno .tema-botao");
+    if (!tema || !window.HTMLDialogElement) return;
+
+    var botao = criarElemento("button", "tema-botao busca-botao");
+    botao.type = "button";
+    botao.setAttribute("aria-label", "Buscar no site");
+    botao.innerHTML =
+      '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" ' +
+      'stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">' +
+      '<circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="21" y2="21"></line></svg>';
+    tema.parentNode.insertBefore(botao, tema);
+
+    var janela = criarElemento("dialog", "busca");
+    janela.setAttribute("aria-labelledby", "busca-titulo");
+    janela.innerHTML =
+      '<div class="busca__interno">' +
+      '<div class="busca__topo">' +
+      '<label class="painel-regiao__sobre" id="busca-titulo" for="busca-campo">Buscar no site</label>' +
+      '<button class="busca__fechar" type="button" aria-label="Fechar a busca">×</button>' +
+      "</div>" +
+      '<input class="busca__campo" id="busca-campo" type="search" autocomplete="off" ' +
+      'placeholder="Cidade, festa, prato...">' +
+      '<p class="busca__status" role="status" aria-live="polite"></p>' +
+      '<ul class="busca__resultados"></ul>' +
+      "</div>";
+    document.body.appendChild(janela);
+
+    var campo = janela.querySelector(".busca__campo");
+    var status = janela.querySelector(".busca__status");
+    var lista = janela.querySelector(".busca__resultados");
+    var indice = null;
+    var DICA = "Experimente: Oktoberfest, neve, cuca ou Blumenau.";
+
+    function pesquisar(consulta) {
+      var palavras = normalizar(consulta).split(/\s+/).filter(Boolean);
+      var inteira = palavras.join(" ");
+      return indice
+        .filter(function (item) {
+          return palavras.every(function (p) {
+            return item.textoBusca.indexOf(p) !== -1;
+          });
+        })
+        .map(function (item) {
+          // Título que começa com a busca, depois título com todas as palavras
+          var nota = 0;
+          if (item.tituloBusca.indexOf(inteira) === 0) {
+            nota = 2;
+          } else if (palavras.every(function (p) { return item.tituloBusca.indexOf(p) !== -1; })) {
+            nota = 1;
+          }
+          return { item: item, nota: nota };
+        })
+        .sort(function (a, b) {
+          return b.nota - a.nota;
+        })
+        .slice(0, MAXIMO_RESULTADOS)
+        .map(function (r) {
+          return r.item;
+        });
+    }
+
+    function desenhar() {
+      var consulta = campo.value.trim();
+      lista.textContent = "";
+      if (!consulta) {
+        status.textContent = DICA;
+        return;
+      }
+
+      var achados = pesquisar(consulta);
+      achados.forEach(function (item) {
+        var li = document.createElement("li");
+        var link = criarElemento("a", "busca__resultado");
+        link.href = item.url;
+        link.appendChild(criarElemento("span", "busca__tipo", item.tipo));
+        link.appendChild(criarElemento("span", "busca__nome", item.titulo));
+        link.appendChild(criarElemento("span", "busca__descricao", item.descricao));
+        li.appendChild(link);
+        lista.appendChild(li);
+      });
+
+      if (!achados.length) {
+        status.textContent = "Nada encontrado para “" + consulta + "”. " + DICA;
+      } else {
+        status.textContent = achados.length === 1 ? "1 resultado." : achados.length + " resultados.";
+      }
+    }
+
+    function abrir() {
+      if (janela.open) return;
+      if (!indice) indice = montarIndiceDaBusca();
+      desenhar();
+      janela.showModal();
+      campo.select();
+    }
+
+    botao.addEventListener("click", abrir);
+    campo.addEventListener("input", desenhar);
+
+    janela.querySelector(".busca__fechar").addEventListener("click", function () {
+      janela.close();
+    });
+
+    janela.addEventListener("click", function (evento) {
+      // Clique no fundo escurecido: o alvo é a própria janela, fora do miolo
+      if (evento.target === janela) {
+        janela.close();
+        return;
+      }
+      // Fecha ao seguir um link, senão uma âncora da mesma página ficaria atrás
+      if (evento.target.closest(".busca__resultado")) janela.close();
+    });
+
+    // Setas andam entre o campo e os resultados; Enter no campo abre o primeiro
+    janela.addEventListener("keydown", function (evento) {
+      var links = Array.prototype.slice.call(lista.querySelectorAll("a"));
+      if (evento.target === campo && evento.key === "Enter") {
+        evento.preventDefault();
+        if (links[0]) links[0].click();
+        return;
+      }
+      if (evento.key !== "ArrowDown" && evento.key !== "ArrowUp") return;
+      if (!links.length) return;
+      evento.preventDefault();
+      var posicao = links.indexOf(document.activeElement);
+      var proxima = posicao + (evento.key === "ArrowDown" ? 1 : -1);
+      if (proxima < 0) campo.focus();
+      else if (links[proxima]) links[proxima].focus();
+    });
+
+    // Atalhos: "/" (fora de campos de texto) e Ctrl+K ou Cmd+K
+    document.addEventListener("keydown", function (evento) {
+      if ((evento.ctrlKey || evento.metaKey) && evento.key.toLowerCase() === "k") {
+        evento.preventDefault();
+        abrir();
+        return;
+      }
+      if (evento.key !== "/" || evento.ctrlKey || evento.metaKey || evento.altKey) return;
+      var alvo = evento.target;
+      if (alvo.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(alvo.tagName)) return;
+      evento.preventDefault();
+      abrir();
+    });
+  }
+
+
+  /* ========================================================================
+     17. GLOSSÁRIO DE SOTAQUES (cultura.html) — diferencial 12
+     A lista inteira já vem no HTML. O JS só acrescenta o filtro por texto e
+     por língua, com a mesma ideia da galeria.
+     ==================================================================== */
+  function iniciarGlossario() {
+    var glossario = document.querySelector("[data-glossario]");
+    if (!glossario) return;
+
+    var controles = glossario.querySelector("[data-glossario-controles]");
+    var campo = glossario.querySelector("[data-glossario-busca]");
+    var botoes = glossario.querySelectorAll("[data-glossario-filtro]");
+    var contador = glossario.querySelector("[data-glossario-contador]");
+    var itens = Array.prototype.slice.call(glossario.querySelectorAll("[data-lingua]"));
+    var lingua = "todas";
+
+    function filtrar() {
+      var palavras = normalizar(campo.value).split(/\s+/).filter(Boolean);
+      var visiveis = 0;
+
+      itens.forEach(function (item) {
+        var texto = normalizar(item.textContent);
+        var mostra =
+          (lingua === "todas" || item.getAttribute("data-lingua") === lingua) &&
+          palavras.every(function (p) {
+            return texto.indexOf(p) !== -1;
+          });
+        item.hidden = !mostra;
+        if (mostra) visiveis++;
+      });
+
+      botoes.forEach(function (botao) {
+        botao.setAttribute("aria-pressed", String(botao.getAttribute("data-glossario-filtro") === lingua));
+      });
+
+      if (visiveis === 0) contador.textContent = "Nenhum termo encontrado.";
+      else contador.textContent = visiveis === 1 ? "1 termo." : visiveis + " termos.";
+    }
+
+    botoes.forEach(function (botao) {
+      botao.addEventListener("click", function () {
+        lingua = botao.getAttribute("data-glossario-filtro");
+        filtrar();
+      });
+    });
+    campo.addEventListener("input", filtrar);
+
+    controles.hidden = false;
+    filtrar();
+  }
+
+
+  /* ========================================================================
+     18. RECEITAS (panorama.html) — diferencial 13
+     As receitas abrem com <details>, sem JS. O JS acrescenta os botões que
+     mudam o número de porções e recalculam os ingredientes de cada uma.
+     ==================================================================== */
+  var FRACOES = ["", "⅛", "¼", "⅜", "½", "⅝", "¾", "⅞"];
+
+  // Pesos e volumes maiores viram número inteiro; o resto, fração de cozinha
+  function formatarQuantidade(n) {
+    if (n >= 20) return String(Math.round(n));
+    var oitavos = Math.max(Math.round(n * 8), 1);
+    var inteiro = Math.floor(oitavos / 8);
+    var fracao = FRACOES[oitavos % 8];
+    if (!inteiro) return fracao;
+    return fracao ? inteiro + " " + fracao : String(inteiro);
+  }
+
+  function iniciarReceitas() {
+    document.querySelectorAll("[data-receita]").forEach(function (receita) {
+      var base = Number(receita.getAttribute("data-porcoes"));
+      var passo = Number(receita.getAttribute("data-passo"));
+      var rende = receita.querySelector("[data-rende]");
+      var numero = receita.querySelector("[data-rende-numero]");
+      var quantidades = receita.querySelectorAll("[data-qtd]");
+      if (!base || !passo || !rende || !numero) return;
+
+      var maximo = base * 3;
+      var atual = base;
+
+      var controle = criarElemento("div", "receita__porcoes");
+      controle.setAttribute("role", "group");
+      controle.setAttribute("aria-label", "Ajustar o rendimento da receita");
+      var menos = criarElemento("button", "receita__botao", "−");
+      menos.type = "button";
+      menos.setAttribute("aria-label", "Diminuir o rendimento");
+      var mais = criarElemento("button", "receita__botao", "+");
+      mais.type = "button";
+      mais.setAttribute("aria-label", "Aumentar o rendimento");
+      controle.appendChild(menos);
+      controle.appendChild(mais);
+      rende.parentNode.insertBefore(controle, rende.nextSibling);
+      rende.setAttribute("aria-live", "polite");
+
+      function atualizar(novo) {
+        atual = novo;
+        numero.textContent = String(atual);
+        quantidades.forEach(function (el) {
+          var n = Number(el.getAttribute("data-qtd")) * atual / base;
+          var nome = el.getAttribute(n <= 1 ? "data-um" : "data-varios");
+          el.textContent = formatarQuantidade(n) + " " + nome;
+        });
+        menos.disabled = atual - passo < passo;
+        mais.disabled = atual + passo > maximo;
+      }
+
+      menos.addEventListener("click", function () {
+        atualizar(atual - passo);
+      });
+      mais.addEventListener("click", function () {
+        atualizar(atual + passo);
+      });
+
+      atualizar(base);
+    });
+  }
+
+
+  /* ========================================================================
      INICIALIZAÇÃO
      ==================================================================== */
   function iniciar() {
@@ -1959,6 +2965,10 @@
     iniciarQuiz();
     iniciarCalendario();
     iniciarComparador();
+    iniciarPlanejador();
+    iniciarBusca();
+    iniciarGlossario();
+    iniciarReceitas();
   }
 
   if (document.readyState === "loading") {
