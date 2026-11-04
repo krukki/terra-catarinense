@@ -49,16 +49,19 @@ terra-catarinense/
 │                             destaque, painel "Duas Santa Catarinas",
 │                             economia e prévia das curiosidades.
 ├── cidades.html ............ Cidades e regiões + ATLAS INTERATIVO: zoom nas
-│                             seis regiões, camada de clima e "Monte seu
-│                             roteiro" com distância entre as cidades, e o
+│                             seis regiões, camada de clima, "Monte seu
+│                             roteiro" com distância entre as cidades e link
+│                             para compartilhar, DESAFIO DO MAPA, e o
 │                             COMPARADOR de duas cidades lado a lado.
 ├── cultura.html ............ Cultura e imigração + LINHA DO TEMPO animada
-│                             conforme a rolagem da página e CALENDÁRIO DE
-│                             FESTAS mês a mês.
-├── panorama.html ........... Geografia e clima, gastronomia típica e economia
-│                             do estado, com tabelas de dados.
-├── turismo.html ............ Geografia, clima, vegetação, fauna, roteiros e
-│                             GALERIA DE FOTOS COM FILTRO por categoria.
+│                             conforme a rolagem da página, CALENDÁRIO DE
+│                             FESTAS mês a mês e GLOSSÁRIO DOS SOTAQUES.
+├── panorama.html ........... Geografia e clima, gastronomia típica com
+│                             RECEITAS e ajuste de porções, e economia do
+│                             estado, com tabelas de dados.
+├── turismo.html ............ Geografia, clima, vegetação, fauna, roteiros,
+│                             PLANEJADOR DE VIAGEM e GALERIA DE FOTOS COM
+│                             FILTRO por categoria.
 ├── curiosidades.html ....... Cards com EFEITO FLIP, QUIZ "Qual Santa
 │                             Catarina é a sua?", arquitetura enxaimel e os
 │                             créditos das fotos.
@@ -72,7 +75,8 @@ terra-catarinense/
 │                             (menu, tema claro/escuro, banner, flip, atlas,
 │                             timeline, galeria, scroll-reveal, voltar ao
 │                             topo, ano do rodapé, passaporte, quiz,
-│                             calendário e comparador).
+│                             calendário, comparador, planejador, busca,
+│                             glossário e receitas).
 ├── assets/ ................. As 58 fotos do site, cada uma ja gravada no
 │   │                         tamanho exato em que aparece na pagina
 │   ├── favicon.svg ......... Ícone da aba (selo circular "SC" em terracota)
@@ -136,10 +140,16 @@ temas.
 | 2 | **Camada de clima**: os botões Verão/Inverno repintam as regiões pela temperatura média, com legenda — "praia de manhã, neve à tarde" em forma de dado. | `cidades.html` |
 | 3 | **Monte seu roteiro**: no modo roteiro, clicar nos pinos (ou escolher na lista) cria paradas; o mapa traça a rota e soma a distância em linha reta (fórmula de haversine). O roteiro fica salvo no navegador. | `cidades.html` |
 | 4 | **Quiz "Qual Santa Catarina é a sua?"**: cinco perguntas, uma por vez; o resultado leva ao atlas já aproximado na região (`cidades.html?regiao=serra#mapa`). | `curiosidades.html` |
-| 5 | **Passaporte catarinense**: cada página visitada e o quiz rendem um carimbo no rodapé. | todas as páginas |
+| 5 | **Passaporte catarinense**: cada página visitada, o quiz e o desafio do mapa rendem um carimbo no rodapé. | todas as páginas |
 | 6 | Linha do tempo animada, galeria com filtro, flip cards, painel "Duas Santa Catarinas" e banner rotativo (já existiam, agora no visual novo). | várias |
 | 7 | **Calendário de festas**: os doze meses com festas, safras e fenômenos da natureza (Oktoberfest, Festa do Pinhão, baleia-franca, neve na serra...). Abre no mês atual; setas do teclado trocam o mês e o link guarda o mês escolhido (`cultura.html?mes=7`). Cada evento leva ao atlas com a cidade destacada (`cidades.html?cidade=blumenau#mapa`). Sem JavaScript, aparece a lista inteira. | `cultura.html` |
 | 8 | **Comparador de cidades**: duas das 28 cidades do atlas lado a lado — região, herança, população, altitude, fundação, clima e distância — com selo em quem "vence" cada linha e uma frase-resumo ("São Joaquim fica 1.350 m mais alta que Florianópolis..."). Um botão destaca as duas no atlas. A escolha fica salva no navegador. | `cidades.html` |
+| 9 | **Desafio do mapa**: os pinos somem, o jogo pede uma cidade e a pessoa marca onde acha que ela fica, com mouse, toque ou setas do teclado. O mapa mostra a resposta e o erro em km (100 pontos até 10 km, 0 a partir de 150 km). Dez rodadas valem até 1.000 pontos, um título, o recorde salvo e um carimbo no passaporte. | `cidades.html` |
+| 10 | **Planejador de viagem**: mês e interesse viram uma sugestão de região, com temperatura estimada, festas do mês e o que levar. A escolha fica no link (`turismo.html?mes=7&interesse=serra#planejador`). A temperatura é uma estimativa feita com as médias de verão e inverno da região, e o texto avisa isso. | `turismo.html` |
+| 11 | **Busca no site**: cidades, regiões, festas, pratos, curiosidades e seções, sem ligar para acento ou maiúscula. Abre pelo botão do cabeçalho, com `/` ou com Ctrl+K; as setas andam pelos resultados. | todas as páginas |
+| 12 | **Glossário dos sotaques**: 25 termos de manezês, alemão de colônia, pomerano e talian, com filtro por texto e por língua. Sem JavaScript, aparece a lista inteira. | `cultura.html` |
+| 13 | **Receitas**: cada prato típico abre uma receita (sem precisar de JavaScript), com botões que recalculam os ingredientes para outro rendimento e o link da fonte. | `panorama.html` |
+| 14 | **Roteiro compartilhável**: o botão "Copiar link do roteiro" gera um endereço com as paradas (`cidades.html?roteiro=florianopolis,blumenau#mapa`). Abrir o link não apaga o roteiro salvo, a não ser que a pessoa o edite. Com o site aberto por dois cliques, o link só funciona no mesmo computador. | `cidades.html` |
 
 Os pinos das cidades são posicionados pela latitude e longitude reais, com a
 mesma projeção do contorno do estado (`x = 20 + (lon + 53,84) / 5,49 × 485`,
@@ -222,4 +232,15 @@ Se a lista de fotos mudar, rode o `trocar_html.py` de novo e cole a lista nova d
 - [ ] **Calendário de festas:** conferir o mês de cada festa em `cultura.html`
       (seção `#calendario`) nos sites oficiais — algumas mudam de mês ou só
       acontecem a cada dois anos (Festa Nacional da Maçã, Festa da Uva, Fenaostra).
+      Mudou alguma festa? Mude também a cópia no objeto `FESTAS` do `script.js`,
+      que o planejador e a busca usam.
+- [ ] **Glossário:** os termos vêm das fontes citadas abaixo dele, em `cultura.html`.
+      A grafia do manezês e do alemão de colônia varia, e os significados vêm quase
+      sempre de uma fonte só. Vale a revisão de quem conhece as falas.
+- [ ] **Receitas:** foram adaptadas de sites de culinária e não foram testadas na
+      cozinha. Em quatro delas (cuca, marreco, entrevero e polenta com galeto) o
+      rendimento é uma estimativa ou vem de uma fonte só. A do camarão é uma versão
+      geral (leva dendê), não uma receita catarinense.
+- [ ] **Planejador:** os pesos de cada região em `INTERESSES` (`script.js`) e as
+      notas de cada época foram definidos para este trabalho, não vêm de uma fonte.
 - [ ] **Textos:** revisão final de ortografia e concordância com o professor.

@@ -22,6 +22,10 @@
    16. Quiz "Qual Santa Catarina é a sua?" (curiosidades.html)
    16b. Calendário de festas (cultura.html)
    16c. Comparador de cidades (cidades.html)
+   16d. Planejador de viagem (turismo.html)
+   16e. Busca no site (todas as páginas)
+   16f. Glossário de sotaques (cultura.html)
+   16g. Receitas (panorama.html)
    17. Footer e passaporte catarinense
    18. Animações de scroll-reveal
    19. Media queries (tablet / desktop)
@@ -2089,6 +2093,82 @@ html:not(.js) .navegacao[hidden] {
   to { stroke-dashoffset: -22; }
 }
 
+/* --- Desafio do mapa (diferencial 9) --- */
+/* Sem os pinos: a resposta só aparece depois do palpite (pino--destaque) */
+.atlas--desafio .pino:not(.pino--destaque) {
+  visibility: hidden;
+}
+
+.atlas--desafio .atlas__svg,
+.atlas--desafio .regiao {
+  cursor: crosshair;
+}
+
+.atlas--desafio .regiao-botoes,
+.atlas--desafio .painel-regiao,
+.atlas--desafio .atlas__prancha figcaption {
+  display: none;
+}
+
+/* A região selecionada antes do jogo não pode parecer uma dica */
+.atlas--desafio:not(.atlas--clima) .regiao--ativa:not(:hover) {
+  fill: var(--cor-mapa-regiao);
+}
+
+.atlas--desafio .mapa-rotulo--ativa {
+  fill: var(--cor-texto);
+  font-weight: 500;
+}
+
+/* O scrollIntoView do desafio para logo abaixo do cabeçalho */
+.atlas--desafio .atlas__quadro {
+  scroll-margin-top: calc(var(--altura-header) + 0.5rem);
+}
+
+.desafio-mira,
+.desafio-linha {
+  display: none;
+  pointer-events: none;
+}
+
+.atlas--desafio .desafio-mira:not([hidden]) {
+  display: inline;
+}
+
+.desafio-mira__corpo {
+  transform: scale(calc(1 / var(--zoom-texto)));
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 2;
+  opacity: 0.7;
+}
+
+/* Palpite marcado: traço cheio em terracota */
+.desafio-mira--marcada .desafio-mira__corpo {
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+  stroke-dasharray: none;
+  opacity: 1;
+}
+
+.desafio-mira:focus {
+  outline: none;
+}
+
+.desafio-mira:focus-visible .desafio-mira__corpo circle {
+  fill: rgb(var(--cor-sombra) / 0.18);
+}
+
+.atlas--desafio .desafio-linha--visivel {
+  display: inline;
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
 /* A rota fica guardada, mas só aparece com o modo roteiro ligado */
 .atlas:not(.atlas--rota) .rota-linha,
 .atlas:not(.atlas--rota) .rota-paradas {
@@ -2167,9 +2247,21 @@ html:not(.js) .atlas__barra {
   color: var(--cor-fundo);
 }
 
-.atlas__opcao--rota {
+.atlas__modos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.atlas__opcao--rota,
+.atlas__opcao--desafio {
   border: var(--borda-fina) solid var(--cor-destaque);
   color: var(--cor-destaque);
+}
+
+.atlas__opcao--desafio::before {
+  content: "\2316\00a0\00a0"; /* ⌖ */
+  letter-spacing: 0;
 }
 
 .atlas__opcao--rota::before {
@@ -2177,7 +2269,8 @@ html:not(.js) .atlas__barra {
   letter-spacing: 0;
 }
 
-.atlas__opcao--rota[aria-pressed="true"] {
+.atlas__opcao--rota[aria-pressed="true"],
+.atlas__opcao--desafio[aria-pressed="true"] {
   background-color: var(--cor-destaque-fundo);
   border-color: var(--cor-destaque-fundo);
   color: var(--cor-branco);
@@ -2697,6 +2790,149 @@ html:not(.js) .atlas__barra {
 
 .roteiro__limpar:hover {
   color: var(--cor-destaque);
+}
+
+/* Link para compartilhar o roteiro */
+.roteiro__compartilhar {
+  margin-top: 1rem;
+}
+
+.roteiro__compartilhar[hidden],
+.roteiro__link[hidden] {
+  display: none;
+}
+
+.roteiro__link {
+  width: 100%;
+  min-height: 2.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-radius: var(--raio);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+}
+
+.roteiro__aviso {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.roteiro__aviso:empty {
+  display: none;
+}
+
+/* --- Caderno do desafio (diferencial 9) --- */
+.desafio {
+  order: -1;
+  padding: 1.25rem 1.35rem 1.5rem;
+  background-color: var(--cor-superficie);
+  border: var(--borda-fina) solid var(--cor-destaque);
+  border-top-width: 0.3rem;
+}
+
+.desafio[hidden],
+.desafio [hidden] {
+  display: none;
+}
+
+.desafio h3 {
+  margin-block: 0.35rem 0.75rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.desafio__contador {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.desafio__pergunta {
+  margin-top: 0.75rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.desafio__pergunta strong {
+  font-weight: 600;
+  color: var(--cor-destaque);
+}
+
+.desafio__ajuda {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.desafio__mira {
+  margin-top: 0.5rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+}
+
+.desafio__resultado {
+  margin-top: 0.75rem;
+  font-size: 0.98rem;
+}
+
+.desafio__mira:empty,
+.desafio__resultado:empty {
+  display: none;
+}
+
+.desafio .botao {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.desafio__total {
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+}
+
+.desafio__total strong {
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--cor-destaque);
+}
+
+.desafio__titulo {
+  margin-top: 0.35rem;
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+.desafio__recorde {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.desafio__lista {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.9rem;
+}
+
+.desafio__lista li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.15rem 0.65rem;
+  padding: 0.3rem 0;
+  border-bottom: var(--borda-fina) dashed var(--cor-borda);
 }
 
 
@@ -3422,6 +3658,399 @@ html:not(.js) .calendario__status {
 
 
 /* ==========================================================================
+   16d. PLANEJADOR DE VIAGEM (turismo.html) — diferencial 10
+   ========================================================================== */
+
+.planejador__escolha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+  max-width: 34rem;
+}
+
+.planejador__status {
+  margin-block: 0.75rem 1.25rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--cor-texto-suave);
+}
+
+.planejador__resultado {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-superficie);
+}
+
+.planejador__foto {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.planejador__destino h3 {
+  margin-block: 0.35rem 0.65rem;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 500;
+}
+
+.planejador__nota {
+  margin-block: 0.5rem 1rem;
+  font-size: 0.82rem;
+  color: var(--cor-texto-suave);
+}
+
+.planejador__extras h4 {
+  margin-block: 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.planejador__extras h4:not(:first-child) {
+  margin-top: 1.25rem;
+}
+
+.planejador__festas,
+.planejador__mala {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.planejador__festas li,
+.planejador__mala li {
+  padding: 0.3rem 0;
+  border-bottom: var(--borda-fina) dashed var(--cor-borda);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 48rem) {
+  .planejador__resultado {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .planejador__resultado {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* ==========================================================================
+   16e. BUSCA NO SITE (todas as páginas) — diferencial 11
+   ========================================================================== */
+
+/* Empurra a busca e o tema para junto do menu, em vez de ficarem soltos no
+   meio do cabeçalho */
+.busca-botao {
+  margin-left: auto;
+}
+
+.busca {
+  width: min(40rem, calc(100vw - 2rem));
+  max-height: min(36rem, calc(100vh - 2rem));
+  max-height: min(36rem, calc(100dvh - 2rem));
+  margin: 1rem auto auto;
+  padding: 0;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.busca::backdrop {
+  background-color: rgb(var(--cor-veu) / 0.6);
+}
+
+.busca__interno {
+  padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.busca__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.busca__fechar {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  color: var(--cor-texto);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.busca__fechar:hover {
+  border-color: var(--cor-texto);
+}
+
+.busca__campo {
+  width: 100%;
+  min-height: 2.9rem;
+  padding: 0.5rem 0.75rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  font-size: 1.05rem;
+}
+
+.busca__status {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.busca__resultados {
+  margin-top: 0.5rem;
+}
+
+.busca__resultado {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.1rem 0.75rem;
+  padding: 0.6rem 0.4rem;
+  border-top: var(--borda-fina) dashed var(--cor-borda);
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+.busca__resultado:hover,
+.busca__resultado:focus-visible {
+  background-color: var(--cor-principal-clara);
+  color: var(--cor-texto);
+}
+
+.busca__nome {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+}
+
+.busca__tipo {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  font-family: var(--fonte-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
+}
+
+.busca__descricao {
+  grid-column: 1 / -1;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+
+/* ==========================================================================
+   16f. GLOSSÁRIO DE SOTAQUES (cultura.html) — diferencial 12
+   ========================================================================== */
+
+.glossario {
+  margin-top: 2.5rem;
+}
+
+.glossario h3 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 500;
+}
+
+.glossario__controles {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.glossario__controles[hidden],
+.glossario__item[hidden] {
+  display: none;
+}
+
+.glossario__campo {
+  max-width: 24rem;
+}
+
+.glossario__campo label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.glossario__campo input {
+  width: 100%;
+  min-height: 2.9rem;
+  padding: 0.5rem 0.65rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  border-radius: var(--raio);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.glossario__controles .filtros {
+  margin-bottom: 0;
+}
+
+.glossario__contador {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--cor-texto-suave);
+}
+
+.glossario__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.glossario__item {
+  padding: 0.85rem 1rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  background-color: var(--cor-superficie);
+}
+
+.glossario__item dt {
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  font-style: italic;
+}
+
+.glossario__lingua {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.62rem;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
+}
+
+.glossario__item dd {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+}
+
+.glossario__fontes {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+
+/* ==========================================================================
+   16g. RECEITAS (panorama.html) — diferencial 13
+   ========================================================================== */
+
+.receita {
+  margin-top: 0.75rem;
+  border-top: var(--borda-fina) dashed var(--cor-borda);
+}
+
+.receita summary {
+  padding-block: 0.65rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.receita summary:hover {
+  color: var(--cor-destaque);
+}
+
+.receita__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.receita__rende {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+}
+
+.receita__porcoes {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.receita__botao {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  color: var(--cor-texto);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.receita__botao:hover:not(:disabled) {
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+.receita__botao:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.receita h4 {
+  margin-block: 0.85rem 0.35rem;
+  font-size: 1rem;
+}
+
+.receita ul,
+.receita ol {
+  display: grid;
+  gap: 0.3rem;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+}
+
+.receita ul {
+  list-style: disc;
+}
+
+.receita ol {
+  list-style: decimal;
+}
+
+.receita__fonte {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+
+.receitas-nota {
+  max-width: var(--largura-texto);
+  margin-top: 1.25rem;
+  font-size: 0.88rem;
+  color: var(--cor-texto-suave);
+}
+
+
+/* ==========================================================================
    17. FOOTER (com o passaporte — diferencial 5)
    ========================================================================== */
 
@@ -3921,7 +4550,13 @@ html:not(.js) .calendario__status {
   .calendario__barra,
   .calendario__status,
   .comparador__inverter,
-  [data-comparador-atlas] {
+  [data-comparador-atlas],
+  .roteiro__compartilhar,
+  .desafio,
+  .planejador__escolha,
+  .planejador__status,
+  .glossario__controles,
+  .receita__porcoes {
     display: none !important;
   }
 

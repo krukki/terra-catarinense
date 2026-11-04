@@ -353,6 +353,8 @@
          Os doze meses ficam no HTML: sem JavaScript aparece a lista inteira.
          Com JS, a barra mostra um mês por vez (abre no mês atual).
          ================================================================= -->
+    <!-- O planejador de turismo.html usa uma cópia desta lista (FESTAS, no
+         script.js). Mudou uma festa aqui? Mude lá também. -->
     <section class="secao secao--principal" id="calendario" data-calendario
              aria-labelledby="titulo-calendario">
       <div class="container">
@@ -727,6 +729,146 @@
           </figure>
         </div>
 
+        <!-- DIFERENCIAL 12 — Glossário: a lista inteira fica no HTML e aparece
+             mesmo sem JavaScript; só os filtros dependem dele. -->
+        <div class="glossario revelar" data-glossario>
+          <h3 id="glossario">Pequeno glossário dos sotaques</h3>
+          <p>
+            Algumas palavras e expressões das quatro falas acima, escritas como
+            aparecem nas fontes. Muitas são mais faladas do que escritas, então é
+            normal encontrar outras formas de escrever.
+          </p>
+
+          <div class="glossario__controles" data-glossario-controles hidden>
+            <div class="glossario__campo">
+              <label for="glossario-busca">Procurar no glossário</label>
+              <input id="glossario-busca" type="search" autocomplete="off" data-glossario-busca>
+            </div>
+            <div class="filtros" role="group" aria-label="Filtrar o glossário por língua">
+              <button class="filtro-botao" type="button" data-glossario-filtro="todas" aria-pressed="true">Todas</button>
+              <button class="filtro-botao" type="button" data-glossario-filtro="manezes" aria-pressed="false">Manezês</button>
+              <button class="filtro-botao" type="button" data-glossario-filtro="alemao" aria-pressed="false">Alemão de colônia</button>
+              <button class="filtro-botao" type="button" data-glossario-filtro="pomerano" aria-pressed="false">Pomerano</button>
+              <button class="filtro-botao" type="button" data-glossario-filtro="talian" aria-pressed="false">Talian</button>
+            </div>
+            <p class="glossario__contador" data-glossario-contador role="status" aria-live="polite"></p>
+          </div>
+
+          <dl class="glossario__lista">
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">O lhó lhó</span></dt>
+              <dd>Expressa surpresa ou espanto.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Tax tolo</span></dt>
+              <dd>Diz que a pessoa não acreditou no que acabou de ouvir.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Dax um banho</span></dt>
+              <dd>Elogio: quer dizer que a pessoa é incrível.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Cacaiada</span></dt>
+              <dd>Turma bagunceira, no bom sentido.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Tanso</span></dt>
+              <dd>Pessoa boba, lenta, ou que fez alguma besteira.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Mazanza</span></dt>
+              <dd>Pessoa preguiçosa ou devagar.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Segue reto toda vida</span></dt>
+              <dd>A direção para quem pede informação: é só continuar em frente.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="manezes">
+              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Se quex, quex, se não quex, dix</span></dt>
+              <dd>“Se queres, queres; se não queres, diz”: para quem não se decide.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Móin</span></dt>
+              <dd>Bom dia. Forma encurtada de <i>guten Morgen</i>.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Schimia</span></dt>
+              <dd>Tudo o que se passa no pão: geleia, mousse ou patê.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Bubi</span></dt>
+              <dd>Jeito carinhoso de chamar uma criança de origem alemã.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Felá</span></dt>
+              <dd>O recheio de miúdos do marreco ou do frango assado. Vem de <i>Fülle</i>.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Surraxco</span></dt>
+              <dd>Churrasco, com sotaque da colônia.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Mondoví</span></dt>
+              <dd>Amendoim.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="alemao">
+              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Schipcare</span></dt>
+              <dd>Carrinho de mão.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="pomerano">
+              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Bauk</span></dt>
+              <dd>Livro. Parente do inglês <i>book</i> e do alemão <i>Buch</i>.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="pomerano">
+              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Sonn</span></dt>
+              <dd>Sol. Parente do inglês <i>sun</i> e do alemão <i>Sonne</i>.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="pomerano">
+              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Broud</span></dt>
+              <dd>Pão, como em <i>dat broud for jeire dag</i>, “o pão de cada dia”.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="pomerano">
+              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Himel</span></dt>
+              <dd>Céu, como em <i>im Himel</i>, “nos céus”.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="pomerano">
+              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Fåter</span></dt>
+              <dd>Pai, como em <i>ous Fåter</i>, “pai nosso”.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="talian">
+              <dt><span class="glossario__lingua">Talian</span><span lang="und">Bondì</span></dt>
+              <dd>Bom dia.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="talian">
+              <dt><span class="glossario__lingua">Talian</span><span lang="und">Putel</span></dt>
+              <dd>Criança. Também se diz <i>bambin</i> ou <i>fantolin</i>.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="talian">
+              <dt><span class="glossario__lingua">Talian</span><span lang="und">Pióva</span></dt>
+              <dd>Chuva.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="talian">
+              <dt><span class="glossario__lingua">Talian</span><span lang="und">Recia</span></dt>
+              <dd>Orelha.</dd>
+            </div>
+            <div class="glossario__item" data-lingua="talian">
+              <dt><span class="glossario__lingua">Talian</span><span lang="und">Tuti</span></dt>
+              <dd>Todos, como no provérbio <i>la ociosità la è la mama de tuti i vìssii</i>: “a ociosidade é a mãe de todos os vícios”.</dd>
+            </div>
+          </dl>
+
+          <p class="glossario__fontes">
+            Fontes:
+            <a href="https://www.nsctotal.com.br/?p=2585306" rel="external noopener" target="_blank">dicionário manezês do NSC Total</a>;
+            <a href="https://www.tribunapr.com.br/blogs/dante-mendonca/dicionario-de-alemao/amp/" rel="external noopener" target="_blank">glossário de Horácio Braum na Tribuna do Paraná</a>;
+            <a href="https://wp.ufpel.edu.br/tesouro-linguistico/?p=195" rel="external noopener" target="_blank">Tesouro Linguístico da UFPel</a>;
+            <a href="https://pt.wikipedia.org/wiki/L%C3%ADngua_pomerana" rel="external noopener" target="_blank">Wikipédia, língua pomerana</a>;
+            <a href="https://pt.wikipedia.org/wiki/Talian" rel="external noopener" target="_blank">Wikipédia, talian</a>;
+            <a href="https://www.brasiltalian.com/2016/11/dicionario-portugues-talian.html" rel="external noopener" target="_blank">dicionário Brasil Talian</a>;
+            <a href="http://branchedorfamilia.blogspot.com/2013/06/proverbios-em-talian-o-dialeto-veneto.html" rel="external noopener" target="_blank">provérbios em talian do blog Branche D'Or</a>.
+          </p>
+        </div>
+
         <aside class="esp-topo-6 voce-sabia revelar" >
           <h3>Você sabia?</h3>
           <p>
@@ -823,7 +965,7 @@
       <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
         </div>
         <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
       </section>
