@@ -17,21 +17,10 @@
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
@@ -46,19 +35,22 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
+           Sem JavaScript a escolha vale para esta página e não fica salva. -->
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -101,8 +93,8 @@
 
     <!-- ================================================================
          DIFERENCIAL 3 — LINHA DO TEMPO INTERATIVA
-         Cada marco entra em cena via Intersection Observer (js/script.js).
-         Sem JavaScript, todos os marcos aparecem normalmente.
+         Cada marco entra em cena com a rolagem (animation-timeline: view(),
+         só CSS). Sem esse suporte, todos os marcos aparecem normalmente.
          ================================================================= -->
     <section class="secao" id="linha-do-tempo">
       <div class="container">
@@ -118,7 +110,7 @@
         <div class="linha-tempo">
 
           <!-- ---------- Marco 1 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/guarani.jpg"
@@ -144,7 +136,7 @@
           </article>
 
           <!-- ---------- Marco 2 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/litoral/acoriano-casario.jpg"
@@ -169,7 +161,7 @@
           </article>
 
           <!-- ---------- Marco 3 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/pedro-alcantara.jpg"
@@ -194,7 +186,7 @@
           </article>
 
           <!-- ---------- Marco 4 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/blumenau-historico.jpg"
@@ -220,7 +212,7 @@
           </article>
 
           <!-- ---------- Marco 5 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/italianos-videira.jpg"
@@ -245,7 +237,7 @@
           </article>
 
           <!-- ---------- Marco 6 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/festa-tipica.jpg"
@@ -350,10 +342,10 @@
 
     <!-- ================================================================
          DIFERENCIAL 7 — CALENDÁRIO DE FESTAS
-         Os doze meses ficam no HTML: sem JavaScript aparece a lista inteira.
-         Com JS, a barra mostra um mês por vez (abre no mês atual).
+         Os doze meses ficam no HTML. A barra é um grupo de rádios: o CSS
+         (:has) mostra só o mês marcado. Abre em outubro (marcado no HTML).
          ================================================================= -->
-    <section class="secao secao--principal" id="calendario" data-calendario
+    <section class="secao secao--principal calendario" id="calendario"
              aria-labelledby="titulo-calendario">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -366,22 +358,46 @@
           </p>
         </div>
 
-        <div class="calendario__barra" role="group" aria-label="Escolha o mês"
-             data-calendario-barra>
-          <button class="calendario__botao" type="button" data-mes-botao="1" aria-pressed="false" aria-label="Janeiro">Jan</button>
-          <button class="calendario__botao" type="button" data-mes-botao="2" aria-pressed="false" aria-label="Fevereiro">Fev</button>
-          <button class="calendario__botao" type="button" data-mes-botao="3" aria-pressed="false" aria-label="Março">Mar</button>
-          <button class="calendario__botao" type="button" data-mes-botao="4" aria-pressed="false" aria-label="Abril">Abr</button>
-          <button class="calendario__botao" type="button" data-mes-botao="5" aria-pressed="false" aria-label="Maio">Mai</button>
-          <button class="calendario__botao" type="button" data-mes-botao="6" aria-pressed="false" aria-label="Junho">Jun</button>
-          <button class="calendario__botao" type="button" data-mes-botao="7" aria-pressed="false" aria-label="Julho">Jul</button>
-          <button class="calendario__botao" type="button" data-mes-botao="8" aria-pressed="false" aria-label="Agosto">Ago</button>
-          <button class="calendario__botao" type="button" data-mes-botao="9" aria-pressed="false" aria-label="Setembro">Set</button>
-          <button class="calendario__botao" type="button" data-mes-botao="10" aria-pressed="false" aria-label="Outubro">Out</button>
-          <button class="calendario__botao" type="button" data-mes-botao="11" aria-pressed="false" aria-label="Novembro">Nov</button>
-          <button class="calendario__botao" type="button" data-mes-botao="12" aria-pressed="false" aria-label="Dezembro">Dez</button>
+        <div class="calendario__barra" role="radiogroup" aria-label="Escolha o mês">
+          <input class="estado" type="radio" name="mes" id="mes-1" aria-label="Janeiro">
+          <label class="calendario__botao" for="mes-1" title="Janeiro">Jan</label>
+          <input class="estado" type="radio" name="mes" id="mes-2" aria-label="Fevereiro">
+          <label class="calendario__botao" for="mes-2" title="Fevereiro">Fev</label>
+          <input class="estado" type="radio" name="mes" id="mes-3" aria-label="Março">
+          <label class="calendario__botao" for="mes-3" title="Março">Mar</label>
+          <input class="estado" type="radio" name="mes" id="mes-4" aria-label="Abril">
+          <label class="calendario__botao" for="mes-4" title="Abril">Abr</label>
+          <input class="estado" type="radio" name="mes" id="mes-5" aria-label="Maio">
+          <label class="calendario__botao" for="mes-5" title="Maio">Mai</label>
+          <input class="estado" type="radio" name="mes" id="mes-6" aria-label="Junho">
+          <label class="calendario__botao" for="mes-6" title="Junho">Jun</label>
+          <input class="estado" type="radio" name="mes" id="mes-7" aria-label="Julho">
+          <label class="calendario__botao" for="mes-7" title="Julho">Jul</label>
+          <input class="estado" type="radio" name="mes" id="mes-8" aria-label="Agosto">
+          <label class="calendario__botao" for="mes-8" title="Agosto">Ago</label>
+          <input class="estado" type="radio" name="mes" id="mes-9" aria-label="Setembro">
+          <label class="calendario__botao" for="mes-9" title="Setembro">Set</label>
+          <input class="estado" type="radio" name="mes" id="mes-10" checked aria-label="Outubro">
+          <label class="calendario__botao" for="mes-10" title="Outubro">Out</label>
+          <input class="estado" type="radio" name="mes" id="mes-11" aria-label="Novembro">
+          <label class="calendario__botao" for="mes-11" title="Novembro">Nov</label>
+          <input class="estado" type="radio" name="mes" id="mes-12" aria-label="Dezembro">
+          <label class="calendario__botao" for="mes-12" title="Dezembro">Dez</label>
         </div>
-        <p class="calendario__status" data-calendario-status aria-live="polite"></p>
+        <p class="calendario__status">
+          <span data-mes-status="1">Janeiro: 2 programas</span>
+          <span data-mes-status="2">Fevereiro: 3 programas</span>
+          <span data-mes-status="3">Março: 2 programas</span>
+          <span data-mes-status="4">Abril: 2 programas</span>
+          <span data-mes-status="5">Maio: 2 programas</span>
+          <span data-mes-status="6">Junho: 2 programas</span>
+          <span data-mes-status="7">Julho: 2 programas</span>
+          <span data-mes-status="8">Agosto: 1 programa</span>
+          <span data-mes-status="9">Setembro: 1 programa</span>
+          <span data-mes-status="10">Outubro: 4 programas</span>
+          <span data-mes-status="11">Novembro: 2 programas</span>
+          <span data-mes-status="12">Dezembro: 2 programas</span>
+        </p>
 
         <ol class="calendario__meses">
           <li class="calendario__mes" data-mes="1">
@@ -394,7 +410,7 @@
                   Celebra a colonização pomerana com desfiles, bandinhas,
                   comida típica e jogos tradicionais trazidos da Europa.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=pomerode#mapa">Ver Pomerode no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-pomerode">Ver Pomerode no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Litoral</p>
@@ -403,7 +419,7 @@
                   Barcos enfeitados levam a imagem de Nossa Senhora dos
                   Navegantes pelo mar, tradição herdada dos açorianos.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-litoral">Ver o Litoral no atlas</a>
               </article>
             </div>
           </li>
@@ -418,7 +434,7 @@
                   Desfile das escolas de samba na Passarela Nego Quirido e
                   blocos de rua espalhados pela Ilha.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-florianopolis">Ver Florianópolis no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Laguna</p>
@@ -427,7 +443,7 @@
                   Um dos carnavais de rua mais tradicionais do Sul, com blocos
                   que lotam o centro histórico.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=laguna#mapa">Ver Laguna no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-laguna">Ver Laguna no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Videira</p>
@@ -436,7 +452,7 @@
                   A capital catarinense da uva comemora a colheita com desfile,
                   vinho colonial e cozinha italiana.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=oeste#mapa">Ver o Oeste no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-oeste">Ver o Oeste no atlas</a>
               </article>
             </div>
           </li>
@@ -451,7 +467,7 @@
                   Os pomares da serra estão carregados: é a melhor época para
                   visitar e colher a fruta direto do pé.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=sao-joaquim#mapa">Ver São Joaquim no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-sao-joaquim">Ver São Joaquim no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Época · Planalto Serrano</p>
@@ -460,7 +476,7 @@
                   As vinícolas acima de 900 metros colhem a uva e abrem as
                   portas para visitas e degustações.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=serra#mapa">Ver a Serra no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-serra">Ver a Serra no atlas</a>
               </article>
             </div>
           </li>
@@ -475,7 +491,7 @@
                   A festa de Páscoa enche a cidade de ovos pintados à mão,
                   pendurados em árvores gigantes.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=pomerode#mapa">Ver Pomerode no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-pomerode">Ver Pomerode no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · São Joaquim</p>
@@ -484,7 +500,7 @@
                   Fecha a safra com a fruta em todas as formas — doce, suco,
                   sidra — além de shows e cultura campeira.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=sao-joaquim#mapa">Ver São Joaquim no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-sao-joaquim">Ver São Joaquim no atlas</a>
               </article>
             </div>
           </li>
@@ -499,7 +515,7 @@
                   De maio a julho, os pescadores artesanais vigiam o mar e
                   cercam os cardumes no arrastão de praia.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-florianopolis">Ver Florianópolis no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Litoral açoriano</p>
@@ -508,7 +524,7 @@
                   Cortejo com a bandeira do Divino, coroação do imperador e
                   distribuição de massa, nas freguesias antigas da Ilha.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-litoral">Ver o Litoral no atlas</a>
               </article>
             </div>
           </li>
@@ -523,7 +539,7 @@
                   Celebra a semente da araucária e a cultura campeira, com
                   rodeio, música regional e pinhão de todo jeito.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=lages#mapa">Ver Lages no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-lages">Ver Lages no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Época · Urubici</p>
@@ -532,7 +548,7 @@
                   Nas madrugadas abaixo de zero, os campos de altitude
                   amanhecem cobertos de branco.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=urubici#mapa">Ver Urubici no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-urubici">Ver Urubici no atlas</a>
               </article>
             </div>
           </li>
@@ -547,7 +563,7 @@
                   Um dos maiores festivais de dança do mundo, com palcos
                   espalhados pela cidade e apresentações gratuitas.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=joinville#mapa">Ver Joinville no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-joinville">Ver Joinville no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Época · Urupema</p>
@@ -556,7 +572,7 @@
                   Quando a frente fria é forte, pode nevar no planalto —
                   Urupema e São Joaquim são os lugares mais prováveis.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=urupema#mapa">Ver Urupema no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-urupema">Ver Urupema no atlas</a>
               </article>
             </div>
           </li>
@@ -571,7 +587,7 @@
                   Entre julho e novembro as baleias vêm ao litoral sul para ter
                   os filhotes, e dá para vê-las da praia.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=garopaba#mapa">Ver Garopaba no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-garopaba">Ver Garopaba no atlas</a>
               </article>
             </div>
           </li>
@@ -586,7 +602,7 @@
                   Os centros de tradição gaúcha celebram com cavalgadas,
                   chimarrão e churrasco de chão, até o 20 de setembro.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=lages#mapa">Ver Lages no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-lages">Ver Lages no atlas</a>
               </article>
             </div>
           </li>
@@ -601,7 +617,7 @@
                   A maior festa alemã das Américas: bandas típicas, desfiles,
                   chope artesanal e concurso de trajes.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=blumenau#mapa">Ver Blumenau no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-blumenau">Ver Blumenau no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Itajaí</p>
@@ -610,7 +626,7 @@
                   Festa portuguesa e do pescado, com bacalhau, frutos do mar e
                   danças folclóricas.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=itajai#mapa">Ver Itajaí no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-itajai">Ver Itajaí no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Brusque</p>
@@ -619,7 +635,7 @@
                   O marreco recheado com repolho roxo é o prato principal desta
                   festa de tradição alemã.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=brusque#mapa">Ver Brusque no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-brusque">Ver Brusque no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Jaraguá do Sul</p>
@@ -628,7 +644,7 @@
                   A festa dos atiradores mantém a tradição das sociedades de
                   tiro trazidas pelos imigrantes alemães.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=jaragua-do-sul#mapa">Ver Jaraguá do Sul no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-jaragua-do-sul">Ver Jaraguá do Sul no atlas</a>
               </article>
             </div>
           </li>
@@ -643,7 +659,7 @@
                   Festival da ostra e da cultura açoriana, com gastronomia,
                   terno de reis e ratoeira.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-florianopolis">Ver Florianópolis no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Joinville</p>
@@ -652,7 +668,7 @@
                   Exposição de orquídeas e flores que ajudou a dar a Joinville
                   o apelido de Cidade das Flores.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=joinville#mapa">Ver Joinville no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-joinville">Ver Joinville no atlas</a>
               </article>
             </div>
           </li>
@@ -667,7 +683,7 @@
                   A Vila Germânica vira vila de Natal, com desfiles, luzes e
                   música nas ruas do centro.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=blumenau#mapa">Ver Blumenau no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-blumenau">Ver Blumenau no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Litoral</p>
@@ -676,7 +692,7 @@
                   Do Natal ao Dia de Reis, grupos cantam de casa em casa e o
                   boi-de-mamão sai às ruas.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-litoral">Ver o Litoral no atlas</a>
               </article>
             </div>
           </li>
@@ -817,20 +833,28 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
+           (a:visited), então o histórico do próprio navegador guarda os
+           carimbos, sem JavaScript nem localStorage. -->
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -838,9 +862,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>

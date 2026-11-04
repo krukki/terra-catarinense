@@ -17,21 +17,10 @@
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
@@ -46,19 +35,22 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
+           Sem JavaScript a escolha vale para esta página e não fica salva. -->
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -279,8 +271,8 @@
 
     <!-- ================================================================
          DIFERENCIAL 2 — GALERIA COM FILTRO
-         O JS (js/script.js) lê data-categoria de cada figura e aplica hidden
-         nos itens fora do filtro. Nenhuma biblioteca externa.
+         Os filtros são rádios: o CSS (:has) esconde as figuras de outra
+         categoria e um contador CSS soma as que sobraram. Sem JavaScript.
          ================================================================= -->
     <section class="secao secao--principal" id="galeria">
       <div class="container">
@@ -293,17 +285,21 @@
           </p>
         </div>
 
-        <div class="filtros" role="group" aria-label="Filtrar fotos por categoria">
-          <button class="filtro-botao" type="button" data-filtro="todas" aria-pressed="true">Todas</button>
-          <button class="filtro-botao" type="button" data-filtro="litoral" aria-pressed="false">Litoral</button>
-          <button class="filtro-botao" type="button" data-filtro="serra" aria-pressed="false">Serra</button>
-          <button class="filtro-botao" type="button" data-filtro="cidades" aria-pressed="false">Cidades</button>
-          <button class="filtro-botao" type="button" data-filtro="gastronomia" aria-pressed="false">Gastronomia</button>
+        <div class="galeria-filtrada">
+        <div class="filtros" role="radiogroup" aria-label="Filtrar fotos por categoria">
+          <input class="estado" type="radio" name="filtro" id="filtro-todas" checked>
+          <label class="filtro-botao" for="filtro-todas">Todas</label>
+          <input class="estado" type="radio" name="filtro" id="filtro-litoral">
+          <label class="filtro-botao" for="filtro-litoral">Litoral</label>
+          <input class="estado" type="radio" name="filtro" id="filtro-serra">
+          <label class="filtro-botao" for="filtro-serra">Serra</label>
+          <input class="estado" type="radio" name="filtro" id="filtro-cidades">
+          <label class="filtro-botao" for="filtro-cidades">Cidades</label>
+          <input class="estado" type="radio" name="filtro" id="filtro-gastronomia">
+          <label class="filtro-botao" for="filtro-gastronomia">Gastronomia</label>
         </div>
 
-        <p class="galeria-contador" data-galeria-contador role="status" aria-live="polite"></p>
-
-        <div class="galeria" data-galeria>
+        <div class="galeria">
 
           <!-- ---------- Litoral ---------- -->
           <figure class="galeria__item" data-categoria="litoral">
@@ -428,6 +424,11 @@
               <span>Planalto Serrano</span>
             </figcaption>
           </figure>
+        </div>
+
+        <!-- Vem depois das fotos para o contador CSS já ter somado; o CSS
+             põe a linha de volta acima da galeria -->
+        <p class="galeria-contador"></p>
         </div>
       </div>
     </section>
@@ -595,20 +596,28 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
+           (a:visited), então o histórico do próprio navegador guarda os
+           carimbos, sem JavaScript nem localStorage. -->
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -616,9 +625,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>

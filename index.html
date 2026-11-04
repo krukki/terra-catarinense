@@ -18,21 +18,10 @@
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
@@ -49,19 +38,22 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
+           Sem JavaScript a escolha vale para esta página e não fica salva. -->
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html" aria-current="page">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -79,9 +71,9 @@
   <main id="conteudo">
 
     <!-- ================================================================
-         BANNER ROTATIVO — 3 imagens alternadas por JS (sem biblioteca)
+         BANNER ROTATIVO — 3 imagens, só HTML e CSS (rádios + @keyframes)
          ================================================================= -->
-    <section class="banner" data-banner aria-roledescription="carrossel"
+    <section class="banner" aria-roledescription="carrossel"
              aria-label="Paisagens de Santa Catarina">
 
       <div class="container banner__grade">
@@ -113,21 +105,28 @@
         <figure class="banner__prancha">
           <span class="banner__marca" aria-hidden="true">Prancha I — Paisagens</span>
 
+          <!-- Estado do carrossel, sem JavaScript: "auto" gira sozinho com
+               @keyframes; escolher uma foto (ponto ou seta) fixa nela. As
+               setas do teclado andam entre as fotos (é um grupo de rádios). -->
+          <input class="banner__estado" type="radio" name="banner" id="banner-auto" checked
+                 aria-label="Rotação automática das fotos">
+          <input class="banner__estado" type="radio" name="banner" id="banner-1" aria-label="Foto 1: litoral">
+          <input class="banner__estado" type="radio" name="banner" id="banner-2" aria-label="Foto 2: serra do Rio do Rastro">
+          <input class="banner__estado" type="radio" name="banner" id="banner-3" aria-label="Foto 3: araucárias">
+          <input class="banner__estado" type="checkbox" id="banner-pausa" aria-label="Pausar rotação automática das fotos">
+
           <div class="banner__slides">
-            <div class="banner__slide" data-slide data-ativo="true"
-                 data-legenda="Foto 1 de 3 — Praia da Joaquina, Florianópolis (litoral)">
+            <div class="banner__slide">
               <img src="assets/litoral/litoral-praia.jpg"
                    alt="Praia de areia clara com mar aberto e morros cobertos de vegetação ao fundo, no litoral de Santa Catarina."
                    width="1600" height="900" decoding="async" fetchpriority="high">
             </div>
-            <div class="banner__slide" data-slide
-                 data-legenda="Foto 2 de 3 — Serra do Rio do Rastro, Bom Jardim da Serra (serra)">
+            <div class="banner__slide">
               <img src="assets/serra/serra-estrada.jpg"
                    alt="Estrada sinuosa descendo uma serra alta entre paredões de rocha e nuvens baixas."
                    width="1600" height="900" loading="lazy" decoding="async">
             </div>
-            <div class="banner__slide" data-slide
-                 data-legenda="Foto 3 de 3 — Araucárias no planalto serrano, São Joaquim (serra)">
+            <div class="banner__slide">
               <img src="assets/serra/araucarias-campo.jpg"
                    alt="Campos de altitude com araucárias isoladas e geada leve sobre a vegetação, no planalto serrano."
                    width="1600" height="900" loading="lazy" decoding="async">
@@ -135,29 +134,32 @@
           </div>
 
           <figcaption class="banner__rodape">
-            <!-- Controles do carrossel -->
-            <div class="banner__controles" data-banner-controles>
-              <button class="banner__seta" type="button" data-banner-anterior
-                      aria-label="Foto anterior">&#8249;</button>
+            <!-- Controles: rótulos (<label>) que marcam os rádios acima -->
+            <div class="banner__controles" aria-hidden="true">
+              <label class="banner__seta banner__seta--para-3" for="banner-3" title="Foto anterior">&#8249;</label>
+              <label class="banner__seta banner__seta--para-1" for="banner-1" title="Foto anterior">&#8249;</label>
+              <label class="banner__seta banner__seta--para-2" for="banner-2" title="Foto anterior">&#8249;</label>
 
-              <div class="banner__pontos" role="group" aria-label="Escolher foto do banner">
-                <button class="banner__ponto" type="button" data-ponto
-                        aria-pressed="true" aria-label="Foto 1: litoral"></button>
-                <button class="banner__ponto" type="button" data-ponto
-                        aria-pressed="false" aria-label="Foto 2: serra do Rio do Rastro"></button>
-                <button class="banner__ponto" type="button" data-ponto
-                        aria-pressed="false" aria-label="Foto 3: araucárias"></button>
+              <div class="banner__pontos">
+                <label class="banner__ponto" for="banner-1" title="Foto 1: litoral"></label>
+                <label class="banner__ponto" for="banner-2" title="Foto 2: serra do Rio do Rastro"></label>
+                <label class="banner__ponto" for="banner-3" title="Foto 3: araucárias"></label>
               </div>
 
-              <button class="banner__seta" type="button" data-banner-proximo
-                      aria-label="Próxima foto">&#8250;</button>
+              <label class="banner__seta banner__seta--prox-2" for="banner-2" title="Próxima foto">&#8250;</label>
+              <label class="banner__seta banner__seta--prox-3" for="banner-3" title="Próxima foto">&#8250;</label>
+              <label class="banner__seta banner__seta--prox-1" for="banner-1" title="Próxima foto">&#8250;</label>
 
-              <button class="banner__pausa" type="button" data-banner-pausa
-                      aria-pressed="false"
-                      aria-label="Pausar rotação automática das fotos">&#9208;</button>
+              <label class="banner__pausa banner__pausa--pausar" for="banner-pausa" title="Pausar a rotação">&#9208;</label>
+              <label class="banner__pausa banner__pausa--seguir" for="banner-pausa" title="Retomar a rotação">&#9654;</label>
+              <label class="banner__pausa banner__pausa--auto" for="banner-auto" title="Voltar à rotação automática">&#9654;</label>
             </div>
 
-            <p class="banner__legenda" data-banner-legenda role="status" aria-live="polite"></p>
+            <p class="banner__legenda">
+              <span class="banner__legenda-item">Foto 1 de 3 — Praia da Joaquina, Florianópolis (litoral)</span>
+              <span class="banner__legenda-item">Foto 2 de 3 — Serra do Rio do Rastro, Bom Jardim da Serra (serra)</span>
+              <span class="banner__legenda-item">Foto 3 de 3 — Araucárias no planalto serrano, São Joaquim (serra)</span>
+            </p>
           </figcaption>
         </figure>
       </div>
@@ -564,11 +566,9 @@
                      alt="Galhos e cerca cobertos por uma fina camada de neve em região serrana."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-1">Neve no Brasil?</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-1">Neve no Brasil?</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-1">
+              <div class="flip-card__face flip-card__verso" id="vs-home-1">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Santa Catarina é o estado brasileiro onde <strong>mais neva</strong>.
@@ -586,11 +586,9 @@
                      alt="Prato com ostras frescas servidas sobre gelo e limão."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-2">Capital das ostras</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-2">Capital das ostras</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-2">
+              <div class="flip-card__face flip-card__verso" id="vs-home-2">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   A maior parte das <strong>ostras cultivadas no Brasil</strong> sai
@@ -608,11 +606,9 @@
                      alt="Casa de arquitetura enxaimel com jardim florido em cidade de colonização alemã."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-3">Alemão como língua viva</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-3">Alemão como língua viva</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-3">
+              <div class="flip-card__face flip-card__verso" id="vs-home-3">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em <strong>Pomerode</strong>, o dialeto pomerano ainda é falado em
@@ -630,11 +626,9 @@
                      alt="Farol antigo à beira-mar em dia de céu nublado, na cidade de Laguna."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-4">Uma república de 4 meses</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-4">Uma república de 4 meses</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-4">
+              <div class="flip-card__face flip-card__verso" id="vs-home-4">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em 1839, Laguna foi capital da <strong>República Juliana</strong>,
@@ -791,20 +785,28 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
+           (a:visited), então o histórico do próprio navegador guarda os
+           carimbos, sem JavaScript nem localStorage. -->
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas e faça o quiz para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -812,9 +814,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>
