@@ -614,7 +614,7 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --c-alt-txt: "3 m";
   --c-cor-verao: var(--clima-5);
   --c-cor-inverno: var(--clima-3);
-  --c-pop: 540000;
+  --c-pop: 537000;
   --c-alt: 3;
   --c-fund: 1726;
   --c-verao: 28;
@@ -650,11 +650,11 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --c-regiao: "Litoral e Grande Florianópolis";
   --c-heranca: "Açoriana";
   --c-destaque: "Arranha-céus à beira-mar";
-  --c-pop-txt: "~150 mil";
+  --c-pop-txt: "~140 mil";
   --c-alt-txt: "2 m";
   --c-cor-verao: var(--clima-5);
   --c-cor-inverno: var(--clima-3);
-  --c-pop: 150000;
+  --c-pop: 139000;
   --c-alt: 2;
   --c-fund: 1964;
   --c-verao: 28;
@@ -830,11 +830,11 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --c-regiao: "Norte / Nordeste";
   --c-heranca: "Alemã";
   --c-destaque: "Cidade das Flores e da Dança";
-  --c-pop-txt: "~600 mil";
+  --c-pop-txt: "~616 mil";
   --c-alt-txt: "4 m";
   --c-cor-verao: var(--clima-5);
   --c-cor-inverno: var(--clima-2);
-  --c-pop: 600000;
+  --c-pop: 616000;
   --c-alt: 4;
   --c-fund: 1851;
   --c-verao: 26;
@@ -888,7 +888,7 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 .comparador:has(#comparar-b option[value="sao-francisco-do-sul"]:checked) > :not(.comparador__escolha) {
   --c-nome: "São Francisco do Sul";
   --c-regiao: "Norte / Nordeste";
-  --c-heranca: "Alemã";
+  --c-heranca: "Portuguesa e açoriana";
   --c-destaque: "Centro histórico tombado";
   --c-pop-txt: "~53 mil";
   --c-alt-txt: "7 m";
@@ -930,11 +930,11 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --c-regiao: "Planalto Serrano";
   --c-heranca: "Campeira";
   --c-destaque: "Maçã, vinho e neve";
-  --c-pop-txt: "~27 mil";
+  --c-pop-txt: "~26 mil";
   --c-alt-txt: "1.353 m";
   --c-cor-verao: var(--clima-4);
   --c-cor-inverno: var(--clima-1);
-  --c-pop: 27000;
+  --c-pop: 26000;
   --c-alt: 1353;
   --c-fund: 1886;
   --c-verao: 21;
@@ -951,11 +951,11 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --c-heranca: "Campeira";
   --c-destaque: "Morro da Igreja";
   --c-pop-txt: "~11 mil";
-  --c-alt-txt: "1.000 m";
+  --c-alt-txt: "915 m";
   --c-cor-verao: var(--clima-4);
   --c-cor-inverno: var(--clima-1);
   --c-pop: 11000;
-  --c-alt: 1000;
+  --c-alt: 915;
   --c-fund: 1956;
   --c-verao: 21;
   --c-inverno: 8;
@@ -1128,13 +1128,13 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 .comparador:has(#comparar-b option[value="laguna"]:checked) > :not(.comparador__escolha) {
   --c-nome: "Laguna";
   --c-regiao: "Sul";
-  --c-heranca: "Italiana";
+  --c-heranca: "Açoriana";
   --c-destaque: "Pesca com botos";
-  --c-pop-txt: "~46 mil";
+  --c-pop-txt: "~43 mil";
   --c-alt-txt: "2 m";
   --c-cor-verao: var(--clima-5);
   --c-cor-inverno: var(--clima-2);
-  --c-pop: 46000;
+  --c-pop: 43000;
   --c-alt: 2;
   --c-fund: 1676;
   --c-verao: 27;
