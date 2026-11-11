@@ -7,12 +7,10 @@
   <meta name="description" content="Site educativo sobre Santa Catarina: geografia, clima, colonização, cidades, cultura, gastronomia, turismo e economia do estado.">
   <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
 
-  <!-- Google Fonts: Fraunces (títulos), Inter (texto), JetBrains Mono (rótulos e dados) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
@@ -25,10 +23,7 @@
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ==================================================================
-       HEADER STICKY (componente reutilizável — igual em todas as páginas)
-       =================================================================== -->
-  <header class="cabecalho">
+  <header class="cabecalho cabecalho--transparente">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
         <span class="logo__marca" aria-hidden="true">SC</span>
@@ -38,8 +33,6 @@
         </span>
       </a>
 
-      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
-           Sem JavaScript a escolha vale para esta página e não fica salva. -->
       <label class="tema-botao" title="Alternar entre tema claro e escuro">
         <input class="tema-botao__caixa" type="checkbox" id="tema"
                aria-label="Alternar entre tema claro e escuro">
@@ -70,18 +63,15 @@
   
   <main id="conteudo">
 
-    <!-- ================================================================
-         BANNER ROTATIVO — 3 imagens, só HTML e CSS (rádios + @keyframes)
-         ================================================================= -->
-    <section class="banner" aria-roledescription="carrossel"
+    <section class="banner banner--foto" aria-roledescription="carrossel"
              aria-label="Paisagens de Santa Catarina">
+
+      <img class="banner__fundo" src="assets/litoral/guarda-do-embau-banner.jpg"
+           alt="Vista aérea da Guarda do Embaú: mar verde-azulado, faixa longa de areia, morros e a serra ao fundo."
+           width="2560" height="1440" decoding="async" fetchpriority="high">
 
       <div class="container banner__grade">
         <div class="banner__conteudo">
-          <p class="banner__selo">
-            <span>Atlas de campo</span>
-            <span class="banner__coord">27°35′S · 48°32′O</span>
-          </p>
           <h1>Santa Catarina: praia de manhã, <em>neve</em> à tarde</h1>
           <p class="banner__texto">
             Um estado pequeno no mapa e enorme na variedade: mais de 500 praias,
@@ -101,13 +91,9 @@
           </dl>
         </div>
 
-        <!-- Prancha com as fotos do carrossel -->
         <figure class="banner__prancha">
           <span class="banner__marca" aria-hidden="true">Prancha I — Paisagens</span>
 
-          <!-- Estado do carrossel, sem JavaScript: "auto" gira sozinho com
-               @keyframes; escolher uma foto (ponto ou seta) fixa nela. As
-               setas do teclado andam entre as fotos (é um grupo de rádios). -->
           <input class="banner__estado" type="radio" name="banner" id="banner-auto" checked
                  aria-label="Rotação automática das fotos">
           <input class="banner__estado" type="radio" name="banner" id="banner-1" aria-label="Foto 1: litoral">
@@ -119,7 +105,7 @@
             <div class="banner__slide">
               <img src="assets/litoral/litoral-praia.jpg"
                    alt="Praia de areia clara com mar aberto e morros cobertos de vegetação ao fundo, no litoral de Santa Catarina."
-                   width="1600" height="900" decoding="async" fetchpriority="high">
+                   width="1600" height="900" decoding="async">
             </div>
             <div class="banner__slide">
               <img src="assets/serra/serra-estrada.jpg"
@@ -134,7 +120,6 @@
           </div>
 
           <figcaption class="banner__rodape">
-            <!-- Controles: rótulos (<label>) que marcam os rádios acima -->
             <div class="banner__controles" aria-hidden="true">
               <label class="banner__seta banner__seta--para-3" for="banner-3" title="Foto anterior">&#8249;</label>
               <label class="banner__seta banner__seta--para-1" for="banner-1" title="Foto anterior">&#8249;</label>
@@ -165,10 +150,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         SOBRE SANTA CATARINA
-         ================================================================= -->
     <section class="secao" id="sobre">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -195,10 +176,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         MAPA + CARDS DE CARACTERÍSTICAS (duas colunas)
-         ================================================================= -->
     <section class="secao secao--clara" id="caracteristicas">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -212,7 +189,6 @@
 
         <div class="duas-colunas">
 
-          <!-- Coluna 1: mapa em SVG, contorno real do estado -->
           <figure class="mapa-quadro revelar">
             <svg class="mapa-svg" viewBox="0 0 600 380" role="img"
                  aria-labelledby="titulo-mapa-home desc-mapa-home">
@@ -276,7 +252,6 @@
               <path class="regiao" d="M482.11,218.96L481.17,223.6L481.6,226.05L483.11,226.12L484.13,227.48L483.22,228.37L483.15,230.76L481.14,233.19L478.35,242.9L478.94,244.01L478.02,245.8L479.93,247.89L477.56,249.69L475.02,254.2L474.77,258.28L471.88,262.32L469.19,270.96L469.51,273.62L470.87,275.28L464.75,283.45L464.99,285.12L461.67,285.79L450.51,291.83L432.08,304.63L422.77,312.73L406.82,329.19L395.12,343.34L385.38,357.05L382.79,357.4L383.76,356.33L382.91,354.44L379.76,354.24L373.49,351.66L372.58,347.83L367.63,345.29L363.21,344.38L360.22,347.32L349.82,350.23L350.23,352.42L354.23,355.58L356.82,359.27L356.28,360L355.4,358.4L353.89,358.75L354.73,357.22L349.94,354.89L348.6,352.67L348.33,354.88L346.49,349.31L344.24,349.44L347.42,348.33L346.78,346.49L347.97,346L347.7,343.87L351.65,345.77L349.9,347.02L349.92,348.37L351.72,346.92L352.4,344.34L351.21,342.55L351.33,340.39L354.31,340.02L351.88,340.95L353.42,343.29L358.37,342.68L357.37,341.68L359.11,340.17L358.72,337.17L361.3,338.16L360.6,336.58L362.66,336.09L362.73,332.91L363.8,332.98L363.69,330.82L359.76,331.43L363.37,329.57L365.16,326.72L362.93,326.66L365.01,322.71L366.31,322.43L365.79,321.07L363.69,320.78L363.01,317.04L364.91,312.45L363.04,307.32L363.34,301.7L364.83,299.68L366.85,299.04L365.7,297.05L368.24,295.24L369.03,297.09L370.32,296.21L369.49,298.41L371.27,294.77L373.87,295.11L374.21,291.06L375.46,291.05L375.94,288.76L379.18,285.46L379.44,287.4L381.45,286.03L381.45,287.21L386.21,287.37L388.56,286.37L391.28,283.38L390.42,280.59L391.33,278.69L399.56,272.89L398.64,271.17L400.41,267.99L398.83,267.92L398.24,265.81L400.34,262.78L398.85,261.77L402.2,254.27L401.74,251.28L399.94,251.7L401.35,249.88L401.2,248.66L399.72,248.42L401.52,247.08L401.5,243.24L405.23,237.2L409.43,237.69L409.82,236.2L413.51,235.63L413.12,232.53L415.44,231.06L417.51,224.05L420.36,222.69L421.16,218.5L422.51,218.01L432.84,222.64L434.26,221.23L435.45,225.07L439.18,225.16L443.92,223.49L446.53,229.35L450.83,232.56L451.23,235.25L452.96,235.19L454.54,231.71L457.26,230.57L457.92,232.46L462.89,231.66L465.37,232.31L465.58,233.81L474.49,232.73L474.14,230.55L473.07,230.53L474.46,227.1L476.24,226.31L479.58,221.09L482.11,218.96Z"></path>
               <text class="mapa-rotulo" x="417.74" y="282.73" text-anchor="middle">Sul</text>
 
-              <!-- Marcador da capital -->
               <g class="pino pino--capital pino--ativo" transform="translate(487.5 184.5)"><g class="pino__corpo"><path class="pino__marca" d="M0,-5.6L1.5,-1.8L5.4,-1.7L2.3,0.8L3.4,4.6L0,2.4L-3.4,4.6L-2.3,0.8L-5.4,-1.7L-1.5,-1.8Z"></path><text class="pino__nome" x="6" y="3.5">Florianópolis</text></g></g>
             </svg>
 
@@ -292,7 +267,6 @@
             </p>
           </figure>
 
-          <!-- Coluna 2: cards de dados -->
           <div class="revelar">
             <dl class="cards-dados">
               <div class="card-dado">
@@ -334,10 +308,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         CIDADES EM DESTAQUE
-         ================================================================= -->
     <section class="secao" id="cidades-destaque">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -426,10 +396,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         DIFERENCIAL: DUAS SANTA CATARINAS
-         ================================================================= -->
     <section class="secao secao--principal" id="duas-santa-catarinas">
       <div class="container">
         <div class="secao__cabecalho centralizado revelar">
@@ -443,7 +409,6 @@
 
         <div class="comparativo">
 
-          <!-- Lado 1: litoral -->
           <article class="comparativo__lado comparativo__lado--litoral revelar">
             <div class="comparativo__foto">
               <img src="assets/litoral/praia-verao.jpg"
@@ -488,7 +453,6 @@
 
           <p class="comparativo__divisor" aria-hidden="true">vs.</p>
 
-          <!-- Lado 2: serra -->
           <article class="comparativo__lado comparativo__lado--serra revelar">
             <div class="comparativo__foto">
               <img src="assets/serra/serra-geada.jpg"
@@ -541,11 +505,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         PRÉVIA DE CURIOSIDADES — flip cards
-         Viram no hover (desktop) ou no toque/Enter (mobile e teclado)
-         ================================================================= -->
     <section class="secao secao--verde" id="curiosidades-previa">
       <div class="container">
         <div class="secao__cabecalho centralizado revelar">
@@ -648,10 +607,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         FONTES
-         ================================================================= -->
     <section class="secao secao--verde" id="fontes">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -659,8 +614,7 @@
           <h2>Fontes de pesquisa</h2>
           <p class="subtitulo-secao">
             Todo o conteúdo deste site foi produzido a partir de dados públicos
-            dos portais oficiais abaixo. Os números devem ser reconferidos antes
-            da entrega, porque as estatísticas são atualizadas periodicamente.
+            dos portais oficiais abaixo.
           </p>
         </div>
 
@@ -706,10 +660,6 @@
 
   </main>
 
-
-  <!-- ==================================================================
-       FOOTER (componente reutilizável — igual em todas as páginas)
-       =================================================================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -722,7 +672,6 @@
             do IFMT — Campus Várzea Grande.
           </p>
 
-          <!-- Mapa do estado no rodapé (mesma silhueta, sem interação) -->
           <div class="rodape__mapa-estado">
             <img src="assets/mapa-sc.svg" width="600" height="380" loading="lazy" decoding="async"
                  alt="Contorno do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
@@ -785,9 +734,6 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
-           (a:visited), então o histórico do próprio navegador guarda os
-           carimbos, sem JavaScript nem localStorage. -->
       <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>

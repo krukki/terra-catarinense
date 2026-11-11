@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Repontua as candidatas já baixadas, sem novas chamadas à API.
 
 Motivo: a primeira versão do bônus geográfico procurava " sc " com espaços
@@ -28,8 +27,6 @@ SC = re.compile(
     r"rio do rastro|morro da igreja|pedra furada|joaquina|unipraias|"
     r"hercilio luz|ribeirao da ilha|lagoinha do leste)", re.I)
 
-# Outros estados/países que costumam aparecer e não servem quando a vaga
-# é explicitamente catarinense
 FORA = re.compile(
     r"(itatiaia|minas gerais|\bmg\b|rio de janeiro|\brj\b|sao paulo|\bsp\b|"
     r"parana|\bpr\b|rio grande do sul|\brs\b|bahia|amazonas|goias|"
@@ -75,7 +72,6 @@ def main():
     trocas = []
 
     for v in vagas:
-        # comida é comida em qualquer lugar; lugar tem de ser o lugar certo
         exige_sc = not v["destino"].startswith("assets/gastronomia/")
         palavras = [w for w in sem_acento(" ".join(v["busca"])).split() if len(w) > 3]
 
@@ -89,7 +85,6 @@ def main():
         if antes != depois:
             trocas.append((v["seed"], antes, depois))
 
-    # sem repetir a mesma foto em duas vagas
     usados = set()
     for v in vagas:
         v["escolhida"] = None

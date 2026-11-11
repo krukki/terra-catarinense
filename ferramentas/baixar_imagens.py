@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Baixa as fotos escolhidas do Commons e grava nas dimensões exatas da vaga.
 
 Por que recortar aqui e não confiar no Commons: o Special:FilePath?width=
@@ -33,9 +32,6 @@ CACHE = "ferramentas/_cache"
 QUALIDADE = 82
 PAUSA = 0.6
 
-# Ao recortar a altura, ancorar um pouco acima do centro: em paisagem o
-# assunto costuma ficar no terço superior, e o centro geométrico corta céu
-# demais em cima e chão demais embaixo.
 ANCORA_V = 0.42
 
 
@@ -55,17 +51,17 @@ def baixar(arquivo, largura):
 
 def recortar(origem, destino, larg, alt):
     im = Image.open(origem)
-    im = ImageOps.exif_transpose(im)          # respeita a rotação da câmera
+    im = ImageOps.exif_transpose(im)
     if im.mode not in ("RGB", "L"):
         im = im.convert("RGB")
 
     prop_alvo = larg / alt
     w, h = im.size
-    if w / h > prop_alvo:                      # sobra largura: corta dos lados
+    if w / h > prop_alvo:
         nova_w = int(round(h * prop_alvo))
         esq = (w - nova_w) // 2
         caixa = (esq, 0, esq + nova_w, h)
-    else:                                      # sobra altura: corta em cima/baixo
+    else:
         nova_h = int(round(w / prop_alvo))
         topo = int(round((h - nova_h) * ANCORA_V))
         caixa = (0, topo, w, topo + nova_h)

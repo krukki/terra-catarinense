@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
@@ -24,7 +23,6 @@
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ===================== HEADER STICKY ===================== -->
   <header class="cabecalho">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
@@ -35,8 +33,6 @@
         </span>
       </a>
 
-      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
-           Sem JavaScript a escolha vale para esta página e não fica salva. -->
       <label class="tema-botao" title="Alternar entre tema claro e escuro">
         <input class="tema-botao__caixa" type="checkbox" id="tema"
                aria-label="Alternar entre tema claro e escuro">
@@ -67,7 +63,6 @@
 
   <main id="conteudo">
 
-    <!-- ===================== HERO DA PÁGINA ===================== -->
     <section class="hero-pagina">
       <div class="container">
         <span class="etiqueta">Turismo e natureza</span>
@@ -91,10 +86,6 @@
       </div>
     </nav>
 
-
-    <!-- ================================================================
-         CLIMA
-         ================================================================= -->
     <section class="secao secao--clara" id="clima">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -132,8 +123,7 @@
           <div class="esp-topo-0 tabela-envolvida revelar" >
             <table>
               <caption>
-                Temperaturas médias aproximadas em três pontos do estado —
-                conferir séries atualizadas no INMET antes da entrega.
+                Temperaturas médias aproximadas em três pontos do estado.
               </caption>
               <thead>
                 <tr>
@@ -169,10 +159,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         VEGETAÇÃO E FAUNA
-         ================================================================= -->
     <section class="secao" id="natureza">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -268,12 +254,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         DIFERENCIAL 2 — GALERIA COM FILTRO
-         Os filtros são rádios: o CSS (:has) esconde as figuras de outra
-         categoria e um contador CSS soma as que sobraram. Sem JavaScript.
-         ================================================================= -->
     <section class="secao secao--principal" id="galeria">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -301,7 +281,6 @@
 
         <div class="galeria">
 
-          <!-- ---------- Litoral ---------- -->
           <figure class="galeria__item" data-categoria="litoral">
             <img src="assets/litoral/joaquina.jpg"
                  alt="Dunas de areia clara com mar ao fundo na Praia da Joaquina, Florianópolis."
@@ -332,7 +311,6 @@
             </figcaption>
           </figure>
 
-          <!-- ---------- Serra ---------- -->
           <figure class="galeria__item" data-categoria="serra">
             <img src="assets/serra/rio-do-rastro.jpg"
                  alt="Curvas da Serra do Rio do Rastro vistas do mirante, com nuvens abaixo da estrada."
@@ -363,7 +341,6 @@
             </figcaption>
           </figure>
 
-          <!-- ---------- Cidades ---------- -->
           <figure class="galeria__item" data-categoria="cidades">
             <img src="assets/cidades/ponte-hercilio-luz.jpg"
                  alt="Ponte Hercílio Luz iluminada ao anoitecer, ligando a ilha ao continente."
@@ -394,7 +371,6 @@
             </figcaption>
           </figure>
 
-          <!-- ---------- Gastronomia ---------- -->
           <figure class="galeria__item" data-categoria="gastronomia">
             <img src="assets/gastronomia/ostras-bandeja.jpg"
                  alt="Bandeja de ostras frescas abertas, servidas com limão."
@@ -426,17 +402,11 @@
           </figure>
         </div>
 
-        <!-- Vem depois das fotos para o contador CSS já ter somado; o CSS
-             põe a linha de volta acima da galeria -->
         <p class="galeria-contador"></p>
         </div>
       </div>
     </section>
 
-
-    <!-- ================================================================
-         ROTEIROS
-         ================================================================= -->
     <section class="secao" id="roteiros">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -520,8 +490,6 @@
 
   </main>
 
-
-  <!-- ===================== FOOTER ===================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -596,9 +564,6 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
-           (a:visited), então o histórico do próprio navegador guarda os
-           carimbos, sem JavaScript nem localStorage. -->
       <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>

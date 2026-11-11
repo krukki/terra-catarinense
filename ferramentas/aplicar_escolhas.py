@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Aplica ferramentas/escolhas.json de volta em candidatas.json.
 
 A folha de contato (contato.html) devolve uma lista
@@ -51,10 +50,9 @@ def indice_da_escolha(vaga, pedido):
                 return i, None
         return None, "arquivo '%s' nao esta mais entre as candidatas" % arquivo[:45]
 
-    # sem nome: cai no indice, que so vale se a lista nao tiver sido reordenada
     i = pedido.get("escolhida")
     if i is None:
-        return None, None                      # vaga recusada de proposito
+        return None, None
     if not isinstance(i, int) or not (0 <= i < len(vaga["candidatas"])):
         return None, "indice %r fora da lista de %d candidatas" % (i, len(vaga["candidatas"]))
     return i, None
@@ -94,7 +92,7 @@ def main():
     for seed, de, para, destino in mudadas + recusadas:
         print("  %-28s %s\n  %-28s -> %s" % (seed, de[:46], "", para[:46]))
         if os.path.exists(destino) and not seco:
-            os.remove(destino)                 # forca o baixar_imagens a refazer
+            os.remove(destino)
 
     print("\n%d escolhas trocadas, %d recusadas, %d sem mudanca, %d com problema"
           % (len(mudadas), len(recusadas), iguais, len(erros)))
@@ -112,7 +110,7 @@ def main():
     tmp = CANDIDATAS + ".tmp"
     with io.open(tmp, "w", encoding="utf-8") as f:
         json.dump(vagas, f, ensure_ascii=False, indent=1)
-    os.replace(tmp, CANDIDATAS)                # troca atomica: nunca meio gravado
+    os.replace(tmp, CANDIDATAS)
     print("gravado em %s (copia do anterior em %s.bak)" % (CANDIDATAS, CANDIDATAS))
     print("agora rode:  python ferramentas/baixar_imagens.py")
 

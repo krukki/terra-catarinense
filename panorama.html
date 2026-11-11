@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
@@ -24,7 +23,6 @@
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ===================== HEADER STICKY ===================== -->
   <header class="cabecalho">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
@@ -35,8 +33,6 @@
         </span>
       </a>
 
-      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
-           Sem JavaScript a escolha vale para esta página e não fica salva. -->
       <label class="tema-botao" title="Alternar entre tema claro e escuro">
         <input class="tema-botao__caixa" type="checkbox" id="tema"
                aria-label="Alternar entre tema claro e escuro">
@@ -67,7 +63,6 @@
 
   <main id="conteudo">
 
-    <!-- ===================== HERO DA PÁGINA ===================== -->
     <section class="hero-pagina" id="geografia">
       <div class="container">
         <span class="etiqueta">Geografia, economia e gastronomia</span>
@@ -89,10 +84,6 @@
       </div>
     </nav>
 
-
-    <!-- ================================================================
-         GEOGRAFIA
-         ================================================================= -->
     <section class="secao">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -181,10 +172,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         ECONOMIA
-         ================================================================= -->
     <section class="secao secao--clara" id="economia">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -262,8 +249,7 @@
         <div class="tabela-envolvida revelar">
           <table>
             <caption>
-              Panorama socioeconômico de Santa Catarina (dados aproximados —
-              conferir os valores mais recentes no IBGE antes da entrega).
+              Panorama socioeconômico de Santa Catarina (dados aproximados).
             </caption>
             <thead>
               <tr>
@@ -278,11 +264,11 @@
               </tr>
               <tr>
                 <th scope="row">IDH</th>
-                <td>0,792 — um dos três mais altos do país</td>
+                <td>0,833 (2024) — o terceiro mais alto do país, atrás do Distrito Federal e de São Paulo</td>
               </tr>
               <tr>
                 <th scope="row">Expectativa de vida</th>
-                <td>Cerca de 80 anos, a maior entre os estados</td>
+                <td>Cerca de 81 anos (2024), a maior entre os estados</td>
               </tr>
               <tr>
                 <th scope="row">Principais exportações</th>
@@ -290,7 +276,7 @@
               </tr>
               <tr>
                 <th scope="row">Taxa de urbanização</th>
-                <td>Aproximadamente 84% da população em áreas urbanas</td>
+                <td>88,4% da população em áreas urbanas (Censo 2022)</td>
               </tr>
             </tbody>
           </table>
@@ -298,10 +284,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         GASTRONOMIA
-         ================================================================= -->
     <section class="secao" id="gastronomia">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -421,10 +403,6 @@
 
   </main>
 
-
-  <!-- ==================================================================
-       FOOTER (componente reutilizável — igual em todas as páginas)
-       =================================================================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -499,9 +477,6 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
-           (a:visited), então o histórico do próprio navegador guarda os
-           carimbos, sem JavaScript nem localStorage. -->
       <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>

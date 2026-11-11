@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
@@ -24,7 +23,6 @@
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ===================== HEADER STICKY ===================== -->
   <header class="cabecalho">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
@@ -35,8 +33,6 @@
         </span>
       </a>
 
-      <!-- Tema: um checkbox inverte a preferência do sistema (só CSS, via :has).
-           Sem JavaScript a escolha vale para esta página e não fica salva. -->
       <label class="tema-botao" title="Alternar entre tema claro e escuro">
         <input class="tema-botao__caixa" type="checkbox" id="tema"
                aria-label="Alternar entre tema claro e escuro">
@@ -67,7 +63,6 @@
 
   <main id="conteudo">
 
-    <!-- ===================== HERO DA PÁGINA ===================== -->
     <section class="hero-pagina">
       <div class="container">
         <span class="etiqueta">Cidades e regiões</span>
@@ -89,18 +84,6 @@
       </div>
     </nav>
 
-
-    <!-- ================================================================
-         DIFERENCIAIS 1, 2 E 3 — ATLAS INTERATIVO
-         1. Mapa-atlas: cada região do SVG é clicável (role="button") e o
-            mapa dá zoom nela, animando o viewBox. Pinos marcam 28 cidades.
-         2. Camada de clima: os botões Verão/Inverno repintam as regiões
-            pela temperatura média (mapa coroplético com legenda).
-         3. Monte seu roteiro: no modo roteiro, os pinos viram paradas; o
-            mapa traça a rota e soma a distância em linha reta.
-         Os botões abaixo do mapa fazem o mesmo que clicar nas regiões e
-         garantem uso por teclado e em telas pequenas.
-         ================================================================= -->
     <section class="secao" id="mapa">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -114,8 +97,6 @@
         </div>
 
         <div class="atlas" data-atlas>
-          <!-- Alvos das âncoras (#regiao-serra, #cidade-blumenau...): o
-               :target delas diz ao CSS qual região aproximar -->
           <div class="atlas__alvos" aria-hidden="true">
             <span class="atlas__alvo" id="regiao-litoral"></span>
             <span class="atlas__alvo" id="regiao-vale"></span>
@@ -155,7 +136,6 @@
           </div>
 
           <figure class="atlas__prancha revelar">
-            <!-- Barra de ferramentas: rádios e checkbox (estado lido pelo CSS) -->
             <div class="atlas__barra">
               <div class="atlas__camadas" role="radiogroup" aria-label="Camada do mapa">
                 <input class="estado" type="radio" name="camada" id="camada-regioes" checked>
@@ -202,7 +182,6 @@
                 </clipPath>
               </defs>
 
-              <!-- Tudo o que se aproxima no zoom (transform no CSS, por região) -->
               <g class="mapa-camada">
               <path class="mapa-oceano" d="M492,0L600,0L600,380L378,380L386,357L406,329L432,305L462,286L471,262L479,240L486,213L499,184L506,160L495,146L488,128L486,102L479,82L492,48L485,22L492,0Z"></path>
               <g class="mapa-graticula" aria-hidden="true">
@@ -260,7 +239,6 @@
                 </a>
               </g>
 
-              <!-- Sombreado de relevo: ruído iluminado, recortado no contorno do estado -->
               <rect class="mapa-relevo" x="0" y="0" width="600" height="380" clip-path="url(#recorte-sc)" filter="url(#relevo)"></rect>
 
               <g class="mapa-rotulos" aria-hidden="true">
@@ -357,7 +335,6 @@
               </g>
             </svg>
 
-              <!-- Rosa dos ventos e escala gráfica, por cima do mapa -->
               <svg class="atlas__rosa" viewBox="-20 -24 40 46" aria-hidden="true" focusable="false">
                 <circle r="11"></circle>
                 <path class="atlas__rosa-norte" d="M0,-18L4,0L0,-3L-4,0Z"></path>
@@ -375,7 +352,6 @@
               <a class="atlas__recentrar" href="#mapa">Ver o estado inteiro</a>
             </div>
 
-            <!-- Legenda da camada de clima -->
             <div class="atlas__legenda">
               <p class="atlas__legenda-titulo">
                 Temperatura média aproximada no <span class="atlas__legenda-verao">verão</span><span class="atlas__legenda-inverno">inverno</span>
@@ -396,7 +372,6 @@
               Florianópolis.
             </figcaption>
 
-            <!-- Mesma função do mapa, em botões -->
             <nav class="regiao-botoes" aria-label="Selecionar região">
               <a class="regiao-botao" href="#regiao-litoral" data-regiao="litoral">Litoral</a>
               <a class="regiao-botao" href="#regiao-vale" data-regiao="vale">Vale do Itajaí</a>
@@ -408,8 +383,6 @@
           </figure>
 
           <div class="atlas__lateral">
-            <!-- Um painel por região, todos no HTML: o CSS mostra o da região
-                 escolhida (âncora :target). Sem escolha, aparece o Litoral. -->
             <article class="painel-regiao" data-painel="litoral" aria-labelledby="painel-titulo-litoral">
               <div class="painel-regiao__foto">
                 <img src="assets/cidades/ponte-hercilio-luz.jpg"
@@ -630,9 +603,6 @@
               </div>
             </article>
 
-            <!-- DIFERENCIAL 3 — Roteiros sugeridos (aparece com "Roteiros sugeridos"
-                 marcado). Sem JavaScript não dá para montar um roteiro livre:
-                 os percursos e as distâncias já vêm calculados. -->
             <section class="roteiro" id="roteiro" aria-labelledby="titulo-roteiro">
               <p class="painel-regiao__sobre">Caderno de viagem</p>
               <h3 id="titulo-roteiro">Roteiros sugeridos</h3>
@@ -706,13 +676,6 @@
       </div>
     </section>
 
-
-<!-- ================================================================
-         DIFERENCIAL 8 — COMPARADOR DE CIDADES (só HTML e CSS)
-         O CSS lê a opção marcada de cada <select> (option:checked) e
-         preenche a tabela com os dados da cidade; a distância é calculada
-         no próprio CSS (fórmula de haversine com sin, cos e sqrt).
-         ================================================================= -->
     <section class="secao secao--principal" id="comparar" aria-labelledby="titulo-comparar">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -883,8 +846,6 @@
             </table>
           </div>
 
-          <!-- Frase-resumo: o texto fixo está aqui; nomes e números vêm do
-               CSS, e a frase certa aparece conforme a comparação -->
           <p class="comparador__resumo">
             <span class="cmp-frase" data-frase="alt-igual"><span class="cmp-t" data-t="a-nome"></span> e <span class="cmp-t" data-t="b-nome"></span> ficam praticamente na mesma altitude.</span>
             <span class="cmp-frase" data-frase="alt-a"><span class="cmp-t" data-t="a-nome"></span> fica <span class="cmp-dif-alt"></span> m mais alta que <span class="cmp-t" data-t="b-nome"></span>.</span>
@@ -900,10 +861,6 @@
       </div>
     </section>
 
-
-<!-- ================================================================
-         CIDADES POR REGIÃO
-         ================================================================= -->
     <section class="secao secao--clara" id="cidades">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -915,7 +872,6 @@
           </p>
         </div>
 
-        <!-- ---------- Litoral ---------- -->
         <h3 class="revelar" id="litoral">Litoral e Grande Florianópolis</h3>
         <div class="esp-topo-2 grade-cards" >
 
@@ -965,7 +921,6 @@
           </article>
         </div>
 
-        <!-- ---------- Vale do Itajaí ---------- -->
         <h3 class="esp-topo-7 revelar" id="vale" >Vale do Itajaí</h3>
         <div class="esp-topo-2 grade-cards" >
 
@@ -1014,7 +969,6 @@
           </article>
         </div>
 
-        <!-- ---------- Norte ---------- -->
         <h3 class="esp-topo-7 revelar" id="norte" >Norte e Nordeste</h3>
         <div class="esp-topo-2 grade-cards" >
 
@@ -1041,7 +995,6 @@
           </article>
         </div>
 
-        <!-- ---------- Planalto Serrano ---------- -->
         <h3 class="esp-topo-7 revelar" id="serra" >Planalto Serrano</h3>
         <div class="esp-topo-2 grade-cards" >
 
@@ -1090,7 +1043,6 @@
           </article>
         </div>
 
-        <!-- ---------- Oeste e Sul ---------- -->
         <h3 class="esp-topo-7 revelar" id="oeste-sul" >Oeste e Sul</h3>
         <div class="esp-topo-2 grade-cards" >
 
@@ -1153,8 +1105,6 @@
 
   </main>
 
-
-  <!-- ===================== FOOTER ===================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -1229,9 +1179,6 @@
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: cada carimbo é um link. O CSS pinta os já visitados
-           (a:visited), então o histórico do próprio navegador guarda os
-           carimbos, sem JavaScript nem localStorage. -->
       <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>

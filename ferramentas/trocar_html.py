@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Troca as URLs do picsum pelas fotos definitivas de assets/ nas paginas.
 
 O vinculo entre a vaga e a tag <img> e o seed da URL
@@ -37,8 +36,6 @@ MANUAIS = "ferramentas/fontes_manuais.json"
 CREDITOS = "ferramentas/creditos.html"
 
 PICSUM = re.compile(r"https://picsum\.photos/seed/([A-Za-z0-9_-]+)/(\d+)/(\d+)")
-# so comentario que ocupa a linha inteira: os de bloco (varias linhas)
-# explicam a secao e sao removidos a mao.
 COMENTARIO_TROCAR = re.compile(r"^[ \t]*<!--[^\n]*TROCAR:[^\n]*-->[ \t]*\r?\n",
                                re.MULTILINE)
 
@@ -59,7 +56,7 @@ def main():
     seco = "--seco" in sys.argv
     limpar = "--limpar" in sys.argv
 
-    if "--creditos" in sys.argv:      # so regera a lista, sem tocar no HTML
+    if "--creditos" in sys.argv:
         creditos()
         return
 
@@ -73,8 +70,6 @@ def main():
             problemas.append((pagina, "pagina do manifesto nao existe"))
             continue
 
-        # newline="" nos dois lados: o projeto tem paginas em LF e
-        # paginas em CRLF, e converter uma delas viraria um diff inteiro.
         html = io.open(pagina, encoding="utf-8", newline="").read()
         contador = [0]
 

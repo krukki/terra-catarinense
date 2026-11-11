@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Busca candidatas no Wikimedia Commons para cada vaga do manifesto.
 
 Escreve ferramentas/candidatas.json. Pode ser interrompido e retomado.
@@ -40,7 +39,6 @@ SAIDA = "ferramentas/candidatas.json"
 LICENCAS_OK = re.compile(r"^(cc0|cc-by|cc-by-sa|pd|public domain|no restriction)", re.I)
 EXT_OK = (".jpg", ".jpeg", ".png", ".webp")
 
-# Nomes que quase nunca são a fotografia que queremos
 SUSPEITO = re.compile(
     r"(\.pdf|\.djvu|\.svg|\.tif|page[ _-]?\d|livro|jornal|relat[oó]rio|"
     r"plano de manejo|bras[aã]o|coat of arms|flag|bandeira|logo|mapa|map of|"
@@ -143,18 +141,14 @@ def pontuar(c, vaga, palavras):
     """Maior é melhor. Orientação pesa mais que resolução."""
     p = 0.0
 
-    # orientação: recortar retrato para uma vaga deitada joga fora
-    # metade da foto, então casar a orientação vale muito
     prop_vaga = vaga["largura"] / vaga["altura"]
     prop_foto = c["largura"] / c["altura"]
     if (prop_vaga >= 1) == (prop_foto >= 1):
         p += 30
     p -= min(20, abs(math.log(prop_foto / prop_vaga)) * 20)
 
-    # resolução, com retorno decrescente
     p += min(15, math.log(c["largura"] * c["altura"] / 1e5 + 1) * 5)
 
-    # palavra-chave do assunto no nome ou na descrição
     texto = sem_acento(c["arquivo"] + " " + c["descricao"])
     p += sum(6 for w in palavras if w in texto)
 
@@ -181,14 +175,12 @@ def main():
         print("[%2d/%d] %s" % (i, len(vagas), vaga["seed"]))
         titulos = []
 
-        # 1. categorias
         for termo in vaga["busca"][:1]:
             for cat in buscar_categoria(termo):
                 for t in arquivos_da_categoria(cat):
                     if t not in titulos:
                         titulos.append(t)
 
-        # 2. busca textual, como complemento
         for termo in vaga["busca"]:
             for t in buscar_arquivos(termo):
                 if t not in titulos:
@@ -212,7 +204,6 @@ def main():
         io.open(SAIDA, "w", encoding="utf-8").write(
             json.dumps(resultado, ensure_ascii=False, indent=1))
 
-    # --- escolha final, sem repetir a mesma foto em duas vagas ---
     usados = set()
     for item in resultado:
         item["escolhida"] = None

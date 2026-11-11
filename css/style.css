@@ -1,37 +1,4 @@
-/* ==========================================================================
-   TERRA CATARINENSE 
-   Técnico em Informática / Front-End
-   IFMT Campus Várzea Grande — Ronaldo Heitor Marques de Oliveira — 4 INF
 
-   SUMÁRIO
-   01. Reset e base
-   02. Variáveis (:root)
-   03. Tipografia e utilitários
-   04. Acessibilidade (skip link, foco)
-   05. Header e menu sticky
-   06. Banner rotativo (home)
-   07. Seções genéricas
-   08. Mapa + cards de características
-   09. Cards de cidades / regiões
-   10. Painel "Duas Santa Catarinas"
-   11. Flip cards (curiosidades)
-   12. Linha do tempo (cultura.html)
-   13. Atlas interativo (cidades.html): mapa, clima e roteiro
-   14. Galeria com filtro (turismo.html)
-   15. Blocos de conteúdo (economia, fauna, gastronomia, fontes)
-   16. Quiz "Qual Santa Catarina é a sua?" (curiosidades.html)
-   16b. Calendário de festas (cultura.html)
-   16c. Comparador de cidades (cidades.html)
-   17. Footer e passaporte catarinense
-   18. Animações de scroll-reveal
-   19. Media queries (tablet / desktop)
-   20. Preferências do usuário (movimento reduzido, impressão)
-   ========================================================================== */
-
-
-/* ==========================================================================
-   01. RESET E BASE
-   ========================================================================== */
 
 *,
 *::before,
@@ -40,7 +7,6 @@
 }
 
 html {
-  /* 1rem = 16px, mas respeitando o zoom/tamanho de fonte do navegador */
   font-size: 100%;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -66,7 +32,6 @@ svg {
 
 img {
   height: auto;
-  /* cor de espera enquanto a foto carrega — acompanha o tema */
   background-color: var(--cor-img-vazia);
 }
 
@@ -94,92 +59,74 @@ a:hover {
   color: var(--cor-destaque);
 }
 
-
-/* ==========================================================================
-   02. VARIÁVEIS (:root)
-   Identidade "Atlas de campo": papel, tinta, oceano, araucária e terracota.
-   ========================================================================== */
-
 :root {
-  /* --- Paleta principal --- */
-  --cor-principal: #1F4E5F;   /* Azul Oceano      */
-  --cor-secundaria: #3F5B3A;  /* Verde Araucária  */
-  --cor-destaque: #B5452B;      /* Terracota Enxaimel — texto/borda */
-  --cor-destaque-fundo: #A63D25; /* fundo com texto branco por cima */
-  --cor-fundo: #F3EEE4;       /* Papel de atlas   */
-  --cor-texto: #1B1F1D;       /* Tinta            */
+  --cor-principal: #1F4E5F;
+  --cor-secundaria: #3F5B3A;
+  --cor-destaque: #B5452B;
+  --cor-destaque-fundo: #A63D25;
+  --cor-fundo: #F3EEE4;
+  --cor-texto: #1B1F1D;
 
-  /* --- Variações derivadas (usadas para garantir contraste AA) --- */
-  --cor-principal-escura: #173C49;  /* superfície escura */
-  --cor-acento: #1F4E5F;            /* texto/traço de destaque */
+  --cor-principal-escura: #173C49;
+  --cor-acento: #1F4E5F;
   --cor-principal-clara: #E3E6DF;
-  --cor-secundaria-escura: #34502F;  /* texto verde sobre fundo claro */
-  --cor-secundaria-fundo: #34502F;   /* fundo com texto claro por cima */
+  --cor-secundaria-escura: #34502F;
+  --cor-secundaria-fundo: #34502F;
   --cor-secundaria-clara: #E7E6D6;
   --cor-destaque-escura: #8E3219;
   --cor-destaque-clara: #F3E0D6;
   --cor-texto-suave: #5A5A52;
-  --cor-borda: #CFC5B3;         /* fio sépia das réguas e molduras */
-  --cor-branco: #FFFFFF;        /* texto/ícone sobre fundo escuro */
-  --cor-sobre-principal: #FFFFFF; /* texto por cima de --cor-principal */
-  --cor-superficie: #FAF7F0;    /* fundo de cards e painéis */
+  --cor-borda: #CFC5B3;
+  --cor-branco: #FFFFFF;
+  --cor-sobre-principal: #FFFFFF;
+  --cor-superficie: #FAF7F0;
 
-  /* --- Tipografia --- */
   --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
   --fonte-texto: "Inter", "Segoe UI", system-ui, sans-serif;
   --fonte-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
-  /* Antes era a Caveat. Os "selos" agora são a serifada em itálico. */
   --fonte-manuscrita: var(--fonte-titulo);
 
-  /* --- Espaçamento e formas --- */
   --largura-max: 76rem;
-  --largura-texto: 42rem;    /* leitura confortável */
-  --raio: 0.125rem;          /* atlas impresso: cantos quase retos */
+  --largura-texto: 42rem;
+  --raio: 0.125rem;
   --raio-pequeno: 0.125rem;
   --sombra: none;
   --sombra-forte: 0 1.25rem 2.5rem -1.25rem rgb(27 31 29 / 0.45);
   --altura-header: 4rem;
   --transicao: 0.25s ease;
 
-  /* --- Texto claro sobre fundo escuro (banner, hero, comparativo) --- */
   --cor-texto-claro: #F3EEE4;
   --cor-texto-claro-suave: #D9CFBC;
 
-  /* --- Acentos e superfícies --- */
-  --cor-areia: #E9C98F;        /* selos e marcadores sobre fundo escuro */
-  --cor-zebra: transparent;    /* tabelas agora só com fios entre linhas */
-  --cor-img-vazia: #E2DACB;    /* fundo enquanto a foto não carrega */
+  --cor-areia: #E9C98F;
+  --cor-zebra: transparent;
+  --cor-img-vazia: #E2DACB;
   --cor-mapa-regiao: #E6DFCF;
   --cor-mapa-regiao-hover: #D6CCB5;
-  --cor-mapa-oceano: #1F4E5F;  /* hachura do oceano */
-  --cor-mapa-linha: #8C8472;   /* graticulado, escala e rosa dos ventos */
-  --relevo-opacidade: 0.3;     /* sombreado de relevo por cima das regiões */
+  --cor-mapa-oceano: #1F4E5F;
+  --cor-mapa-linha: #8C8472;
+  --relevo-opacidade: 0.3;
 
-  /* Escala do clima (mapa): do frio ao quente */
   --clima-1: #2F5D8C;
   --clima-2: #6F9CB8;
   --clima-3: #CFC7A8;
   --clima-4: #D9925B;
   --clima-5: #B5452B;
 
-  /* --- Rodapé (paleta escura própria) --- */
   --cor-rodape-fundo: #16211F;
   --cor-rodape-texto: #E6DFD0;
   --cor-rodape-link: #D9CFBC;
   --cor-rodape-titulo: #B8AE98;
   --cor-rodape-base: #B8AE98;
-  --cor-rodape-carimbo: #F0A88E; /* carimbos do passaporte */
+  --cor-rodape-carimbo: #F0A88E;
 
-  /* --- Componentes de cor usados com alfa variável --- */
-  --cor-veu: 18 26 24;         /* véu escuro sobre fotos */
+  --cor-veu: 18 26 24;
   --cor-cabecalho: rgb(243 238 228 / 0.94);
   --cor-sombra: 27 31 29;
 
-  /* Textura de papel e curvas de nível (SVG inline, sem arquivo extra) */
   --textura-papel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   --curvas-nivel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300' viewBox='0 0 600 300' fill='none' stroke='%238C8472' stroke-opacity='.3'%3E%3Cpath d='M-20 250C60 200 120 240 200 190S340 120 420 150 560 210 640 160'/%3E%3Cpath d='M-20 220C70 170 130 205 205 160S335 90 420 118 555 180 640 130'/%3E%3Cpath d='M-20 190C80 140 140 170 210 130S330 62 420 88 550 150 640 100'/%3E%3Cpath d='M-20 160C90 112 150 136 215 102S325 36 420 58 545 120 640 70'/%3E%3Cpath d='M150 110c30-26 80-40 120-30s40 40 0 52-100 6-120-22z'/%3E%3Cpath d='M175 108c20-14 55-22 80-15s24 24 0 31-66 2-80-16z'/%3E%3Cpath d='M-20 280C70 240 140 270 215 228S350 160 430 186 565 240 640 196'/%3E%3C/svg%3E");
 
-  /* --- Escala de espaçamento --- */
   --espaco-xs: 0.5rem;
   --espaco-sm: 0.75rem;
   --espaco-md: 1.25rem;
@@ -189,21 +136,10 @@ a:hover {
   --raio-pilula: 999px;
 }
 
-
-
-/* ==========================================================================
-   02b. TEMA ESCURO — "carta náutica noturna"
-   Só os tokens mudam — nenhum componente precisa saber que o tema existe.
-   Sem JavaScript: o site segue a preferência do sistema, e o checkbox
-   #tema do cabeçalho inverte essa preferência (lido com :has). A escolha
-   vale para a página aberta e não fica salva entre páginas.
-   ========================================================================== */
-
 :root {
   color-scheme: light;
 }
 
-/* Sistema escuro e checkbox desmarcado: tema escuro */
 @media (prefers-color-scheme: dark) {
   :root:not(:has(#tema:checked)) {
     color-scheme: dark;
@@ -244,7 +180,6 @@ a:hover {
   }
 }
 
-/* Sistema claro e checkbox marcado: tema escuro */
 @media not (prefers-color-scheme: dark) {
 :root:has(#tema:checked) {
   color-scheme: dark;
@@ -285,8 +220,6 @@ a:hover {
 }
 }
 
-
-/* --- Botão de alternância --- */
 .tema-botao {
   display: grid;
   place-items: center;
@@ -308,8 +241,6 @@ a:hover {
   border-color: var(--cor-texto);
 }
 
-/* O checkbox fica invisível dentro do rótulo, mas continua focável: o
-   foco do teclado aparece no botão inteiro */
 .tema-botao__caixa {
   position: absolute;
   opacity: 0;
@@ -323,7 +254,6 @@ a:hover {
   outline-offset: 0.1875rem;
 }
 
-/* Lua no tema claro, sol no escuro */
 .tema-botao__icone--escuro { display: none; }
 
 @media not (prefers-color-scheme: dark) {
@@ -336,19 +266,13 @@ a:hover {
   :root:not(:has(#tema:checked)) .tema-botao__icone--escuro { display: block; }
 }
 
-/* ==========================================================================
-   03. TIPOGRAFIA E UTILITÁRIOS
-   ========================================================================== */
-
 body {
   font-family: var(--fonte-texto);
   font-size: 1rem;
   line-height: 1.7;
   color: var(--cor-texto);
   background-color: var(--cor-fundo);
-  /* grão de papel, bem de leve, por cima da cor de fundo */
   background-image: var(--textura-papel);
-  /* numeração automática das seções: "01 — Mapa", "02 — Cidades"... */
   counter-reset: secao;
   -webkit-font-smoothing: antialiased;
 }
@@ -383,7 +307,6 @@ h4 {
   letter-spacing: -0.01em;
 }
 
-/* Palavra em destaque dentro de um título: itálico em terracota */
 h1 em,
 h2 em {
   font-style: italic;
@@ -400,7 +323,6 @@ strong {
   color: var(--cor-texto);
 }
 
-/* Selo — "Você sabia?", assinaturas e destaques leves, em serifa itálica */
 .selo {
   font-family: var(--fonte-manuscrita);
   font-size: 1.4rem;
@@ -426,8 +348,6 @@ strong {
   margin-inline: auto;
 }
 
-/* Rótulo técnico: fonte mono, caixa alta, espaçada. É a "voz" do atlas
-   em etiquetas, legendas, dados e botões. */
 .etiqueta {
   display: inline-flex;
   align-items: center;
@@ -453,7 +373,6 @@ strong {
   margin-inline: auto;
 }
 
-/* Botões: retos, com rótulo mono */
 .botao {
   display: inline-flex;
   align-items: center;
@@ -500,8 +419,6 @@ strong {
   color: var(--cor-fundo);
 }
 
-/* Feedback de "pressionado" — antes nenhum botão do site tinha :active,
-   então o clique não dava nenhuma resposta tátil. */
 .botao:active:not(:disabled),
 .regiao-botao:active,
 .filtro-botao:active,
@@ -514,7 +431,6 @@ strong {
   transform: translateY(0.0625rem) scale(0.98);
 }
 
-/* Link com seta — sempre com texto descritivo, nunca "clique aqui" */
 .link-seta {
   display: inline-flex;
   align-items: center;
@@ -531,7 +447,7 @@ strong {
 }
 
 .link-seta::after {
-  content: "\2192";           /* → */
+  content: "\2192";
   transition: transform var(--transicao);
 }
 
@@ -544,10 +460,6 @@ strong {
   transform: translateX(0.25rem);
 }
 
-
-
-/* --- Utilitárias de espaçamento vertical ---
-   Substituem os 34 atributos style= que existiam nas páginas. --- */
 .esp-topo-0 { margin-top: 0; }
 .esp-topo-1 { margin-top: 1rem; }
 .esp-topo-2 { margin-top: var(--espaco-md); }
@@ -559,8 +471,6 @@ strong {
 
 .canto-pequeno { border-radius: var(--raio-pequeno); }
 
-/* Grade que se ajusta sozinha — flip cards, blocos de conteúdo e pratos
-   tinham três regras idênticas. */
 .grade-flip,
 .grade-blocos,
 .grade-pratos {
@@ -569,12 +479,6 @@ strong {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
-
-/* ==========================================================================
-   04. ACESSIBILIDADE
-   ========================================================================== */
-
-/* Link "pular para o conteúdo" — primeiro item tabulável da página */
 .pular-conteudo {
   position: absolute;
   left: 50%;
@@ -595,22 +499,16 @@ strong {
   color: var(--cor-branco);
 }
 
-/* Foco visível e consistente em todo o site (navegação por teclado) */
 :focus-visible {
   outline: 0.1875rem solid var(--cor-destaque);
   outline-offset: 0.1875rem;
   border-radius: 0.125rem;
 }
 
-/* Compensa o header fixo ao pular para uma âncora */
 :target {
   scroll-margin-top: calc(var(--altura-header) + 1.5rem);
 }
 
-
-/* Em telas estreitas o rótulo textual do hambúrguer sai de cena para o
-   nome do site caber numa linha: o ícone de barras já identifica o botão,
-   e o texto continua lá para leitores de tela. */
 @media (max-width: 26rem) {
   .menu-botao__rotulo {
     position: absolute;
@@ -622,20 +520,12 @@ strong {
   }
 }
 
-
-
-
-/* ==========================================================================
-   05. HEADER E MENU STICKY
-   ========================================================================== */
-
 .cabecalho {
   position: sticky;
   top: 0;
   z-index: 100;
   background-color: var(--cor-cabecalho);
   backdrop-filter: blur(0.5rem);
-  /* fio duplo, como o cabeçalho de uma prancha impressa */
   border-bottom: 0.1875rem double var(--cor-borda);
 }
 
@@ -653,9 +543,6 @@ strong {
   }
 }
 
-/* --- Logo: selo circular "SC" + nome em serifa ---
-   O logo é quem cede espaço quando a barra aperta (320px com o botão de
-   tema ao lado do hambúrguer), em vez de empurrar os botões para fora. */
 .logo {
   min-width: 0;
   flex: 0 1 auto;
@@ -712,8 +599,6 @@ strong {
   color: var(--cor-texto-suave);
 }
 
-/* No celular o subtítulo quebrava em duas linhas e espremia o nome:
-   abaixo de 30rem fica só o nome, numa linha. */
 @media (max-width: 29.99rem) {
   .logo__texto small {
     display: none;
@@ -724,7 +609,6 @@ strong {
   }
 }
 
-/* --- Botão hamburguer (só no mobile) --- */
 .menu-botao {
   display: inline-flex;
   align-items: center;
@@ -764,7 +648,6 @@ strong {
 .menu-botao__barras span    { top: 0.3rem; }
 .menu-botao__barras::after  { top: 0.6rem; }
 
-/* O rótulo troca de "Menu" para "Fechar" com o menu aberto */
 .menu-botao__rotulo--fechar,
 :root:has(.navegacao:popover-open) .menu-botao__rotulo--abrir {
   display: none;
@@ -786,10 +669,6 @@ strong {
   transform: translateY(-0.3rem) rotate(-45deg);
 }
 
-/* --- Lista de navegação ---
-   No celular o <nav> é um popover: o botão abre (popovertarget), e Esc ou
-   um clique fora fecham, tudo nativo do navegador. Ele aparece na camada
-   de cima, logo abaixo do cabeçalho. */
 .navegacao {
   position: fixed;
   inset: var(--altura-header) 0 auto 0;
@@ -830,7 +709,6 @@ strong {
   text-decoration: none;
 }
 
-/* No celular o menu vira um índice numerado, como o sumário de um atlas */
 .navegacao__lista li {
   counter-increment: item-menu;
 }
@@ -846,18 +724,72 @@ strong {
   color: var(--cor-destaque);
 }
 
-/* Página atual — marcada com aria-current="page" no HTML */
 .navegacao__lista a[aria-current="page"] {
   color: var(--cor-destaque);
   font-style: italic;
 }
 
+@property --sobre-foto {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
 
-/* ==========================================================================
-   06. BANNER ROTATIVO (apenas index.html)
-   Capa editorial: título grande no papel e as fotos numa "prancha"
-   emoldurada ao lado. O carrossel continua o mesmo; só mudou a moldura.
-   ========================================================================== */
+@keyframes cabecalho-solido {
+  from {
+    --sobre-foto: 1;
+    background-color: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: blur(0);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  .cabecalho--transparente {
+    --cab-tinta: color-mix(in srgb, var(--cor-texto-claro) calc(var(--sobre-foto) * 100%), var(--cor-texto));
+    --cab-tinta-suave: color-mix(in srgb, var(--cor-texto-claro-suave) calc(var(--sobre-foto) * 100%), var(--cor-texto-suave));
+    --cab-fio: color-mix(in srgb, rgb(243 238 228 / 0.55) calc(var(--sobre-foto) * 100%), var(--cor-borda));
+    --cab-destaque: color-mix(in srgb, var(--cor-areia) calc(var(--sobre-foto) * 100%), var(--cor-destaque));
+    animation: cabecalho-solido linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 8rem;
+  }
+
+  .cabecalho--transparente :is(.logo, .logo:hover) {
+    color: var(--cab-tinta);
+  }
+
+  .cabecalho--transparente .logo__texto small {
+    color: var(--cab-tinta-suave);
+  }
+
+  .cabecalho--transparente .logo__marca {
+    border-color: var(--cab-destaque);
+    outline-color: var(--cab-destaque);
+    color: var(--cab-destaque);
+  }
+
+  .cabecalho--transparente :is(.tema-botao, .menu-botao) {
+    border-color: var(--cab-fio);
+    color: var(--cab-tinta);
+  }
+
+  @media (min-width: 62rem) {
+    .cabecalho--transparente .navegacao__lista a {
+      color: var(--cab-tinta);
+    }
+
+    .cabecalho--transparente .navegacao__lista a:hover,
+    .cabecalho--transparente .navegacao__lista a[aria-current="page"] {
+      color: var(--cab-destaque);
+      border-bottom-color: var(--cab-destaque);
+    }
+
+    .cabecalho--transparente .navegacao__lista a:not([aria-current]):not(:hover) {
+      border-bottom-color: transparent;
+    }
+  }
+}
 
 .banner {
   position: relative;
@@ -867,7 +799,6 @@ strong {
   overflow: hidden;
 }
 
-/* Curvas de nível ao fundo, saindo da borda direita */
 .banner::before {
   content: "";
   position: absolute;
@@ -889,33 +820,6 @@ strong {
   line-height: 0.98;
 }
 
-.banner__selo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 1rem;
-  margin-bottom: 1.25rem;
-  font-family: var(--fonte-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cor-destaque);
-}
-
-.banner__selo span:first-child::before {
-  content: "";
-  display: inline-block;
-  width: 2rem;
-  height: var(--borda-fina);
-  margin-right: 0.6rem;
-  vertical-align: middle;
-  background-color: currentColor;
-}
-
-.banner__coord {
-  color: var(--cor-texto-suave);
-}
-
 .banner__texto {
   max-width: 44ch;
   margin-top: 1.25rem;
@@ -930,7 +834,6 @@ strong {
   margin-top: 1.75rem;
 }
 
-/* Três números logo abaixo, separados por fios */
 .banner__numeros {
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -963,7 +866,6 @@ strong {
   line-height: 1.2;
 }
 
-/* --- A prancha com as fotos --- */
 .banner__prancha {
   position: relative;
   padding: 0.6rem;
@@ -1015,7 +917,6 @@ strong {
   padding-top: 0.6rem;
 }
 
-/* Legenda do slide atual */
 .banner__legenda {
   flex: 1 1 12rem;
   min-height: 1.2em;
@@ -1025,7 +926,6 @@ strong {
   color: var(--cor-texto-suave);
 }
 
-/* --- Controles do banner --- */
 .banner__controles {
   display: flex;
   flex-wrap: wrap;
@@ -1039,8 +939,6 @@ strong {
 }
 
 .banner__ponto {
-  /* A área clicável tem 2rem x 1.5rem (WCAG 2.5.8 pede 24x24px);
-     o traço visível é desenhado pelo ::before. */
   width: 2rem;
   height: 1.5rem;
   display: grid;
@@ -1057,7 +955,6 @@ strong {
   background-color: var(--cor-borda);
   transition: background-color var(--transicao), height var(--transicao);
 }
-
 
 .banner__seta,
 .banner__pausa {
@@ -1087,10 +984,55 @@ strong {
   color: var(--cor-fundo);
 }
 
+.banner.banner--foto {
+  margin-top: calc(-1 * (var(--altura-header) + 0.1875rem));
+  padding-block: calc(var(--altura-header) + 0.1875rem + 2.5rem) 2.5rem;
+  background-color: var(--cor-principal-escura);
+}
 
-/* ==========================================================================
-   07. SEÇÕES GENÉRICAS
-   ========================================================================== */
+.banner__fundo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.banner--foto::before {
+  background:
+    linear-gradient(180deg, rgb(var(--cor-veu) / 0.6), transparent 9rem),
+    linear-gradient(90deg, rgb(var(--cor-veu) / 0.78) 0%, rgb(var(--cor-veu) / 0.45) 50%, rgb(var(--cor-veu) / 0.05) 100%);
+  opacity: 1;
+}
+
+.banner--foto .banner__conteudo {
+  --cor-texto: var(--cor-texto-claro);
+  --cor-texto-suave: var(--cor-texto-claro-suave);
+  --cor-destaque: var(--cor-areia);
+  --cor-borda: rgb(243 238 228 / 0.35);
+  --cor-fundo: #1B1F1D;
+  color: var(--cor-texto);
+  text-shadow: 0 0.1rem 0.6rem rgb(var(--cor-veu) / 0.45);
+}
+
+.banner--foto .banner__numeros {
+  width: fit-content;
+}
+
+.banner--foto .banner__grade {
+  align-items: end;
+}
+
+.banner--foto .banner__prancha {
+  justify-self: end;
+  width: min(100%, 19rem);
+}
+
+.banner--foto .banner__slides {
+  aspect-ratio: 4 / 3;
+}
 
 .secao {
   padding-block: 3.5rem;
@@ -1109,8 +1051,6 @@ strong {
   background-color: var(--cor-secundaria-clara);
 }
 
-/* Cabeçalho de seção: fio de tinta em cima e número automático na
-   etiqueta ("01 — Mapa interativo"), como os capítulos de um atlas. */
 .secao__cabecalho {
   max-width: 50rem;
   margin-bottom: 2.5rem;
@@ -1128,7 +1068,6 @@ strong {
   color: var(--cor-texto-suave);
 }
 
-/* Cabeçalho das páginas internas: papel com curvas de nível */
 .hero-pagina {
   position: relative;
   isolation: isolate;
@@ -1163,7 +1102,6 @@ strong {
   background-color: currentColor;
 }
 
-/* Trilha de navegação */
 .trilha {
   padding-block: 0.8rem;
   border-bottom: var(--borda-fina) solid var(--cor-borda);
@@ -1188,11 +1126,6 @@ strong {
   content: "/\00a0";
   color: var(--cor-borda);
 }
-
-
-/* ==========================================================================
-   08. MAPA + CARDS DE CARACTERÍSTICAS (index.html)
-   ========================================================================== */
 
 .duas-colunas {
   display: grid;
@@ -1225,7 +1158,6 @@ strong {
   height: auto;
 }
 
-/* Números do estado: sem caixas, só fios e tipografia */
 .cards-dados {
   display: grid;
   gap: 1.5rem 1.25rem;
@@ -1249,7 +1181,6 @@ strong {
 .card-dado dd {
   margin-top: 0.3rem;
   font-family: var(--fonte-titulo);
-  /* clamp porque "Florianópolis" transbordava a coluna estreita */
   font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
   font-weight: 450;
   line-height: 1.15;
@@ -1269,7 +1200,6 @@ strong {
   color: var(--cor-texto-suave);
 }
 
-/* Caixa "Você sabia?" */
 .voce-sabia {
   margin-top: 2rem;
   padding: 1.15rem 1.25rem;
@@ -1289,13 +1219,6 @@ strong {
   margin-top: 0.35rem;
   font-size: 0.98rem;
 }
-
-
-/* ==========================================================================
-   09. CARDS DE CIDADES / REGIÕES
-   Numerados como figuras de um livro ("Fig. 01"), com foto emoldurada
-   por um fio e texto direto no papel.
-   ========================================================================== */
 
 .grade-cards {
   display: grid;
@@ -1361,7 +1284,6 @@ strong {
   color: var(--cor-destaque);
 }
 
-/* h4 aparece quando o card está dentro de um grupo de região (h3) */
 .card-cidade__corpo h3,
 .card-cidade__corpo h4,
 .bloco h4 {
@@ -1390,11 +1312,6 @@ strong {
   font-size: 0.66rem;
   letter-spacing: 0.04em;
 }
-
-
-/* ==========================================================================
-   10. PAINEL "DUAS SANTA CATARINAS" (diferencial da home)
-   ========================================================================== */
 
 .comparativo {
   display: grid;
@@ -1461,8 +1378,6 @@ strong {
 
 .comparativo__indices {
   display: grid;
-  /* Abaixo de 30rem as três colunas fixas deixavam ~80px por índice,
-     apertando o rótulo em maiúsculas. Aqui elas empilham. */
   grid-template-columns: 1fr;
   margin-bottom: 1.1rem;
   border-block: var(--borda-fina) solid rgb(255 255 255 / 0.22);
@@ -1512,7 +1427,6 @@ strong {
   color: var(--cor-areia);
 }
 
-/* Divisor central "vs." */
 .comparativo__divisor {
   display: grid;
   place-items: center;
@@ -1522,18 +1436,8 @@ strong {
   color: var(--cor-destaque);
 }
 
-
-/* ==========================================================================
-   11. FLIP CARDS (curiosidades)
-   O card é uma div; quem é interativo é o rótulo .flip-card__gatilho, com
-   um checkbox invisível dentro, no <h3> da frente (esticado por ::after
-   para cobrir o card inteiro). Vira no hover (só onde há ponteiro de
-   verdade) e com o checkbox marcado — clique, toque, Espaço.
-   ========================================================================== */
-
 .flip-card {
   position: relative;
-  /* 15rem cortava o verso mais longo entre ~992px e ~1120px e em zoom 200% */
   min-height: 18rem;
   perspective: 62.5rem;
 }
@@ -1547,8 +1451,6 @@ strong {
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-/* O estado é o checkbox. O hover é um atalho para quem tem ponteiro (num
-   aparelho de toque ele "gruda" depois do dedo sair). */
 .flip-card:has(.flip-card__estado:checked) .flip-card__interno {
   transform: rotateY(180deg);
 }
@@ -1563,9 +1465,6 @@ strong {
   }
 }
 
-/* Gatilho: o texto da pergunta é o nome acessível; o ::after estica a área
-   clicável por cima do card todo, então o clique continua valendo em
-   qualquer ponto. */
 .flip-card__titulo {
   position: relative;
   z-index: 2;
@@ -1606,12 +1505,9 @@ strong {
   padding: var(--espaco-md);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  /* auto em vez de hidden: se o texto do verso passar da altura do card,
-     ele rola em vez de ser cortado (WCAG 1.4.4) */
   overflow: auto;
 }
 
-/* --- Frente: foto + título --- */
 .flip-card__frente {
   color: var(--cor-branco);
   background-color: var(--cor-principal-escura);
@@ -1650,10 +1546,9 @@ strong {
 }
 
 .flip-card__dica::before {
-  content: "\21BB\00a0";  /* ↻ */
+  content: "\21BB\00a0";
 }
 
-/* --- Verso: o fato surpreendente, como uma ficha catalográfica --- */
 .flip-card__verso {
   transform: rotateY(180deg);
   justify-content: center;
@@ -1680,19 +1575,11 @@ strong {
   color: var(--cor-secundaria-escura);
 }
 
-
-/* ==========================================================================
-   12. LINHA DO TEMPO (cultura.html)
-   O trilho virou uma "estrada" tracejada, e cada marco é um losango que
-   acende quando entra na tela. O período aparece como um carimbo.
-   ========================================================================== */
-
 .linha-tempo {
   position: relative;
   padding-left: 2.25rem;
 }
 
-/* Trilho vertical */
 .linha-tempo::before {
   content: "";
   position: absolute;
@@ -1707,7 +1594,6 @@ strong {
   margin-bottom: 2.5rem;
 }
 
-/* Losango do marco */
 .marco::before {
   content: "";
   position: absolute;
@@ -1721,7 +1607,6 @@ strong {
   transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
-/* Sem animação guiada pela rolagem, os marcos já nascem acesos */
 @supports not (animation-timeline: view()) {
   .marco::before {
     background-color: var(--cor-destaque);
@@ -1738,9 +1623,6 @@ strong {
 }
 
 .marco__foto {
-  /* 7/5 é a proporção dos arquivos em assets/: com 16/9 o object-fit
-     recortava outros 21% da altura, por cima do recorte já feito ao
-     gerar a foto. Acima de 48rem quem manda é a altura do cartão. */
   aspect-ratio: 7 / 5;
 }
 
@@ -1782,27 +1664,14 @@ strong {
   color: var(--cor-secundaria-escura);
 }
 
-
-/* ==========================================================================
-   13. ATLAS INTERATIVO (cidades.html) — diferenciais 1, 2 e 3
-   O SVG usa unidades próprias (viewBox 600 x 380). --zoom diz quantos
-   pixels de tela vale uma unidade do mapa (calculado no CSS, ver
-   estados.css); textos, pinos e traços dividem o próprio tamanho por esse
-   número e ficam sempre do mesmo tamanho na tela, em qualquer zoom e em
-   qualquer largura.
-   ========================================================================== */
-
 .mapa-svg {
   --zoom: 1;
-  /* No celular o estado inteiro fica pequeno: abaixo de 0,75 os textos
-     param de compensar e encolhem junto com o mapa, senão se atropelam. */
   --zoom-texto: max(var(--zoom), 0.75);
   width: 100%;
   height: auto;
   overflow: hidden;
 }
 
-/* --- Vestimenta cartográfica (também usada no mapa estático da home) --- */
 .mapa-oceano {
   fill: url(#hachura-mar);
   opacity: 0.35;
@@ -1846,14 +1715,12 @@ strong {
   fill: var(--cor-acento);
 }
 
-/* Mapa estreito: os vizinhos saem, só o oceano fica */
 @media (max-width: 30rem) {
   .mapa-vizinhos text:not(.mapa-vizinhos__mar) {
     display: none;
   }
 }
 
-/* --- Regiões --- */
 .regiao {
   fill: var(--cor-mapa-regiao);
   stroke: var(--cor-texto);
@@ -1864,7 +1731,6 @@ strong {
   transition: fill 0.35s ease, opacity 0.35s ease;
 }
 
-/* Mapa ilustrativo (não interativo) da home: sem cursor de clique */
 .mapa-quadro .regiao {
   cursor: default;
 }
@@ -1873,8 +1739,6 @@ strong {
   fill: var(--cor-mapa-regiao-hover);
 }
 
-/* Cada região é um link (<a> do SVG) para a âncora dela. Sem contorno
-   feio no clique — só aparece com navegação por teclado */
 .regiao-link:focus {
   outline: none;
 }
@@ -1884,7 +1748,6 @@ strong {
   stroke-width: 3;
 }
 
-/* Sombreado de relevo por cima das regiões (não recebe clique) */
 .mapa-relevo {
   pointer-events: none;
   mix-blend-mode: multiply;
@@ -1897,7 +1760,6 @@ strong {
   text-transform: uppercase;
   fill: var(--cor-texto);
   pointer-events: none;
-  /* halo da cor do papel, para ler por cima de qualquer preenchimento */
   paint-order: stroke;
   stroke: var(--cor-fundo);
   stroke-width: calc(3px / var(--zoom-texto));
@@ -1916,21 +1778,15 @@ strong {
   display: none;
 }
 
-/* --- Camada de clima (diferencial 2): a cor de cada região vem da
-   escala (regras geradas em estados.css); a temperatura da estação
-   escolhida aparece por cima --- */
 .atlas:has(#camada-verao:checked) .mapa-temp--verao,
 .atlas:has(#camada-inverno:checked) .mapa-temp--inverno {
   display: inline;
 }
 
-/* --- Pinos das cidades --- */
 .pino {
   pointer-events: none;
 }
 
-/* O corpo do pino é desenhado na origem e encolhe na mesma proporção do
-   zoom: fica sempre do mesmo tamanho na tela. */
 .pino__corpo {
   transform: scale(calc(1 / var(--zoom-texto)));
   transition: opacity 0.3s ease;
@@ -1963,8 +1819,6 @@ strong {
   transition: opacity 0.3s ease;
 }
 
-/* Pinos da região selecionada: marca cheia e nome à mostra (regras
-   geradas em estados.css). A capital sempre mostra o nome. */
 .pino--capital .pino__nome {
   opacity: 1;
 }
@@ -1973,14 +1827,10 @@ strong {
   opacity: 0.55;
 }
 
-/* Cidade pedida pelo calendário (#cidade-...) ou pelo comparador: o
-   anel claro (regras em estados.css) pulsa três vezes */
 @keyframes pino-pulso {
   50% { stroke-width: 9; stroke-opacity: 0.3; }
 }
 
-/* Roteiro sugerido: os nomes das paradas aparecem e se afastam do
-   número que cobre o pino */
 .atlas:has(.estado--rota:checked) .pino__nome {
   transform: translateX(4px);
 }
@@ -1989,7 +1839,6 @@ strong {
   transform: translateX(-4px);
 }
 
-/* --- Rota (diferencial 3) --- */
 .rota-linha {
   fill: none;
   stroke: var(--cor-destaque);
@@ -2006,7 +1855,6 @@ strong {
   to { stroke-dashoffset: -22; }
 }
 
-/* Cada roteiro só aparece quando está escolhido (regras em estados.css) */
 .rota-linha,
 .rota-paradas > g,
 .roteiro__detalhe {
@@ -2031,7 +1879,6 @@ strong {
   transform: scale(calc(1 / var(--zoom-texto)));
 }
 
-/* --- Estrutura da página do atlas --- */
 .atlas {
   display: grid;
   gap: 2rem;
@@ -2048,7 +1895,6 @@ strong {
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
-
 
 .atlas__camadas {
   display: inline-flex;
@@ -2080,7 +1926,6 @@ strong {
   background-color: var(--cor-principal-clara);
 }
 
-/* Rótulo do rádio/checkbox marcado = botão "pressionado" */
 :checked + .atlas__opcao {
   background-color: var(--cor-texto);
   color: var(--cor-fundo);
@@ -2092,7 +1937,7 @@ strong {
 }
 
 .atlas__opcao--rota::before {
-  content: "\25CB\2009\2013\2009\25CF\00a0\00a0"; /* ○ – ● */
+  content: "\25CB\2009\2013\2009\25CF\00a0\00a0";
   letter-spacing: 0;
 }
 
@@ -2102,7 +1947,6 @@ strong {
   color: var(--cor-branco);
 }
 
-/* O quadro do mapa: fundo de papel, moldura de tinta e overlays */
 .atlas__quadro {
   position: relative;
   overflow: hidden;
@@ -2112,7 +1956,6 @@ strong {
 }
 
 .atlas__quadro::after {
-  /* marcas de canto, como nas pranchas impressas */
   content: "";
   position: absolute;
   inset: 0.4rem;
@@ -2171,7 +2014,6 @@ strong {
   pointer-events: none;
 }
 
-/* Barra quadriculada preto/papel, como nas escalas gráficas */
 .atlas__escala-barra {
   display: block;
   width: var(--largura-escala, 5.5rem);
@@ -2181,7 +2023,6 @@ strong {
   transition: width 0.3s ease;
 }
 
-/* Só aparece com uma região aproximada */
 .atlas__recentrar {
   display: none;
   position: absolute;
@@ -2200,7 +2041,7 @@ strong {
 }
 
 .atlas__recentrar::before {
-  content: "\2922\00a0"; /* ⤢ */
+  content: "\2922\00a0";
 }
 
 .atlas__recentrar:hover {
@@ -2220,7 +2061,6 @@ strong {
   color: var(--cor-texto-suave);
 }
 
-/* Legenda da escala de clima */
 .atlas__legenda {
   margin-top: 0.75rem;
   padding: 0.75rem 0.9rem;
@@ -2278,7 +2118,6 @@ strong {
 .escala-clima__cor--4 { background-color: var(--clima-4); }
 .escala-clima__cor--5 { background-color: var(--clima-5); }
 
-/* Botões de região (alternativa acessível ao mapa, visível em todas as telas) */
 .regiao-botoes {
   display: flex;
   flex-wrap: wrap;
@@ -2308,7 +2147,6 @@ strong {
   border-color: var(--cor-texto);
 }
 
-/* --- Painel da região --- */
 .atlas__lateral {
   display: grid;
   gap: 1.5rem;
@@ -2316,7 +2154,6 @@ strong {
   min-width: 0;
 }
 
-/* Seis painéis no HTML; só o da região escolhida aparece (estados.css) */
 .painel-regiao {
   display: none;
   background-color: var(--cor-superficie);
@@ -2339,7 +2176,6 @@ strong {
   padding: 1.25rem 1.35rem 1.5rem;
 }
 
-/* Troca de região: o conteúdo entra suave, em vez de pular */
 .painel-regiao .painel-regiao__foto img,
 .painel-regiao .painel-regiao__corpo {
   animation: painel-troca 0.45s ease;
@@ -2437,8 +2273,6 @@ strong {
   color: var(--cor-secundaria-escura);
 }
 
-/* --- Caderno do roteiro (diferencial 3): só aparece com "Roteiros
-   sugeridos" marcado, no topo da coluna --- */
 .roteiro {
   display: none;
   padding: 1.25rem 1.35rem 1.5rem;
@@ -2568,12 +2402,6 @@ strong {
   color: var(--cor-texto-suave);
 }
 
-
-
-/* ==========================================================================
-   14. GALERIA COM FILTRO (turismo.html)
-   ========================================================================== */
-
 .filtros {
   display: flex;
   flex-wrap: wrap;
@@ -2658,9 +2486,6 @@ strong {
   color: var(--cor-areia);
 }
 
-/* Filtros, contador e fotos: no HTML o contador vem por último (o
-   contador CSS precisa passar pelas fotos antes); aqui ele volta para o
-   meio. Itens escondidos (display: none) não entram na soma. */
 .galeria-filtrada {
   display: flex;
   flex-direction: column;
@@ -2688,12 +2513,6 @@ strong {
   to   { opacity: 1; transform: none; }
 }
 
-
-/* ==========================================================================
-   15. BLOCOS DE CONTEÚDO (economia, fauna, gastronomia, fontes)
-   ========================================================================== */
-
-/* Lista de tópicos com marcador em seta */
 .lista-topicos {
   display: grid;
   gap: 0.85rem;
@@ -2787,7 +2606,6 @@ strong {
   color: var(--cor-destaque-escura);
 }
 
-/* Tabela de dados (clima, economia): só fios, números em mono */
 .tabela-envolvida {
   overflow-x: auto;
   margin-top: 1.5rem;
@@ -2845,7 +2663,6 @@ tbody tr:nth-child(even) {
   background-color: var(--cor-zebra);
 }
 
-/* Lista de fontes */
 .fontes {
   display: grid;
   gap: 0;
@@ -2876,8 +2693,6 @@ tbody tr:nth-child(even) {
   color: var(--cor-texto-suave);
 }
 
-/* Creditos das fotos: sao 58 itens curtos — em coluna unica viravam
-   uma parede de texto de varias telas de altura. */
 .fontes--creditos {
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   column-gap: 1.5rem;
@@ -2887,11 +2702,6 @@ tbody tr:nth-child(even) {
   font-size: 0.95rem;
   overflow-wrap: anywhere;
 }
-
-
-/* ==========================================================================
-   16. QUIZ "QUAL SANTA CATARINA É A SUA?" (curiosidades.html) — diferencial 4
-   ========================================================================== */
 
 .quiz__cartao {
   max-width: 44rem;
@@ -2958,7 +2768,6 @@ tbody tr:nth-child(even) {
   border-color: var(--cor-texto);
 }
 
-/* O rádio nativo continua lá (teclado e leitor de tela); só ganhou cara */
 .quiz__opcao input {
   appearance: none;
   flex: 0 0 auto;
@@ -3002,7 +2811,6 @@ tbody tr:nth-child(even) {
   cursor: pointer;
 }
 
-/* Na 1ª pergunta não há para onde voltar */
 .quiz__voltar--inativo {
   opacity: 0.45;
   cursor: default;
@@ -3037,7 +2845,6 @@ tbody tr:nth-child(even) {
   object-fit: cover;
 }
 
-/* Carimbo "aprovado" por cima da foto */
 .quiz__resultado-foto::after {
   content: "SC \2605  confere";
   position: absolute;
@@ -3082,12 +2889,6 @@ tbody tr:nth-child(even) {
   to   { opacity: 1; transform: rotate(-8deg) scale(1); }
 }
 
-
-/* ==========================================================================
-   16b. CALENDÁRIO DE FESTAS (cultura.html) — diferencial 7
-   ========================================================================== */
-
-/* Doze casas como uma folhinha: 6 x 2 no celular, uma linha no tablet */
 .calendario__barra {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -3179,23 +2980,16 @@ tbody tr:nth-child(even) {
   font-size: 0.97rem;
 }
 
-/* O link fica sempre no pé do card, alinhando os cards da mesma linha */
 .calendario__evento .link-seta {
   align-self: flex-start;
   margin-top: auto;
   padding-top: 0.85rem;
 }
 
-
-/* ==========================================================================
-   16c. COMPARADOR DE CIDADES (cidades.html) — diferencial 8
-   ========================================================================== */
-
 .comparador {
   max-width: 52rem;
 }
 
-/* Cidade A | inverter | Cidade B */
 .comparador__escolha {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -3223,7 +3017,6 @@ tbody tr:nth-child(even) {
   color: var(--cor-texto);
 }
 
-/* O "×" entre as duas escolhas */
 .comparador__inverter {
   display: grid;
   place-items: center;
@@ -3235,7 +3028,6 @@ tbody tr:nth-child(even) {
   font-size: 1.3rem;
 }
 
-/* Os nomes das cidades viram títulos de coluna, na serifada */
 .comparador__tabela thead th {
   font-family: var(--fonte-titulo);
   font-size: clamp(1.1rem, 3vw, 1.4rem);
@@ -3288,16 +3080,11 @@ tbody tr:nth-child(even) {
   line-height: 1.45;
 }
 
-
-/* ==========================================================================
-   17. FOOTER (com o passaporte — diferencial 5)
-   ========================================================================== */
-
 .rodape {
   position: relative;
   isolation: isolate;
   padding-block: 3.5rem 1.5rem;
-  background-color: var(--cor-rodape-fundo);   /* tinta escura — contraste AA com texto claro */
+  background-color: var(--cor-rodape-fundo);
   color: var(--cor-rodape-texto);
 }
 
@@ -3347,8 +3134,6 @@ tbody tr:nth-child(even) {
 .rodape__mapa-estado img {
   width: 100%;
   height: auto;
-  /* SVG transparente: sem a cor de espera das fotos, senão fica uma
-     caixa clara recortada no rodapé escuro */
   background: none;
 }
 
@@ -3380,7 +3165,6 @@ tbody tr:nth-child(even) {
   text-decoration: underline;
 }
 
-/* Redes sociais */
 .redes {
   display: flex;
   flex-wrap: wrap;
@@ -3411,7 +3195,6 @@ tbody tr:nth-child(even) {
   fill: currentColor;
 }
 
-/* --- Passaporte catarinense --- */
 .passaporte {
   display: grid;
   gap: 1rem;
@@ -3431,9 +3214,6 @@ tbody tr:nth-child(even) {
   gap: 0.6rem;
 }
 
-/* Cada carimbo é um link para a página. Ainda não visitado: tracejado e
-   apagado. Visitado (a:visited): tinta de carimbo. O navegador só deixa
-   :visited trocar cores, por isso a diferença é toda feita de cor. */
 .passaporte .carimbo {
   display: grid;
   place-items: center;
@@ -3477,7 +3257,6 @@ tbody tr:nth-child(even) {
   line-height: 1;
 }
 
-
 .rodape__base {
   display: flex;
   flex-wrap: wrap;
@@ -3498,7 +3277,6 @@ tbody tr:nth-child(even) {
   color: var(--cor-areia);
 }
 
-/* Botão "voltar ao topo" */
 .voltar-topo {
   position: fixed;
   right: 1rem;
@@ -3518,8 +3296,6 @@ tbody tr:nth-child(even) {
   transition: background-color var(--transicao);
 }
 
-/* Aparece depois de rolar ~600px: animação presa à rolagem da página.
-   Sem suporte, o botão fica sempre visível. */
 @supports (animation-timeline: scroll()) {
   .voltar-topo {
     animation: topo-aparece linear both;
@@ -3546,14 +3322,6 @@ tbody tr:nth-child(even) {
   color: var(--cor-branco);
 }
 
-
-/* ==========================================================================
-   18. SCROLL-REVEAL
-   Sem JavaScript: animação guiada pela rolagem (animation-timeline: view()).
-   A "cortina" abre enquanto o bloco entra na tela. Navegador sem suporte,
-   ou quem prefere menos movimento, vê tudo parado e visível.
-   ========================================================================== */
-
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .revelar {
@@ -3562,7 +3330,6 @@ tbody tr:nth-child(even) {
       animation-range: entry 0% entry 70%;
     }
 
-    /* O losango da linha do tempo acende quando o marco chega ao meio */
     .marco {
       view-timeline: --marco block;
     }
@@ -3599,12 +3366,6 @@ tbody tr:nth-child(even) {
   }
 }
 
-
-/* ==========================================================================
-   19. MEDIA QUERIES — mobile-first (base = ~360px)
-   ========================================================================== */
-
-/* --- Telas pequenas: índices comparativos lado a lado --- */
 @media (min-width: 30rem) {
   .comparativo__indices {
     grid-template-columns: repeat(3, 1fr);
@@ -3621,7 +3382,6 @@ tbody tr:nth-child(even) {
   }
 }
 
-/* --- Tablet --- */
 @media (min-width: 48rem) {
   body {
     font-size: 1.0625rem;
@@ -3680,7 +3440,6 @@ tbody tr:nth-child(even) {
   }
 }
 
-/* --- Desktop: menu horizontal, capa em duas colunas e atlas com painel --- */
 @media (min-width: 62rem) {
   :root {
     --altura-header: 4.75rem;
@@ -3690,7 +3449,6 @@ tbody tr:nth-child(even) {
     display: none;
   }
 
-  /* O menu deixa de ser painel flutuante e volta a ser linha do header */
   .navegacao {
     position: static;
     max-height: none;
@@ -3699,7 +3457,6 @@ tbody tr:nth-child(even) {
     border: 0;
   }
 
-  /* No desktop o popover vira a barra fixa do cabeçalho, sempre aberta */
   .navegacao:not(:popover-open) {
     display: block;
   }
@@ -3744,38 +3501,41 @@ tbody tr:nth-child(even) {
     transform: rotate(1.2deg);
   }
 
+  .banner.banner--foto {
+    padding-block: calc(var(--altura-header) + 0.1875rem + 3.5rem) 3rem;
+  }
+
+  .banner--foto .banner__grade {
+    grid-template-columns: 1fr 19rem;
+  }
+
+  .banner--foto .banner__slides {
+    aspect-ratio: 4 / 3;
+  }
+
   .duas-colunas {
     grid-template-columns: 1fr 1fr;
     gap: var(--espaco-xl);
   }
 
-  /* Litoral | vs. | Serra */
   .comparativo {
     grid-template-columns: 1fr auto 1fr;
     gap: 1.5rem;
   }
 
   .grade-flip {
-    /* Era repeat(4, 1fr): a 992px cada card ficava com ~217px e o verso
-       mais longo era cortado. auto-fit respeita o mínimo legível. */
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 
-  /* Blocos e pratos vêm sempre de seis em seis: em 4 colunas a segunda
-     linha ficava com dois cards e um buraco à direita. Em três, as duas
-     linhas fecham e cada card ganha ~100px. */
   .grade-blocos,
   .grade-pratos {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Vegetação e fauna vêm de quatro em quatro: em três colunas sobrava
-     um card sozinho na segunda linha. */
   .grade-blocos--duas {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Atlas: mapa grande à esquerda, painel fixo à direita enquanto rola */
   .atlas {
     grid-template-columns: minmax(0, 1.55fr) minmax(19rem, 1fr);
     align-items: start;
@@ -3787,11 +3547,6 @@ tbody tr:nth-child(even) {
     top: calc(var(--altura-header) + 1.25rem);
   }
 }
-
-
-/* ==========================================================================
-   20. PREFERÊNCIAS DO USUÁRIO
-   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -3829,12 +3584,10 @@ tbody tr:nth-child(even) {
     display: none !important;
   }
 
-  /* No papel o calendário sai inteiro, não só o mês escolhido */
   .calendario .calendario__mes {
     display: list-item !important;
   }
 
-  /* No papel sempre a paleta clara, mesmo com o tema escuro na tela */
   :root,
   :root:has(#tema:checked),
   :root:not(:has(#tema:checked)) {
@@ -3864,8 +3617,6 @@ tbody tr:nth-child(even) {
     animation: none;
   }
 
-  /* Os dois lados do card precisam sair no papel: impresso, o card vira
-     uma ficha com a pergunta e a resposta, uma abaixo da outra. */
   .flip-card,
   .flip-card__interno {
     min-height: 0;

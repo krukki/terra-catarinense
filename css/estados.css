@@ -1,27 +1,4 @@
-/* ==========================================================================
-   TERRA CATARINENSE — ESTADOS SEM JAVASCRIPT
-   Tudo o que antes o script.js fazia, agora com HTML e CSS: rádios,
-   checkboxes, <select>, âncoras (:target) e popover guardam o estado, e o
-   CSS reage com :has(). As regras repetidas por cidade/região (atlas,
-   comparador) foram geradas a partir dos mesmos dados do antigo script.
 
-   SUMÁRIO
-   01. Utilitário: controle invisível mas focável
-   02. Banner rotativo (index.html)
-   03. Mapas: zoom calculado pelo CSS (index.html e cidades.html)
-   04. Atlas interativo (cidades.html) — regras geradas por região/cidade
-   05. Comparador de cidades (cidades.html)
-   06. Calendário de festas (cultura.html)
-   07. Galeria com filtro (turismo.html)
-   08. Flip cards e quiz (curiosidades.html)
-   ========================================================================== */
-
-
-/* ==========================================================================
-   01. CONTROLE INVISÍVEL MAS FOCÁVEL
-   Rádios e checkboxes que guardam estado: somem da tela, mas continuam no
-   teclado e nos leitores de tela. O foco aparece no rótulo correspondente.
-   ========================================================================== */
 
 .banner__estado,
 .estado {
@@ -33,15 +10,6 @@
   pointer-events: none;
 }
 
-
-/* ==========================================================================
-   02. BANNER ROTATIVO (index.html)
-   Rádio "auto" marcado: as três fotos se revezam com @keyframes (6 s cada,
-   ciclo de 18 s). Marcar uma foto (ponto ou seta) fixa nela; o botão ▶
-   volta ao automático. Pausa: checkbox, passar o mouse ou focar o banner.
-   ========================================================================== */
-
-/* --- Estado parado: só a foto escolhida (ou a primeira) --- */
 .banner__slide:first-child,
 .banner__legenda-item:first-child {
   opacity: 1;
@@ -74,7 +42,6 @@
   background-color: var(--cor-destaque);
 }
 
-/* --- Setas: cada estado mostra o par que leva às fotos vizinhas --- */
 .banner__seta {
   display: none;
 }
@@ -85,12 +52,10 @@
   display: grid;
 }
 
-/* A seta da esquerda vem antes dos pontos, a da direita depois */
 .banner__controles .banner__pontos { order: 1; }
 .banner__controles [class*="--prox-"] { order: 2; }
 .banner__controles .banner__pausa { order: 3; }
 
-/* --- Pausa / retomar / voltar ao automático --- */
 .banner__pausa {
   display: none;
 }
@@ -101,7 +66,6 @@
   display: grid;
 }
 
-/* --- Foco do teclado (nos rádios invisíveis) aparece nos pontos --- */
 .banner__prancha:has(#banner-1:focus-visible) .banner__ponto:nth-child(1),
 .banner__prancha:has(#banner-2:focus-visible) .banner__ponto:nth-child(2),
 .banner__prancha:has(#banner-3:focus-visible) .banner__ponto:nth-child(3),
@@ -111,7 +75,6 @@
   outline-offset: 0.125rem;
 }
 
-/* --- Rotação automática --- */
 @media (prefers-reduced-motion: no-preference) {
   .banner__prancha:has(#banner-auto:checked) :is(.banner__slide, .banner__legenda-item) {
     opacity: 0;
@@ -126,7 +89,6 @@
     animation: banner-ponto 18s linear infinite backwards;
   }
 
-  /* A 1ª foto já começa no ar; as outras entram 6 s e 12 s depois */
   .banner__prancha:has(#banner-auto:checked) :is(.banner__slide, .banner__legenda-item):nth-child(1),
   .banner__prancha:has(#banner-auto:checked) .banner__slide:nth-child(1) img,
   .banner__prancha:has(#banner-auto:checked) .banner__ponto:nth-child(1)::before {
@@ -145,7 +107,6 @@
     animation-delay: 11.1s;
   }
 
-  /* Pausa: checkbox, mouse em cima ou foco de teclado no banner */
   .banner__prancha:is(:has(#banner-pausa:checked), :hover, :has(:focus-visible)) :is(.banner__slide, .banner__slide img, .banner__legenda-item),
   .banner__prancha:is(:has(#banner-pausa:checked), :hover, :has(:focus-visible)) .banner__ponto::before {
     animation-play-state: paused;
@@ -171,15 +132,6 @@
   5%, 33.33% { height: 0.25rem; background-color: var(--cor-destaque); }
   35.83%, 100% { height: 0.125rem; background-color: var(--cor-borda); }
 }
-
-
-/* ==========================================================================
-   03. MAPAS: ZOOM CALCULADO PELO CSS
-   Antes o script media a largura do SVG e gravava --zoom (pixels de tela
-   por unidade do mapa). Agora o quadro do mapa é um container e o CSS
-   divide a largura dele (100cqw) pelos 600 do viewBox. Navegador sem essa
-   divisão de medidas usa degraus por largura, que chegam bem perto.
-   ========================================================================== */
 
 @property --escala {
   syntax: "<number>";
@@ -211,17 +163,6 @@
   }
 }
 
-
-/* ==========================================================================
-   04. ATLAS INTERATIVO (cidades.html) — diferenciais 1, 2 e 3
-   Escolher região: cada região do SVG (e cada botão abaixo do mapa) é um
-   link para uma âncora invisível no topo do atlas (#regiao-serra). O
-   :target dessa âncora diz qual painel mostrar e qual zoom aplicar. O
-   calendário usa as âncoras das cidades (#cidade-blumenau). "Ver o estado
-   inteiro" leva a #mapa, que não é âncora do atlas: o zoom volta.
-   Camada de clima e roteiros: rádios na barra e no caderno.
-   ========================================================================== */
-
 .atlas {
   position: relative;
   --escala: 1;
@@ -229,7 +170,6 @@
   transition: --escala 0.75s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Âncoras: invisíveis, no topo do atlas (a página rola até ali) */
 .atlas__alvos,
 .atlas__alvo {
   position: absolute;
@@ -243,7 +183,6 @@
   transition: transform 0.75s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Escala gráfica: o número vem de --km-escala, a barra mede km na tela */
 .atlas__escala-rotulo {
   counter-reset: km var(--km-escala);
 }
@@ -256,17 +195,11 @@
   width: calc(var(--km-escala) * var(--zoom) * 100 / 111.2 * 1px);
 }
 
-/* Foco do teclado nos rádios/checkbox invisíveis aparece no rótulo */
 .estado:focus-visible + label {
   outline: 0.1875rem solid var(--cor-destaque);
   outline-offset: 0.125rem;
 }
 
-/* --- Região escolhida (gerado: uma linha por região) ---
-   Cada linha da lista diz "a âncora da região, ou de uma cidade dela,
-   está ativa: estes são os elementos dela" (região do SVG, rótulo, pinos,
-   botão e painel). As regras de dentro valem para todas as linhas.
-   Sem nenhuma âncora, o Litoral fica marcado, mas sem zoom, como antes. */
 .atlas:has(#regiao-litoral:target, #cidade-florianopolis:target, #cidade-sao-jose:target, #cidade-balneario-camboriu:target, #cidade-itajai:target, #cidade-bombinhas:target, #cidade-garopaba:target) :is([data-regiao="litoral"], [data-rotulo="litoral"], [data-regiao-pino="litoral"], [data-painel="litoral"]),
 .atlas:not(:has(.atlas__alvo:not(.atlas__alvo--comparar):target)) :is([data-regiao="litoral"], [data-rotulo="litoral"], [data-regiao-pino="litoral"], [data-painel="litoral"]),
 .atlas:has(#regiao-vale:target, #cidade-blumenau:target, #cidade-pomerode:target, #cidade-brusque:target, #cidade-timbo:target, #cidade-indaial:target) :is([data-regiao="vale"], [data-rotulo="vale"], [data-regiao-pino="vale"], [data-painel="vale"]),
@@ -302,16 +235,11 @@
     display: block;
   }
 
-  /* Com a camada de clima ligada: mantém a cor do clima, engrossa a borda */
   .atlas:has(#camada-verao:checked, #camada-inverno:checked) &.regiao {
     stroke-width: 2.5;
   }
 }
 
-/* --- Zoom: a caixa de cada região (a mesma que o antigo script animava
-   no viewBox) vira um transform da camada do mapa (--camada). --escala
-   corrige o tamanho de textos e pinos, e --km-escala troca a escala
-   gráfica. --- */
 .atlas:has(.atlas__alvo:not(.atlas__alvo--comparar):target) {
   --km-escala: 50;
 
@@ -350,7 +278,6 @@
   --camada: translate(-479.23px, -339.17px) scale(1.8310);
 }
 
-/* --- Cidade pedida pelo calendário (#cidade-...) --- */
 .atlas:has(#cidade-florianopolis:target) .pino[data-pino="florianopolis"],
 .atlas:has(#cidade-sao-jose:target) .pino[data-pino="sao-jose"],
 .atlas:has(#cidade-balneario-camboriu:target) .pino[data-pino="balneario-camboriu"],
@@ -398,7 +325,6 @@
   }
 }
 
-/* --- "Mostrar as duas no atlas" do comparador (#ver-comparadas) --- */
 body:has(#ver-comparadas:target):has(#comparar-a option[value="florianopolis"]:checked, #comparar-b option[value="florianopolis"]:checked) .pino[data-pino="florianopolis"],
 body:has(#ver-comparadas:target):has(#comparar-a option[value="sao-jose"]:checked, #comparar-b option[value="sao-jose"]:checked) .pino[data-pino="sao-jose"],
 body:has(#ver-comparadas:target):has(#comparar-a option[value="balneario-camboriu"]:checked, #comparar-b option[value="balneario-camboriu"]:checked) .pino[data-pino="balneario-camboriu"],
@@ -446,8 +372,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-/* --- Camada de clima: cor de cada região pela temperatura média ---
-   (a cor mais comum vale para todas; as diferentes vêm logo depois) */
 .atlas:has(#camada-verao:checked) .regiao[data-regiao] { fill: var(--clima-5); }
 .atlas:has(#camada-verao:checked) .regiao[data-regiao="serra"] { fill: var(--clima-4); }
 
@@ -455,7 +379,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 .atlas:has(#camada-inverno:checked) .regiao[data-regiao="litoral"] { fill: var(--clima-3); }
 .atlas:has(#camada-inverno:checked) .regiao[data-regiao="serra"] { fill: var(--clima-1); }
 
-/* --- Roteiros sugeridos: linha, números, nomes das paradas e detalhe --- */
 .atlas:has(#modo-rota:checked):has(#rota-germanica:checked) {
   & .rota-linha[data-rota="germanica"],
   & .rota-paradas [data-rota="germanica"],
@@ -504,17 +427,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-
-/* ==========================================================================
-   05. COMPARADOR DE CIDADES (cidades.html) — diferencial 8
-   Cada opção marcada nos dois <select> preenche as variáveis --c-* da
-   cidade (regras geradas no fim desta seção), que viram --a-* e --b-*
-   conforme o lado. Textos entram com content; os números são
-   propriedades registradas (@property), então o CSS consegue fazer contas
-   com eles: diferenças, quem "vence" cada linha (0 ou 1) e a distância
-   em linha reta. As style queries mostram o selo e a frase certa.
-   ========================================================================== */
-
 @property --a-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --b-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --a-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -532,7 +444,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 @property --a-lon { syntax: "<number>"; inherits: true; initial-value: 0; }
 @property --b-lon { syntax: "<number>"; inherits: true; initial-value: 0; }
 
-/* Resultados das contas (inteiros: 0/1 nos "vence") */
 @property --vence-a-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --vence-b-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --vence-a-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -551,9 +462,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 @property --alt-igual { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --dist { syntax: "<integer>"; inherits: true; initial-value: 0; }
 
-/* A cidade A preenche as --c-* no próprio .comparador, e a B nos filhos
-   dele (tabela, frase e botão). Cada um copia as --c-* do seu nível para
-   o lado certo: os filhos herdam as --a-* já prontas e fazem as contas. */
 .comparador {
   --a-nome: var(--c-nome);
   --a-regiao: var(--c-regiao);
@@ -591,7 +499,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --b-lat: var(--c-lat);
   --b-lon: var(--c-lon);
 
-  /* "Vence" = 1 quando a diferença é positiva (clamp corta em 0 e 1) */
   --vence-a-pop: clamp(0, var(--a-pop) - var(--b-pop), 1);
   --vence-b-pop: clamp(0, var(--b-pop) - var(--a-pop), 1);
   --vence-a-alt: clamp(0, var(--a-alt) - var(--b-alt), 1);
@@ -603,7 +510,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --vence-a-inverno: clamp(0, var(--b-inverno) - var(--a-inverno), 1);
   --vence-b-inverno: clamp(0, var(--a-inverno) - var(--b-inverno), 1);
 
-  /* Diferença de altitude, separada em milhar e resto para o "1.350" */
   --dif-alt: max(var(--a-alt) - var(--b-alt), var(--b-alt) - var(--a-alt));
   --dif-alt-mil: round(down, var(--dif-alt) / 1000, 1);
   --dif-alt-resto: mod(var(--dif-alt), 1000);
@@ -611,7 +517,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --dif-inv: max(var(--a-inverno) - var(--b-inverno), var(--b-inverno) - var(--a-inverno));
   --mesma-regiao: clamp(0, 1 - max(var(--a-reg) - var(--b-reg), var(--b-reg) - var(--a-reg)), 1);
 
-  /* Haversine: para distâncias deste tamanho, asin(x) ≈ x (erro < 0,05%) */
   --dist: calc(2 * 6371 * sqrt(
     pow(sin((var(--b-lat) - var(--a-lat)) * 0.5deg), 2) +
     cos(var(--a-lat) * 1deg) * cos(var(--b-lat) * 1deg) *
@@ -626,7 +531,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   pad: 3 "0";
 }
 
-/* --- Células: o texto vem das variáveis --- */
 [data-cmp="a-nome"]::before, [data-t="a-nome"]::before { content: var(--a-nome); }
 [data-cmp="b-nome"]::before, [data-t="b-nome"]::before { content: var(--b-nome); }
 [data-cmp="a-regiao"]::before { content: var(--a-regiao); }
@@ -652,7 +556,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   font-style: italic;
 }
 
-/* Quadradinho da escala de clima, na cor da faixa */
 [data-cmp="a-verao"] .escala-clima__cor { background-color: var(--a-cor-verao); }
 [data-cmp="b-verao"] .escala-clima__cor { background-color: var(--b-cor-verao); }
 [data-cmp="a-inverno"] .escala-clima__cor { background-color: var(--a-cor-inverno); }
@@ -663,7 +566,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   display: inline-block;
 }
 
-/* --- Selos "mais populosa", "mais alta"...: só no lado que vence --- */
 .comparador__selo {
   display: none;
 }
@@ -679,7 +581,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 @container style(--vence-a-inverno: 1) { [data-selo="a-inverno"] { display: inline-block; } [data-cmp="a-inverno"] { font-weight: 600; } }
 @container style(--vence-b-inverno: 1) { [data-selo="b-inverno"] { display: inline-block; } [data-cmp="b-inverno"] { font-weight: 600; } }
 
-/* --- Frase-resumo: cada trecho aparece na condição dele --- */
 .cmp-frase {
   display: none;
 }
@@ -703,9 +604,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 @container style(--mesma-regiao: 0) and style(--vence-a-inverno: 1) { [data-frase="inv-a"] { display: inline; } }
 @container style(--mesma-regiao: 0) and style(--vence-b-inverno: 1) { [data-frase="inv-b"] { display: inline; } }
 
-/* --- Dados de cada cidade (gerado: 28 cidades) ---
-   A mesma regra serve aos dois lados: a cidade escolhida em A preenche o
-   .comparador; a escolhida em B, os filhos dele. --- */
 .comparador:has(#comparar-a option[value="florianopolis"]:checked),
 .comparador:has(#comparar-b option[value="florianopolis"]:checked) > :not(.comparador__escolha) {
   --c-nome: "Florianópolis";
@@ -1266,13 +1164,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --c-lon: -49.486;
 }
 
-/* ==========================================================================
-   06. CALENDÁRIO DE FESTAS (cultura.html) — diferencial 7
-   Doze rádios na barra; o CSS mostra o mês marcado e a linha "Outubro: 4
-   programas" dele. As setas do teclado andam entre os meses (é um grupo
-   de rádios). Sem suporte a :has, aparece o calendário inteiro.
-   ========================================================================== */
-
 @supports selector(:has(a)) {
   .calendario__mes,
   [data-mes-status] {
@@ -1310,12 +1201,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   display: inline;
 }
 
-
-/* ==========================================================================
-   07. GALERIA COM FILTRO (turismo.html)
-   Rádios no lugar dos botões; "Todas" marcado não esconde nada.
-   ========================================================================== */
-
 .galeria-filtrada:has(#filtro-litoral:checked) .galeria__item:not([data-categoria="litoral"]),
 .galeria-filtrada:has(#filtro-serra:checked) .galeria__item:not([data-categoria="serra"]),
 .galeria-filtrada:has(#filtro-cidades:checked) .galeria__item:not([data-categoria="cidades"]),
@@ -1323,14 +1208,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   display: none;
 }
 
-
-/* ==========================================================================
-   08. QUIZ "QUAL SANTA CATARINA É A SUA?" (curiosidades.html) — diferencial 4
-   (Os flip cards só precisaram trocar o botão por um checkbox: a regra
-   está no style.css, seção 11.) Regras geradas a partir das perguntas.
-   ========================================================================== */
-
-/* --- Passo atual: quantos checkboxes "passo" estão marcados --- */
 .quiz__pergunta,
 [data-passo-rotulo],
 .quiz__voltar,
@@ -1339,12 +1216,10 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   display: none;
 }
 
-/* Só os checkboxes que valem no passo atual entram na ordem do Tab */
 .quiz__passo {
   visibility: hidden;
 }
 
-/* Passo 1 */
 .quiz:not(:has(#passo-1:checked)) {
   & :is([data-pergunta="1"], [data-voltar="1"], [data-proxima="1"]) { display: flex; }
   & [data-pergunta="1"] { display: block; }
@@ -1358,7 +1233,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-/* Passo 2 */
 .quiz:has(#passo-1:checked):not(:has(#passo-2:checked)) {
   & :is([data-pergunta="2"], [data-voltar="2"], [data-proxima="2"]) { display: flex; }
   & [data-pergunta="2"] { display: block; }
@@ -1374,7 +1248,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-/* Passo 3 */
 .quiz:has(#passo-2:checked):not(:has(#passo-3:checked)) {
   & :is([data-pergunta="3"], [data-voltar="3"], [data-proxima="3"]) { display: flex; }
   & [data-pergunta="3"] { display: block; }
@@ -1390,7 +1263,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-/* Passo 4 */
 .quiz:has(#passo-3:checked):not(:has(#passo-4:checked)) {
   & :is([data-pergunta="4"], [data-voltar="4"], [data-proxima="4"]) { display: flex; }
   & [data-pergunta="4"] { display: block; }
@@ -1406,7 +1278,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-/* Passo 5 */
 .quiz:has(#passo-4:checked):not(:has(#passo-5:checked)) {
   & :is([data-pergunta="5"], [data-voltar="5"], [data-proxima="5"]) { display: flex; }
   & [data-pergunta="5"] { display: block; }
@@ -1422,11 +1293,9 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   }
 }
 
-/* Fim: some o cartão, aparece o resultado */
 .quiz:has(#passo-5:checked) .quiz__cartao { display: none; }
 .quiz:has(#passo-5:checked) .quiz__resultados { display: grid; }
 
-/* --- Pontuação: cada resposta marcada vale 1 ponto para as regiões dela --- */
 @property --pts-litoral { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --pts-vale { syntax: "<integer>"; inherits: true; initial-value: 0; }
 @property --pts-norte { syntax: "<integer>"; inherits: true; initial-value: 0; }
@@ -1467,8 +1336,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 .quiz:has(#q5c:checked) { --q5-sul: 1; }
 .quiz:has(#q5d:checked) { --q5-norte: 1; }
 
-/* Desempate igual ao do antigo script: primeiro a região da 1ª resposta,
-   depois a ordem do atlas. Peso = pontos x 100 + bônus; o maior vence. */
 .quiz {
   --pts-litoral: calc(var(--q1-litoral, 0) + var(--q2-litoral, 0) + var(--q3-litoral, 0) + var(--q4-litoral, 0) + var(--q5-litoral, 0));
   --pts-vale: calc(var(--q1-vale, 0) + var(--q2-vale, 0) + var(--q3-vale, 0) + var(--q4-vale, 0) + var(--q5-vale, 0));
@@ -1490,8 +1357,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   --vence-sul: clamp(0, var(--peso-sul) - max(var(--peso-litoral), var(--peso-vale), var(--peso-norte), var(--peso-serra), var(--peso-oeste)), 1);
 }
 
-/* Os seis resultados ficam empilhados na mesma célula: o de maior peso
-   fica por cima (serve de reserva em navegador sem style queries)... */
 .quiz__resultado {
   grid-area: 1 / 1;
 }
@@ -1502,7 +1367,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 [data-resultado="oeste"] { z-index: var(--peso-oeste); }
 [data-resultado="sul"] { z-index: var(--peso-sul); }
 
-/* ...e, com style queries, só o vencedor aparece */
 @supports selector(:has(a)) {
   @container style(--vence-litoral: 0) { [data-resultado="litoral"] { display: none; } }
   @container style(--vence-vale: 0) { [data-resultado="vale"] { display: none; } }
