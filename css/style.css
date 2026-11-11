@@ -729,60 +729,66 @@ strong {
   font-style: italic;
 }
 
-@property --sobre-foto {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 0;
-}
-
+/* Cabeçalho da index: transparente e com texto branco sobre a foto do
+   banner; ao rolar 8rem vira o cabeçalho sólido normal do tema.
+   Cada cor é animada direto (só o "from"; o fim é o estilo normal), sem
+   variável intermediária, para funcionar igual em todos os navegadores. */
 @keyframes cabecalho-solido {
   from {
-    --sobre-foto: 1;
     background-color: transparent;
     border-bottom-color: transparent;
     backdrop-filter: blur(0);
   }
 }
 
+@keyframes cab-tinta {
+  from { color: var(--cor-texto-claro); }
+}
+
+@keyframes cab-tinta-suave {
+  from { color: var(--cor-texto-claro-suave); }
+}
+
+@keyframes cab-destaque {
+  from {
+    color: var(--cor-areia);
+    border-color: var(--cor-areia);
+    outline-color: var(--cor-areia);
+  }
+}
+
+@keyframes cab-botao {
+  from {
+    color: var(--cor-texto-claro);
+    border-color: rgb(243 238 228 / 0.55);
+  }
+}
+
 @supports (animation-timeline: scroll()) {
-  .cabecalho--transparente {
-    --cab-tinta: color-mix(in srgb, var(--cor-texto-claro) calc(var(--sobre-foto) * 100%), var(--cor-texto));
-    --cab-tinta-suave: color-mix(in srgb, var(--cor-texto-claro-suave) calc(var(--sobre-foto) * 100%), var(--cor-texto-suave));
-    --cab-fio: color-mix(in srgb, rgb(243 238 228 / 0.55) calc(var(--sobre-foto) * 100%), var(--cor-borda));
-    --cab-destaque: color-mix(in srgb, var(--cor-areia) calc(var(--sobre-foto) * 100%), var(--cor-destaque));
-    animation: cabecalho-solido linear both;
+  .cabecalho--transparente,
+  .cabecalho--transparente :is(.logo, .logo__texto small, .logo__marca, .tema-botao, .menu-botao) {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: scroll(root);
     animation-range: 0 8rem;
   }
 
-  .cabecalho--transparente :is(.logo, .logo:hover) {
-    color: var(--cab-tinta);
-  }
-
-  .cabecalho--transparente .logo__texto small {
-    color: var(--cab-tinta-suave);
-  }
-
-  .cabecalho--transparente .logo__marca {
-    border-color: var(--cab-destaque);
-    outline-color: var(--cab-destaque);
-    color: var(--cab-destaque);
-  }
-
-  .cabecalho--transparente :is(.tema-botao, .menu-botao) {
-    border-color: var(--cab-fio);
-    color: var(--cab-tinta);
-  }
+  .cabecalho--transparente { animation-name: cabecalho-solido; }
+  .cabecalho--transparente .logo { animation-name: cab-tinta; }
+  .cabecalho--transparente .logo__texto small { animation-name: cab-tinta-suave; }
+  .cabecalho--transparente .logo__marca { animation-name: cab-destaque; }
+  .cabecalho--transparente :is(.tema-botao, .menu-botao) { animation-name: cab-botao; }
 
   @media (min-width: 62rem) {
     .cabecalho--transparente .navegacao__lista a {
-      color: var(--cab-tinta);
+      animation: cab-tinta linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 8rem;
     }
 
     .cabecalho--transparente .navegacao__lista a:hover,
     .cabecalho--transparente .navegacao__lista a[aria-current="page"] {
-      color: var(--cab-destaque);
-      border-bottom-color: var(--cab-destaque);
+      animation-name: cab-destaque;
     }
 
     .cabecalho--transparente .navegacao__lista a:not([aria-current]):not(:hover) {
