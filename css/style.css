@@ -1021,13 +1021,26 @@ strong {
   width: fit-content;
 }
 
+/* A prancha fica colada no topo (alinhada à primeira linha do título) e
+   pequena, para não disputar espaço com a foto de fundo */
 .banner--foto .banner__grade {
-  align-items: end;
+  align-items: start;
 }
 
 .banner--foto .banner__prancha {
   justify-self: end;
-  width: min(100%, 19rem);
+  width: min(100%, 15rem);
+}
+
+/* Controles compactos para caberem numa linha na prancha estreita */
+.banner--foto :is(.banner__seta, .banner__pausa) {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.9rem;
+}
+
+.banner--foto .banner__ponto {
+  width: 1.25rem;
 }
 
 .banner--foto .banner__slides {
@@ -3506,7 +3519,7 @@ tbody tr:nth-child(even) {
   }
 
   .banner--foto .banner__grade {
-    grid-template-columns: 1fr 19rem;
+    grid-template-columns: 1fr 16rem;
   }
 
   .banner--foto .banner__slides {
