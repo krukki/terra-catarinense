@@ -24,14 +24,18 @@
   opacity: 0;
 }
 
+/* Foto escolhida à mão: as outras somem também para leitores de tela
+   (visibility). Na rotação automática as três continuam disponíveis. */
 .banner__prancha:has(#banner-1:checked, #banner-2:checked, #banner-3:checked) :is(.banner__slide, .banner__legenda-item) {
   opacity: 0;
+  visibility: hidden;
 }
 
 .banner__prancha:has(#banner-1:checked) :is(.banner__slide, .banner__legenda-item):nth-child(1),
 .banner__prancha:has(#banner-2:checked) :is(.banner__slide, .banner__legenda-item):nth-child(2),
 .banner__prancha:has(#banner-3:checked) :is(.banner__slide, .banner__legenda-item):nth-child(3) {
   opacity: 1;
+  visibility: visible;
 }
 
 .banner__prancha:has(#banner-1:checked) .banner__ponto:nth-child(1)::before,

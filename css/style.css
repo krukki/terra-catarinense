@@ -62,7 +62,7 @@ a:hover {
 :root {
   --cor-principal: #1F4E5F;
   --cor-secundaria: #3F5B3A;
-  --cor-destaque: #B5452B;
+  --cor-destaque: #AD4128; /* era #B5452B: escurecido para o texto pequeno passar 4,5:1 nas faixas coloridas */
   --cor-destaque-fundo: #A63D25;
   --cor-fundo: #F3EEE4;
   --cor-texto: #1B1F1D;
@@ -505,6 +505,16 @@ strong {
   border-radius: 0.125rem;
 }
 
+/* Texto só para leitores de tela (fica fora da tela, mas é lido) */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 :target {
   scroll-margin-top: calc(var(--altura-header) + 1.5rem);
 }
@@ -905,7 +915,8 @@ strong {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.9s ease;
+  /* visibility acompanha o fade: a foto que sai continua visível até sumir */
+  transition: opacity 0.9s ease, visibility 0.9s;
 }
 
 .banner__slide img {
@@ -1006,11 +1017,23 @@ strong {
   object-position: center top;
 }
 
+/* Véu escuro para o texto branco ter contraste (WCAG AA, 4,5:1) mesmo
+   sobre a espuma e a areia da foto. No celular o texto ocupa a largura
+   toda, então o véu é uniforme; no desktop ele clareia para a direita,
+   onde fica a prancha. */
 .banner--foto::before {
   background:
     linear-gradient(180deg, rgb(var(--cor-veu) / 0.6), transparent 9rem),
-    linear-gradient(90deg, rgb(var(--cor-veu) / 0.78) 0%, rgb(var(--cor-veu) / 0.45) 50%, rgb(var(--cor-veu) / 0.05) 100%);
+    rgb(var(--cor-veu) / 0.72);
   opacity: 1;
+}
+
+@media (min-width: 62rem) {
+  .banner--foto::before {
+    background:
+      linear-gradient(180deg, rgb(var(--cor-veu) / 0.6), transparent 9rem),
+      linear-gradient(90deg, rgb(var(--cor-veu) / 0.84) 0%, rgb(var(--cor-veu) / 0.74) 42%, rgb(var(--cor-veu) / 0.1) 100%);
+  }
 }
 
 .banner--foto .banner__conteudo {
@@ -2701,7 +2724,7 @@ tbody tr:nth-child(even) {
 }
 
 .fontes--creditos {
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
   column-gap: 1.5rem;
 }
 
