@@ -791,6 +791,20 @@ strong {
   }
 }
 
+/* No tema claro o cabeçalho já começa sólido (creme, texto escuro), em vez
+   de transparente sobre a foto: sem a animação, --sobre-foto fica em 0 */
+@media not (prefers-color-scheme: dark) {
+  :root:not(:has(#tema:checked)) .cabecalho--transparente {
+    animation: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:has(#tema:checked) .cabecalho--transparente {
+    animation: none;
+  }
+}
+
 .banner {
   position: relative;
   isolation: isolate;
