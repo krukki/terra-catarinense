@@ -1021,7 +1021,7 @@ strong {
   width: fit-content;
 }
 
-/* A prancha fica no alto, um pouco abaixo da primeira linha do título */
+/* A prancha fica no alto, alinhada ao topo do título */
 .banner--foto .banner__grade {
   align-items: start;
 }
@@ -3506,12 +3506,14 @@ tbody tr:nth-child(even) {
     padding-block: calc(var(--altura-header) + 0.1875rem + 3.5rem) 3rem;
   }
 
+  /* Prancha grande nas telas largas (até 30rem), encolhendo aos poucos
+     até 19rem para não apertar o título em telas menores */
   .banner--foto .banner__grade {
-    grid-template-columns: 1fr 19rem;
+    grid-template-columns: 1fr clamp(19rem, 34vw, 30rem);
   }
 
   .banner--foto .banner__prancha {
-    margin-top: 5rem;
+    width: 100%;
   }
 
   .banner--foto .banner__slides {
