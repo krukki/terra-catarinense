@@ -3172,36 +3172,6 @@ tbody tr:nth-child(even) {
   text-decoration: underline;
 }
 
-.redes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-
-.redes a {
-  display: grid;
-  place-items: center;
-  width: 2.6rem;
-  height: 2.6rem;
-  border: var(--borda-fina) solid rgb(255 255 255 / 0.25);
-  border-radius: 50%;
-  color: var(--cor-rodape-texto);
-  transition: background-color var(--transicao), border-color var(--transicao);
-}
-
-.redes a:hover {
-  background-color: var(--cor-destaque-fundo);
-  border-color: var(--cor-destaque-fundo);
-  color: var(--cor-branco);
-}
-
-.redes svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  fill: currentColor;
-}
-
 .passaporte {
   display: grid;
   gap: 1rem;

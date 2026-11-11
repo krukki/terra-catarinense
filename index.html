@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Terra Catarinense — Conheça Santa Catarina</title>
   <meta name="description" content="Site educativo sobre Santa Catarina: geografia, clima, colonização, cidades, cultura, gastronomia, turismo e economia do estado.">
+  <!-- Prévia do link (WhatsApp, redes sociais). Precisa de endereço absoluto:
+       aponta para o GitHub Pages do projeto. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Terra Catarinense">
+  <meta property="og:title" content="Terra Catarinense — Conheça Santa Catarina">
+  <meta property="og:description" content="Site educativo sobre Santa Catarina: geografia, clima, colonização, cidades, cultura, gastronomia, turismo e economia do estado.">
+  <meta property="og:url" content="https://krukki.github.io/terra-catarinense/">
+  <meta property="og:image" content="https://krukki.github.io/terra-catarinense/assets/litoral/previa-link.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vista aérea da Guarda do Embaú, no litoral de Santa Catarina.">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +79,15 @@
     <section class="banner banner--foto" aria-roledescription="carrossel"
              aria-label="Paisagens de Santa Catarina">
 
-      <img class="banner__fundo" src="assets/litoral/guarda-do-embau-banner.jpg"
+      <!-- srcset: o navegador escolhe o menor arquivo que cobre a tela.
+           No celular o banner é alto e a foto é cortada pelos lados
+           (object-fit: cover), por isso ela ocupa ~150vw de largura. -->
+      <img class="banner__fundo" src="assets/litoral/guarda-do-embau-banner-1920.jpg"
+           srcset="assets/litoral/guarda-do-embau-banner-800.jpg 800w,
+                   assets/litoral/guarda-do-embau-banner-1280.jpg 1280w,
+                   assets/litoral/guarda-do-embau-banner-1920.jpg 1920w,
+                   assets/litoral/guarda-do-embau-banner.jpg 2560w"
+           sizes="(max-width: 47.99rem) 150vw, 100vw"
            alt="Vista aérea da Guarda do Embaú: mar verde-azulado, faixa longa de areia, morros e a serra ao fundo."
            width="2560" height="1440" decoding="async" fetchpriority="high">
 
@@ -613,7 +634,7 @@
           <h2>Fontes de pesquisa</h2>
           <p class="subtitulo-secao">
             Todo o conteúdo deste site foi produzido a partir de dados públicos
-            dos portais oficiais abaixo.
+            dos portais oficiais e pesquisas abaixo.
           </p>
         </div>
 
@@ -623,8 +644,39 @@
               IBGE Cidades — panorama de Santa Catarina
             </a>
             <p>
-              Área, população, número de municípios, PIB, IDH e dados por
-              município. É a fonte usada para todos os números estatísticos do site.
+              Área, população, número de municípios, PIB e dados de cada município: altitude, ano de emancipação e população.
+            </p>
+          </li>
+          <li>
+            <a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">
+              IBGE — Censo Demográfico 2022
+            </a>
+            <p>
+              População do estado e das cidades, taxa de urbanização e moradia. Os números de habitantes do site são deste censo.
+            </p>
+          </li>
+          <li>
+            <a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">
+              PNUD — Radar IDHM 2024
+            </a>
+            <p>
+              Índice de Desenvolvimento Humano dos estados: Santa Catarina tem 0,833, o terceiro maior do país.
+            </p>
+          </li>
+          <li>
+            <a href="https://www.ibge.gov.br/estatisticas/sociais/populacao/9126-tabuas-completas-de-mortalidade.html" rel="external noopener" target="_blank">
+              IBGE — Tábuas Completas de Mortalidade
+            </a>
+            <p>
+              Expectativa de vida ao nascer por estado (dados de 2024).
+            </p>
+          </li>
+          <li>
+            <a href="https://anuario.ibge.gov.br/images/aeb/2023/s1/2_pdf/s1t3202.pdf" rel="external noopener" target="_blank">
+              IBGE — Anuário Estatístico: pontos culminantes
+            </a>
+            <p>
+              Altitude do Morro da Boa Vista (1.827 m), o ponto mais alto do estado, e dos outros picos da serra.
             </p>
           </li>
           <li>
@@ -632,8 +684,7 @@
               Governo do Estado — Conheça SC
             </a>
             <p>
-              História da colonização, símbolos do estado, geografia e informações
-              gerais sobre as regiões catarinenses.
+              História da colonização, símbolos do estado, geografia e informações gerais sobre as regiões catarinenses.
             </p>
           </li>
           <li>
@@ -641,16 +692,7 @@
               Santur — Agência de Desenvolvimento do Turismo de Santa Catarina
             </a>
             <p>
-              Roteiros turísticos, calendário de festas, atrativos naturais e
-              dados sobre as regiões turísticas.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">
-              Portal oficial do Estado de Santa Catarina
-            </a>
-            <p>
-              Notícias, indicadores de economia e serviços públicos estaduais.
+              Roteiros turísticos, calendário de festas, atrativos naturais e dados sobre as regiões turísticas.
             </p>
           </li>
         </ul>
@@ -698,37 +740,10 @@
           <h3 class="rodape__titulo">Fontes de pesquisa</h3>
           <ul class="rodape__lista">
             <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">IBGE — Censo 2022</a></li>
+            <li><a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">PNUD — Radar IDHM 2024</a></li>
             <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
             <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
-            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
-          </ul>
-
-          <h3 class="esp-topo-3 rodape__titulo" >Redes sociais</h3>
-          <ul class="redes">
-            <li>
-              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
-                 aria-label="Instagram (página inicial da rede)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
-                 aria-label="Canal do projeto Terra Catarinense no YouTube">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
-                 aria-label="Página do projeto Terra Catarinense no Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
-                </svg>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
