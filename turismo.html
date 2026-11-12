@@ -46,12 +46,19 @@
         </span>
       </a>
 
-      <label class="tema-botao" title="Alternar entre tema claro e escuro">
-        <input class="tema-botao__caixa" type="checkbox" id="tema"
-               aria-label="Alternar entre tema claro e escuro">
-        <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
-        <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </label>
+      <div class="cabecalho__botoes">
+        <label class="tema-botao" title="Alternar entre tema claro e escuro">
+          <input class="tema-botao__caixa" type="checkbox" id="tema"
+                 aria-label="Alternar entre tema claro e escuro">
+          <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
+          <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
+        </label>
+        <label class="tema-botao neve-botao" title="Fazer nevar nesta página">
+          <input class="tema-botao__caixa" type="checkbox" id="neve"
+                 aria-label="Fazer nevar nesta página">
+          <span aria-hidden="true">&#10052;</span>
+        </label>
+      </div>
 
       <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
@@ -98,6 +105,75 @@
         </ol>
       </div>
     </nav>
+
+    <!-- Viagem do mar à neve: enquanto a pessoa rola, o palco fica parado
+         (sticky) e uma linha do tempo de visualização (view-timeline) desenha
+         o perfil, sobe a altitude, baixa a temperatura e faz nevar no topo.
+         Sem suporte ou com movimento reduzido, tudo aparece pronto e parado. -->
+    <section class="viagem" id="viagem" aria-labelledby="viagem-titulo">
+      <div class="viagem__trilho">
+        <div class="viagem__palco">
+          <div class="container viagem__conteudo">
+            <div class="viagem__cabecalho">
+              <span class="etiqueta">Do mar à neve</span>
+              <h2 id="viagem-titulo">Da praia ao topo da serra</h2>
+            </div>
+
+            <div class="viagem__leitura" aria-hidden="true">
+              <div><span>Altitude</span><strong class="viagem__alt"></strong></div>
+              <div><span>Média de julho</span><strong class="viagem__temp"></strong></div>
+            </div>
+
+            <svg class="viagem__perfil" viewBox="0 -50 800 410" aria-hidden="true" focusable="false">
+              <path class="viagem__terreno" d="M0,320.0 L70,319.6 C120,318.6 150,311.8 175,251.4 C190,169.1 205,148.5 230,155.3 C255,162.2 275,192.4 300,194.5 C380,185.5 440,141.6 520,134.4 C600,125.2 660,93.6 730,70.0 C760,73.0 785,86.7 800,93.6 L800,360 L0,360 Z"></path>
+              <path class="viagem__linha" d="M0,320.0 L70,319.6 C120,318.6 150,311.8 175,251.4 C190,169.1 205,148.5 230,155.3 C255,162.2 275,192.4 300,194.5 C380,185.5 440,141.6 520,134.4 C600,125.2 660,93.6 730,70.0 C760,73.0 785,86.7 800,93.6" pathLength="1"></path>
+            <g class="viagem__parada" style="--em: 0.000" transform="translate(70 319.6)">
+              <circle r="7"></circle>
+              <text class="viagem__parada-nome" x="10" y="-30" text-anchor="start">Florianópolis</text>
+              <text class="viagem__parada-dado" x="10" y="-14" text-anchor="start">3 m · 16 °C</text>
+            </g>
+            <g class="viagem__parada" style="--em: 0.333" transform="translate(300 194.5)">
+              <circle r="7"></circle>
+              <text class="viagem__parada-nome" x="0" y="-30" text-anchor="middle">Urubici</text>
+              <text class="viagem__parada-dado" x="0" y="-14" text-anchor="middle">915 m · 10 °C</text>
+            </g>
+            <g class="viagem__parada" style="--em: 0.667" transform="translate(520 134.4)">
+              <circle r="7"></circle>
+              <text class="viagem__parada-nome" x="0" y="-30" text-anchor="middle">São Joaquim</text>
+              <text class="viagem__parada-dado" x="0" y="-14" text-anchor="middle">1.353 m · 8 °C</text>
+            </g>
+            <g class="viagem__parada" style="--em: 1.000" transform="translate(730 70.0)">
+              <circle r="7"></circle>
+              <text class="viagem__parada-nome" x="-10" y="-30" text-anchor="end">Morro da Igreja</text>
+              <text class="viagem__parada-dado" x="-10" y="-14" text-anchor="end">1.822 m · 6 °C</text>
+            </g>
+              <g class="viagem__neve">
+              <circle class="viagem__floco" r="2.4" cx="690" cy="-10" style="--d:3.2s;--a:0s"></circle>
+              <circle class="viagem__floco" r="1.8" cx="715" cy="-25" style="--d:2.6s;--a:-1.1s"></circle>
+              <circle class="viagem__floco" r="2.8" cx="740" cy="-5" style="--d:3.6s;--a:-2s"></circle>
+              <circle class="viagem__floco" r="2" cx="765" cy="-20" style="--d:2.9s;--a:-0.6s"></circle>
+              <circle class="viagem__floco" r="1.6" cx="705" cy="-35" style="--d:2.4s;--a:-1.7s"></circle>
+              <circle class="viagem__floco" r="2.2" cx="752" cy="-30" style="--d:3.1s;--a:-2.4s"></circle>
+              <circle class="viagem__floco" r="1.9" cx="728" cy="-15" style="--d:2.7s;--a:-0.3s"></circle>
+              <circle class="viagem__floco" r="2.5" cx="778" cy="-8" style="--d:3.4s;--a:-1.4s"></circle>
+              </g>
+            </svg>
+
+            <ol class="viagem__lista">
+            <li><strong>Florianópolis</strong> <span>3 m de altitude · média de julho perto de 16 °C</span></li>
+            <li><strong>Urubici</strong> <span>915 m de altitude · média de julho perto de 10 °C</span></li>
+            <li><strong>São Joaquim</strong> <span>1.353 m de altitude · média de julho perto de 8 °C</span></li>
+            <li><strong>Morro da Igreja</strong> <span>1.822 m de altitude · média de julho perto de 6 °C</span></li>
+            </ol>
+
+            <p class="viagem__nota">
+              Perfil esquemático, de Florianópolis ao Morro da Igreja, em Urubici.
+              Em linha reta, são cerca de 110 km entre o mar e o topo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="secao secao--clara" id="clima">
       <div class="container">
@@ -574,5 +650,42 @@
 
   <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
+
+  <!-- Neve: aparece quando o botão ❄ do cabeçalho está marcado (só CSS).
+       Posição, tamanho e velocidade de cada floco vêm das variáveis. -->
+  <div class="neve" aria-hidden="true">
+    <i style="--x:16.2%;--d:10.7s;--a:-4.5s;--t:1.13;--v:-0.7rem"></i>
+    <i style="--x:21.7%;--d:15.8s;--a:-7.5s;--t:1.04;--v:2.3rem"></i>
+    <i style="--x:25.2%;--d:10.8s;--a:-13.4s;--t:1.04;--v:2.2rem"></i>
+    <i style="--x:62.4%;--d:15.6s;--a:-6.7s;--t:0.86;--v:2.3rem"></i>
+    <i style="--x:50.9%;--d:13.8s;--a:-5.0s;--t:0.7;--v:2.3rem"></i>
+    <i style="--x:0.3%;--d:11.6s;--a:-5.1s;--t:1.3;--v:-1.7rem"></i>
+    <i style="--x:7.4%;--d:8.6s;--a:-8.8s;--t:0.9;--v:3.0rem"></i>
+    <i style="--x:50.7%;--d:12.6s;--a:-1.6s;--t:1.02;--v:1.6rem"></i>
+    <i style="--x:38.1%;--d:15.5s;--a:-2.2s;--t:0.73;--v:0.3rem"></i>
+    <i style="--x:45.0%;--d:7.3s;--a:-4.3s;--t:0.77;--v:-0.3rem"></i>
+    <i style="--x:67.2%;--d:11.0s;--a:-8.7s;--t:1.16;--v:-0.2rem"></i>
+    <i style="--x:60.3%;--d:8.5s;--a:-2.2s;--t:0.57;--v:1.8rem"></i>
+    <i style="--x:1.8%;--d:13.0s;--a:-3.8s;--t:0.72;--v:-2.3rem"></i>
+    <i style="--x:5.7%;--d:8.5s;--a:-1.2s;--t:0.96;--v:0.9rem"></i>
+    <i style="--x:43.7%;--d:16.0s;--a:-3.8s;--t:1.08;--v:-1.4rem"></i>
+    <i style="--x:63.7%;--d:7.4s;--a:-15.6s;--t:1.16;--v:-2.8rem"></i>
+    <i style="--x:23.0%;--d:15.4s;--a:-12.1s;--t:0.75;--v:-0.2rem"></i>
+    <i style="--x:14.0%;--d:12.3s;--a:-3.5s;--t:0.77;--v:-1.7rem"></i>
+    <i style="--x:5.8%;--d:11.3s;--a:-12.5s;--t:1.03;--v:2.9rem"></i>
+    <i style="--x:63.8%;--d:8.9s;--a:-10.4s;--t:0.87;--v:-2.6rem"></i>
+    <i style="--x:99.8%;--d:7.2s;--a:-0.6s;--t:0.79;--v:-0.2rem"></i>
+    <i style="--x:17.0%;--d:13.1s;--a:-15.7s;--t:1.01;--v:-2.0rem"></i>
+    <i style="--x:52.4%;--d:11.1s;--a:-6.3s;--t:0.91;--v:-1.7rem"></i>
+    <i style="--x:75.9%;--d:12.4s;--a:-2.3s;--t:0.78;--v:-1.4rem"></i>
+    <i style="--x:16.4%;--d:11.4s;--a:-1.9s;--t:0.75;--v:0.9rem"></i>
+    <i style="--x:50.0%;--d:8.5s;--a:-10.8s;--t:1.3;--v:1.1rem"></i>
+    <i style="--x:19.5%;--d:11.7s;--a:-12.8s;--t:1.18;--v:-2.9rem"></i>
+    <i style="--x:22.7%;--d:14.6s;--a:-1.9s;--t:0.92;--v:0.9rem"></i>
+    <i style="--x:0.4%;--d:8.8s;--a:-15.8s;--t:0.99;--v:-2.2rem"></i>
+    <i style="--x:69.6%;--d:10.4s;--a:-8.9s;--t:0.88;--v:-2.8rem"></i>
+    <i style="--x:93.4%;--d:15.0s;--a:-9.9s;--t:0.64;--v:-1.7rem"></i>
+    <i style="--x:73.0%;--d:12.3s;--a:-8.8s;--t:1.21;--v:-0.2rem"></i>
+  </div>
 </body>
 </html>

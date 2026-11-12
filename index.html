@@ -46,12 +46,19 @@
         </span>
       </a>
 
-      <label class="tema-botao" title="Alternar entre tema claro e escuro">
-        <input class="tema-botao__caixa" type="checkbox" id="tema"
-               aria-label="Alternar entre tema claro e escuro">
-        <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
-        <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </label>
+      <div class="cabecalho__botoes">
+        <label class="tema-botao" title="Alternar entre tema claro e escuro">
+          <input class="tema-botao__caixa" type="checkbox" id="tema"
+                 aria-label="Alternar entre tema claro e escuro">
+          <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
+          <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
+        </label>
+        <label class="tema-botao neve-botao" title="Fazer nevar nesta página">
+          <input class="tema-botao__caixa" type="checkbox" id="neve"
+                 aria-label="Fazer nevar nesta página">
+          <span aria-hidden="true">&#10052;</span>
+        </label>
+      </div>
 
       <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
@@ -517,6 +524,39 @@
           </article>
         </div>
 
+        <!-- Antes e depois: a foto da serra fica por cima e é recortada
+             (clip-path) até a divisória. A posição vem de 5 rádios: as
+             setas do teclado movem a divisória, e clicar na foto também. -->
+        <figure class="antes-depois revelar">
+          <div class="antes-depois__palco">
+            <img src="assets/litoral/praia-verao.jpg"
+                 alt="Litoral: praia de Jurerê, em Florianópolis, com areia clara e mar azul."
+                 width="900" height="520" loading="lazy" decoding="async">
+            <img class="antes-depois__serra" src="assets/serra/serra-geada.jpg"
+                 alt="Serra: casa de madeira em campo de altitude cercado por araucárias."
+                 width="900" height="520" loading="lazy" decoding="async">
+            <span class="antes-depois__linha" aria-hidden="true"></span>
+            <span class="antes-depois__rotulo antes-depois__rotulo--litoral" aria-hidden="true">Litoral · 3 m</span>
+            <span class="antes-depois__rotulo antes-depois__rotulo--serra" aria-hidden="true">Planalto serrano · 1.300 m</span>
+            <span class="antes-depois__faixas" aria-hidden="true">
+              <label for="ad-0"></label><label for="ad-25"></label><label for="ad-50"></label><label for="ad-75"></label><label for="ad-100"></label>
+            </span>
+          </div>
+
+          <div class="antes-depois__trilho" role="radiogroup" aria-label="Posição da divisória entre litoral e serra">
+            <input type="radio" name="antes-depois" id="ad-0" value="0" aria-label="Só a serra">
+            <input type="radio" name="antes-depois" id="ad-25" value="25" aria-label="Um quarto de litoral, três quartos de serra">
+            <input type="radio" name="antes-depois" id="ad-50" value="50" aria-label="Metade de cada" checked>
+            <input type="radio" name="antes-depois" id="ad-75" value="75" aria-label="Três quartos de litoral, um quarto de serra">
+            <input type="radio" name="antes-depois" id="ad-100" value="100" aria-label="Só o litoral">
+          </div>
+
+          <figcaption class="antes-depois__legenda">
+            Duas paisagens do mesmo estado, a cerca de 200 km uma da outra.
+            Clique na foto ou use as setas do teclado no trilho para mover a divisória.
+          </figcaption>
+        </figure>
+
         <p class="esp-topo-5 centralizado revelar" >
           <a class="link-seta" href="turismo.html#clima">
             Entender o clima e a natureza catarinense em detalhe
@@ -776,5 +816,42 @@
 
   <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
+
+  <!-- Neve: aparece quando o botão ❄ do cabeçalho está marcado (só CSS).
+       Posição, tamanho e velocidade de cada floco vêm das variáveis. -->
+  <div class="neve" aria-hidden="true">
+    <i style="--x:16.2%;--d:10.7s;--a:-4.5s;--t:1.13;--v:-0.7rem"></i>
+    <i style="--x:21.7%;--d:15.8s;--a:-7.5s;--t:1.04;--v:2.3rem"></i>
+    <i style="--x:25.2%;--d:10.8s;--a:-13.4s;--t:1.04;--v:2.2rem"></i>
+    <i style="--x:62.4%;--d:15.6s;--a:-6.7s;--t:0.86;--v:2.3rem"></i>
+    <i style="--x:50.9%;--d:13.8s;--a:-5.0s;--t:0.7;--v:2.3rem"></i>
+    <i style="--x:0.3%;--d:11.6s;--a:-5.1s;--t:1.3;--v:-1.7rem"></i>
+    <i style="--x:7.4%;--d:8.6s;--a:-8.8s;--t:0.9;--v:3.0rem"></i>
+    <i style="--x:50.7%;--d:12.6s;--a:-1.6s;--t:1.02;--v:1.6rem"></i>
+    <i style="--x:38.1%;--d:15.5s;--a:-2.2s;--t:0.73;--v:0.3rem"></i>
+    <i style="--x:45.0%;--d:7.3s;--a:-4.3s;--t:0.77;--v:-0.3rem"></i>
+    <i style="--x:67.2%;--d:11.0s;--a:-8.7s;--t:1.16;--v:-0.2rem"></i>
+    <i style="--x:60.3%;--d:8.5s;--a:-2.2s;--t:0.57;--v:1.8rem"></i>
+    <i style="--x:1.8%;--d:13.0s;--a:-3.8s;--t:0.72;--v:-2.3rem"></i>
+    <i style="--x:5.7%;--d:8.5s;--a:-1.2s;--t:0.96;--v:0.9rem"></i>
+    <i style="--x:43.7%;--d:16.0s;--a:-3.8s;--t:1.08;--v:-1.4rem"></i>
+    <i style="--x:63.7%;--d:7.4s;--a:-15.6s;--t:1.16;--v:-2.8rem"></i>
+    <i style="--x:23.0%;--d:15.4s;--a:-12.1s;--t:0.75;--v:-0.2rem"></i>
+    <i style="--x:14.0%;--d:12.3s;--a:-3.5s;--t:0.77;--v:-1.7rem"></i>
+    <i style="--x:5.8%;--d:11.3s;--a:-12.5s;--t:1.03;--v:2.9rem"></i>
+    <i style="--x:63.8%;--d:8.9s;--a:-10.4s;--t:0.87;--v:-2.6rem"></i>
+    <i style="--x:99.8%;--d:7.2s;--a:-0.6s;--t:0.79;--v:-0.2rem"></i>
+    <i style="--x:17.0%;--d:13.1s;--a:-15.7s;--t:1.01;--v:-2.0rem"></i>
+    <i style="--x:52.4%;--d:11.1s;--a:-6.3s;--t:0.91;--v:-1.7rem"></i>
+    <i style="--x:75.9%;--d:12.4s;--a:-2.3s;--t:0.78;--v:-1.4rem"></i>
+    <i style="--x:16.4%;--d:11.4s;--a:-1.9s;--t:0.75;--v:0.9rem"></i>
+    <i style="--x:50.0%;--d:8.5s;--a:-10.8s;--t:1.3;--v:1.1rem"></i>
+    <i style="--x:19.5%;--d:11.7s;--a:-12.8s;--t:1.18;--v:-2.9rem"></i>
+    <i style="--x:22.7%;--d:14.6s;--a:-1.9s;--t:0.92;--v:0.9rem"></i>
+    <i style="--x:0.4%;--d:8.8s;--a:-15.8s;--t:0.99;--v:-2.2rem"></i>
+    <i style="--x:69.6%;--d:10.4s;--a:-8.9s;--t:0.88;--v:-2.8rem"></i>
+    <i style="--x:93.4%;--d:15.0s;--a:-9.9s;--t:0.64;--v:-1.7rem"></i>
+    <i style="--x:73.0%;--d:12.3s;--a:-8.8s;--t:1.21;--v:-0.2rem"></i>
+  </div>
 </body>
 </html>

@@ -266,6 +266,75 @@ a:hover {
   :root:not(:has(#tema:checked)) .tema-botao__icone--escuro { display: block; }
 }
 
+/* --- Botão "Faça nevar" (checkbox #neve, ao lado do tema) --- */
+.cabecalho__botoes {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.neve-botao:has(:checked) {
+  border-color: currentColor;
+  background-color: rgb(140 170 195 / 0.22);
+}
+
+/* Camada de flocos: fixa sobre a página, não recebe cliques */
+.neve {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+:root:has(#neve:checked) .neve {
+  display: block;
+}
+
+.neve i {
+  position: absolute;
+  top: -2rem;
+  left: var(--x);
+  width: calc(0.55rem * var(--t));
+  height: calc(0.55rem * var(--t));
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 50%, rgb(255 255 255 / 0.4) 70%, transparent 72%);
+  box-shadow: 0 0 0.35rem rgb(70 100 130 / 0.45);
+  opacity: 0.9;
+  animation: floco-cai var(--d) linear var(--a) infinite;
+}
+
+/* Um floco em cada três é um cristal ❄ em vez de bolinha */
+.neve i:nth-child(3n) {
+  width: auto;
+  height: auto;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+  font-size: calc(1.1rem * var(--t));
+  font-style: normal;
+  line-height: 1;
+  text-shadow: 0 0 0.3rem rgb(70 100 130 / 0.6);
+}
+
+.neve i:nth-child(3n)::before {
+  content: "\2744";
+}
+
+@keyframes floco-cai {
+  to {
+    transform: translate(var(--v), 110vh) rotate(240deg);
+  }
+}
+
+/* Quem pede menos movimento não recebe neve caindo: o botão some */
+@media (prefers-reduced-motion: reduce) {
+  .neve-botao,
+  .neve {
+    display: none !important;
+  }
+}
+
 body {
   font-family: var(--fonte-texto);
   font-size: 1rem;
@@ -3552,6 +3621,796 @@ tbody tr:nth-child(even) {
     position: sticky;
     top: calc(var(--altura-header) + 1.25rem);
   }
+}
+
+/* ==========================================================================
+   Antes e depois: litoral × serra (index, "Duas Santa Catarinas")
+   A posição da divisória (--corte) vem dos rádios, em css/estados.css.
+   ========================================================================== */
+
+@property --corte {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+.antes-depois {
+  --corte: 50%;
+  max-width: 56rem;
+  margin: var(--espaco-xl) auto 0;
+  transition: --corte 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.antes-depois__palco {
+  position: relative;
+  aspect-ratio: 900 / 520;
+  overflow: hidden;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-img-vazia);
+}
+
+.antes-depois__palco img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.antes-depois__serra {
+  clip-path: inset(0 0 0 var(--corte));
+}
+
+.antes-depois__linha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--corte);
+  width: 0.1875rem;
+  translate: -50% 0;
+  background-color: var(--cor-branco, #fff);
+  box-shadow: 0 0 0.5rem rgb(0 0 0 / 0.45);
+}
+
+.antes-depois__linha::after {
+  content: "\2194";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--cor-branco, #fff);
+  color: #1B1F1D;
+  font-size: 1.1rem;
+  box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.35);
+}
+
+.antes-depois__rotulo {
+  position: absolute;
+  bottom: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  background-color: rgb(18 26 24 / 0.78);
+  color: #F3EEE4;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+
+.antes-depois__rotulo--litoral { left: 0.75rem; }
+.antes-depois__rotulo--serra { right: 0.75rem; }
+
+/* Faixas clicáveis sobre a foto: cada uma marca um dos 5 rádios */
+.antes-depois__faixas {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 12.5% 25% 25% 25% 12.5%;
+}
+
+.antes-depois__faixas label {
+  cursor: pointer;
+}
+
+/* Trilho: os próprios rádios, estilizados como marcas de um slider */
+.antes-depois__trilho {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto 0;
+  width: min(100%, 22rem);
+  padding: 0.5rem 0;
+}
+
+.antes-depois__trilho::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 0.125rem;
+  background-color: var(--cor-borda);
+}
+
+.antes-depois__trilho input {
+  appearance: none;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  border: var(--borda-fina) solid var(--cor-texto-suave);
+  border-radius: 50%;
+  background-color: var(--cor-fundo);
+  cursor: pointer;
+  transition: background-color var(--transicao), border-color var(--transicao), transform var(--transicao);
+}
+
+.antes-depois__trilho input:checked {
+  border-color: var(--cor-destaque);
+  background-color: var(--cor-destaque);
+  transform: scale(1.2);
+}
+
+.antes-depois__trilho input:focus-visible {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+.antes-depois__legenda {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--cor-texto-suave);
+}
+
+/* ==========================================================================
+   Teste de conhecimento (curiosidades.html)
+   A nota e o gabarito aparecem por estados em css/estados.css.
+   ========================================================================== */
+
+.teste__perguntas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.teste__pergunta fieldset {
+  height: 100%;
+  margin: 0;
+  padding: 1rem 1.1rem 1.1rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+
+.teste__pergunta legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.teste__num {
+  margin-right: 0.35rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  color: var(--cor-destaque);
+}
+
+.teste__opcao {
+  clear: both;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  padding: 0.5rem 0.7rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-radius: var(--raio);
+  cursor: pointer;
+  transition: border-color var(--transicao), background-color var(--transicao);
+}
+
+.teste__opcao:hover {
+  border-color: var(--cor-texto-suave);
+}
+
+.teste__opcao input {
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--cor-destaque);
+}
+
+.teste__opcao:has(:checked) {
+  border-color: var(--cor-destaque);
+  background-color: var(--cor-principal-clara);
+}
+
+.teste__retorno {
+  display: none;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: var(--borda-fina) dashed var(--cor-borda);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--cor-texto-suave);
+}
+
+.teste__certo,
+.teste__errado,
+.teste__vazio {
+  display: none;
+  margin-right: 0.25rem;
+  font-weight: 600;
+}
+
+.teste__certo { color: var(--cor-principal); }
+.teste__errado,
+.teste__vazio { color: var(--cor-destaque); }
+
+.teste__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-sm);
+  margin-top: var(--espaco-lg);
+}
+
+.teste__ver {
+  cursor: pointer;
+}
+
+.teste__ver:has(:focus-visible) {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+.teste__ver-esconder {
+  display: none;
+}
+
+.teste__placar {
+  display: none;
+  max-width: 34rem;
+  margin: var(--espaco-md) auto 0;
+  padding: 1rem 1.25rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-superficie);
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.teste__nota {
+  font-size: 2.2rem;
+  color: var(--cor-destaque);
+}
+
+.teste__placar-dica {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--fonte-texto);
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+/* ==========================================================================
+   Mapa da ocupação por época (cultura.html)
+   As cores de cada região por época ficam em css/estados.css.
+   ========================================================================== */
+
+.imigracao {
+  --imig-indigena: #CFC8B6;
+  --imig-vicentista: #6F7F86;
+  --imig-acoriana: #2F6F8A;
+  --imig-tropeiro: #8A6A3B;
+  --imig-alema: #AD4128;
+  --imig-italiana: #5C7F3A;
+  --imig-gaucha: #C9962E;
+  --imig-contorno: #FAF7F0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(#tema:checked)) .imigracao {
+    --imig-indigena: #3A403B;
+    --imig-vicentista: #8C9BA1;
+    --imig-acoriana: #5E9FBA;
+    --imig-tropeiro: #B48E5A;
+    --imig-alema: #E58A6C;
+    --imig-italiana: #8DB565;
+    --imig-gaucha: #E2B652;
+    --imig-contorno: #0F1614;
+  }
+}
+
+@media not (prefers-color-scheme: dark) {
+  :root:has(#tema:checked) .imigracao {
+    --imig-indigena: #3A403B;
+    --imig-vicentista: #8C9BA1;
+    --imig-acoriana: #5E9FBA;
+    --imig-tropeiro: #B48E5A;
+    --imig-alema: #E58A6C;
+    --imig-italiana: #8DB565;
+    --imig-gaucha: #E2B652;
+    --imig-contorno: #0F1614;
+  }
+}
+
+.imigracao__grade {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.imigracao__epocas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.imigracao__estado {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.imigracao__epocas label {
+  padding: 0.45rem 0.8rem;
+  border: var(--borda-fina) solid var(--cor-texto-suave);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao), border-color var(--transicao);
+}
+
+.imigracao__epocas label:hover {
+  border-color: var(--cor-texto);
+}
+
+.imigracao__estado:checked + label {
+  border-color: var(--cor-texto);
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+.imigracao__estado:focus-visible + label {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+.imigracao__mapa {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.imigracao__regiao {
+  fill: var(--imig-indigena);
+  stroke: var(--imig-contorno);
+  stroke-width: 1.2;
+  transition: fill 0.5s ease;
+}
+
+.imigracao__pino {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.imigracao__pino circle {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 1.5;
+}
+
+.imigracao__pino text {
+  font-family: var(--fonte-mono);
+  font-size: 9.5px;
+  fill: var(--cor-texto);
+  paint-order: stroke;
+  stroke: var(--cor-fundo);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+/* No celular o mapa fica pequeno demais para os nomes: ficam só os pinos,
+   e o texto da época cita as cidades */
+@media (max-width: 47.99rem) {
+  .imigracao__pino text {
+    display: none;
+  }
+}
+
+.imigracao__texto {
+  display: none;
+}
+
+.imigracao__texto h3 {
+  margin-bottom: 0.4rem;
+}
+
+.imigracao__texto p {
+  max-width: 46ch;
+  color: var(--cor-texto-suave);
+}
+
+.imigracao__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+}
+
+.imigracao__legenda li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.imigracao__cor {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: var(--borda-fina) solid var(--cor-texto-suave);
+  border-radius: 0.15rem;
+}
+
+.imigracao__cor[data-povo="indigena"]   { background-color: var(--imig-indigena); }
+.imigracao__cor[data-povo="vicentista"] { background-color: var(--imig-vicentista); }
+.imigracao__cor[data-povo="acoriana"]   { background-color: var(--imig-acoriana); }
+.imigracao__cor[data-povo="tropeiro"]   { background-color: var(--imig-tropeiro); }
+.imigracao__cor[data-povo="alema"]      { background-color: var(--imig-alema); }
+.imigracao__cor[data-povo="italiana"]   { background-color: var(--imig-italiana); }
+.imigracao__cor[data-povo="gaucha"]     { background-color: var(--imig-gaucha); }
+
+/* Pinos com a cor do povo que fundou a cidade */
+.imigracao__pino[data-povo="vicentista"] circle { fill: var(--imig-vicentista); }
+.imigracao__pino[data-povo="tropeiro"] circle   { fill: var(--imig-tropeiro); }
+.imigracao__pino[data-povo="alema"] circle      { fill: var(--imig-alema); }
+.imigracao__pino[data-povo="italiana"] circle   { fill: var(--imig-italiana); }
+.imigracao__pino[data-povo="gaucha"] circle     { fill: var(--imig-gaucha); }
+
+@media (min-width: 62rem) {
+  .imigracao__grade {
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-areas:
+      "epocas epocas"
+      "mapa   texto"
+      "mapa   legenda";
+    align-items: start;
+    column-gap: 2.5rem;
+  }
+
+  .imigracao__epocas  { grid-area: epocas; }
+  .imigracao__mapa    { grid-area: mapa; }
+  .imigracao__textos  { grid-area: texto; }
+  .imigracao__legenda { grid-area: legenda; }
+}
+
+/* ==========================================================================
+   Viagem do mar à neve (turismo.html)
+   Versão base (sem animação): tudo visível e parado. A versão animada,
+   ligada à rolagem, só entra com suporte a view-timeline e sem pedido
+   de menos movimento.
+   ========================================================================== */
+
+@property --alt { syntax: "<integer>"; inherits: true; initial-value: 1822; }
+@property --temp { syntax: "<integer>"; inherits: true; initial-value: 6; }
+@property --geada { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --alt-mil { syntax: "<integer>"; inherits: true; initial-value: 1; }
+@property --alt-resto { syntax: "<integer>"; inherits: true; initial-value: 822; }
+
+.viagem {
+  --mar: #CFE3EA;
+  --gelo: #F4F6F7;
+  --terreno-mar: #7E9C76;
+  --terreno-gelo: #DCE3E6;
+  --floco: #9DB6C9;
+  position: relative;
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
+  background-color: color-mix(in srgb, var(--gelo) calc(var(--geada) * 100%), var(--mar));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(#tema:checked)) .viagem {
+    --mar: #0E2A33;
+    --gelo: #1F2A2E;
+    --terreno-mar: #2F4A33;
+    --terreno-gelo: #56646A;
+    --floco: #FFFFFF;
+  }
+}
+
+@media not (prefers-color-scheme: dark) {
+  :root:has(#tema:checked) .viagem {
+    --mar: #0E2A33;
+    --gelo: #1F2A2E;
+    --terreno-mar: #2F4A33;
+    --terreno-gelo: #56646A;
+    --floco: #FFFFFF;
+  }
+}
+
+.viagem__conteudo {
+  display: grid;
+  gap: 1rem;
+  padding-block: var(--espaco-xl);
+}
+
+.viagem__cabecalho h2 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+.viagem__leitura {
+  display: none;
+  gap: 2rem;
+}
+
+.viagem__leitura span {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.viagem__leitura strong {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* Altitude e temperatura como contadores: acompanham --alt e --temp */
+.viagem__leitura {
+  --alt-mil: round(down, var(--alt) / 1000, 1);
+  --alt-resto: mod(var(--alt), 1000);
+  counter-reset: altmil var(--alt-mil) altresto var(--alt-resto) temp var(--temp);
+  container-name: viagem-leitura;
+}
+
+.viagem__alt::before { content: counter(altmil) "." counter(altresto, tres-digitos) " m"; }
+.viagem__temp::before { content: counter(temp) " °C"; }
+
+@container viagem-leitura style(--alt-mil: 0) {
+  .viagem__alt::before { content: counter(altresto) " m"; }
+}
+
+.viagem__perfil {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* No palco fixo, o perfil ocupa só o que sobra da tela */
+.viagem__palco .viagem__perfil {
+  max-height: calc(100svh - var(--altura-header) - 17rem);
+}
+
+.viagem__terreno {
+  fill: color-mix(in srgb, var(--terreno-gelo) calc(var(--geada) * 100%), var(--terreno-mar));
+  opacity: 0.55;
+}
+
+.viagem__linha {
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.viagem__parada circle {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-fundo);
+  stroke-width: 3;
+}
+
+.viagem__parada-nome {
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+  fill: var(--cor-texto);
+}
+
+.viagem__parada-dado {
+  font-family: var(--fonte-mono);
+  font-size: 13px;
+  fill: var(--cor-texto-suave);
+}
+
+.viagem__parada text {
+  paint-order: stroke;
+  stroke: color-mix(in srgb, var(--gelo) calc(var(--geada) * 100%), var(--mar));
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+/* No celular o SVG encolhe muito: letras maiores nas paradas */
+@media (max-width: 47.99rem) {
+  .viagem__parada-nome { font-size: 30px; }
+  .viagem__parada-dado { font-size: 26px; }
+  .viagem__parada-nome { transform: translateY(-12px); }
+}
+
+.viagem__floco {
+  fill: var(--floco);
+  stroke: rgb(70 100 130 / 0.5);
+  stroke-width: 0.6;
+  animation: viagem-floco var(--d) linear var(--a) infinite;
+}
+
+@keyframes viagem-floco {
+  from { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  to { transform: translateY(70px); opacity: 0; }
+}
+
+.viagem__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.viagem__lista span {
+  display: block;
+  color: var(--cor-texto-suave);
+}
+
+.viagem__nota {
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+
+/* --- Versão animada pela rolagem --- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .viagem__trilho {
+      height: 320vh;
+      view-timeline-name: --viagem;
+    }
+
+    .viagem__palco {
+      position: sticky;
+      top: var(--altura-header);
+      height: calc(100svh - var(--altura-header));
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .viagem__conteudo {
+      width: 100%;
+      padding-block: 1rem;
+    }
+
+    .viagem__leitura {
+      display: flex;
+    }
+
+    /* A lista vira texto só para leitores de tela: o SVG mostra o mesmo */
+    .viagem__lista {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    /* a linha do tempo é do trilho (filho); timeline-scope a deixa
+       visível também para a própria .viagem, que muda a cor do fundo */
+    .viagem {
+      timeline-scope: --viagem;
+      animation: viagem-subida linear both;
+      animation-timeline: --viagem;
+      animation-range: contain 5% contain 95%;
+    }
+
+    .viagem__linha {
+      animation: viagem-traco linear both;
+      animation-timeline: --viagem;
+      animation-range: contain 5% contain 95%;
+    }
+
+    .viagem__parada {
+      animation: viagem-aparece linear both;
+      animation-timeline: --viagem;
+      animation-range: contain calc(5% + var(--em) * 88%) contain calc(9% + var(--em) * 88%);
+    }
+
+    .viagem__neve {
+      animation: viagem-aparece linear both;
+      animation-timeline: --viagem;
+      animation-range: contain 80% contain 92%;
+    }
+  }
+}
+
+@keyframes viagem-subida {
+  0%      { --alt: 3;    --temp: 16; --geada: 0; }
+  33.3%   { --alt: 915;  --temp: 10; --geada: 0.25; }
+  66.6%   { --alt: 1353; --temp: 8;  --geada: 0.6; }
+  100%    { --alt: 1822; --temp: 6;  --geada: 1; }
+}
+
+@keyframes viagem-traco {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes viagem-aparece {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viagem__neve {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Transição entre páginas (View Transitions API, só CSS)
+   Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
+   com leve deslize. Navegadores sem suporte trocam de página normalmente;
+   quem pede menos movimento não recebe a animação.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.cabecalho {
+  view-transition-name: cabecalho;
+}
+
+main {
+  view-transition-name: conteudo;
+}
+
+::view-transition-group(cabecalho) {
+  animation-duration: 0.25s;
+}
+
+::view-transition-old(conteudo) {
+  animation: 0.22s ease-in both pagina-sai;
+}
+
+::view-transition-new(conteudo) {
+  animation: 0.32s ease-out both pagina-entra;
+}
+
+@keyframes pagina-sai {
+  to { opacity: 0; transform: translateY(-0.75rem); }
+}
+
+@keyframes pagina-entra {
+  from { opacity: 0; transform: translateY(0.75rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
