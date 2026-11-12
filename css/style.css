@@ -266,6 +266,75 @@ a:hover {
   :root:not(:has(#tema:checked)) .tema-botao__icone--escuro { display: block; }
 }
 
+/* --- Botão "Faça nevar" (checkbox #neve, ao lado do tema) --- */
+.cabecalho__botoes {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.neve-botao:has(:checked) {
+  border-color: currentColor;
+  background-color: rgb(140 170 195 / 0.22);
+}
+
+/* Camada de flocos: fixa sobre a página, não recebe cliques */
+.neve {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+:root:has(#neve:checked) .neve {
+  display: block;
+}
+
+.neve i {
+  position: absolute;
+  top: -2rem;
+  left: var(--x);
+  width: calc(0.55rem * var(--t));
+  height: calc(0.55rem * var(--t));
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 50%, rgb(255 255 255 / 0.4) 70%, transparent 72%);
+  box-shadow: 0 0 0.35rem rgb(70 100 130 / 0.45);
+  opacity: 0.9;
+  animation: floco-cai var(--d) linear var(--a) infinite;
+}
+
+/* Um floco em cada três é um cristal ❄ em vez de bolinha */
+.neve i:nth-child(3n) {
+  width: auto;
+  height: auto;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+  font-size: calc(1.1rem * var(--t));
+  font-style: normal;
+  line-height: 1;
+  text-shadow: 0 0 0.3rem rgb(70 100 130 / 0.6);
+}
+
+.neve i:nth-child(3n)::before {
+  content: "\2744";
+}
+
+@keyframes floco-cai {
+  to {
+    transform: translate(var(--v), 110vh) rotate(240deg);
+  }
+}
+
+/* Quem pede menos movimento não recebe neve caindo: o botão some */
+@media (prefers-reduced-motion: reduce) {
+  .neve-botao,
+  .neve {
+    display: none !important;
+  }
+}
+
 body {
   font-family: var(--fonte-texto);
   font-size: 1rem;
