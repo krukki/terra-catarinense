@@ -190,9 +190,12 @@ Os scripts que fizeram esse trabalho estão em `ferramentas/`, nesta ordem:
 | `baixar_imagens.py` | baixa e recorta no tamanho exato de cada vaga |
 | `trocar_html.py` | troca os endereços no HTML e gera a lista de créditos |
 
-Dez fotos não vieram do Commons: foram escolhidas à mão em sites de turismo,
-de notícia e de enciclopédia. A origem de cada uma está em
-`ferramentas/fontes_manuais.json`, e os prints das páginas em `cfonts/`. O
+Oito fotos não vieram do Commons: foram escolhidas à mão em sites de turismo,
+de notícia e de enciclopédia. Outras cinco são do Commons, mas foram trocadas
+à mão depois (ostras, cuca e a igreja de São Pedro de Alcântara), para usar
+fotos feitas em Santa Catarina. A origem de todas essas está em
+`ferramentas/fontes_manuais.json`, e os prints das páginas de fora do Commons
+em `cfonts/`. O
 `trocar_html.py` lê esse arquivo ao montar os créditos, então essas fontes não
 se perdem quando a lista é gerada de novo:
 
