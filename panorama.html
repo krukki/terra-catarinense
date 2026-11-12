@@ -36,7 +36,7 @@
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <header class="cabecalho">
+  <header class="cabecalho cabecalho--transparente">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
         <span class="logo__marca" aria-hidden="true">SC</span>
@@ -69,12 +69,12 @@
       <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html">Início</a></li>
-          <li><a href="panorama.html#geografia" aria-current="page">Geografia</a></li>
           <li><a href="cidades.html">Cidades</a></li>
           <li><a href="cultura.html">Cultura</a></li>
-          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
           <li><a href="turismo.html">Turismo</a></li>
+          <li><a href="panorama.html#geografia" aria-current="page">Geografia</a></li>
           <li><a href="panorama.html#economia">Economia</a></li>
+          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
           <li><a href="curiosidades.html">Curiosidades</a></li>
         </ul>
       </nav>
@@ -83,7 +83,10 @@
 
   <main id="conteudo">
 
-    <section class="hero-pagina" id="geografia">
+    <section class="hero-pagina hero-pagina--foto" id="geografia">
+      <img class="hero-pagina__fundo" src="assets/topo/panorama.jpg"
+           alt="Camadas de montanhas e paredões da Serra Geral iluminados pelo sol baixo, com névoa ao fundo."
+           width="1920" height="1080" decoding="async" fetchpriority="high">
       <div class="container">
         <span class="etiqueta">Geografia, economia e gastronomia</span>
         <h1>O relevo, a riqueza e a mesa do estado</h1>

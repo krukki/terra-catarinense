@@ -227,6 +227,11 @@ Se a lista de fotos mudar, rode o `trocar_html.py` de novo e cole a lista nova d
 
 ## 7. O que ainda precisa ser conferido antes da entrega
 
+- [ ] **Fotos de topo:** `assets/topo/cidades.jpg`, `cultura.jpg`, `panorama.jpg` e
+      `turismo.jpg` vieram do Wikimedia Commons, mas os créditos ainda dizem
+      "autor e licença a conferir". Falta o nome do arquivo de cada uma no Commons
+      para completar a lista em `curiosidades.html`.
+
 - [ ] **Dados do IBGE:** conferir e atualizar população, área, PIB, IDH e número de
       habitantes de cada cidade em
       [cidades.ibge.gov.br/brasil/sc/panorama](https://cidades.ibge.gov.br/brasil/sc/panorama).
