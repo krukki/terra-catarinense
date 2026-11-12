@@ -1435,3 +1435,42 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 .teste__form:has(#teste-ver:checked) .teste__opcao:has(input:checked:not([data-certa])) {
   text-decoration: line-through;
 }
+
+/* ==========================================================================
+   Mapa da ocupação por época (cultura): cada rádio #ep-N pinta as regiões
+   já ocupadas naquela época, mostra os pinos fundados até ela e o texto.
+   Gerado à mão a partir da tabela época → região → povo.
+   ========================================================================== */
+.imigracao:has(#ep-1:checked) #i-litoral { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-1:checked) #i-sul { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-2:checked) #i-litoral { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-2:checked) #i-sul { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-2:checked) #i-serra { fill: var(--imig-tropeiro); }
+.imigracao:has(#ep-3:checked) #i-litoral { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-3:checked) #i-sul { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-3:checked) #i-serra { fill: var(--imig-tropeiro); }
+.imigracao:has(#ep-3:checked) #i-vale { fill: var(--imig-alema); }
+.imigracao:has(#ep-3:checked) #i-norte { fill: var(--imig-alema); }
+.imigracao:has(#ep-4:checked) #i-litoral { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-4:checked) #i-sul { fill: var(--imig-italiana); }
+.imigracao:has(#ep-4:checked) #i-serra { fill: var(--imig-tropeiro); }
+.imigracao:has(#ep-4:checked) #i-vale { fill: var(--imig-alema); }
+.imigracao:has(#ep-4:checked) #i-norte { fill: var(--imig-alema); }
+.imigracao:has(#ep-5:checked) #i-litoral { fill: var(--imig-acoriana); }
+.imigracao:has(#ep-5:checked) #i-sul { fill: var(--imig-italiana); }
+.imigracao:has(#ep-5:checked) #i-serra { fill: var(--imig-tropeiro); }
+.imigracao:has(#ep-5:checked) #i-vale { fill: var(--imig-alema); }
+.imigracao:has(#ep-5:checked) #i-norte { fill: var(--imig-alema); }
+.imigracao:has(#ep-5:checked) #i-oeste { fill: var(--imig-gaucha); }
+.imigracao:has(#ep-0:checked) .imigracao__pino:is([data-desde="0"]) { opacity: 1; }
+.imigracao:has(#ep-1:checked) .imigracao__pino:is([data-desde="0"], [data-desde="1"]) { opacity: 1; }
+.imigracao:has(#ep-2:checked) .imigracao__pino:is([data-desde="0"], [data-desde="1"], [data-desde="2"]) { opacity: 1; }
+.imigracao:has(#ep-3:checked) .imigracao__pino:is([data-desde="0"], [data-desde="1"], [data-desde="2"], [data-desde="3"]) { opacity: 1; }
+.imigracao:has(#ep-4:checked) .imigracao__pino:is([data-desde="0"], [data-desde="1"], [data-desde="2"], [data-desde="3"], [data-desde="4"]) { opacity: 1; }
+.imigracao:has(#ep-5:checked) .imigracao__pino:is([data-desde="0"], [data-desde="1"], [data-desde="2"], [data-desde="3"], [data-desde="4"], [data-desde="5"]) { opacity: 1; }
+.imigracao:has(#ep-0:checked) .imigracao__texto[data-epoca="0"] { display: block; }
+.imigracao:has(#ep-1:checked) .imigracao__texto[data-epoca="1"] { display: block; }
+.imigracao:has(#ep-2:checked) .imigracao__texto[data-epoca="2"] { display: block; }
+.imigracao:has(#ep-3:checked) .imigracao__texto[data-epoca="3"] { display: block; }
+.imigracao:has(#ep-4:checked) .imigracao__texto[data-epoca="4"] { display: block; }
+.imigracao:has(#ep-5:checked) .imigracao__texto[data-epoca="5"] { display: block; }

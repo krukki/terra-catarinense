@@ -3906,6 +3906,203 @@ tbody tr:nth-child(even) {
 }
 
 /* ==========================================================================
+   Mapa da ocupação por época (cultura.html)
+   As cores de cada região por época ficam em css/estados.css.
+   ========================================================================== */
+
+.imigracao {
+  --imig-indigena: #CFC8B6;
+  --imig-vicentista: #6F7F86;
+  --imig-acoriana: #2F6F8A;
+  --imig-tropeiro: #8A6A3B;
+  --imig-alema: #AD4128;
+  --imig-italiana: #5C7F3A;
+  --imig-gaucha: #C9962E;
+  --imig-contorno: #FAF7F0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(#tema:checked)) .imigracao {
+    --imig-indigena: #3A403B;
+    --imig-vicentista: #8C9BA1;
+    --imig-acoriana: #5E9FBA;
+    --imig-tropeiro: #B48E5A;
+    --imig-alema: #E58A6C;
+    --imig-italiana: #8DB565;
+    --imig-gaucha: #E2B652;
+    --imig-contorno: #0F1614;
+  }
+}
+
+@media not (prefers-color-scheme: dark) {
+  :root:has(#tema:checked) .imigracao {
+    --imig-indigena: #3A403B;
+    --imig-vicentista: #8C9BA1;
+    --imig-acoriana: #5E9FBA;
+    --imig-tropeiro: #B48E5A;
+    --imig-alema: #E58A6C;
+    --imig-italiana: #8DB565;
+    --imig-gaucha: #E2B652;
+    --imig-contorno: #0F1614;
+  }
+}
+
+.imigracao__grade {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.imigracao__epocas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.imigracao__estado {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.imigracao__epocas label {
+  padding: 0.45rem 0.8rem;
+  border: var(--borda-fina) solid var(--cor-texto-suave);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao), border-color var(--transicao);
+}
+
+.imigracao__epocas label:hover {
+  border-color: var(--cor-texto);
+}
+
+.imigracao__estado:checked + label {
+  border-color: var(--cor-texto);
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+.imigracao__estado:focus-visible + label {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+.imigracao__mapa {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.imigracao__regiao {
+  fill: var(--imig-indigena);
+  stroke: var(--imig-contorno);
+  stroke-width: 1.2;
+  transition: fill 0.5s ease;
+}
+
+.imigracao__pino {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.imigracao__pino circle {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 1.5;
+}
+
+.imigracao__pino text {
+  font-family: var(--fonte-mono);
+  font-size: 9.5px;
+  fill: var(--cor-texto);
+  paint-order: stroke;
+  stroke: var(--cor-fundo);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+/* No celular o mapa fica pequeno demais para os nomes: ficam só os pinos,
+   e o texto da época cita as cidades */
+@media (max-width: 47.99rem) {
+  .imigracao__pino text {
+    display: none;
+  }
+}
+
+.imigracao__texto {
+  display: none;
+}
+
+.imigracao__texto h3 {
+  margin-bottom: 0.4rem;
+}
+
+.imigracao__texto p {
+  max-width: 46ch;
+  color: var(--cor-texto-suave);
+}
+
+.imigracao__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+}
+
+.imigracao__legenda li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.imigracao__cor {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: var(--borda-fina) solid var(--cor-texto-suave);
+  border-radius: 0.15rem;
+}
+
+.imigracao__cor[data-povo="indigena"]   { background-color: var(--imig-indigena); }
+.imigracao__cor[data-povo="vicentista"] { background-color: var(--imig-vicentista); }
+.imigracao__cor[data-povo="acoriana"]   { background-color: var(--imig-acoriana); }
+.imigracao__cor[data-povo="tropeiro"]   { background-color: var(--imig-tropeiro); }
+.imigracao__cor[data-povo="alema"]      { background-color: var(--imig-alema); }
+.imigracao__cor[data-povo="italiana"]   { background-color: var(--imig-italiana); }
+.imigracao__cor[data-povo="gaucha"]     { background-color: var(--imig-gaucha); }
+
+/* Pinos com a cor do povo que fundou a cidade */
+.imigracao__pino[data-povo="vicentista"] circle { fill: var(--imig-vicentista); }
+.imigracao__pino[data-povo="tropeiro"] circle   { fill: var(--imig-tropeiro); }
+.imigracao__pino[data-povo="alema"] circle      { fill: var(--imig-alema); }
+.imigracao__pino[data-povo="italiana"] circle   { fill: var(--imig-italiana); }
+.imigracao__pino[data-povo="gaucha"] circle     { fill: var(--imig-gaucha); }
+
+@media (min-width: 62rem) {
+  .imigracao__grade {
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-areas:
+      "epocas epocas"
+      "mapa   texto"
+      "mapa   legenda";
+    align-items: start;
+    column-gap: 2.5rem;
+  }
+
+  .imigracao__epocas  { grid-area: epocas; }
+  .imigracao__mapa    { grid-area: mapa; }
+  .imigracao__textos  { grid-area: texto; }
+  .imigracao__legenda { grid-area: legenda; }
+}
+
+/* ==========================================================================
    Transição entre páginas (View Transitions API, só CSS)
    Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
    com leve deslize. Navegadores sem suporte trocam de página normalmente;
