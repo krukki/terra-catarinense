@@ -5,37 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Curiosidades — Terra Catarinense</title>
   <meta name="description" content="Curiosidades sobre Santa Catarina em cards que viram e a arquitetura enxaimel de Blumenau e Pomerode.">
+  <!-- Prévia do link (WhatsApp, redes sociais). Precisa de endereço absoluto:
+       aponta para o GitHub Pages do projeto. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Terra Catarinense">
+  <meta property="og:title" content="Curiosidades — Terra Catarinense">
+  <meta property="og:description" content="Curiosidades sobre Santa Catarina em cards que viram e a arquitetura enxaimel de Blumenau e Pomerode.">
+  <meta property="og:url" content="https://krukki.github.io/terra-catarinense/curiosidades.html">
+  <meta property="og:image" content="https://krukki.github.io/terra-catarinense/assets/litoral/previa-link.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vista aérea da Guarda do Embaú, no litoral de Santa Catarina.">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ===================== HEADER STICKY ===================== -->
   <header class="cabecalho">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
@@ -46,19 +46,20 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -75,7 +76,6 @@
 
   <main id="conteudo">
 
-    <!-- ===================== HERO DA PÁGINA ===================== -->
     <section class="hero-pagina">
       <div class="container">
         <span class="etiqueta">Curiosidades</span>
@@ -97,12 +97,6 @@
       </div>
     </nav>
 
-
-    <!-- ================================================================
-         DIFERENCIAL 4 — CARDS COM EFEITO FLIP
-         Giro por CSS no hover; no toque e no teclado o JS alterna a classe
-         .flip-card--virado e o aria-pressed de cada botão.
-         ================================================================= -->
     <section class="secao" id="cards">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -120,14 +114,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/serra/urupema-neve.jpg"
-                     alt="Paisagem rural com camada fina de neve sobre a grama e cercas de madeira."
+                     alt="Beira de estrada coberta por uma camada fina de neve, com uma placa de madeira e árvores ao fundo."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-1">O lugar mais frio do Brasil</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-1">O lugar mais frio do Brasil</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-1">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-1">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   <strong>Urupema</strong> já registrou temperaturas abaixo de
@@ -142,14 +134,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/litoral/ostras-cultivo.jpg"
-                     alt="Estruturas de cultivo de ostras flutuando em baía calma ao amanhecer."
+                     alt="Lanternas de rede usadas no cultivo de ostras, penduradas lado a lado em Santo Antônio de Lisboa, Florianópolis."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-2">Capital nacional da ostra</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-2">Capital nacional da ostra</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-2">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-2">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Cerca de <strong>90% das ostras cultivadas no Brasil</strong> vêm
@@ -164,14 +154,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/litoral/marco-tordesilhas.jpg"
-                     alt="Marco de pedra antigo à beira-mar em dia nublado."
+                     alt="Monumento do marco do Tratado de Tordesilhas numa praça calçada de pedras, em Laguna."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-3">A linha de Tordesilhas</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-3">A linha de Tordesilhas</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-3">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-3">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   A linha imaginária do <strong>Tratado de Tordesilhas</strong>
@@ -186,14 +174,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/litoral/boto-laguna.jpg"
-                     alt="Boto emergindo perto de pescador com tarrafa em água rasa."
+                     alt="Golfinhos-nariz-de-garrafa, a mesma espécie dos botos de Laguna, nadando debaixo d’água."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-4">Pescaria com botos</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-4">Pescaria com botos</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-4">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-4">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em Laguna, <strong>botos selvagens</strong> avisam os pescadores,
@@ -211,11 +197,9 @@
                      alt="Três bailarinos de mãos dadas em cena, no palco, diante de uma cortina azul."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-5">Bolshoi fora da Rússia</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-5">Bolshoi fora da Rússia</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-5">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-5">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   <strong>Joinville</strong> abriga a única escola do Teatro
@@ -230,14 +214,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/serra/vinho-altitude.jpg"
-                     alt="Taça de vinho tinto ao lado de parreiral em região de altitude."
+                     alt="Garrafas de espumante apoiadas de gargalo para baixo num cavalete de madeira, numa vinícola."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-6">Vinho de altitude</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-6">Vinho de altitude</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-6">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-6">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Acima de <strong>900 metros</strong>, o frio da serra atrasa a
@@ -255,11 +237,9 @@
                      alt="Grupo em trajes típicos pomeranos de mãos dadas, ao lado do brasão da Pomerânia."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-7">Uma língua cooficial</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-7">Uma língua cooficial</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-7">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-7">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em <strong>Pomerode</strong>, o <strong>pomerano</strong> é
@@ -277,11 +257,9 @@
                      alt="Praia de areia clara e mar esverdeado na Ilha do Campeche, com morro de mata fechada ao lado."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-cur-8">Mais de 500 praias</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-cur-8">Mais de 500 praias</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-cur-8">
+              <div class="flip-card__face flip-card__verso" id="vs-cur-8">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em <strong>561 km de litoral</strong>, o estado reúne mais de
@@ -296,14 +274,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         DIFERENCIAL 4 — QUIZ "QUAL SANTA CATARINA É A SUA?"
-         Cinco perguntas, uma por vez. Cada resposta soma pontos para uma
-         ou mais regiões (data-pontos); a que somar mais vira o resultado,
-         com link para o atlas já aproximado nela. Precisa de JavaScript,
-         então a seção inteira só aparece quando ele está ativo.
-         ================================================================= -->
     <section class="secao secao--principal quiz" id="quiz">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -315,82 +285,178 @@
           </p>
         </div>
 
-        <form class="quiz__cartao revelar" data-quiz novalidate>
+        <form class="quiz__cartao revelar" id="quiz-form">
           <div class="quiz__progresso" aria-hidden="true">
-            <span class="quiz__progresso-barra" data-quiz-barra></span>
+            <span class="quiz__progresso-barra"></span>
           </div>
-          <p class="quiz__contador" data-quiz-contador aria-live="polite">Pergunta 1 de 5</p>
+          <p class="quiz__contador">
+            <span data-passo-rotulo="1">Pergunta 1 de 5</span>
+            <span data-passo-rotulo="2">Pergunta 2 de 5</span>
+            <span data-passo-rotulo="3">Pergunta 3 de 5</span>
+            <span data-passo-rotulo="4">Pergunta 4 de 5</span>
+            <span data-passo-rotulo="5">Pergunta 5 de 5</span>
+          </p>
 
-          <fieldset class="quiz__pergunta" data-quiz-pergunta>
+          <fieldset class="quiz__pergunta" data-pergunta="1">
             <legend>Férias perfeitas em julho:</legend>
-            <label class="quiz__opcao"><input type="radio" name="q1" value="a" data-pontos="serra">Lareira, pinhão e torcer para nevar</label>
-            <label class="quiz__opcao"><input type="radio" name="q1" value="b" data-pontos="litoral">Sol de inverno na praia, com a cidade por perto</label>
-            <label class="quiz__opcao"><input type="radio" name="q1" value="c" data-pontos="vale">Festas típicas e cidades com cara de Europa</label>
-            <label class="quiz__opcao"><input type="radio" name="q1" value="d" data-pontos="oeste">Estrada no campo e cidade do interior</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" id="q1a" value="a">Lareira, pinhão e torcer para nevar</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" id="q1b" value="b">Sol de inverno na praia, com a cidade por perto</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" id="q1c" value="c">Festas típicas e cidades com cara de Europa</label>
+            <label class="quiz__opcao"><input type="radio" name="q1" id="q1d" value="d">Estrada no campo e cidade do interior</label>
           </fieldset>
 
-          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+          <fieldset class="quiz__pergunta" data-pergunta="2">
             <legend>No prato, você escolhe:</legend>
-            <label class="quiz__opcao"><input type="radio" name="q2" value="a" data-pontos="litoral">Ostras frescas e tainha</label>
-            <label class="quiz__opcao"><input type="radio" name="q2" value="b" data-pontos="vale">Marreco recheado e cuca de sobremesa</label>
-            <label class="quiz__opcao"><input type="radio" name="q2" value="c" data-pontos="sul oeste">Galeto com polenta e um vinho colonial</label>
-            <label class="quiz__opcao"><input type="radio" name="q2" value="d" data-pontos="serra">Entrevero de pinhão</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" id="q2a" value="a">Ostras frescas e tainha</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" id="q2b" value="b">Marreco recheado e cuca de sobremesa</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" id="q2c" value="c">Galeto com polenta e um vinho colonial</label>
+            <label class="quiz__opcao"><input type="radio" name="q2" id="q2d" value="d">Entrevero de pinhão</label>
           </fieldset>
 
-          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+          <fieldset class="quiz__pergunta" data-pergunta="3">
             <legend>A paisagem que faz você parar o carro:</legend>
-            <label class="quiz__opcao"><input type="radio" name="q3" value="a" data-pontos="serra sul">As curvas da Serra do Rio do Rastro</label>
-            <label class="quiz__opcao"><input type="radio" name="q3" value="b" data-pontos="litoral">Uma baía com barcos de pesca</label>
-            <label class="quiz__opcao"><input type="radio" name="q3" value="c" data-pontos="oeste">Lavouras e silos a perder de vista</label>
-            <label class="quiz__opcao"><input type="radio" name="q3" value="d" data-pontos="vale norte">Rios, morros e Mata Atlântica</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" id="q3a" value="a">As curvas da Serra do Rio do Rastro</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" id="q3b" value="b">Uma baía com barcos de pesca</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" id="q3c" value="c">Lavouras e silos a perder de vista</label>
+            <label class="quiz__opcao"><input type="radio" name="q3" id="q3d" value="d">Rios, morros e Mata Atlântica</label>
           </fieldset>
 
-          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+          <fieldset class="quiz__pergunta" data-pergunta="4">
             <legend>O seu ritmo é:</legend>
-            <label class="quiz__opcao"><input type="radio" name="q4" value="a" data-pontos="norte">Indústria, porto e cidade grande</label>
-            <label class="quiz__opcao"><input type="radio" name="q4" value="b" data-pontos="oeste">Agro, cooperativa e acordar cedo</label>
-            <label class="quiz__opcao"><input type="radio" name="q4" value="c" data-pontos="litoral">Turismo, praia e movimento</label>
-            <label class="quiz__opcao"><input type="radio" name="q4" value="d" data-pontos="sul norte">Centro histórico e casario antigo</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" id="q4a" value="a">Indústria, porto e cidade grande</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" id="q4b" value="b">Agro, cooperativa e acordar cedo</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" id="q4c" value="c">Turismo, praia e movimento</label>
+            <label class="quiz__opcao"><input type="radio" name="q4" id="q4d" value="d">Centro histórico e casario antigo</label>
           </fieldset>
 
-          <fieldset class="quiz__pergunta" data-quiz-pergunta hidden>
+          <fieldset class="quiz__pergunta" data-pergunta="5">
             <legend>Uma lembrança para levar para casa:</legend>
-            <label class="quiz__opcao"><input type="radio" name="q5" value="a" data-pontos="serra">Uma garrafa de vinho de altitude</label>
-            <label class="quiz__opcao"><input type="radio" name="q5" value="b" data-pontos="vale">Um caneco de chope da Oktoberfest</label>
-            <label class="quiz__opcao"><input type="radio" name="q5" value="c" data-pontos="sul">Uma peça de cerâmica</label>
-            <label class="quiz__opcao"><input type="radio" name="q5" value="d" data-pontos="norte">Um ingresso do Festival de Dança de Joinville</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" id="q5a" value="a">Uma garrafa de vinho de altitude</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" id="q5b" value="b">Um caneco de chope da Oktoberfest</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" id="q5c" value="c">Uma peça de cerâmica</label>
+            <label class="quiz__opcao"><input type="radio" name="q5" id="q5d" value="d">Um ingresso do Festival de Dança de Joinville</label>
           </fieldset>
 
           <div class="quiz__acoes">
-            <button class="botao botao--contorno" type="button" data-quiz-voltar disabled>Voltar</button>
-            <button class="botao botao--destaque" type="submit" data-quiz-avancar disabled>Próxima</button>
+            <input class="estado quiz__passo" type="checkbox" id="passo-1" aria-label="Pergunta 1 respondida: avançar">
+            <input class="estado quiz__passo" type="checkbox" id="passo-2" aria-label="Pergunta 2 respondida: avançar">
+            <input class="estado quiz__passo" type="checkbox" id="passo-3" aria-label="Pergunta 3 respondida: avançar">
+            <input class="estado quiz__passo" type="checkbox" id="passo-4" aria-label="Pergunta 4 respondida: avançar">
+            <input class="estado quiz__passo" type="checkbox" id="passo-5" aria-label="Pergunta 5 respondida: avançar">
+            <span class="botao botao--contorno quiz__voltar quiz__voltar--inativo" data-voltar="1" aria-hidden="true">Voltar</span>
+            <label class="botao botao--contorno quiz__voltar" data-voltar="2" for="passo-1">Voltar</label>
+            <label class="botao botao--contorno quiz__voltar" data-voltar="3" for="passo-2">Voltar</label>
+            <label class="botao botao--contorno quiz__voltar" data-voltar="4" for="passo-3">Voltar</label>
+            <label class="botao botao--contorno quiz__voltar" data-voltar="5" for="passo-4">Voltar</label>
+            <label class="botao botao--destaque quiz__proxima" data-proxima="1" for="passo-1">Próxima</label>
+            <label class="botao botao--destaque quiz__proxima" data-proxima="2" for="passo-2">Próxima</label>
+            <label class="botao botao--destaque quiz__proxima" data-proxima="3" for="passo-3">Próxima</label>
+            <label class="botao botao--destaque quiz__proxima" data-proxima="4" for="passo-4">Próxima</label>
+            <label class="botao botao--destaque quiz__proxima" data-proxima="5" for="passo-5">Ver resultado</label>
           </div>
         </form>
 
-        <!-- Resultado, preenchido pelo JS -->
-        <article class="quiz__resultado" data-quiz-resultado hidden tabindex="-1"
-                 aria-labelledby="quiz-resultado-titulo">
-          <div class="quiz__resultado-foto">
-            <img data-quiz-foto src="assets/cidades/ponte-hercilio-luz.jpg" alt=""
-                 width="600" height="450" loading="lazy" decoding="async">
-          </div>
-          <div class="quiz__resultado-corpo">
-            <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
-            <h3 id="quiz-resultado-titulo" data-quiz-nome>Litoral</h3>
-            <p data-quiz-resumo></p>
-            <p class="quiz__resultado-acoes">
-              <a class="botao botao--destaque" data-quiz-link href="cidades.html#mapa">Ver no atlas</a>
-              <button class="botao botao--contorno" type="button" data-quiz-refazer>Refazer o quiz</button>
-            </p>
-          </div>
-        </article>
+        <div class="quiz__resultados">
+          <article class="quiz__resultado" data-resultado="litoral" aria-labelledby="quiz-resultado-litoral">
+            <div class="quiz__resultado-foto">
+              <img src="assets/cidades/ponte-hercilio-luz.jpg" alt="Ponte Hercílio Luz recortada contra o pôr do sol, ligando a ilha ao continente."
+                   width="600" height="450" loading="lazy" decoding="async">
+            </div>
+            <div class="quiz__resultado-corpo">
+              <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+              <h3 id="quiz-resultado-litoral">Litoral e Grande Florianópolis</h3>
+              <p>Faixa costeira de clima mais ameno, herança açoriana, praias urbanas e a capital do estado. Concentra turismo, serviços e tecnologia. Só na Ilha de Santa Catarina são mais de 40 praias — e o estado passa das 500 no total.</p>
+              <p class="quiz__resultado-acoes">
+                <a class="botao botao--destaque" href="cidades.html#regiao-litoral">Ver Litoral e Grande Florianópolis no atlas</a>
+                <button class="botao botao--contorno" type="reset" form="quiz-form">Refazer o quiz</button>
+              </p>
+              <p class="quiz__carimbo"><a href="#quiz-concluido">Carimbar o passaporte &#9733;</a></p>
+            </div>
+          </article>
+          <article class="quiz__resultado" data-resultado="vale" aria-labelledby="quiz-resultado-vale">
+            <div class="quiz__resultado-foto">
+              <img src="assets/cidades/vale-europeu.jpg" alt="Prédio de escola de tijolos à vista em Timbó, no Vale Europeu, com casas e morros ao redor."
+                   width="800" height="500" loading="lazy" decoding="async">
+            </div>
+            <div class="quiz__resultado-corpo">
+              <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+              <h3 id="quiz-resultado-vale">Vale do Itajaí</h3>
+              <p>Coração da imigração alemã e italiana, com arquitetura enxaimel, indústria têxtil forte e as maiores festas germânicas do país. Pomerode é conhecida como a cidade mais alemã do Brasil: boa parte da população ainda fala o dialeto pomerano.</p>
+              <p class="quiz__resultado-acoes">
+                <a class="botao botao--destaque" href="cidades.html#regiao-vale">Ver Vale do Itajaí no atlas</a>
+                <button class="botao botao--contorno" type="reset" form="quiz-form">Refazer o quiz</button>
+              </p>
+              <p class="quiz__carimbo"><a href="#quiz-concluido">Carimbar o passaporte &#9733;</a></p>
+            </div>
+          </article>
+          <article class="quiz__resultado" data-resultado="norte" aria-labelledby="quiz-resultado-norte">
+            <div class="quiz__resultado-foto">
+              <img src="assets/cidades/joinville2.jpg" alt="Vista aérea do Moinho da XV, réplica de moinho holandês, à beira de uma avenida arborizada em Joinville."
+                   width="800" height="500" loading="lazy" decoding="async">
+            </div>
+            <div class="quiz__resultado-corpo">
+              <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+              <h3 id="quiz-resultado-norte">Norte / Nordeste</h3>
+              <p>Maior polo industrial e metalmecânico do estado, com portos, escolas técnicas e a maior cidade catarinense em população. São Francisco do Sul é uma das cidades mais antigas do Brasil e tem centro histórico tombado.</p>
+              <p class="quiz__resultado-acoes">
+                <a class="botao botao--destaque" href="cidades.html#regiao-norte">Ver Norte / Nordeste no atlas</a>
+                <button class="botao botao--contorno" type="reset" form="quiz-form">Refazer o quiz</button>
+              </p>
+              <p class="quiz__carimbo"><a href="#quiz-concluido">Carimbar o passaporte &#9733;</a></p>
+            </div>
+          </article>
+          <article class="quiz__resultado" data-resultado="serra" aria-labelledby="quiz-resultado-serra">
+            <div class="quiz__resultado-foto">
+              <img src="assets/serra/morro-da-igreja.jpg" alt="Formação rochosa Pedra Furada vista do alto do Morro da Igreja, em Urubici."
+                   width="600" height="450" loading="lazy" decoding="async">
+            </div>
+            <div class="quiz__resultado-corpo">
+              <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+              <h3 id="quiz-resultado-serra">Planalto Serrano</h3>
+              <p>Região de altitude coberta por araucárias, com clima subtropical de altitude, tradição campeira e o inverno mais rigoroso do país. Urupema e São Joaquim disputam o título de cidade mais fria do Brasil, com marcas abaixo de -8 °C.</p>
+              <p class="quiz__resultado-acoes">
+                <a class="botao botao--destaque" href="cidades.html#regiao-serra">Ver Planalto Serrano no atlas</a>
+                <button class="botao botao--contorno" type="reset" form="quiz-form">Refazer o quiz</button>
+              </p>
+              <p class="quiz__carimbo"><a href="#quiz-concluido">Carimbar o passaporte &#9733;</a></p>
+            </div>
+          </article>
+          <article class="quiz__resultado" data-resultado="oeste" aria-labelledby="quiz-resultado-oeste">
+            <div class="quiz__resultado-foto">
+              <img src="assets/cidades/catedral-chapeco.jpg" alt="Catedral de Chapecó, de tijolos aparentes e duas torres, sob céu azul."
+                   width="800" height="500" loading="lazy" decoding="async">
+            </div>
+            <div class="quiz__resultado-corpo">
+              <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+              <h3 id="quiz-resultado-oeste">Oeste</h3>
+              <p>Motor do agronegócio catarinense: aves, suínos e cooperativas. Colonização vinda do Rio Grande do Sul, de origem italiana e alemã. O oeste ajuda a fazer de Santa Catarina o maior exportador de carne de porco do Brasil.</p>
+              <p class="quiz__resultado-acoes">
+                <a class="botao botao--destaque" href="cidades.html#regiao-oeste">Ver Oeste no atlas</a>
+                <button class="botao botao--contorno" type="reset" form="quiz-form">Refazer o quiz</button>
+              </p>
+              <p class="quiz__carimbo"><a href="#quiz-concluido">Carimbar o passaporte &#9733;</a></p>
+            </div>
+          </article>
+          <article class="quiz__resultado" data-resultado="sul" aria-labelledby="quiz-resultado-sul">
+            <div class="quiz__resultado-foto">
+              <img src="assets/cidades/laguna.jpg" alt="Casario histórico colorido do centro de Laguna, com um sobrado rosa de janelas em arco."
+                   width="800" height="500" loading="lazy" decoding="async">
+            </div>
+            <div class="quiz__resultado-corpo">
+              <p class="painel-regiao__sobre">A sua Santa Catarina é</p>
+              <h3 id="quiz-resultado-sul">Sul</h3>
+              <p>Região de carvão, cerâmica e descendência italiana, com praias tranquilas, dunas e as encostas da Serra do Rio do Rastro. Laguna guarda o marco do Tratado de Tordesilhas e foi capital da efêmera República Juliana, em 1839.</p>
+              <p class="quiz__resultado-acoes">
+                <a class="botao botao--destaque" href="cidades.html#regiao-sul">Ver Sul no atlas</a>
+                <button class="botao botao--contorno" type="reset" form="quiz-form">Refazer o quiz</button>
+              </p>
+              <p class="quiz__carimbo"><a href="#quiz-concluido">Carimbar o passaporte &#9733;</a></p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-
-    <!-- ================================================================
-         ARQUITETURA ENXAIMEL
-         ================================================================= -->
     <section class="secao secao--clara" id="enxaimel">
       <div class="container">
         <div class="duas-colunas">
@@ -425,7 +491,7 @@
 
           <figure class="mapa-quadro revelar">
             <img src="assets/cidades/enxaimel-pomerode.jpg"
-                 alt="Casa enxaimel de dois andares com vigas de madeira escura formando triângulos sobre parede clara."
+                 alt="Casa enxaimel comprida, com jardim florido e caminho de pedras, na Rota do Enxaimel, em Pomerode."
                  width="900" height="700" loading="lazy" decoding="async"
                  class="canto-pequeno">
             <figcaption>
@@ -437,11 +503,6 @@
       </div>
     </section>
 
-    <!-- ===================================================================
-         CREDITOS DAS FOTOS — a lista de itens e gerada por
-         ferramentas/trocar_html.py em ferramentas/creditos.html.
-         Se as fotos mudarem, regere o arquivo e cole a lista de novo.
-         =================================================================== -->
     <section class="secao secao--verde" id="creditos">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -450,7 +511,7 @@
           <p class="subtitulo-secao">
             A maior parte das fotos vem do Wikimedia Commons, sob licenças
             livres (Creative Commons ou domínio público), que exigem creditar
-            quem fez a foto. Outras dez foram escolhidas em sites de turismo,
+            quem fez a foto. Outras oito foram escolhidas em sites de turismo,
             de notícia e de enciclopédia: essas não são de uso livre e estão
             aqui creditadas à sua origem. Cada item traz o arquivo usado, de
             onde ele veio e, quando existe, a licença.
@@ -548,23 +609,23 @@
           </li>
           <li>
             <a href="https://pt.wikipedia.org/wiki/Guaranis" rel="external noopener" target="_blank">Homens guarani em celebração</a>
-            <p>assets/cultura/guarani.jpg — (conferir autoria na página de origem) — material protegido, usado como trabalho escolar.</p>
+            <p>assets/cultura/guarani.jpg — material protegido, usado como trabalho escolar.</p>
           </li>
           <li>
             <a href="https://commons.wikimedia.org/wiki/File:Igreja_Matriz_-_panoramio_(9).jpg" rel="external noopener" target="_blank">Igreja Matriz - panoramio (9)</a>
             <p>assets/cultura/italianos-videira.jpg — matheus.d, via Wikimedia Commons (CC BY 3.0).</p>
           </li>
           <li>
-            Pintura de São Pedro de Alcântara
-            <p>assets/cultura/pedro-alcantara.jpg — (origem nao registrada — falta o print) — material protegido, usado como trabalho escolar.</p>
+            <a href="https://commons.wikimedia.org/wiki/File:Igreja_S%C3%A3o_Pedro_de_Alc%C3%A2ntara.jpg" rel="external noopener" target="_blank">Igreja São Pedro de Alcântara</a>
+            <p>assets/cultura/pedro-alcantara.jpg — Carlos H. Gesser, via Wikimedia Commons (CC BY-SA 4.0).</p>
           </li>
           <li>
             <a href="https://commons.wikimedia.org/wiki/File:971110-ILIA-Vanak-IMG_8870-2-2.jpg" rel="external noopener" target="_blank">971110-ILIA-Vanak-IMG 8870-2-2</a>
             <p>assets/gastronomia/camarao.jpg — Safa Daneshvar, via Wikimedia Commons (CC BY-SA 4.0).</p>
           </li>
           <li>
-            <a href="https://commons.wikimedia.org/wiki/File:Ko%C5%82ocz_%C5%9Bl%C4%85ski.JPG" rel="external noopener" target="_blank">Kołocz śląski</a>
-            <p>assets/gastronomia/cuca-fatia.jpg — Pustelnik1, via Wikimedia Commons (Public domain).</p>
+            <a href="https://commons.wikimedia.org/wiki/File:RenatoSoares_Cuca_Pomerode_SC_(26016919937).jpg" rel="external noopener" target="_blank">Cuca em Pomerode</a>
+            <p>assets/gastronomia/cuca-fatia.jpg — Renato Soares/MTur, via Wikimedia Commons (domínio público).</p>
           </li>
           <li>
             <a href="https://commons.wikimedia.org/wiki/File:Haselnuss-Streuselkuchen_(8523653045).jpg" rel="external noopener" target="_blank">Haselnuss-Streuselkuchen (8523653045)</a>
@@ -583,16 +644,16 @@
             <p>assets/gastronomia/marreco.jpg — MCGau, via Wikimedia Commons (CC BY-SA 4.0).</p>
           </li>
           <li>
-            <a href="https://commons.wikimedia.org/wiki/File:Freshippo_steamed_oysters_with_vermicelli_and_garlic.jpg" rel="external noopener" target="_blank">Freshippo steamed oysters with vermicelli and garlic</a>
-            <p>assets/gastronomia/ostras-bandeja.jpg — Fumikas Sagisavas, via Wikimedia Commons (CC0).</p>
+            <a href="https://commons.wikimedia.org/wiki/File:Ostras.jpg" rel="external noopener" target="_blank">Ostras — prato típico de Florianópolis</a>
+            <p>assets/gastronomia/ostras-bandeja.jpg — Larissinhast, via Wikimedia Commons (CC BY-SA 4.0).</p>
           </li>
           <li>
             <a href="https://commons.wikimedia.org/wiki/File:Ostra_gratinada.jpg" rel="external noopener" target="_blank">Ostra gratinada</a>
             <p>assets/gastronomia/ostras-gratinadas.jpg — Rodrigo.Argenton, via Wikimedia Commons (CC BY-SA 3.0).</p>
           </li>
           <li>
-            <a href="https://commons.wikimedia.org/wiki/File:Oysters_Rockefeller.jpg" rel="external noopener" target="_blank">Oysters Rockefeller</a>
-            <p>assets/gastronomia/ostras-prato.jpg — Dan Perry, via Wikimedia Commons (CC BY 2.0).</p>
+            <a href="https://commons.wikimedia.org/wiki/File:Ostras.jpg" rel="external noopener" target="_blank">Ostras — prato típico de Florianópolis</a>
+            <p>assets/gastronomia/ostras-prato.jpg — Larissinhast, via Wikimedia Commons (CC BY-SA 4.0).</p>
           </li>
           <li>
             <a href="https://commons.wikimedia.org/wiki/File:Pinh%C3%A3o_semente.jpg" rel="external noopener" target="_blank">Pinhão semente</a>
@@ -627,8 +688,8 @@
             <p>assets/litoral/marco-tordesilhas.jpg — Stanglavine, via Wikimedia Commons (CC BY-SA 4.0).</p>
           </li>
           <li>
-            <a href="https://commons.wikimedia.org/wiki/File:Illawong_1.JPG" rel="external noopener" target="_blank">Illawong 1</a>
-            <p>assets/litoral/ostras-cultivo.jpg — J Bar, via Wikimedia Commons (CC BY 2.5).</p>
+            <a href="https://commons.wikimedia.org/wiki/File:Rede_de_pesca_de_ostras_(14272800831).jpg" rel="external noopener" target="_blank">Rede de pesca de ostras, Santo Antônio de Lisboa</a>
+            <p>assets/litoral/ostras-cultivo.jpg — Joao Paulo de Vasconcelos, via Wikimedia Commons (CC BY-SA 2.0).</p>
           </li>
           <li>
             <a href="https://commons.wikimedia.org/wiki/File:Praia_de_Jurer%C3%AA_Internacional_(cropped).JPG" rel="external noopener" target="_blank">Praia de Jurerê Internacional (cropped)</a>
@@ -694,11 +755,8 @@
       </div>
     </section>
 
-
   </main>
 
-
-  <!-- ===================== FOOTER ===================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -738,55 +796,33 @@
           <h3 class="rodape__titulo">Fontes de pesquisa</h3>
           <ul class="rodape__lista">
             <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">IBGE — Censo 2022</a></li>
+            <li><a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">PNUD — Radar IDHM 2024</a></li>
             <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
             <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
-            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
-          </ul>
-
-          <h3 class="esp-topo-3 rodape__titulo" >Redes sociais</h3>
-          <ul class="redes">
-            <li>
-              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
-                 aria-label="Instagram (página inicial da rede)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
-                 aria-label="Canal do projeto Terra Catarinense no YouTube">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
-                 aria-label="Página do projeto Terra Catarinense no Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
-                </svg>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -794,9 +830,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>

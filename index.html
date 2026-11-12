@@ -5,41 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Terra Catarinense — Conheça Santa Catarina</title>
   <meta name="description" content="Site educativo sobre Santa Catarina: geografia, clima, colonização, cidades, cultura, gastronomia, turismo e economia do estado.">
+  <!-- Prévia do link (WhatsApp, redes sociais). Precisa de endereço absoluto:
+       aponta para o GitHub Pages do projeto. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Terra Catarinense">
+  <meta property="og:title" content="Terra Catarinense — Conheça Santa Catarina">
+  <meta property="og:description" content="Site educativo sobre Santa Catarina: geografia, clima, colonização, cidades, cultura, gastronomia, turismo e economia do estado.">
+  <meta property="og:url" content="https://krukki.github.io/terra-catarinense/">
+  <meta property="og:image" content="https://krukki.github.io/terra-catarinense/assets/litoral/previa-link.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vista aérea da Guarda do Embaú, no litoral de Santa Catarina.">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
 
-  <!-- Google Fonts: Fraunces (títulos), Inter (texto), JetBrains Mono (rótulos e dados) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ==================================================================
-       HEADER STICKY (componente reutilizável — igual em todas as páginas)
-       =================================================================== -->
-  <header class="cabecalho">
+  <header class="cabecalho cabecalho--transparente">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
         <span class="logo__marca" aria-hidden="true">SC</span>
@@ -49,19 +46,20 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html" aria-current="page">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -78,18 +76,23 @@
   
   <main id="conteudo">
 
-    <!-- ================================================================
-         BANNER ROTATIVO — 3 imagens alternadas por JS (sem biblioteca)
-         ================================================================= -->
-    <section class="banner" data-banner aria-roledescription="carrossel"
+    <section class="banner banner--foto" aria-roledescription="carrossel"
              aria-label="Paisagens de Santa Catarina">
+
+      <!-- srcset: o navegador escolhe o menor arquivo que cobre a tela.
+           No celular o banner é alto e a foto é cortada pelos lados
+           (object-fit: cover), por isso ela ocupa ~150vw de largura. -->
+      <img class="banner__fundo" src="assets/litoral/guarda-do-embau-banner-1920.jpg"
+           srcset="assets/litoral/guarda-do-embau-banner-800.jpg 800w,
+                   assets/litoral/guarda-do-embau-banner-1280.jpg 1280w,
+                   assets/litoral/guarda-do-embau-banner-1920.jpg 1920w,
+                   assets/litoral/guarda-do-embau-banner.jpg 2560w"
+           sizes="(max-width: 47.99rem) 150vw, 100vw"
+           alt="Vista aérea da Guarda do Embaú: mar verde-azulado, faixa longa de areia, morros e a serra ao fundo."
+           width="2560" height="1440" decoding="async" fetchpriority="high">
 
       <div class="container banner__grade">
         <div class="banner__conteudo">
-          <p class="banner__selo">
-            <span>Atlas de campo</span>
-            <span class="banner__coord">27°35′S · 48°32′O</span>
-          </p>
           <h1>Santa Catarina: praia de manhã, <em>neve</em> à tarde</h1>
           <p class="banner__texto">
             Um estado pequeno no mapa e enorme na variedade: mais de 500 praias,
@@ -109,64 +112,65 @@
           </dl>
         </div>
 
-        <!-- Prancha com as fotos do carrossel -->
         <figure class="banner__prancha">
           <span class="banner__marca" aria-hidden="true">Prancha I — Paisagens</span>
 
+          <input class="banner__estado" type="radio" name="banner" id="banner-auto" checked
+                 aria-label="Rotação automática das fotos">
+          <input class="banner__estado" type="radio" name="banner" id="banner-1" aria-label="Foto 1: litoral">
+          <input class="banner__estado" type="radio" name="banner" id="banner-2" aria-label="Foto 2: serra do Rio do Rastro">
+          <input class="banner__estado" type="radio" name="banner" id="banner-3" aria-label="Foto 3: araucárias">
+          <input class="banner__estado" type="checkbox" id="banner-pausa" aria-label="Pausar rotação automática das fotos">
+
           <div class="banner__slides">
-            <div class="banner__slide" data-slide data-ativo="true"
-                 data-legenda="Foto 1 de 3 — Praia da Joaquina, Florianópolis (litoral)">
+            <div class="banner__slide">
               <img src="assets/litoral/litoral-praia.jpg"
-                   alt="Praia de areia clara com mar aberto e morros cobertos de vegetação ao fundo, no litoral de Santa Catarina."
-                   width="1600" height="900" decoding="async" fetchpriority="high">
+                   alt="Praia Central de Balneário Camboriú, com banhistas no mar e a fileira de arranha-céus da Barra Norte ao fundo."
+                   width="1600" height="900" decoding="async">
             </div>
-            <div class="banner__slide" data-slide
-                 data-legenda="Foto 2 de 3 — Serra do Rio do Rastro, Bom Jardim da Serra (serra)">
+            <div class="banner__slide">
               <img src="assets/serra/serra-estrada.jpg"
-                   alt="Estrada sinuosa descendo uma serra alta entre paredões de rocha e nuvens baixas."
+                   alt="Vale verde da Serra do Rio do Rastro, com a estrada serpenteando pela encosta."
                    width="1600" height="900" loading="lazy" decoding="async">
             </div>
-            <div class="banner__slide" data-slide
-                 data-legenda="Foto 3 de 3 — Araucárias no planalto serrano, São Joaquim (serra)">
+            <div class="banner__slide">
               <img src="assets/serra/araucarias-campo.jpg"
-                   alt="Campos de altitude com araucárias isoladas e geada leve sobre a vegetação, no planalto serrano."
+                   alt="Encosta com mata de araucárias e campo nativo no planalto catarinense, em Campos Novos."
                    width="1600" height="900" loading="lazy" decoding="async">
             </div>
           </div>
 
           <figcaption class="banner__rodape">
-            <!-- Controles do carrossel -->
-            <div class="banner__controles" data-banner-controles>
-              <button class="banner__seta" type="button" data-banner-anterior
-                      aria-label="Foto anterior">&#8249;</button>
+            <div class="banner__controles" aria-hidden="true">
+              <label class="banner__seta banner__seta--para-3" for="banner-3" title="Foto anterior">&#8249;</label>
+              <label class="banner__seta banner__seta--para-1" for="banner-1" title="Foto anterior">&#8249;</label>
+              <label class="banner__seta banner__seta--para-2" for="banner-2" title="Foto anterior">&#8249;</label>
 
-              <div class="banner__pontos" role="group" aria-label="Escolher foto do banner">
-                <button class="banner__ponto" type="button" data-ponto
-                        aria-pressed="true" aria-label="Foto 1: litoral"></button>
-                <button class="banner__ponto" type="button" data-ponto
-                        aria-pressed="false" aria-label="Foto 2: serra do Rio do Rastro"></button>
-                <button class="banner__ponto" type="button" data-ponto
-                        aria-pressed="false" aria-label="Foto 3: araucárias"></button>
+              <div class="banner__pontos">
+                <label class="banner__ponto" for="banner-1" title="Foto 1: litoral"></label>
+                <label class="banner__ponto" for="banner-2" title="Foto 2: serra do Rio do Rastro"></label>
+                <label class="banner__ponto" for="banner-3" title="Foto 3: araucárias"></label>
               </div>
 
-              <button class="banner__seta" type="button" data-banner-proximo
-                      aria-label="Próxima foto">&#8250;</button>
+              <label class="banner__seta banner__seta--prox-2" for="banner-2" title="Próxima foto">&#8250;</label>
+              <label class="banner__seta banner__seta--prox-3" for="banner-3" title="Próxima foto">&#8250;</label>
+              <label class="banner__seta banner__seta--prox-1" for="banner-1" title="Próxima foto">&#8250;</label>
 
-              <button class="banner__pausa" type="button" data-banner-pausa
-                      aria-pressed="false"
-                      aria-label="Pausar rotação automática das fotos">&#9208;</button>
+              <label class="banner__pausa banner__pausa--pausar" for="banner-pausa" title="Pausar a rotação">&#9208;</label>
+              <label class="banner__pausa banner__pausa--seguir" for="banner-pausa" title="Retomar a rotação">&#9654;</label>
+              <label class="banner__pausa banner__pausa--auto" for="banner-auto" title="Voltar à rotação automática">&#9654;</label>
             </div>
 
-            <p class="banner__legenda" data-banner-legenda role="status" aria-live="polite"></p>
+            <p class="banner__legenda">
+              <span class="banner__legenda-item">Foto 1 de 3 — Praia Central, Balneário Camboriú (litoral)</span>
+              <span class="banner__legenda-item">Foto 2 de 3 — Serra do Rio do Rastro, Bom Jardim da Serra (serra)</span>
+              <span class="banner__legenda-item">Foto 3 de 3 — Araucárias e campos nativos, Campos Novos (planalto)</span>
+            </p>
           </figcaption>
         </figure>
       </div>
     </section>
 
-
-    <!-- ================================================================
-         SOBRE SANTA CATARINA
-         ================================================================= -->
     <section class="secao" id="sobre">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -188,15 +192,11 @@
             <strong>açoriana, alemã e italiana</strong>, e uma das economias mais
             fortes do país.
           </p>
-          <p class="selo">É o único estado brasileiro onde nevar não é notícia de primeira página.</p>
+          <p class="selo">É um dos poucos estados brasileiros onde nevar não é notícia de primeira página.</p>
         </div>
       </div>
     </section>
 
-
-    <!-- ================================================================
-         MAPA + CARDS DE CARACTERÍSTICAS (duas colunas)
-         ================================================================= -->
     <section class="secao secao--clara" id="caracteristicas">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -210,7 +210,6 @@
 
         <div class="duas-colunas">
 
-          <!-- Coluna 1: mapa em SVG, contorno real do estado -->
           <figure class="mapa-quadro revelar">
             <svg class="mapa-svg" viewBox="0 0 600 380" role="img"
                  aria-labelledby="titulo-mapa-home desc-mapa-home">
@@ -274,7 +273,6 @@
               <path class="regiao" d="M482.11,218.96L481.17,223.6L481.6,226.05L483.11,226.12L484.13,227.48L483.22,228.37L483.15,230.76L481.14,233.19L478.35,242.9L478.94,244.01L478.02,245.8L479.93,247.89L477.56,249.69L475.02,254.2L474.77,258.28L471.88,262.32L469.19,270.96L469.51,273.62L470.87,275.28L464.75,283.45L464.99,285.12L461.67,285.79L450.51,291.83L432.08,304.63L422.77,312.73L406.82,329.19L395.12,343.34L385.38,357.05L382.79,357.4L383.76,356.33L382.91,354.44L379.76,354.24L373.49,351.66L372.58,347.83L367.63,345.29L363.21,344.38L360.22,347.32L349.82,350.23L350.23,352.42L354.23,355.58L356.82,359.27L356.28,360L355.4,358.4L353.89,358.75L354.73,357.22L349.94,354.89L348.6,352.67L348.33,354.88L346.49,349.31L344.24,349.44L347.42,348.33L346.78,346.49L347.97,346L347.7,343.87L351.65,345.77L349.9,347.02L349.92,348.37L351.72,346.92L352.4,344.34L351.21,342.55L351.33,340.39L354.31,340.02L351.88,340.95L353.42,343.29L358.37,342.68L357.37,341.68L359.11,340.17L358.72,337.17L361.3,338.16L360.6,336.58L362.66,336.09L362.73,332.91L363.8,332.98L363.69,330.82L359.76,331.43L363.37,329.57L365.16,326.72L362.93,326.66L365.01,322.71L366.31,322.43L365.79,321.07L363.69,320.78L363.01,317.04L364.91,312.45L363.04,307.32L363.34,301.7L364.83,299.68L366.85,299.04L365.7,297.05L368.24,295.24L369.03,297.09L370.32,296.21L369.49,298.41L371.27,294.77L373.87,295.11L374.21,291.06L375.46,291.05L375.94,288.76L379.18,285.46L379.44,287.4L381.45,286.03L381.45,287.21L386.21,287.37L388.56,286.37L391.28,283.38L390.42,280.59L391.33,278.69L399.56,272.89L398.64,271.17L400.41,267.99L398.83,267.92L398.24,265.81L400.34,262.78L398.85,261.77L402.2,254.27L401.74,251.28L399.94,251.7L401.35,249.88L401.2,248.66L399.72,248.42L401.52,247.08L401.5,243.24L405.23,237.2L409.43,237.69L409.82,236.2L413.51,235.63L413.12,232.53L415.44,231.06L417.51,224.05L420.36,222.69L421.16,218.5L422.51,218.01L432.84,222.64L434.26,221.23L435.45,225.07L439.18,225.16L443.92,223.49L446.53,229.35L450.83,232.56L451.23,235.25L452.96,235.19L454.54,231.71L457.26,230.57L457.92,232.46L462.89,231.66L465.37,232.31L465.58,233.81L474.49,232.73L474.14,230.55L473.07,230.53L474.46,227.1L476.24,226.31L479.58,221.09L482.11,218.96Z"></path>
               <text class="mapa-rotulo" x="417.74" y="282.73" text-anchor="middle">Sul</text>
 
-              <!-- Marcador da capital -->
               <g class="pino pino--capital pino--ativo" transform="translate(487.5 184.5)"><g class="pino__corpo"><path class="pino__marca" d="M0,-5.6L1.5,-1.8L5.4,-1.7L2.3,0.8L3.4,4.6L0,2.4L-3.4,4.6L-2.3,0.8L-5.4,-1.7L-1.5,-1.8Z"></path><text class="pino__nome" x="6" y="3.5">Florianópolis</text></g></g>
             </svg>
 
@@ -290,7 +288,6 @@
             </p>
           </figure>
 
-          <!-- Coluna 2: cards de dados -->
           <div class="revelar">
             <dl class="cards-dados">
               <div class="card-dado">
@@ -303,11 +300,11 @@
               </div>
               <div class="card-dado">
                 <dt>Capital</dt>
-                <dd>Florianópolis <small>cidade-ilha, fundada em 1726</small></dd>
+                <dd>Florianópolis <small>cidade-ilha, vila desde 1726</small></dd>
               </div>
               <div class="card-dado">
                 <dt>Municípios</dt>
-                <dd>295 <small>de 1,4 mil a 600 mil habitantes</small></dd>
+                <dd>295 <small>de 1,7 mil a 616 mil habitantes</small></dd>
               </div>
               <div class="card-dado">
                 <dt>Litoral</dt>
@@ -315,11 +312,11 @@
               </div>
               <div class="card-dado">
                 <dt>Ponto mais alto</dt>
-                <dd>1.827 m <small>Morro da Boa Vista, Grão-Pará</small></dd>
+                <dd>1.827 m <small>Morro da Boa Vista, Serra Geral</small></dd>
               </div>
             </dl>
 
-            <aside class="voce-sabia">
+            <aside class="voce-sabia" role="note">
               <h3>Você sabia?</h3>
               <p>
                 Santa Catarina ocupa cerca de 1% do território brasileiro, mas
@@ -332,10 +329,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         CIDADES EM DESTAQUE
-         ================================================================= -->
     <section class="secao" id="cidades-destaque">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -361,8 +354,7 @@
               <p>
                 Capital do estado e uma das poucas cidades-ilha do Brasil. Reúne
                 mais de 40 praias, centro histórico açoriano, mercado público e um
-                polo de tecnologia que rendeu à cidade o apelido de "Vale do Silício
-                brasileiro".
+                polo de tecnologia que rendeu à cidade o apelido de "Ilha do Silício".
               </p>
               <ul class="card-cidade__dados">
                 <li class="etiqueta-dado">~540 mil habitantes</li>
@@ -409,7 +401,7 @@
                 do Brasil.
               </p>
               <ul class="card-cidade__dados">
-                <li class="etiqueta-dado">~150 mil habitantes</li>
+                <li class="etiqueta-dado">~140 mil habitantes</li>
                 <li class="etiqueta-dado">Turismo de verão</li>
               </ul>
             </div>
@@ -424,10 +416,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         DIFERENCIAL: DUAS SANTA CATARINAS
-         ================================================================= -->
     <section class="secao secao--principal" id="duas-santa-catarinas">
       <div class="container">
         <div class="secao__cabecalho centralizado revelar">
@@ -441,11 +429,10 @@
 
         <div class="comparativo">
 
-          <!-- Lado 1: litoral -->
           <article class="comparativo__lado comparativo__lado--litoral revelar">
             <div class="comparativo__foto">
               <img src="assets/litoral/praia-verao.jpg"
-                   alt="Praia ensolarada com mar esverdeado, coqueiros e banhistas ao longe."
+                   alt="Praia de Jurerê, em Florianópolis, vista do alto: areia clara, mar azul e morros ao fundo."
                    width="900" height="520" loading="lazy" decoding="async">
               <div class="comparativo__titulo">
                 <span>quase sempre verão</span>
@@ -478,7 +465,7 @@
               <ul class="comparativo__lista">
                 <li>Mais de 500 praias, de urbanas a desertas</li>
                 <li>Botos-cinza na Baía Norte e baleias-franca no sul</li>
-                <li>Ostras e mariscos: Florianópolis produz a maior parte do país</li>
+                <li>Ostras e mariscos: quase toda a produção do país sai de SC</li>
                 <li>Neve: nunca</li>
               </ul>
             </div>
@@ -486,11 +473,10 @@
 
           <p class="comparativo__divisor" aria-hidden="true">vs.</p>
 
-          <!-- Lado 2: serra -->
           <article class="comparativo__lado comparativo__lado--serra revelar">
             <div class="comparativo__foto">
               <img src="assets/serra/serra-geada.jpg"
-                   alt="Campo de altitude coberto de geada ao amanhecer, com araucárias e cerca de madeira."
+                   alt="Casa de madeira num campo de altitude cercado por araucárias, numa reserva natural da serra."
                    width="900" height="520" loading="lazy" decoding="async">
               <div class="comparativo__titulo">
                 <span>o inverno de verdade</span>
@@ -539,11 +525,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         PRÉVIA DE CURIOSIDADES — flip cards
-         Viram no hover (desktop) ou no toque/Enter (mobile e teclado)
-         ================================================================= -->
     <section class="secao secao--verde" id="curiosidades-previa">
       <div class="container">
         <div class="secao__cabecalho centralizado revelar">
@@ -561,14 +542,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/serra/neve-serra.jpg"
-                     alt="Galhos e cerca cobertos por uma fina camada de neve em região serrana."
+                     alt="Morros com o topo coberto de neve vistos do outro lado da baía, a partir de Florianópolis."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-1">Neve no Brasil?</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-1">Neve no Brasil?</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-1">
+              <div class="flip-card__face flip-card__verso" id="vs-home-1">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Santa Catarina é o estado brasileiro onde <strong>mais neva</strong>.
@@ -583,14 +562,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/gastronomia/ostras-prato.jpg"
-                     alt="Prato com ostras frescas servidas sobre gelo e limão."
+                     alt="Ostras frescas abertas sobre gelo, com fatias de limão, num prato típico de Florianópolis."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-2">Capital das ostras</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-2">Capital das ostras</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-2">
+              <div class="flip-card__face flip-card__verso" id="vs-home-2">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   A maior parte das <strong>ostras cultivadas no Brasil</strong> sai
@@ -605,14 +582,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/cidades/pomerode-jardim.jpg"
-                     alt="Casa de arquitetura enxaimel com jardim florido em cidade de colonização alemã."
+                     alt="Montagem com fotos de Pomerode: o letreiro da cidade e casas em estilo enxaimel e alemão."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-3">Alemão como língua viva</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-3">Alemão como língua viva</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-3">
+              <div class="flip-card__face flip-card__verso" id="vs-home-3">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em <strong>Pomerode</strong>, o dialeto pomerano ainda é falado em
@@ -627,14 +602,12 @@
             <div class="flip-card__interno">
               <div class="flip-card__face flip-card__frente">
                 <img src="assets/cidades/laguna-farol.jpg"
-                     alt="Farol antigo à beira-mar em dia de céu nublado, na cidade de Laguna."
+                     alt="Farol de Santa Marta, em Laguna: torre branca sobre construções de telhado vermelho, sob céu azul."
                      width="600" height="700" loading="lazy" decoding="async">
                 <span class="flip-card__dica">toque para virar</span>
-                <h3 class="flip-card__titulo"><button class="flip-card__gatilho"
-                        type="button" data-flip aria-expanded="false"
-                        aria-controls="vs-home-4">Uma república de 4 meses</button></h3>
+                <h3 class="flip-card__titulo"><label class="flip-card__gatilho"><input class="estado flip-card__estado" type="checkbox" aria-controls="vs-home-4">Uma república de 4 meses</label></h3>
               </div>
-              <div class="flip-card__face flip-card__verso" aria-hidden="true" id="vs-home-4">
+              <div class="flip-card__face flip-card__verso" id="vs-home-4">
                 <p class="flip-card__rotulo">Você sabia?</p>
                 <p>
                   Em 1839, Laguna foi capital da <strong>República Juliana</strong>,
@@ -654,20 +627,14 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         FONTES
-         ================================================================= -->
     <section class="secao secao--verde" id="fontes">
       <div class="container">
         <div class="secao__cabecalho revelar">
           <span class="etiqueta">Referências</span>
           <h2>Fontes de pesquisa</h2>
           <p class="subtitulo-secao">
-            Os dados deste site foram produzidos a partir dos portais oficiais
-            abaixo; o glossário e as receitas vêm das outras fontes listadas. Os
-            números devem ser reconferidos antes da entrega, porque as
-            estatísticas são atualizadas periodicamente.
+            Todo o conteúdo deste site foi produzido a partir de dados públicos
+            dos portais oficiais e pesquisas abaixo.
           </p>
         </div>
 
@@ -677,8 +644,39 @@
               IBGE Cidades — panorama de Santa Catarina
             </a>
             <p>
-              Área, população, número de municípios, PIB, IDH e dados por
-              município. É a fonte usada para todos os números estatísticos do site.
+              Área, população, número de municípios, PIB e dados de cada município: altitude, ano de emancipação e população.
+            </p>
+          </li>
+          <li>
+            <a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">
+              IBGE — Censo Demográfico 2022
+            </a>
+            <p>
+              População do estado e das cidades, taxa de urbanização e moradia. Os números de habitantes do site são deste censo.
+            </p>
+          </li>
+          <li>
+            <a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">
+              PNUD — Radar IDHM 2024
+            </a>
+            <p>
+              Índice de Desenvolvimento Humano dos estados: Santa Catarina tem 0,833, o terceiro maior do país.
+            </p>
+          </li>
+          <li>
+            <a href="https://www.ibge.gov.br/estatisticas/sociais/populacao/9126-tabuas-completas-de-mortalidade.html" rel="external noopener" target="_blank">
+              IBGE — Tábuas Completas de Mortalidade
+            </a>
+            <p>
+              Expectativa de vida ao nascer por estado (dados de 2024).
+            </p>
+          </li>
+          <li>
+            <a href="https://anuario.ibge.gov.br/images/aeb/2023/s1/2_pdf/s1t3202.pdf" rel="external noopener" target="_blank">
+              IBGE — Anuário Estatístico: pontos culminantes
+            </a>
+            <p>
+              Altitude do Morro da Boa Vista (1.827 m), o ponto mais alto do estado, e dos outros picos da serra.
             </p>
           </li>
           <li>
@@ -686,8 +684,7 @@
               Governo do Estado — Conheça SC
             </a>
             <p>
-              História da colonização, símbolos do estado, geografia e informações
-              gerais sobre as regiões catarinenses.
+              História da colonização, símbolos do estado, geografia e informações gerais sobre as regiões catarinenses.
             </p>
           </li>
           <li>
@@ -695,72 +692,7 @@
               Santur — Agência de Desenvolvimento do Turismo de Santa Catarina
             </a>
             <p>
-              Roteiros turísticos, calendário de festas, atrativos naturais e
-              dados sobre as regiões turísticas.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">
-              Portal oficial do Estado de Santa Catarina
-            </a>
-            <p>
-              Notícias, indicadores de economia e serviços públicos estaduais.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.nsctotal.com.br/?p=2585306" rel="external noopener" target="_blank">
-              NSC Total — dicionário manezês
-            </a>
-            <p>
-              Termos e significados do manezês usados no glossário de cultura.html.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.tribunapr.com.br/blogs/dante-mendonca/dicionario-de-alemao/amp/" rel="external noopener" target="_blank">
-              Tribuna do Paraná — glossário de Horácio Braum
-            </a>
-            <p>
-              Palavras do alemão de colônia, reunidas principalmente no Vale do Itajaí.
-            </p>
-          </li>
-          <li>
-            <a href="https://wp.ufpel.edu.br/tesouro-linguistico/?p=195" rel="external noopener" target="_blank">
-              UFPel — Tesouro Linguístico: pomerano
-            </a>
-            <p>
-              História do pomerano no Brasil e palavras parentes do inglês e do alemão.
-            </p>
-          </li>
-          <li>
-            <a href="https://pt.wikipedia.org/wiki/L%C3%ADngua_pomerana" rel="external noopener" target="_blank">
-              Wikipédia — língua pomerana
-            </a>
-            <p>
-              Palavras do pomerano retiradas do texto com tradução apresentado no artigo.
-            </p>
-          </li>
-          <li>
-            <a href="https://pt.wikipedia.org/wiki/Talian" rel="external noopener" target="_blank">
-              Wikipédia — talian
-            </a>
-            <p>
-              Vocabulário do talian e a presença da língua em Santa Catarina.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.brasiltalian.com/2016/11/dicionario-portugues-talian.html" rel="external noopener" target="_blank">
-              Brasil Talian — dicionário português-talian
-            </a>
-            <p>
-              Consulta de termos do talian usados no glossário.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.receiteria.com.br/receita/cuca-de-banana-com-farofa/" rel="external noopener" target="_blank">
-              Receitas típicas — fontes em cada cartão
-            </a>
-            <p>
-              Cada receita de <a href="panorama.html#gastronomia">panorama.html</a> traz o link da página de onde foi adaptada, como esta da cuca.
+              Roteiros turísticos, calendário de festas, atrativos naturais e dados sobre as regiões turísticas.
             </p>
           </li>
         </ul>
@@ -769,10 +701,6 @@
 
   </main>
 
-
-  <!-- ==================================================================
-       FOOTER (componente reutilizável — igual em todas as páginas)
-       =================================================================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -785,7 +713,6 @@
             do IFMT — Campus Várzea Grande.
           </p>
 
-          <!-- Mapa do estado no rodapé (mesma silhueta, sem interação) -->
           <div class="rodape__mapa-estado">
             <img src="assets/mapa-sc.svg" width="600" height="380" loading="lazy" decoding="async"
                  alt="Contorno do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
@@ -813,55 +740,33 @@
           <h3 class="rodape__titulo">Fontes de pesquisa</h3>
           <ul class="rodape__lista">
             <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">IBGE — Censo 2022</a></li>
+            <li><a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">PNUD — Radar IDHM 2024</a></li>
             <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
             <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
-            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
-          </ul>
-
-          <h3 class="esp-topo-3 rodape__titulo" >Redes sociais</h3>
-          <ul class="redes">
-            <li>
-              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
-                 aria-label="Instagram (página inicial da rede)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
-                 aria-label="Canal do projeto Terra Catarinense no YouTube">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
-                 aria-label="Página do projeto Terra Catarinense no Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
-                </svg>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -869,9 +774,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>

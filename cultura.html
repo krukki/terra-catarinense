@@ -5,37 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cultura e Imigração em Santa Catarina — Terra Catarinense</title>
   <meta name="description" content="Linha do tempo da ocupação de Santa Catarina: povos indígenas, colonização açoriana, imigração alemã e italiana, festas, danças e tradições.">
+  <!-- Prévia do link (WhatsApp, redes sociais). Precisa de endereço absoluto:
+       aponta para o GitHub Pages do projeto. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Terra Catarinense">
+  <meta property="og:title" content="Cultura e Imigração em Santa Catarina — Terra Catarinense">
+  <meta property="og:description" content="Linha do tempo da ocupação de Santa Catarina: povos indígenas, colonização açoriana, imigração alemã e italiana, festas, danças e tradições.">
+  <meta property="og:url" content="https://krukki.github.io/terra-catarinense/cultura.html">
+  <meta property="og:image" content="https://krukki.github.io/terra-catarinense/assets/litoral/previa-link.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vista aérea da Guarda do Embaú, no litoral de Santa Catarina.">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ===================== HEADER STICKY ===================== -->
   <header class="cabecalho">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
@@ -46,19 +46,20 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html">Início</a></li>
           <li><a href="panorama.html#geografia">Geografia</a></li>
@@ -75,7 +76,6 @@
 
   <main id="conteudo">
 
-    <!-- ===================== HERO DA PÁGINA ===================== -->
     <section class="hero-pagina">
       <div class="container">
         <span class="etiqueta">Cultura e imigração</span>
@@ -98,12 +98,6 @@
       </div>
     </nav>
 
-
-    <!-- ================================================================
-         DIFERENCIAL 3 — LINHA DO TEMPO INTERATIVA
-         Cada marco entra em cena via Intersection Observer (js/script.js).
-         Sem JavaScript, todos os marcos aparecem normalmente.
-         ================================================================= -->
     <section class="secao" id="linha-do-tempo">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -117,8 +111,7 @@
 
         <div class="linha-tempo">
 
-          <!-- ---------- Marco 1 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/guarani.jpg"
@@ -131,8 +124,7 @@
                 <p>
                   Muito antes da chegada dos europeus, o território era habitado
                   pelos <strong>Xokleng</strong> e <strong>Kaingang</strong>, no
-                  planalto e no vale, e pelos <strong>Guarani</strong> e
-                  <strong>Carijó</strong>, no litoral. Viviam da caça, da pesca, do
+                  planalto e no vale, e pelos <strong>Guarani</strong> — os <strong>Carijó</strong>, como os europeus os chamavam —, no litoral. Viviam da caça, da pesca, do
                   pinhão e da mandioca, e deixaram marcas nos sambaquis e nas
                   inscrições rupestres da costa.
                 </p>
@@ -143,22 +135,20 @@
             </div>
           </article>
 
-          <!-- ---------- Marco 2 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/litoral/acoriano-casario.jpg"
-                     alt="Casario colonial branco com portas e janelas azuis, típico da arquitetura açoriana do litoral catarinense."
+                     alt="Casa colonial vermelha de janelas brancas e telhado de telha, no Ribeirão da Ilha, em Florianópolis."
                      width="700" height="500" loading="lazy" decoding="async">
               </div>
               <div class="marco__corpo">
                 <p class="marco__periodo">1748 – 1756</p>
                 <h3>Colonização açoriana</h3>
                 <p>
-                  Portugal trouxe cerca de <strong>6 mil casais</strong> das ilhas
+                  Portugal trouxe cerca de <strong>6 mil pessoas</strong> das ilhas
                   dos Açores e da Madeira para povoar o litoral e garantir a posse
-                  do sul da colônia. Eles fundaram freguesias em Desterro (hoje
-                  Florianópolis), Laguna, São José e Biguaçu, vivendo da pesca da
+                  do sul da colônia. Eles reforçaram Desterro (hoje Florianópolis) e Laguna e fundaram freguesias como São José e São Miguel (hoje Biguaçu), vivendo da pesca da
                   tainha e da farinha de mandioca.
                 </p>
                 <p class="marco__heranca">
@@ -168,12 +158,11 @@
             </div>
           </article>
 
-          <!-- ---------- Marco 3 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/pedro-alcantara.jpg"
-                     alt="Pintura religiosa de São Pedro de Alcântara erguendo os braços entre nuvens e anjos."
+                     alt="Igreja matriz de São Pedro de Alcântara, branca e com cúpula, no alto de um morro cercado de mata."
                      width="700" height="500" loading="lazy" decoding="async">
               </div>
               <div class="marco__corpo">
@@ -182,7 +171,7 @@
                 <p>
                   A colônia de <strong>São Pedro de Alcântara</strong>, perto de
                   Florianópolis, recebeu as primeiras famílias alemãs do estado —
-                  e foi a primeira colônia alemã de todo o Brasil. O governo
+                  cinco anos depois das pioneiras São Leopoldo (RS) e Nova Friburgo (RJ). O governo
                   imperial queria ocupar o interior com pequenas propriedades
                   agrícolas.
                 </p>
@@ -193,12 +182,11 @@
             </div>
           </article>
 
-          <!-- ---------- Marco 4 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/blumenau-historico.jpg"
-                     alt="Construção enxaimel com vigas de madeira escuras formando desenhos geométricos na fachada."
+                     alt="Prédio histórico de dois andares, com fachada clara e janelas em arco, no centro de Blumenau."
                      width="700" height="500" loading="lazy" decoding="async">
               </div>
               <div class="marco__corpo">
@@ -206,8 +194,7 @@
                 <h3>Imigração alemã no Vale do Itajaí</h3>
                 <p>
                   O farmacêutico <strong>Hermann Blumenau</strong> fundou em 1850 a
-                  colônia que leva seu nome. Nas décadas seguintes surgiram
-                  Joinville, Brusque, Pomerode e São Bento do Sul. Os imigrantes
+                  colônia que leva seu nome. Logo depois surgiram Joinville (1851), Brusque, Pomerode e São Bento do Sul. Os imigrantes
                   trouxeram a técnica construtiva <strong>enxaimel</strong>, as
                   cervejarias, as escolas comunitárias e o início da indústria
                   têxtil.
@@ -219,12 +206,11 @@
             </div>
           </article>
 
-          <!-- ---------- Marco 5 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/italianos-videira.jpg"
-                     alt="Parreiral de uvas em encosta com casa rural de pedra ao fundo."
+                     alt="Igreja matriz branca de torre alta, entre árvores, em cidade de colonização italiana."
                      width="700" height="500" loading="lazy" decoding="async">
               </div>
               <div class="marco__corpo">
@@ -244,8 +230,7 @@
             </div>
           </article>
 
-          <!-- ---------- Marco 6 ---------- -->
-          <article class="marco revelar" data-marco>
+          <article class="marco revelar">
             <div class="marco__cartao">
               <div class="marco__foto">
                 <img src="assets/cultura/festa-tipica.jpg"
@@ -272,10 +257,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         FESTAS E TRADIÇÕES
-         ================================================================= -->
     <section class="secao secao--clara" id="festas">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -289,20 +270,22 @@
 
         <div class="grade-blocos">
           <article class="bloco revelar">
-            <p class="bloco__icone" aria-hidden="true">🍺</p>
-            <h3>Oktoberfest — Blumenau</h3>
+            <p class="bloco__icone" aria-hidden="true">☕</p>
+            <h3>Café colonial — Vale do Itajaí</h3>
             <p>
-              Realizada em outubro, é a maior festa alemã das Américas. Reúne
-              bandas típicas, desfiles, chope artesanal e concursos de trajes.
+              Herança das famílias alemãs: uma mesa farta no meio da tarde, com
+              cucas, pães caseiros, geleias, queijos e embutidos. Em Pomerode,
+              Timbó e Blumenau, virou programa de fim de semana.
             </p>
           </article>
 
           <article class="bloco revelar">
-            <p class="bloco__icone" aria-hidden="true">🌰</p>
-            <h3>Festa do Pinhão — Lages</h3>
+            <p class="bloco__icone" aria-hidden="true">🔥</p>
+            <h3>Tropeirismo — Planalto Serrano</h3>
             <p>
-              Celebra a semente da araucária e a cultura campeira da serra, com
-              rodeio, música regional e comidas feitas com pinhão.
+              Lages nasceu como pouso dos tropeiros que levavam gado do Sul para
+              São Paulo. Deles ficaram o fogo de chão, o chimarrão, o entrevero
+              e a cultura campeira celebrada na Festa do Pinhão.
             </p>
           </article>
 
@@ -318,11 +301,12 @@
           </article>
 
           <article class="bloco revelar">
-            <p class="bloco__icone" aria-hidden="true">🦪</p>
-            <h3>Fenaostra — Florianópolis</h3>
+            <p class="bloco__icone" aria-hidden="true">🧵</p>
+            <h3>Renda de bilro — Ilha de Santa Catarina</h3>
             <p>
-              Festival dedicado à ostra e à cultura açoriana, com gastronomia,
-              música e apresentações de terno de reis e ratoeira.
+              Trazida pelas açorianas, é tecida sobre uma almofada, trançando
+              dezenas de bilros de madeira. As rendeiras da Lagoa da Conceição e
+              de Santo Antônio de Lisboa mantêm a técnica viva.
             </p>
           </article>
 
@@ -336,26 +320,19 @@
           </article>
 
           <article class="bloco revelar">
-            <p class="bloco__icone" aria-hidden="true">⛵</p>
-            <h3>Procissão de Navegantes</h3>
+            <p class="bloco__icone" aria-hidden="true">🎶</p>
+            <h3>Ratoeira — litoral açoriano</h3>
             <p>
-              Em janeiro, barcos enfeitados levam a imagem de Nossa Senhora dos
-              Navegantes pelo mar, tradição religiosa herdada dos açorianos.
+              Cantiga de roda em que as moças improvisam versos de amor e de
+              provocação, respondidos pela roda. Chegou com os açorianos e ainda
+              é cantada em grupos folclóricos da Ilha.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-
-    <!-- ================================================================
-         DIFERENCIAL 7 — CALENDÁRIO DE FESTAS
-         Os doze meses ficam no HTML: sem JavaScript aparece a lista inteira.
-         Com JS, a barra mostra um mês por vez (abre no mês atual).
-         ================================================================= -->
-    <!-- O planejador de turismo.html usa uma cópia desta lista (FESTAS, no
-         script.js). Mudou uma festa aqui? Mude lá também. -->
-    <section class="secao secao--principal" id="calendario" data-calendario
+    <section class="secao secao--principal calendario" id="calendario"
              aria-labelledby="titulo-calendario">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -368,22 +345,46 @@
           </p>
         </div>
 
-        <div class="calendario__barra" role="group" aria-label="Escolha o mês"
-             data-calendario-barra>
-          <button class="calendario__botao" type="button" data-mes-botao="1" aria-pressed="false" aria-label="Janeiro">Jan</button>
-          <button class="calendario__botao" type="button" data-mes-botao="2" aria-pressed="false" aria-label="Fevereiro">Fev</button>
-          <button class="calendario__botao" type="button" data-mes-botao="3" aria-pressed="false" aria-label="Março">Mar</button>
-          <button class="calendario__botao" type="button" data-mes-botao="4" aria-pressed="false" aria-label="Abril">Abr</button>
-          <button class="calendario__botao" type="button" data-mes-botao="5" aria-pressed="false" aria-label="Maio">Mai</button>
-          <button class="calendario__botao" type="button" data-mes-botao="6" aria-pressed="false" aria-label="Junho">Jun</button>
-          <button class="calendario__botao" type="button" data-mes-botao="7" aria-pressed="false" aria-label="Julho">Jul</button>
-          <button class="calendario__botao" type="button" data-mes-botao="8" aria-pressed="false" aria-label="Agosto">Ago</button>
-          <button class="calendario__botao" type="button" data-mes-botao="9" aria-pressed="false" aria-label="Setembro">Set</button>
-          <button class="calendario__botao" type="button" data-mes-botao="10" aria-pressed="false" aria-label="Outubro">Out</button>
-          <button class="calendario__botao" type="button" data-mes-botao="11" aria-pressed="false" aria-label="Novembro">Nov</button>
-          <button class="calendario__botao" type="button" data-mes-botao="12" aria-pressed="false" aria-label="Dezembro">Dez</button>
+        <div class="calendario__barra" role="radiogroup" aria-label="Escolha o mês">
+          <input class="estado" type="radio" name="mes" id="mes-1" aria-label="Janeiro">
+          <label class="calendario__botao" for="mes-1" title="Janeiro">Jan</label>
+          <input class="estado" type="radio" name="mes" id="mes-2" aria-label="Fevereiro">
+          <label class="calendario__botao" for="mes-2" title="Fevereiro">Fev</label>
+          <input class="estado" type="radio" name="mes" id="mes-3" aria-label="Março">
+          <label class="calendario__botao" for="mes-3" title="Março">Mar</label>
+          <input class="estado" type="radio" name="mes" id="mes-4" aria-label="Abril">
+          <label class="calendario__botao" for="mes-4" title="Abril">Abr</label>
+          <input class="estado" type="radio" name="mes" id="mes-5" aria-label="Maio">
+          <label class="calendario__botao" for="mes-5" title="Maio">Mai</label>
+          <input class="estado" type="radio" name="mes" id="mes-6" aria-label="Junho">
+          <label class="calendario__botao" for="mes-6" title="Junho">Jun</label>
+          <input class="estado" type="radio" name="mes" id="mes-7" aria-label="Julho">
+          <label class="calendario__botao" for="mes-7" title="Julho">Jul</label>
+          <input class="estado" type="radio" name="mes" id="mes-8" aria-label="Agosto">
+          <label class="calendario__botao" for="mes-8" title="Agosto">Ago</label>
+          <input class="estado" type="radio" name="mes" id="mes-9" aria-label="Setembro">
+          <label class="calendario__botao" for="mes-9" title="Setembro">Set</label>
+          <input class="estado" type="radio" name="mes" id="mes-10" checked aria-label="Outubro">
+          <label class="calendario__botao" for="mes-10" title="Outubro">Out</label>
+          <input class="estado" type="radio" name="mes" id="mes-11" aria-label="Novembro">
+          <label class="calendario__botao" for="mes-11" title="Novembro">Nov</label>
+          <input class="estado" type="radio" name="mes" id="mes-12" aria-label="Dezembro">
+          <label class="calendario__botao" for="mes-12" title="Dezembro">Dez</label>
         </div>
-        <p class="calendario__status" data-calendario-status aria-live="polite"></p>
+        <p class="calendario__status">
+          <span data-mes-status="1">Janeiro: 2 programas</span>
+          <span data-mes-status="2">Fevereiro: 3 programas</span>
+          <span data-mes-status="3">Março: 2 programas</span>
+          <span data-mes-status="4">Abril: 2 programas</span>
+          <span data-mes-status="5">Maio: 2 programas</span>
+          <span data-mes-status="6">Junho: 2 programas</span>
+          <span data-mes-status="7">Julho: 2 programas</span>
+          <span data-mes-status="8">Agosto: 1 programa</span>
+          <span data-mes-status="9">Setembro: 1 programa</span>
+          <span data-mes-status="10">Outubro: 4 programas</span>
+          <span data-mes-status="11">Novembro: 2 programas</span>
+          <span data-mes-status="12">Dezembro: 2 programas</span>
+        </p>
 
         <ol class="calendario__meses">
           <li class="calendario__mes" data-mes="1">
@@ -396,7 +397,7 @@
                   Celebra a colonização pomerana com desfiles, bandinhas,
                   comida típica e jogos tradicionais trazidos da Europa.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=pomerode#mapa">Ver Pomerode no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-pomerode">Ver Pomerode no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Litoral</p>
@@ -405,7 +406,7 @@
                   Barcos enfeitados levam a imagem de Nossa Senhora dos
                   Navegantes pelo mar, tradição herdada dos açorianos.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-litoral">Ver o Litoral no atlas</a>
               </article>
             </div>
           </li>
@@ -420,7 +421,7 @@
                   Desfile das escolas de samba na Passarela Nego Quirido e
                   blocos de rua espalhados pela Ilha.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-florianopolis">Ver Florianópolis no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Laguna</p>
@@ -429,7 +430,7 @@
                   Um dos carnavais de rua mais tradicionais do Sul, com blocos
                   que lotam o centro histórico.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=laguna#mapa">Ver Laguna no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-laguna">Ver Laguna no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Videira</p>
@@ -438,7 +439,7 @@
                   A capital catarinense da uva comemora a colheita com desfile,
                   vinho colonial e cozinha italiana.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=oeste#mapa">Ver o Oeste no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-oeste">Ver o Oeste no atlas</a>
               </article>
             </div>
           </li>
@@ -453,7 +454,7 @@
                   Os pomares da serra estão carregados: é a melhor época para
                   visitar e colher a fruta direto do pé.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=sao-joaquim#mapa">Ver São Joaquim no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-sao-joaquim">Ver São Joaquim no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Época · Planalto Serrano</p>
@@ -462,7 +463,7 @@
                   As vinícolas acima de 900 metros colhem a uva e abrem as
                   portas para visitas e degustações.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=serra#mapa">Ver a Serra no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-serra">Ver a Serra no atlas</a>
               </article>
             </div>
           </li>
@@ -477,7 +478,7 @@
                   A festa de Páscoa enche a cidade de ovos pintados à mão,
                   pendurados em árvores gigantes.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=pomerode#mapa">Ver Pomerode no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-pomerode">Ver Pomerode no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · São Joaquim</p>
@@ -486,7 +487,7 @@
                   Fecha a safra com a fruta em todas as formas — doce, suco,
                   sidra — além de shows e cultura campeira.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=sao-joaquim#mapa">Ver São Joaquim no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-sao-joaquim">Ver São Joaquim no atlas</a>
               </article>
             </div>
           </li>
@@ -501,7 +502,7 @@
                   De maio a julho, os pescadores artesanais vigiam o mar e
                   cercam os cardumes no arrastão de praia.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-florianopolis">Ver Florianópolis no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Litoral açoriano</p>
@@ -510,7 +511,7 @@
                   Cortejo com a bandeira do Divino, coroação do imperador e
                   distribuição de massa, nas freguesias antigas da Ilha.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-litoral">Ver o Litoral no atlas</a>
               </article>
             </div>
           </li>
@@ -525,7 +526,7 @@
                   Celebra a semente da araucária e a cultura campeira, com
                   rodeio, música regional e pinhão de todo jeito.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=lages#mapa">Ver Lages no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-lages">Ver Lages no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Época · Urubici</p>
@@ -534,7 +535,7 @@
                   Nas madrugadas abaixo de zero, os campos de altitude
                   amanhecem cobertos de branco.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=urubici#mapa">Ver Urubici no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-urubici">Ver Urubici no atlas</a>
               </article>
             </div>
           </li>
@@ -549,7 +550,7 @@
                   Um dos maiores festivais de dança do mundo, com palcos
                   espalhados pela cidade e apresentações gratuitas.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=joinville#mapa">Ver Joinville no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-joinville">Ver Joinville no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Época · Urupema</p>
@@ -558,7 +559,7 @@
                   Quando a frente fria é forte, pode nevar no planalto —
                   Urupema e São Joaquim são os lugares mais prováveis.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=urupema#mapa">Ver Urupema no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-urupema">Ver Urupema no atlas</a>
               </article>
             </div>
           </li>
@@ -573,7 +574,7 @@
                   Entre julho e novembro as baleias vêm ao litoral sul para ter
                   os filhotes, e dá para vê-las da praia.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=garopaba#mapa">Ver Garopaba no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-garopaba">Ver Garopaba no atlas</a>
               </article>
             </div>
           </li>
@@ -588,7 +589,7 @@
                   Os centros de tradição gaúcha celebram com cavalgadas,
                   chimarrão e churrasco de chão, até o 20 de setembro.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=lages#mapa">Ver Lages no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-lages">Ver Lages no atlas</a>
               </article>
             </div>
           </li>
@@ -603,7 +604,7 @@
                   A maior festa alemã das Américas: bandas típicas, desfiles,
                   chope artesanal e concurso de trajes.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=blumenau#mapa">Ver Blumenau no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-blumenau">Ver Blumenau no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Itajaí</p>
@@ -612,7 +613,7 @@
                   Festa portuguesa e do pescado, com bacalhau, frutos do mar e
                   danças folclóricas.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=itajai#mapa">Ver Itajaí no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-itajai">Ver Itajaí no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Brusque</p>
@@ -621,7 +622,7 @@
                   O marreco recheado com repolho roxo é o prato principal desta
                   festa de tradição alemã.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=brusque#mapa">Ver Brusque no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-brusque">Ver Brusque no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Jaraguá do Sul</p>
@@ -630,7 +631,7 @@
                   A festa dos atiradores mantém a tradição das sociedades de
                   tiro trazidas pelos imigrantes alemães.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=jaragua-do-sul#mapa">Ver Jaraguá do Sul no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-jaragua-do-sul">Ver Jaraguá do Sul no atlas</a>
               </article>
             </div>
           </li>
@@ -645,7 +646,7 @@
                   Festival da ostra e da cultura açoriana, com gastronomia,
                   terno de reis e ratoeira.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=florianopolis#mapa">Ver Florianópolis no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-florianopolis">Ver Florianópolis no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Joinville</p>
@@ -654,7 +655,7 @@
                   Exposição de orquídeas e flores que ajudou a dar a Joinville
                   o apelido de Cidade das Flores.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=joinville#mapa">Ver Joinville no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-joinville">Ver Joinville no atlas</a>
               </article>
             </div>
           </li>
@@ -669,7 +670,7 @@
                   A Vila Germânica vira vila de Natal, com desfiles, luzes e
                   música nas ruas do centro.
                 </p>
-                <a class="link-seta" href="cidades.html?cidade=blumenau#mapa">Ver Blumenau no atlas</a>
+                <a class="link-seta" href="cidades.html#cidade-blumenau">Ver Blumenau no atlas</a>
               </article>
               <article class="calendario__evento">
                 <p class="calendario__onde">Festa · Litoral</p>
@@ -678,7 +679,7 @@
                   Do Natal ao Dia de Reis, grupos cantam de casa em casa e o
                   boi-de-mamão sai às ruas.
                 </p>
-                <a class="link-seta" href="cidades.html?regiao=litoral#mapa">Ver o Litoral no atlas</a>
+                <a class="link-seta" href="cidades.html#regiao-litoral">Ver o Litoral no atlas</a>
               </article>
             </div>
           </li>
@@ -686,10 +687,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         LÍNGUA E ARQUITETURA
-         ================================================================= -->
     <section class="secao" id="heranca">
       <div class="container">
         <div class="duas-colunas">
@@ -718,7 +715,7 @@
 
           <figure class="mapa-quadro revelar">
             <img src="assets/cidades/enxaimel-detalhe.jpg"
-                 alt="Detalhe de fachada enxaimel: vigas de madeira escura cruzadas sobre parede branca de tijolo."
+                 alt="Casa enxaimel cercada de mata, com vigas de madeira aparentes na fachada clara."
                  width="900" height="700" loading="lazy" decoding="async"
                  class="canto-pequeno">
             <figcaption>
@@ -729,147 +726,7 @@
           </figure>
         </div>
 
-        <!-- DIFERENCIAL 12 — Glossário: a lista inteira fica no HTML e aparece
-             mesmo sem JavaScript; só os filtros dependem dele. -->
-        <div class="glossario revelar" data-glossario>
-          <h3 id="glossario">Pequeno glossário dos sotaques</h3>
-          <p>
-            Algumas palavras e expressões das quatro falas acima, escritas como
-            aparecem nas fontes. Muitas são mais faladas do que escritas, então é
-            normal encontrar outras formas de escrever.
-          </p>
-
-          <div class="glossario__controles" data-glossario-controles hidden>
-            <div class="glossario__campo">
-              <label for="glossario-busca">Procurar no glossário</label>
-              <input id="glossario-busca" type="search" autocomplete="off" data-glossario-busca>
-            </div>
-            <div class="filtros" role="group" aria-label="Filtrar o glossário por língua">
-              <button class="filtro-botao" type="button" data-glossario-filtro="todas" aria-pressed="true">Todas</button>
-              <button class="filtro-botao" type="button" data-glossario-filtro="manezes" aria-pressed="false">Manezês</button>
-              <button class="filtro-botao" type="button" data-glossario-filtro="alemao" aria-pressed="false">Alemão de colônia</button>
-              <button class="filtro-botao" type="button" data-glossario-filtro="pomerano" aria-pressed="false">Pomerano</button>
-              <button class="filtro-botao" type="button" data-glossario-filtro="talian" aria-pressed="false">Talian</button>
-            </div>
-            <p class="glossario__contador" data-glossario-contador role="status" aria-live="polite"></p>
-          </div>
-
-          <dl class="glossario__lista">
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">O lhó lhó</span></dt>
-              <dd>Expressa surpresa ou espanto.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Tax tolo</span></dt>
-              <dd>Diz que a pessoa não acreditou no que acabou de ouvir.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Dax um banho</span></dt>
-              <dd>Elogio: quer dizer que a pessoa é incrível.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Cacaiada</span></dt>
-              <dd>Turma bagunceira, no bom sentido.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Tanso</span></dt>
-              <dd>Pessoa boba, lenta, ou que fez alguma besteira.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Mazanza</span></dt>
-              <dd>Pessoa preguiçosa ou devagar.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Segue reto toda vida</span></dt>
-              <dd>A direção para quem pede informação: é só continuar em frente.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="manezes">
-              <dt><span class="glossario__lingua">Manezês</span><span lang="pt-BR">Se quex, quex, se não quex, dix</span></dt>
-              <dd>“Se queres, queres; se não queres, diz”: para quem não se decide.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Móin</span></dt>
-              <dd>Bom dia. Forma encurtada de <i>guten Morgen</i>.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Schimia</span></dt>
-              <dd>Tudo o que se passa no pão: geleia, mousse ou patê.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Bubi</span></dt>
-              <dd>Jeito carinhoso de chamar uma criança de origem alemã.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Felá</span></dt>
-              <dd>O recheio de miúdos do marreco ou do frango assado. Vem de <i>Fülle</i>.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Surraxco</span></dt>
-              <dd>Churrasco, com sotaque da colônia.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Mondoví</span></dt>
-              <dd>Amendoim.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="alemao">
-              <dt><span class="glossario__lingua">Alemão de colônia</span><span lang="und">Schipcare</span></dt>
-              <dd>Carrinho de mão.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="pomerano">
-              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Bauk</span></dt>
-              <dd>Livro. Parente do inglês <i>book</i> e do alemão <i>Buch</i>.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="pomerano">
-              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Sonn</span></dt>
-              <dd>Sol. Parente do inglês <i>sun</i> e do alemão <i>Sonne</i>.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="pomerano">
-              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Broud</span></dt>
-              <dd>Pão, como em <i>dat broud for jeire dag</i>, “o pão de cada dia”.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="pomerano">
-              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Himel</span></dt>
-              <dd>Céu, como em <i>im Himel</i>, “nos céus”.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="pomerano">
-              <dt><span class="glossario__lingua">Pomerano</span><span lang="und">Fåter</span></dt>
-              <dd>Pai, como em <i>ous Fåter</i>, “pai nosso”.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="talian">
-              <dt><span class="glossario__lingua">Talian</span><span lang="und">Bondì</span></dt>
-              <dd>Bom dia.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="talian">
-              <dt><span class="glossario__lingua">Talian</span><span lang="und">Putel</span></dt>
-              <dd>Criança. Também se diz <i>bambin</i> ou <i>fantolin</i>.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="talian">
-              <dt><span class="glossario__lingua">Talian</span><span lang="und">Pióva</span></dt>
-              <dd>Chuva.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="talian">
-              <dt><span class="glossario__lingua">Talian</span><span lang="und">Recia</span></dt>
-              <dd>Orelha.</dd>
-            </div>
-            <div class="glossario__item" data-lingua="talian">
-              <dt><span class="glossario__lingua">Talian</span><span lang="und">Tuti</span></dt>
-              <dd>Todos, como no provérbio <i>la ociosità la è la mama de tuti i vìssii</i>: “a ociosidade é a mãe de todos os vícios”.</dd>
-            </div>
-          </dl>
-
-          <p class="glossario__fontes">
-            Fontes:
-            <a href="https://www.nsctotal.com.br/?p=2585306" rel="external noopener" target="_blank">dicionário manezês do NSC Total</a>;
-            <a href="https://www.tribunapr.com.br/blogs/dante-mendonca/dicionario-de-alemao/amp/" rel="external noopener" target="_blank">glossário de Horácio Braum na Tribuna do Paraná</a>;
-            <a href="https://wp.ufpel.edu.br/tesouro-linguistico/?p=195" rel="external noopener" target="_blank">Tesouro Linguístico da UFPel</a>;
-            <a href="https://pt.wikipedia.org/wiki/L%C3%ADngua_pomerana" rel="external noopener" target="_blank">Wikipédia, língua pomerana</a>;
-            <a href="https://pt.wikipedia.org/wiki/Talian" rel="external noopener" target="_blank">Wikipédia, talian</a>;
-            <a href="https://www.brasiltalian.com/2016/11/dicionario-portugues-talian.html" rel="external noopener" target="_blank">dicionário Brasil Talian</a>;
-            <a href="http://branchedorfamilia.blogspot.com/2013/06/proverbios-em-talian-o-dialeto-veneto.html" rel="external noopener" target="_blank">provérbios em talian do blog Branche D'Or</a>.
-          </p>
-        </div>
-
-        <aside class="esp-topo-6 voce-sabia revelar" >
+        <aside class="esp-topo-6 voce-sabia revelar" role="note">
           <h3>Você sabia?</h3>
           <p>
             Durante a Segunda Guerra Mundial, falar alemão em público foi proibido
@@ -883,8 +740,6 @@
 
   </main>
 
-
-  <!-- ===================== FOOTER ===================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -924,55 +779,33 @@
           <h3 class="rodape__titulo">Fontes de pesquisa</h3>
           <ul class="rodape__lista">
             <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">IBGE — Censo 2022</a></li>
+            <li><a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">PNUD — Radar IDHM 2024</a></li>
             <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
             <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
-            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
-          </ul>
-
-          <h3 class="esp-topo-3 rodape__titulo" >Redes sociais</h3>
-          <ul class="redes">
-            <li>
-              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
-                 aria-label="Instagram (página inicial da rede)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
-                 aria-label="Canal do projeto Terra Catarinense no YouTube">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
-                 aria-label="Página do projeto Terra Catarinense no Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
-                </svg>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -980,9 +813,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>

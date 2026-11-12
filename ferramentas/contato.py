@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Gera ferramentas/contato.html — a folha de contato para aprovação.
 
 Mostra, para cada uma das 58 vagas: a foto escolhida, o texto alt que ela

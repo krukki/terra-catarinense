@@ -5,37 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Geografia, Economia e Gastronomia — Terra Catarinense</title>
   <meta name="description" content="Relevo e clima de Santa Catarina, a economia distribuída entre suas regiões e os pratos típicos que contam a história de cada uma delas.">
+  <!-- Prévia do link (WhatsApp, redes sociais). Precisa de endereço absoluto:
+       aponta para o GitHub Pages do projeto. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Terra Catarinense">
+  <meta property="og:title" content="Geografia, Economia e Gastronomia — Terra Catarinense">
+  <meta property="og:description" content="Relevo e clima de Santa Catarina, a economia distribuída entre suas regiões e os pratos típicos que contam a história de cada uma delas.">
+  <meta property="og:url" content="https://krukki.github.io/terra-catarinense/panorama.html">
+  <meta property="og:image" content="https://krukki.github.io/terra-catarinense/assets/litoral/previa-link.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vista aérea da Guarda do Embaú, no litoral de Santa Catarina.">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon: o mesmo selo "SC" do logo (?v= força o navegador a trocar o ícone guardado) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estados.css">
 
-  <!-- Aplica o tema salvo antes da primeira pintura, para a página não
-       piscar no tema errado. É o único script inline do site. -->
-  <script>
-    (function () {
-      var r = document.documentElement;
-      r.classList.add("js");
-      try {
-        var t = localStorage.getItem("terra-catarinense:tema");
-        if (t) r.setAttribute("data-tema", t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
-<body>
+<body id="topo">
 
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ===================== HEADER STICKY ===================== -->
   <header class="cabecalho">
     <div class="container cabecalho__interno">
       <a class="logo" href="index.html">
@@ -46,19 +46,20 @@
         </span>
       </a>
 
-      <button class="tema-botao" type="button" data-tema-botao
-              aria-label="Alternar entre tema claro e escuro">
+      <label class="tema-botao" title="Alternar entre tema claro e escuro">
+        <input class="tema-botao__caixa" type="checkbox" id="tema"
+               aria-label="Alternar entre tema claro e escuro">
         <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
         <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-      </button>
+      </label>
 
-      <button class="menu-botao" type="button" data-menu-botao
-              aria-expanded="false" aria-controls="menu-principal">
+      <button class="menu-botao" type="button" popovertarget="menu-principal">
         <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span data-menu-rotulo>Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
+        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
       </button>
 
-      <nav class="navegacao" id="menu-principal" data-menu hidden aria-label="Navegação principal">
+      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
         <ul class="navegacao__lista">
           <li><a href="index.html">Início</a></li>
           <li><a href="panorama.html#geografia" aria-current="page">Geografia</a></li>
@@ -75,7 +76,6 @@
 
   <main id="conteudo">
 
-    <!-- ===================== HERO DA PÁGINA ===================== -->
     <section class="hero-pagina" id="geografia">
       <div class="container">
         <span class="etiqueta">Geografia, economia e gastronomia</span>
@@ -97,10 +97,6 @@
       </div>
     </nav>
 
-
-    <!-- ================================================================
-         GEOGRAFIA
-         ================================================================= -->
     <section class="secao">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -189,10 +185,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         ECONOMIA
-         ================================================================= -->
     <section class="secao secao--clara" id="economia">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -270,8 +262,7 @@
         <div class="tabela-envolvida revelar">
           <table>
             <caption>
-              Panorama socioeconômico de Santa Catarina (dados aproximados —
-              conferir os valores mais recentes no IBGE antes da entrega).
+              Panorama socioeconômico de Santa Catarina (dados aproximados).
             </caption>
             <thead>
               <tr>
@@ -286,11 +277,11 @@
               </tr>
               <tr>
                 <th scope="row">IDH</th>
-                <td>0,792 — um dos três mais altos do país</td>
+                <td>0,833 (2024) — o terceiro mais alto do país, atrás do Distrito Federal e de São Paulo</td>
               </tr>
               <tr>
                 <th scope="row">Expectativa de vida</th>
-                <td>Cerca de 80 anos, a maior entre os estados</td>
+                <td>78,3 anos (IBGE, 2024), a maior entre os estados — só o Distrito Federal fica acima</td>
               </tr>
               <tr>
                 <th scope="row">Principais exportações</th>
@@ -298,7 +289,7 @@
               </tr>
               <tr>
                 <th scope="row">Taxa de urbanização</th>
-                <td>Aproximadamente 84% da população em áreas urbanas</td>
+                <td>88,4% da população em áreas urbanas (Censo 2022)</td>
               </tr>
             </tbody>
           </table>
@@ -306,10 +297,6 @@
       </div>
     </section>
 
-
-    <!-- ================================================================
-         GASTRONOMIA
-         ================================================================= -->
     <section class="secao" id="gastronomia">
       <div class="container">
         <div class="secao__cabecalho revelar">
@@ -321,11 +308,9 @@
           </p>
         </div>
 
-        <!-- DIFERENCIAL 13 — As receitas abrem com <details>, sem JavaScript.
-             O script.js só acrescenta os botões de ajuste de porções. -->
         <div class="grade-pratos">
 
-          <article class="prato revelar" id="prato-cuca">
+          <article class="prato revelar">
             <img src="assets/gastronomia/cuca.jpg"
                  alt="Cuca fatiada com farofa de açúcar por cima, sobre tábua de madeira."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -337,88 +322,23 @@
                 uva ou goiabada. Acompanha o café colonial em qualquer cidade do
                 Vale do Itajaí.
               </p>
-              <details class="receita" data-receita data-porcoes="8" data-passo="4">
-                <summary>Ver a receita</summary>
-                <div class="receita__topo">
-                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>8</span> fatias</p>
-                </div>
-                <h4>Massa</h4>
-                <ul>
-                  <li><span data-qtd="5" data-um="banana" data-varios="bananas">5 bananas</span> em fatias no comprimento</li>
-                  <li><span data-qtd="180" data-um="g" data-varios="g">180 g</span> de farinha de trigo</li>
-                  <li><span data-qtd="160" data-um="g" data-varios="g">160 g</span> de açúcar</li>
-                  <li><span data-qtd="120" data-um="ml" data-varios="ml">120 ml</span> de leite</li>
-                  <li><span data-qtd="20" data-um="g" data-varios="g">20 g</span> de margarina</li>
-                  <li><span data-qtd="2" data-um="ovo" data-varios="ovos">2 ovos</span></li>
-                  <li><span data-qtd="5" data-um="g" data-varios="g">5 g</span> de fermento em pó</li>
-                </ul>
-                <h4>Farofa</h4>
-                <ul>
-                  <li><span data-qtd="100" data-um="g" data-varios="g">100 g</span> de farinha de trigo</li>
-                  <li><span data-qtd="90" data-um="g" data-varios="g">90 g</span> de açúcar</li>
-                  <li><span data-qtd="40" data-um="g" data-varios="g">40 g</span> de margarina</li>
-                  <li>Canela em pó a gosto</li>
-                </ul>
-                <h4>Como fazer</h4>
-                <ol>
-                  <li>Unte e enfarinhe uma forma de 18 × 28 cm e preaqueça o forno a 180 °C.</li>
-                  <li>Bata os ovos com o açúcar por uns 5 minutos, até clarear. Junte o leite e a margarina.</li>
-                  <li>Acrescente a farinha aos poucos, sem deixar empelotar. Por último, misture o fermento com delicadeza.</li>
-                  <li>Para a farofa, esfarele com os dedos a farinha, o açúcar, a canela e a margarina.</li>
-                  <li>Espalhe a massa na forma, cubra com as bananas e depois com a farofa.</li>
-                  <li>Asse por cerca de 35 minutos, até dourar, e espere esfriar antes de cortar.</li>
-                </ol>
-                <p class="receita__fonte">Adaptada de <a href="https://www.receiteria.com.br/receita/cuca-de-banana-com-farofa/" rel="external noopener" target="_blank">Receiteria</a>. O número de fatias é uma estimativa.</p>
-              </details>
             </div>
           </article>
 
-          <article class="prato revelar" id="prato-marreco">
+          <article class="prato revelar">
             <img src="assets/gastronomia/marreco.jpg"
-                 alt="Travessa com marreco assado dourado servido com repolho roxo."
+                 alt="Mesa farta com pratos típicos servidos em travessas, cestos e tigelas de barro."
                  width="700" height="470" loading="lazy" decoding="async">
             <div class="prato__corpo">
               <p class="prato__origem">Herança alemã</p>
               <h3>Marreco recheado</h3>
               <p>
-                Prato símbolo de Blumenau: marreco assado com recheio de miúdos e
-                pão, servido com repolho roxo e purê de maçã. Tem festival próprio
-                na cidade.
+                Prato símbolo de Brusque e Blumenau: marreco assado com recheio de miúdos e pão, servido com repolho roxo e purê de maçã. Ganhou festa própria em Brusque, a Fenarreco.
               </p>
-              <details class="receita" data-receita data-porcoes="6" data-passo="6">
-                <summary>Ver a receita</summary>
-                <div class="receita__topo">
-                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>6</span> porções</p>
-                </div>
-                <h4>Ingredientes</h4>
-                <ul>
-                  <li><span data-qtd="1" data-um="marreco com os miúdos" data-varios="marrecos com os miúdos">1 marreco com os miúdos</span></li>
-                  <li><span data-qtd="100" data-um="g" data-varios="g">100 g</span> de lombinho suíno</li>
-                  <li><span data-qtd="50" data-um="g" data-varios="g">50 g</span> de bacon</li>
-                  <li><span data-qtd="1" data-um="cebola média" data-varios="cebolas médias">1 cebola média</span></li>
-                  <li><span data-qtd="1" data-um="dente de alho" data-varios="dentes de alho">1 dente de alho</span></li>
-                  <li><span data-qtd="1" data-um="tomate" data-varios="tomates">1 tomate</span></li>
-                  <li><span data-qtd="0.5" data-um="maçã" data-varios="maçãs">½ maçã</span></li>
-                  <li><span data-qtd="1" data-um="pãozinho" data-varios="pãezinhos">1 pãozinho</span></li>
-                  <li><span data-qtd="1" data-um="ovo" data-varios="ovos">1 ovo</span></li>
-                  <li><span data-qtd="2" data-um="col. (sopa)" data-varios="col. (sopa)">2 col. (sopa)</span> de farinha de trigo</li>
-                  <li>Sal, pimenta-do-reino e cebolinha a gosto</li>
-                </ul>
-                <h4>Como fazer</h4>
-                <ol>
-                  <li>Tempere o marreco por dentro e por fora com sal, pimenta e cebolinha, e deixe marinar por pelo menos 12 horas.</li>
-                  <li>Moa os miúdos com a cebola, o tomate, o bacon, o lombinho, a maçã e o alho.</li>
-                  <li>Misture o ovo, o pão molhado em água, a farinha, mais cebolinha, sal e pimenta.</li>
-                  <li>Recheie o marreco e costure a abertura com linha grossa.</li>
-                  <li>Coloque com o peito para cima numa assadeira funda, com meia xícara de água, cubra com papel-alumínio e asse a 180 °C por cerca de 1h30.</li>
-                  <li>Descubra e deixe dourar, regando com o molho da assadeira. Espere 10 minutos, corte em pedaços e fatie o recheio.</li>
-                </ol>
-                <p class="receita__fonte">Adaptada de <a href="https://www.comidaereceitas.com.br/aves/marreco-recheado-tipica-de-santa-catarina.html" rel="external noopener" target="_blank">Comida e Receitas</a>; forno conforme o <a href="https://www.em.com.br/degusta/2026/03/7369014-marreco-recheado-aprenda-um-prato-tipico-alemao-que-voce-precisa-provar.html" rel="external noopener" target="_blank">Estado de Minas</a>. O número de porções é uma estimativa.</p>
-              </details>
             </div>
           </article>
 
-          <article class="prato revelar" id="prato-ostras">
+          <article class="prato revelar">
             <img src="assets/gastronomia/ostras-gratinadas.jpg"
                  alt="Ostras gratinadas em conchas, servidas quentes em prato branco."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -430,35 +350,12 @@
                 cultivos das baías de Florianópolis, ao lado de mexilhões,
                 camarões e da tainha do inverno.
               </p>
-              <details class="receita" data-receita data-porcoes="12" data-passo="6">
-                <summary>Ver a receita</summary>
-                <div class="receita__topo">
-                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>12</span> ostras gratinadas</p>
-                </div>
-                <h4>Ingredientes</h4>
-                <ul>
-                  <li><span data-qtd="12" data-um="ostra" data-varios="ostras">12 ostras</span></li>
-                  <li><span data-qtd="1" data-um="caixinha de creme de leite" data-varios="caixinhas de creme de leite">1 caixinha de creme de leite</span></li>
-                  <li><span data-qtd="1" data-um="pacote de parmesão ralado" data-varios="pacotes de parmesão ralado">1 pacote de parmesão ralado</span></li>
-                  <li><span data-qtd="2" data-um="dente de alho amassado" data-varios="dentes de alho amassados">2 dentes de alho amassados</span></li>
-                  <li>Salsinha e sal a gosto</li>
-                  <li>Algumas gotas de limão (opcional)</li>
-                </ul>
-                <h4>Como fazer</h4>
-                <ol>
-                  <li>Cozinhe as ostras numa panela com meio copo de água até as cascas abrirem. Reserve as ostras e lave bem as cascas.</li>
-                  <li>Misture o creme de leite com o alho, a salsinha, o sal e o limão.</li>
-                  <li>Coloque uma ostra em cada casca, cubra com o creme e polvilhe o parmesão.</li>
-                  <li>Leve ao forno quente numa assadeira até gratinar.</li>
-                </ol>
-                <p class="receita__fonte">Adaptada de <a href="https://www.tudogostoso.com.br/receita/51679-ostras-gratinadas.html" rel="external noopener" target="_blank">TudoGostoso</a>.</p>
-              </details>
             </div>
           </article>
 
-          <article class="prato revelar" id="prato-camarao">
+          <article class="prato revelar">
             <img src="assets/gastronomia/camarao.jpg"
-                 alt="Mesa com vários pratos de camarão preparados de formas diferentes."
+                 alt="Camarões empanados e fritos servidos com anéis de cebola."
                  width="700" height="470" loading="lazy" decoding="async">
             <div class="prato__corpo">
               <p class="prato__origem">Herança açoriana</p>
@@ -467,43 +364,12 @@
                 Tradição de Bombinhas e Penha: o camarão chega à mesa em várias
                 preparações seguidas — frito, ensopado, com pirão e em bolinho.
               </p>
-              <details class="receita" data-receita data-porcoes="4" data-passo="2">
-                <summary>Ver a receita</summary>
-                <div class="receita__topo">
-                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>4</span> porções</p>
-                </div>
-                <h4>Camarão escaldado</h4>
-                <ul>
-                  <li><span data-qtd="1" data-um="kg" data-varios="kg">1 kg</span> de camarão médio, sem a cabeça</li>
-                  <li><span data-qtd="2" data-um="limão (o suco)" data-varios="limões (o suco)">2 limões (o suco)</span></li>
-                  <li><span data-qtd="1" data-um="cebola grande" data-varios="cebolas grandes">1 cebola grande</span></li>
-                  <li><span data-qtd="2" data-um="tomate" data-varios="tomates">2 tomates</span></li>
-                  <li><span data-qtd="1" data-um="pimentão" data-varios="pimentões">1 pimentão</span></li>
-                  <li><span data-qtd="4" data-um="ramo de coentro" data-varios="ramos de coentro">4 ramos de coentro</span></li>
-                  <li>Sal a gosto</li>
-                </ul>
-                <h4>Pirão</h4>
-                <ul>
-                  <li><span data-qtd="2" data-um="xíc." data-varios="xíc.">2 xíc.</span> de farinha de mandioca torrada</li>
-                  <li>Azeite de dendê, só para umedecer a farinha</li>
-                  <li>Sal a gosto</li>
-                </ul>
-                <h4>Como fazer</h4>
-                <ol>
-                  <li>Lave o camarão duas vezes com água e o suco de limão.</li>
-                  <li>Numa panela, em fogo médio, coloque o camarão, a cebola, o tomate, o pimentão, o coentro e o sal. Cubra com água e cozinhe até o camarão ficar rosado.</li>
-                  <li>Separe o camarão e os legumes do caldo e reserve tudo.</li>
-                  <li>Misture a farinha com o dendê até virar uma farofa úmida. Despeje aos poucos o caldo fervente, mexendo até o pirão ficar liso.</li>
-                  <li>Acerte o sal e sirva com o camarão e os legumes.</li>
-                </ol>
-                <p class="receita__fonte">Adaptada de <a href="https://www.tudogostoso.com.br/receita/127516-escaldado-de-camarao-com-pirao.html" rel="external noopener" target="_blank">TudoGostoso</a>. É uma das etapas da sequência, em versão geral: não é a receita de um restaurante catarinense.</p>
-              </details>
             </div>
           </article>
 
-          <article class="prato revelar" id="prato-entrevero">
+          <article class="prato revelar">
             <img src="assets/gastronomia/entrevero.jpg"
-                 alt="Panela de ferro com entrevero de carnes e pinhão sobre fogo de chão."
+                 alt="Pinhões crus, as sementes da araucária, espalhados sobre um pano e numa tigela de barro."
                  width="700" height="470" loading="lazy" decoding="async">
             <div class="prato__corpo">
               <p class="prato__origem">Tradição serrana</p>
@@ -513,34 +379,10 @@
                 mistura de carnes, linguiça e legumes feita na panela de ferro,
                 herança dos tropeiros.
               </p>
-              <details class="receita" data-receita data-porcoes="4" data-passo="2">
-                <summary>Ver a receita</summary>
-                <div class="receita__topo">
-                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>4</span> porções</p>
-                </div>
-                <h4>Ingredientes</h4>
-                <ul>
-                  <li><span data-qtd="300" data-um="g" data-varios="g">300 g</span> de pinhão cozido e descascado</li>
-                  <li><span data-qtd="200" data-um="g" data-varios="g">200 g</span> de carne bovina em tiras</li>
-                  <li><span data-qtd="200" data-um="g" data-varios="g">200 g</span> de carne suína em tiras</li>
-                  <li><span data-qtd="200" data-um="g" data-varios="g">200 g</span> de linguiça calabresa em rodelas</li>
-                  <li><span data-qtd="1" data-um="pimentão vermelho" data-varios="pimentões vermelhos">1 pimentão vermelho</span></li>
-                  <li><span data-qtd="1" data-um="cebola" data-varios="cebolas">1 cebola</span></li>
-                  <li>Sal, pimenta e temperos a gosto</li>
-                </ul>
-                <h4>Como fazer</h4>
-                <ol>
-                  <li>Doure as carnes numa panela grande até ficarem bem cozidas.</li>
-                  <li>Junte a cebola e o pimentão picados e refogue.</li>
-                  <li>Acrescente o pinhão e misture com cuidado.</li>
-                  <li>Acerte os temperos e sirva bem quente.</li>
-                </ol>
-                <p class="receita__fonte">Adaptada do <a href="https://www.nsctotal.com.br/?p=7462966" rel="external noopener" target="_blank">NSC Total</a>. O número de porções é uma estimativa.</p>
-              </details>
             </div>
           </article>
 
-          <article class="prato revelar" id="prato-galeto">
+          <article class="prato revelar">
             <img src="assets/gastronomia/galeto-polenta.jpg"
                  alt="Prato com pedaços de galeto assado e bastões de polenta frita."
                  width="700" height="470" loading="lazy" decoding="async">
@@ -551,42 +393,11 @@
                 No sul e no oeste, a cozinha italiana serve polenta frita, galeto
                 no espeto, queijos, salames e vinho colonial produzido em casa.
               </p>
-              <details class="receita" data-receita data-porcoes="8" data-passo="4">
-                <summary>Ver a receita</summary>
-                <div class="receita__topo">
-                  <p class="receita__rende" data-rende>Rende <span data-rende-numero>8</span> porções</p>
-                </div>
-                <h4>Galeto</h4>
-                <ul>
-                  <li><span data-qtd="2" data-um="galeto" data-varios="galetos">2 galetos</span></li>
-                  <li>Sal grosso, manjericão, salsinha, sálvia e alho picados a gosto</li>
-                  <li>Pimenta-do-reino, noz-moscada e vinho branco seco a gosto</li>
-                </ul>
-                <h4>Polenta frita</h4>
-                <ul>
-                  <li><span data-qtd="450" data-um="g" data-varios="g">450 g</span> de fubá, e mais um pouco para empanar</li>
-                  <li><span data-qtd="1" data-um="litro de água" data-varios="litros de água">1 litro de água</span></li>
-                  <li><span data-qtd="15" data-um="ml" data-varios="ml">15 ml</span> de banha ou óleo</li>
-                  <li><span data-qtd="0.5" data-um="cebola grande" data-varios="cebolas grandes">½ cebola grande</span></li>
-                  <li><span data-qtd="3" data-um="dente de alho" data-varios="dentes de alho">3 dentes de alho</span></li>
-                  <li>Sal a gosto e óleo para fritar</li>
-                </ul>
-                <h4>Como fazer</h4>
-                <ol>
-                  <li>Tempere os galetos com o sal, as ervas, o alho, a pimenta, a noz-moscada e o vinho, e deixe marinar por 2 horas.</li>
-                  <li>Prenda no espeto e asse na brasa por cerca de 1 hora, virando sempre.</li>
-                  <li>Dissolva o fubá em metade da água. Doure a cebola e o alho na banha, junte o resto da água e o sal e aqueça.</li>
-                  <li>Acrescente o fubá dissolvido e mexa sem parar até firmar, por pelo menos 5 minutos.</li>
-                  <li>Espalhe numa forma e leve à geladeira por cerca de 2 horas.</li>
-                  <li>Corte em tiras, passe no fubá e frite em óleo bem quente até dourar.</li>
-                </ol>
-                <p class="receita__fonte">Adaptada de <a href="https://www.agazeta.com.br/entretenimento/gastronomia/galeto-al-primo-canto-confira-receita-para-arrasar-no-churrasco-1120" rel="external noopener" target="_blank">A Gazeta</a> (galeto) e <a href="https://www.receiteria.com.br/receita/polenta-frita/" rel="external noopener" target="_blank">Receiteria</a> (polenta).</p>
-              </details>
             </div>
           </article>
         </div>
 
-        <aside class="esp-topo-6 voce-sabia revelar" >
+        <aside class="esp-topo-6 voce-sabia revelar" role="note">
           <h3>Você sabia?</h3>
           <p>
             A pesca da tainha, entre maio e julho, é acompanhada como se fosse
@@ -603,10 +414,6 @@
 
   </main>
 
-
-  <!-- ==================================================================
-       FOOTER (componente reutilizável — igual em todas as páginas)
-       =================================================================== -->
   <footer class="rodape">
     <div class="container">
       <div class="rodape__grade">
@@ -646,55 +453,33 @@
           <h3 class="rodape__titulo">Fontes de pesquisa</h3>
           <ul class="rodape__lista">
             <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
+            <li><a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">IBGE — Censo 2022</a></li>
+            <li><a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">PNUD — Radar IDHM 2024</a></li>
             <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
             <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
-            <li><a href="https://www.sc.gov.br/" rel="external noopener" target="_blank">Portal oficial do Estado</a></li>
-          </ul>
-
-          <h3 class="esp-topo-3 rodape__titulo" >Redes sociais</h3>
-          <ul class="redes">
-            <li>
-              <a href="https://www.instagram.com/" rel="external noopener" target="_blank"
-                 aria-label="Instagram (página inicial da rede)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3A6.5 6.5 0 1 0 18.5 12 6.5 6.5 0 0 0 12 5.5zm0 10.7A4.2 4.2 0 1 1 16.2 12 4.2 4.2 0 0 1 12 16.2zm6.8-11a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/" rel="external noopener" target="_blank"
-                 aria-label="Canal do projeto Terra Catarinense no YouTube">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.3V8.7l5.7 3.3z"/>
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/" rel="external noopener" target="_blank"
-                 aria-label="Página do projeto Terra Catarinense no Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.5V14h2.4v8z"/>
-                </svg>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
 
-      <!-- DIFERENCIAL 5 — Passaporte catarinense: um carimbo por página
-           visitada e outro pelo quiz. O JS monta os carimbos e tira o hidden;
-           sem JS ou sem armazenamento no navegador, o bloco não aparece. -->
-      <section class="passaporte" data-passaporte hidden aria-labelledby="titulo-passaporte">
+      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
         <div class="passaporte__texto">
           <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p data-passaporte-status>Visite as seis páginas, faça o quiz e jogue o desafio do mapa para completar os carimbos.</p>
+          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
         </div>
-        <ul class="passaporte__carimbos" data-passaporte-carimbos></ul>
+        <ul class="passaporte__carimbos">
+          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
+          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
+          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
+          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
+          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
+          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
+          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
+        </ul>
       </section>
 
       <div class="rodape__base">
         <p>
-          Trabalho escolar sem fins comerciais &middot; <span data-ano>2026</span> &middot;
+          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
           Imagens ilustrativas de banco público de imagens.
         </p>
         <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
@@ -702,9 +487,7 @@
     </div>
   </footer>
 
-  <button class="voltar-topo" type="button" data-voltar-topo
-          aria-label="Voltar ao topo da página">&#8593;</button>
+  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
 
-  <script src="js/script.js"></script>
 </body>
 </html>

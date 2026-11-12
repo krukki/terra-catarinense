@@ -39,10 +39,10 @@
 
  "sc-imigracao-alema-1829": {
   "arquivo": "assets/cultura/pedro-alcantara.jpg",
-  "titulo": "Pintura de São Pedro de Alcântara",
-  "credito": "(origem nao registrada — falta o print)",
-  "fonte": "",
-  "licenca": "",
+  "titulo": "Igreja São Pedro de Alcântara",
+  "credito": "Carlos H. Gesser, via Wikimedia Commons",
+  "fonte": "https://commons.wikimedia.org/wiki/File:Igreja_S%C3%A3o_Pedro_de_Alc%C3%A2ntara.jpg",
+  "licenca": "CC BY-SA 4.0",
   "print": ""
  },
 
@@ -98,5 +98,41 @@
   "fonte": "https://www.visitejoinville.com.br/bolshoi-apresenta-espetaculo-em-joinville",
   "licenca": "",
   "print": "cfonts/fonte bolshoi.png"
+ },
+
+ "sc-ostras-prato": {
+  "arquivo": "assets/gastronomia/ostras-prato.jpg",
+  "titulo": "Ostras — prato típico de Florianópolis",
+  "credito": "Larissinhast, via Wikimedia Commons",
+  "fonte": "https://commons.wikimedia.org/wiki/File:Ostras.jpg",
+  "licenca": "CC BY-SA 4.0",
+  "print": ""
+ },
+
+ "gal-ostras": {
+  "arquivo": "assets/gastronomia/ostras-bandeja.jpg",
+  "titulo": "Ostras — prato típico de Florianópolis",
+  "credito": "Larissinhast, via Wikimedia Commons",
+  "fonte": "https://commons.wikimedia.org/wiki/File:Ostras.jpg",
+  "licenca": "CC BY-SA 4.0",
+  "print": ""
+ },
+
+ "cur-ostra-cultivo": {
+  "arquivo": "assets/litoral/ostras-cultivo.jpg",
+  "titulo": "Rede de pesca de ostras, Santo Antônio de Lisboa",
+  "credito": "Joao Paulo de Vasconcelos, via Wikimedia Commons",
+  "fonte": "https://commons.wikimedia.org/wiki/File:Rede_de_pesca_de_ostras_(14272800831).jpg",
+  "licenca": "CC BY-SA 2.0",
+  "print": ""
+ },
+
+ "gal-cuca": {
+  "arquivo": "assets/gastronomia/cuca-fatia.jpg",
+  "titulo": "Cuca em Pomerode",
+  "credito": "Renato Soares/MTur, via Wikimedia Commons",
+  "fonte": "https://commons.wikimedia.org/wiki/File:RenatoSoares_Cuca_Pomerode_SC_(26016919937).jpg",
+  "licenca": "domínio público",
+  "print": ""
  }
 }

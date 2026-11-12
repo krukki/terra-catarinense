@@ -1,0 +1,1381 @@
+
+
+.banner__estado,
+.estado {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.banner__slide:first-child,
+.banner__legenda-item:first-child {
+  opacity: 1;
+}
+
+.banner__legenda {
+  display: grid;
+}
+
+.banner__legenda-item {
+  grid-area: 1 / 1;
+  opacity: 0;
+}
+
+/* Foto escolhida à mão: as outras somem também para leitores de tela
+   (visibility). Na rotação automática as três continuam disponíveis. */
+.banner__prancha:has(#banner-1:checked, #banner-2:checked, #banner-3:checked) :is(.banner__slide, .banner__legenda-item) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.banner__prancha:has(#banner-1:checked) :is(.banner__slide, .banner__legenda-item):nth-child(1),
+.banner__prancha:has(#banner-2:checked) :is(.banner__slide, .banner__legenda-item):nth-child(2),
+.banner__prancha:has(#banner-3:checked) :is(.banner__slide, .banner__legenda-item):nth-child(3) {
+  opacity: 1;
+  visibility: visible;
+}
+
+.banner__prancha:has(#banner-1:checked) .banner__ponto:nth-child(1)::before,
+.banner__prancha:has(#banner-2:checked) .banner__ponto:nth-child(2)::before,
+.banner__prancha:has(#banner-3:checked) .banner__ponto:nth-child(3)::before,
+.banner__prancha:has(#banner-auto:checked) .banner__ponto:nth-child(1)::before {
+  height: 0.25rem;
+  background-color: var(--cor-destaque);
+}
+
+.banner__seta {
+  display: none;
+}
+
+.banner__prancha:has(#banner-auto:checked, #banner-1:checked) :is(.banner__seta--para-3, .banner__seta--prox-2),
+.banner__prancha:has(#banner-2:checked) :is(.banner__seta--para-1, .banner__seta--prox-3),
+.banner__prancha:has(#banner-3:checked) :is(.banner__seta--para-2, .banner__seta--prox-1) {
+  display: grid;
+}
+
+.banner__controles .banner__pontos { order: 1; }
+.banner__controles [class*="--prox-"] { order: 2; }
+.banner__controles .banner__pausa { order: 3; }
+
+.banner__pausa {
+  display: none;
+}
+
+.banner__prancha:has(#banner-auto:checked):not(:has(#banner-pausa:checked)) .banner__pausa--pausar,
+.banner__prancha:has(#banner-auto:checked):has(#banner-pausa:checked) .banner__pausa--seguir,
+.banner__prancha:not(:has(#banner-auto:checked)) .banner__pausa--auto {
+  display: grid;
+}
+
+.banner__prancha:has(#banner-1:focus-visible) .banner__ponto:nth-child(1),
+.banner__prancha:has(#banner-2:focus-visible) .banner__ponto:nth-child(2),
+.banner__prancha:has(#banner-3:focus-visible) .banner__ponto:nth-child(3),
+.banner__prancha:has(#banner-auto:focus-visible) .banner__pontos,
+.banner__prancha:has(#banner-pausa:focus-visible) .banner__pausa {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.125rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .banner__prancha:has(#banner-auto:checked) :is(.banner__slide, .banner__legenda-item) {
+    opacity: 0;
+    animation: banner-ciclo 18s linear infinite backwards;
+  }
+
+  .banner__prancha:has(#banner-auto:checked) .banner__slide img {
+    animation: banner-zoom 18s linear infinite backwards;
+  }
+
+  .banner__prancha:has(#banner-auto:checked) .banner__ponto::before {
+    animation: banner-ponto 18s linear infinite backwards;
+  }
+
+  .banner__prancha:has(#banner-auto:checked) :is(.banner__slide, .banner__legenda-item):nth-child(1),
+  .banner__prancha:has(#banner-auto:checked) .banner__slide:nth-child(1) img,
+  .banner__prancha:has(#banner-auto:checked) .banner__ponto:nth-child(1)::before {
+    animation-delay: -0.9s;
+  }
+
+  .banner__prancha:has(#banner-auto:checked) :is(.banner__slide, .banner__legenda-item):nth-child(2),
+  .banner__prancha:has(#banner-auto:checked) .banner__slide:nth-child(2) img,
+  .banner__prancha:has(#banner-auto:checked) .banner__ponto:nth-child(2)::before {
+    animation-delay: 5.1s;
+  }
+
+  .banner__prancha:has(#banner-auto:checked) :is(.banner__slide, .banner__legenda-item):nth-child(3),
+  .banner__prancha:has(#banner-auto:checked) .banner__slide:nth-child(3) img,
+  .banner__prancha:has(#banner-auto:checked) .banner__ponto:nth-child(3)::before {
+    animation-delay: 11.1s;
+  }
+
+  .banner__prancha:is(:has(#banner-pausa:checked), :hover, :has(:focus-visible)) :is(.banner__slide, .banner__slide img, .banner__legenda-item),
+  .banner__prancha:is(:has(#banner-pausa:checked), :hover, :has(:focus-visible)) .banner__ponto::before {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes banner-ciclo {
+  0%      { opacity: 0; }
+  5%      { opacity: 1; }
+  33.33%  { opacity: 1; }
+  38.33%  { opacity: 0; }
+  100%    { opacity: 0; }
+}
+
+@keyframes banner-zoom {
+  0%      { transform: scale(1.04); }
+  38.33%  { transform: scale(1); }
+  100%    { transform: scale(1); }
+}
+
+@keyframes banner-ponto {
+  0%, 2.5%   { height: 0.125rem; background-color: var(--cor-borda); }
+  5%, 33.33% { height: 0.25rem; background-color: var(--cor-destaque); }
+  35.83%, 100% { height: 0.125rem; background-color: var(--cor-borda); }
+}
+
+@property --escala {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.atlas__quadro,
+.mapa-quadro {
+  container-type: inline-size;
+}
+
+.mapa-svg,
+.atlas__escala {
+  --zoom-base: 1;
+  --zoom: calc(var(--zoom-base) * var(--escala, 1));
+}
+
+@container (max-width: 349px) { .mapa-svg, .atlas__escala { --zoom-base: 0.5; } }
+@container (min-width: 350px) and (max-width: 449px) { .mapa-svg, .atlas__escala { --zoom-base: 0.67; } }
+@container (min-width: 450px) and (max-width: 549px) { .mapa-svg, .atlas__escala { --zoom-base: 0.83; } }
+@container (min-width: 650px) and (max-width: 749px) { .mapa-svg, .atlas__escala { --zoom-base: 1.17; } }
+@container (min-width: 750px) { .mapa-svg, .atlas__escala { --zoom-base: 1.33; } }
+
+@supports (scale: calc(1px / 1px)) {
+  .mapa-svg,
+  .atlas__escala {
+    --zoom-base: calc(100cqw / 600px);
+  }
+}
+
+.atlas {
+  position: relative;
+  --escala: 1;
+  --km-escala: 100;
+  transition: --escala 0.75s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.atlas__alvos,
+.atlas__alvo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
+.mapa-camada {
+  transition: transform 0.75s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.atlas__escala-rotulo {
+  counter-reset: km var(--km-escala);
+}
+
+.atlas__escala-rotulo::after {
+  content: counter(km) " km";
+}
+
+.atlas__escala-barra {
+  width: calc(var(--km-escala) * var(--zoom) * 100 / 111.2 * 1px);
+}
+
+.estado:focus-visible + label {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.125rem;
+}
+
+.atlas:has(#regiao-litoral:target, #cidade-florianopolis:target, #cidade-sao-jose:target, #cidade-balneario-camboriu:target, #cidade-itajai:target, #cidade-bombinhas:target, #cidade-garopaba:target) :is([data-regiao="litoral"], [data-rotulo="litoral"], [data-regiao-pino="litoral"], [data-painel="litoral"]),
+.atlas:not(:has(.atlas__alvo:not(.atlas__alvo--comparar):target)) :is([data-regiao="litoral"], [data-rotulo="litoral"], [data-regiao-pino="litoral"], [data-painel="litoral"]),
+.atlas:has(#regiao-vale:target, #cidade-blumenau:target, #cidade-pomerode:target, #cidade-brusque:target, #cidade-timbo:target, #cidade-indaial:target) :is([data-regiao="vale"], [data-rotulo="vale"], [data-regiao-pino="vale"], [data-painel="vale"]),
+.atlas:has(#regiao-norte:target, #cidade-joinville:target, #cidade-sao-bento-do-sul:target, #cidade-jaragua-do-sul:target, #cidade-sao-francisco-do-sul:target) :is([data-regiao="norte"], [data-rotulo="norte"], [data-regiao-pino="norte"], [data-painel="norte"]),
+.atlas:has(#regiao-serra:target, #cidade-lages:target, #cidade-sao-joaquim:target, #cidade-urubici:target, #cidade-urupema:target, #cidade-bom-jardim-da-serra:target) :is([data-regiao="serra"], [data-rotulo="serra"], [data-regiao-pino="serra"], [data-painel="serra"]),
+.atlas:has(#regiao-oeste:target, #cidade-chapeco:target, #cidade-concordia:target, #cidade-xanxere:target, #cidade-sao-miguel-do-oeste:target) :is([data-regiao="oeste"], [data-rotulo="oeste"], [data-regiao-pino="oeste"], [data-painel="oeste"]),
+.atlas:has(#regiao-sul:target, #cidade-criciuma:target, #cidade-tubarao:target, #cidade-laguna:target, #cidade-ararangua:target) :is([data-regiao="sul"], [data-rotulo="sul"], [data-regiao-pino="sul"], [data-painel="sul"]) {
+  &.regiao {
+    fill: var(--cor-principal);
+  }
+
+  &.mapa-rotulo {
+    fill: var(--cor-destaque);
+    font-weight: 700;
+  }
+
+  &.pino .pino__marca {
+    fill: var(--cor-destaque);
+    stroke: var(--cor-fundo);
+  }
+
+  &.pino :is(.pino__nome, .pino__corpo) {
+    opacity: 1;
+  }
+
+  &.regiao-botao {
+    background-color: var(--cor-principal);
+    border-color: var(--cor-principal);
+    color: var(--cor-sobre-principal);
+  }
+
+  &.painel-regiao {
+    display: block;
+  }
+
+  .atlas:has(#camada-verao:checked, #camada-inverno:checked) &.regiao {
+    stroke-width: 2.5;
+  }
+}
+
+.atlas:has(.atlas__alvo:not(.atlas__alvo--comparar):target) {
+  --km-escala: 50;
+
+  & .mapa-camada {
+    transform: var(--camada);
+  }
+}
+
+.atlas:has(#regiao-litoral:target, #cidade-florianopolis:target, #cidade-sao-jose:target, #cidade-balneario-camboriu:target, #cidade-itajai:target, #cidade-bombinhas:target, #cidade-garopaba:target) {
+  --escala: 2.1716;
+  --camada: translate(-713.60px, -191.17px) scale(2.1716);
+}
+
+.atlas:has(#regiao-vale:target, #cidade-blumenau:target, #cidade-pomerode:target, #cidade-brusque:target, #cidade-timbo:target, #cidade-indaial:target) {
+  --escala: 2.0673;
+  --camada: translate(-552.64px, -82.55px) scale(2.0673);
+}
+
+.atlas:has(#regiao-norte:target, #cidade-joinville:target, #cidade-sao-bento-do-sul:target, #cidade-jaragua-do-sul:target, #cidade-sao-francisco-do-sul:target) {
+  --escala: 1.6284;
+  --camada: translate(-324.45px, 83.55px) scale(1.6284);
+}
+
+.atlas:has(#regiao-serra:target, #cidade-lages:target, #cidade-sao-joaquim:target, #cidade-urubici:target, #cidade-urupema:target, #cidade-bom-jardim-da-serra:target) {
+  --escala: 1.3588;
+  --camada: translate(-142.03px, -65.93px) scale(1.3588);
+}
+
+.atlas:has(#regiao-oeste:target, #cidade-chapeco:target, #cidade-concordia:target, #cidade-xanxere:target, #cidade-sao-miguel-do-oeste:target) {
+  --escala: 1.5009;
+  --camada: translate(47.34px, 20.28px) scale(1.5009);
+}
+
+.atlas:has(#regiao-sul:target, #cidade-criciuma:target, #cidade-tubarao:target, #cidade-laguna:target, #cidade-ararangua:target) {
+  --escala: 1.8310;
+  --camada: translate(-479.23px, -339.17px) scale(1.8310);
+}
+
+.atlas:has(#cidade-florianopolis:target) .pino[data-pino="florianopolis"],
+.atlas:has(#cidade-sao-jose:target) .pino[data-pino="sao-jose"],
+.atlas:has(#cidade-balneario-camboriu:target) .pino[data-pino="balneario-camboriu"],
+.atlas:has(#cidade-itajai:target) .pino[data-pino="itajai"],
+.atlas:has(#cidade-bombinhas:target) .pino[data-pino="bombinhas"],
+.atlas:has(#cidade-garopaba:target) .pino[data-pino="garopaba"],
+.atlas:has(#cidade-blumenau:target) .pino[data-pino="blumenau"],
+.atlas:has(#cidade-pomerode:target) .pino[data-pino="pomerode"],
+.atlas:has(#cidade-brusque:target) .pino[data-pino="brusque"],
+.atlas:has(#cidade-timbo:target) .pino[data-pino="timbo"],
+.atlas:has(#cidade-indaial:target) .pino[data-pino="indaial"],
+.atlas:has(#cidade-joinville:target) .pino[data-pino="joinville"],
+.atlas:has(#cidade-sao-bento-do-sul:target) .pino[data-pino="sao-bento-do-sul"],
+.atlas:has(#cidade-jaragua-do-sul:target) .pino[data-pino="jaragua-do-sul"],
+.atlas:has(#cidade-sao-francisco-do-sul:target) .pino[data-pino="sao-francisco-do-sul"],
+.atlas:has(#cidade-lages:target) .pino[data-pino="lages"],
+.atlas:has(#cidade-sao-joaquim:target) .pino[data-pino="sao-joaquim"],
+.atlas:has(#cidade-urubici:target) .pino[data-pino="urubici"],
+.atlas:has(#cidade-urupema:target) .pino[data-pino="urupema"],
+.atlas:has(#cidade-bom-jardim-da-serra:target) .pino[data-pino="bom-jardim-da-serra"],
+.atlas:has(#cidade-chapeco:target) .pino[data-pino="chapeco"],
+.atlas:has(#cidade-concordia:target) .pino[data-pino="concordia"],
+.atlas:has(#cidade-xanxere:target) .pino[data-pino="xanxere"],
+.atlas:has(#cidade-sao-miguel-do-oeste:target) .pino[data-pino="sao-miguel-do-oeste"],
+.atlas:has(#cidade-criciuma:target) .pino[data-pino="criciuma"],
+.atlas:has(#cidade-tubarao:target) .pino[data-pino="tubarao"],
+.atlas:has(#cidade-laguna:target) .pino[data-pino="laguna"],
+.atlas:has(#cidade-ararangua:target) .pino[data-pino="ararangua"] {
+  & .pino__marca {
+    fill: var(--cor-destaque);
+    stroke: var(--cor-fundo);
+    stroke-width: 6;
+    stroke-opacity: 0.8;
+    paint-order: stroke;
+    animation: pino-pulso 1.4s ease-in-out 3;
+  }
+
+  & .pino__nome {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  & .pino__corpo {
+    opacity: 1;
+  }
+}
+
+body:has(#ver-comparadas:target):has(#comparar-a option[value="florianopolis"]:checked, #comparar-b option[value="florianopolis"]:checked) .pino[data-pino="florianopolis"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="sao-jose"]:checked, #comparar-b option[value="sao-jose"]:checked) .pino[data-pino="sao-jose"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="balneario-camboriu"]:checked, #comparar-b option[value="balneario-camboriu"]:checked) .pino[data-pino="balneario-camboriu"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="itajai"]:checked, #comparar-b option[value="itajai"]:checked) .pino[data-pino="itajai"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="bombinhas"]:checked, #comparar-b option[value="bombinhas"]:checked) .pino[data-pino="bombinhas"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="garopaba"]:checked, #comparar-b option[value="garopaba"]:checked) .pino[data-pino="garopaba"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="blumenau"]:checked, #comparar-b option[value="blumenau"]:checked) .pino[data-pino="blumenau"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="pomerode"]:checked, #comparar-b option[value="pomerode"]:checked) .pino[data-pino="pomerode"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="brusque"]:checked, #comparar-b option[value="brusque"]:checked) .pino[data-pino="brusque"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="timbo"]:checked, #comparar-b option[value="timbo"]:checked) .pino[data-pino="timbo"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="indaial"]:checked, #comparar-b option[value="indaial"]:checked) .pino[data-pino="indaial"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="joinville"]:checked, #comparar-b option[value="joinville"]:checked) .pino[data-pino="joinville"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="sao-bento-do-sul"]:checked, #comparar-b option[value="sao-bento-do-sul"]:checked) .pino[data-pino="sao-bento-do-sul"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="jaragua-do-sul"]:checked, #comparar-b option[value="jaragua-do-sul"]:checked) .pino[data-pino="jaragua-do-sul"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="sao-francisco-do-sul"]:checked, #comparar-b option[value="sao-francisco-do-sul"]:checked) .pino[data-pino="sao-francisco-do-sul"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="lages"]:checked, #comparar-b option[value="lages"]:checked) .pino[data-pino="lages"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="sao-joaquim"]:checked, #comparar-b option[value="sao-joaquim"]:checked) .pino[data-pino="sao-joaquim"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="urubici"]:checked, #comparar-b option[value="urubici"]:checked) .pino[data-pino="urubici"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="urupema"]:checked, #comparar-b option[value="urupema"]:checked) .pino[data-pino="urupema"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="bom-jardim-da-serra"]:checked, #comparar-b option[value="bom-jardim-da-serra"]:checked) .pino[data-pino="bom-jardim-da-serra"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="chapeco"]:checked, #comparar-b option[value="chapeco"]:checked) .pino[data-pino="chapeco"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="concordia"]:checked, #comparar-b option[value="concordia"]:checked) .pino[data-pino="concordia"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="xanxere"]:checked, #comparar-b option[value="xanxere"]:checked) .pino[data-pino="xanxere"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="sao-miguel-do-oeste"]:checked, #comparar-b option[value="sao-miguel-do-oeste"]:checked) .pino[data-pino="sao-miguel-do-oeste"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="criciuma"]:checked, #comparar-b option[value="criciuma"]:checked) .pino[data-pino="criciuma"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="tubarao"]:checked, #comparar-b option[value="tubarao"]:checked) .pino[data-pino="tubarao"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="laguna"]:checked, #comparar-b option[value="laguna"]:checked) .pino[data-pino="laguna"],
+body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:checked, #comparar-b option[value="ararangua"]:checked) .pino[data-pino="ararangua"] {
+  & .pino__marca {
+    fill: var(--cor-destaque);
+    stroke: var(--cor-fundo);
+    stroke-width: 6;
+    stroke-opacity: 0.8;
+    paint-order: stroke;
+    animation: pino-pulso 1.4s ease-in-out 3;
+  }
+
+  & .pino__nome {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  & .pino__corpo {
+    opacity: 1;
+  }
+}
+
+.atlas:has(#camada-verao:checked) .regiao[data-regiao] { fill: var(--clima-5); }
+.atlas:has(#camada-verao:checked) .regiao[data-regiao="serra"] { fill: var(--clima-4); }
+
+.atlas:has(#camada-inverno:checked) .regiao[data-regiao] { fill: var(--clima-2); }
+.atlas:has(#camada-inverno:checked) .regiao[data-regiao="litoral"] { fill: var(--clima-3); }
+.atlas:has(#camada-inverno:checked) .regiao[data-regiao="serra"] { fill: var(--clima-1); }
+
+.atlas:has(#modo-rota:checked):has(#rota-germanica:checked) {
+  & .rota-linha[data-rota="germanica"],
+  & .rota-paradas [data-rota="germanica"],
+  & .roteiro__detalhe[data-rota="germanica"] {
+    display: revert;
+  }
+
+  & .pino:is([data-pino="joinville"], [data-pino="jaragua-do-sul"], [data-pino="pomerode"], [data-pino="timbo"], [data-pino="indaial"], [data-pino="blumenau"], [data-pino="brusque"]) .pino__nome {
+    opacity: 1;
+  }
+}
+
+.atlas:has(#modo-rota:checked):has(#rota-serra:checked) {
+  & .rota-linha[data-rota="serra"],
+  & .rota-paradas [data-rota="serra"],
+  & .roteiro__detalhe[data-rota="serra"] {
+    display: revert;
+  }
+
+  & .pino:is([data-pino="lages"], [data-pino="urupema"], [data-pino="sao-joaquim"], [data-pino="bom-jardim-da-serra"], [data-pino="urubici"]) .pino__nome {
+    opacity: 1;
+  }
+}
+
+.atlas:has(#modo-rota:checked):has(#rota-litoral:checked) {
+  & .rota-linha[data-rota="litoral"],
+  & .rota-paradas [data-rota="litoral"],
+  & .roteiro__detalhe[data-rota="litoral"] {
+    display: revert;
+  }
+
+  & .pino:is([data-pino="sao-francisco-do-sul"], [data-pino="itajai"], [data-pino="balneario-camboriu"], [data-pino="bombinhas"], [data-pino="florianopolis"], [data-pino="garopaba"], [data-pino="laguna"]) .pino__nome {
+    opacity: 1;
+  }
+}
+
+.atlas:has(#modo-rota:checked):has(#rota-travessia:checked) {
+  & .rota-linha[data-rota="travessia"],
+  & .rota-paradas [data-rota="travessia"],
+  & .roteiro__detalhe[data-rota="travessia"] {
+    display: revert;
+  }
+
+  & .pino:is([data-pino="florianopolis"], [data-pino="lages"], [data-pino="concordia"], [data-pino="chapeco"], [data-pino="sao-miguel-do-oeste"]) .pino__nome {
+    opacity: 1;
+  }
+}
+
+@property --a-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --b-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --a-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --b-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --a-fund { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --b-fund { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --a-verao { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --b-verao { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --a-inverno { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --b-inverno { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --a-reg { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --b-reg { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --a-lat { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --b-lat { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --a-lon { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --b-lon { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+@property --vence-a-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-b-pop { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-a-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-b-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-a-fund { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-b-fund { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-a-verao { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-b-verao { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-a-inverno { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-b-inverno { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --dif-alt { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --dif-alt-mil { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --dif-alt-resto { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --dif-inv { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --mesma-regiao { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --alt-igual { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --dist { syntax: "<integer>"; inherits: true; initial-value: 0; }
+
+.comparador {
+  --a-nome: var(--c-nome);
+  --a-regiao: var(--c-regiao);
+  --a-heranca: var(--c-heranca);
+  --a-destaque: var(--c-destaque);
+  --a-pop-txt: var(--c-pop-txt);
+  --a-alt-txt: var(--c-alt-txt);
+  --a-cor-verao: var(--c-cor-verao);
+  --a-cor-inverno: var(--c-cor-inverno);
+  --a-pop: var(--c-pop);
+  --a-alt: var(--c-alt);
+  --a-fund: var(--c-fund);
+  --a-verao: var(--c-verao);
+  --a-inverno: var(--c-inverno);
+  --a-reg: var(--c-reg);
+  --a-lat: var(--c-lat);
+  --a-lon: var(--c-lon);
+}
+
+.comparador > :not(.comparador__escolha) {
+  --b-nome: var(--c-nome);
+  --b-regiao: var(--c-regiao);
+  --b-heranca: var(--c-heranca);
+  --b-destaque: var(--c-destaque);
+  --b-pop-txt: var(--c-pop-txt);
+  --b-alt-txt: var(--c-alt-txt);
+  --b-cor-verao: var(--c-cor-verao);
+  --b-cor-inverno: var(--c-cor-inverno);
+  --b-pop: var(--c-pop);
+  --b-alt: var(--c-alt);
+  --b-fund: var(--c-fund);
+  --b-verao: var(--c-verao);
+  --b-inverno: var(--c-inverno);
+  --b-reg: var(--c-reg);
+  --b-lat: var(--c-lat);
+  --b-lon: var(--c-lon);
+
+  --vence-a-pop: clamp(0, var(--a-pop) - var(--b-pop), 1);
+  --vence-b-pop: clamp(0, var(--b-pop) - var(--a-pop), 1);
+  --vence-a-alt: clamp(0, var(--a-alt) - var(--b-alt), 1);
+  --vence-b-alt: clamp(0, var(--b-alt) - var(--a-alt), 1);
+  --vence-a-fund: clamp(0, var(--b-fund) - var(--a-fund), 1);
+  --vence-b-fund: clamp(0, var(--a-fund) - var(--b-fund), 1);
+  --vence-a-verao: clamp(0, var(--a-verao) - var(--b-verao), 1);
+  --vence-b-verao: clamp(0, var(--b-verao) - var(--a-verao), 1);
+  --vence-a-inverno: clamp(0, var(--b-inverno) - var(--a-inverno), 1);
+  --vence-b-inverno: clamp(0, var(--a-inverno) - var(--b-inverno), 1);
+
+  --dif-alt: max(var(--a-alt) - var(--b-alt), var(--b-alt) - var(--a-alt));
+  --dif-alt-mil: round(down, var(--dif-alt) / 1000, 1);
+  --dif-alt-resto: mod(var(--dif-alt), 1000);
+  --alt-igual: clamp(0, 50 - var(--dif-alt), 1);
+  --dif-inv: max(var(--a-inverno) - var(--b-inverno), var(--b-inverno) - var(--a-inverno));
+  --mesma-regiao: clamp(0, 1 - max(var(--a-reg) - var(--b-reg), var(--b-reg) - var(--a-reg)), 1);
+
+  --dist: calc(2 * 6371 * sqrt(
+    pow(sin((var(--b-lat) - var(--a-lat)) * 0.5deg), 2) +
+    cos(var(--a-lat) * 1deg) * cos(var(--b-lat) * 1deg) *
+    pow(sin((var(--b-lon) - var(--a-lon)) * 0.5deg), 2)
+  ));
+
+  counter-reset: dist var(--dist) difmil var(--dif-alt-mil) difresto var(--dif-alt-resto) difinv var(--dif-inv);
+}
+
+@counter-style tres-digitos {
+  system: extends decimal;
+  pad: 3 "0";
+}
+
+[data-cmp="a-nome"]::before, [data-t="a-nome"]::before { content: var(--a-nome); }
+[data-cmp="b-nome"]::before, [data-t="b-nome"]::before { content: var(--b-nome); }
+[data-cmp="a-regiao"]::before { content: var(--a-regiao); }
+[data-cmp="b-regiao"]::before { content: var(--b-regiao); }
+[data-cmp="a-heranca"]::before { content: var(--a-heranca); }
+[data-cmp="b-heranca"]::before { content: var(--b-heranca); }
+[data-cmp="a-pop"]::before { content: var(--a-pop-txt); }
+[data-cmp="b-pop"]::before { content: var(--b-pop-txt); }
+[data-cmp="a-alt"]::before { content: var(--a-alt-txt); }
+[data-cmp="b-alt"]::before { content: var(--b-alt-txt); }
+[data-cmp="a-fund"]::before { counter-reset: n var(--a-fund); content: counter(n); }
+[data-cmp="b-fund"]::before { counter-reset: n var(--b-fund); content: counter(n); }
+[data-graus="a-verao"]::before { counter-reset: n var(--a-verao); content: counter(n) " °C"; }
+[data-graus="b-verao"]::before { counter-reset: n var(--b-verao); content: counter(n) " °C"; }
+[data-graus="a-inverno"]::before { counter-reset: n var(--a-inverno); content: counter(n) " °C"; }
+[data-graus="b-inverno"]::before { counter-reset: n var(--b-inverno); content: counter(n) " °C"; }
+[data-cmp="a-destaque"]::before { content: var(--a-destaque); }
+[data-cmp="b-destaque"]::before { content: var(--b-destaque); }
+[data-cmp="distancia"]::before { content: counter(dist) " km em linha reta"; }
+
+[data-cmp$="destaque"] {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+}
+
+[data-cmp="a-verao"] .escala-clima__cor { background-color: var(--a-cor-verao); }
+[data-cmp="b-verao"] .escala-clima__cor { background-color: var(--b-cor-verao); }
+[data-cmp="a-inverno"] .escala-clima__cor { background-color: var(--a-cor-inverno); }
+[data-cmp="b-inverno"] .escala-clima__cor { background-color: var(--b-cor-inverno); }
+
+[data-cmp$="verao"] .escala-clima__cor,
+[data-cmp$="inverno"] .escala-clima__cor {
+  display: inline-block;
+}
+
+.comparador__selo {
+  display: none;
+}
+
+@container style(--vence-a-pop: 1) { [data-selo="a-pop"] { display: inline-block; } [data-cmp="a-pop"] { font-weight: 600; } }
+@container style(--vence-b-pop: 1) { [data-selo="b-pop"] { display: inline-block; } [data-cmp="b-pop"] { font-weight: 600; } }
+@container style(--vence-a-alt: 1) { [data-selo="a-alt"] { display: inline-block; } [data-cmp="a-alt"] { font-weight: 600; } }
+@container style(--vence-b-alt: 1) { [data-selo="b-alt"] { display: inline-block; } [data-cmp="b-alt"] { font-weight: 600; } }
+@container style(--vence-a-fund: 1) { [data-selo="a-fund"] { display: inline-block; } [data-cmp="a-fund"] { font-weight: 600; } }
+@container style(--vence-b-fund: 1) { [data-selo="b-fund"] { display: inline-block; } [data-cmp="b-fund"] { font-weight: 600; } }
+@container style(--vence-a-verao: 1) { [data-selo="a-verao"] { display: inline-block; } [data-cmp="a-verao"] { font-weight: 600; } }
+@container style(--vence-b-verao: 1) { [data-selo="b-verao"] { display: inline-block; } [data-cmp="b-verao"] { font-weight: 600; } }
+@container style(--vence-a-inverno: 1) { [data-selo="a-inverno"] { display: inline-block; } [data-cmp="a-inverno"] { font-weight: 600; } }
+@container style(--vence-b-inverno: 1) { [data-selo="b-inverno"] { display: inline-block; } [data-cmp="b-inverno"] { font-weight: 600; } }
+
+.cmp-frase {
+  display: none;
+}
+
+.cmp-frase--sempre {
+  display: inline;
+}
+
+.cmp-dist::before { content: counter(dist); }
+.cmp-dif-inv::before { content: counter(difinv); }
+.cmp-dif-alt::before { content: counter(difmil) "." counter(difresto, tres-digitos); }
+
+@container style(--dif-alt-mil: 0) {
+  .cmp-dif-alt::before { content: counter(difresto); }
+}
+
+@container style(--alt-igual: 1) { [data-frase="alt-igual"] { display: inline; } }
+@container style(--alt-igual: 0) and style(--vence-a-alt: 1) { [data-frase="alt-a"] { display: inline; } }
+@container style(--alt-igual: 0) and style(--vence-b-alt: 1) { [data-frase="alt-b"] { display: inline; } }
+@container style(--mesma-regiao: 1) { [data-frase="mesma-regiao"] { display: inline; } }
+@container style(--mesma-regiao: 0) and style(--vence-a-inverno: 1) { [data-frase="inv-a"] { display: inline; } }
+@container style(--mesma-regiao: 0) and style(--vence-b-inverno: 1) { [data-frase="inv-b"] { display: inline; } }
+
+.comparador:has(#comparar-a option[value="florianopolis"]:checked),
+.comparador:has(#comparar-b option[value="florianopolis"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Florianópolis";
+  --c-regiao: "Litoral e Grande Florianópolis";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Capital, ostras e tainha";
+  --c-pop-txt: "~540 mil";
+  --c-alt-txt: "3 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-3);
+  --c-pop: 537000;
+  --c-alt: 3;
+  --c-fund: 1726;
+  --c-verao: 28;
+  --c-inverno: 16;
+  --c-reg: 1;
+  --c-lat: -27.595;
+  --c-lon: -48.548;
+}
+
+.comparador:has(#comparar-a option[value="sao-jose"]:checked),
+.comparador:has(#comparar-b option[value="sao-jose"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "São José";
+  --c-regiao: "Litoral e Grande Florianópolis";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Casario açoriano";
+  --c-pop-txt: "~270 mil";
+  --c-alt-txt: "5 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-3);
+  --c-pop: 270000;
+  --c-alt: 5;
+  --c-fund: 1750;
+  --c-verao: 28;
+  --c-inverno: 16;
+  --c-reg: 1;
+  --c-lat: -27.614;
+  --c-lon: -48.627;
+}
+
+.comparador:has(#comparar-a option[value="balneario-camboriu"]:checked),
+.comparador:has(#comparar-b option[value="balneario-camboriu"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Balneário Camboriú";
+  --c-regiao: "Litoral e Grande Florianópolis";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Arranha-céus à beira-mar";
+  --c-pop-txt: "~140 mil";
+  --c-alt-txt: "2 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-3);
+  --c-pop: 139000;
+  --c-alt: 2;
+  --c-fund: 1964;
+  --c-verao: 28;
+  --c-inverno: 16;
+  --c-reg: 1;
+  --c-lat: -26.991;
+  --c-lon: -48.635;
+}
+
+.comparador:has(#comparar-a option[value="itajai"]:checked),
+.comparador:has(#comparar-b option[value="itajai"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Itajaí";
+  --c-regiao: "Litoral e Grande Florianópolis";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Porto e Marejada";
+  --c-pop-txt: "~264 mil";
+  --c-alt-txt: "2 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-3);
+  --c-pop: 264000;
+  --c-alt: 2;
+  --c-fund: 1860;
+  --c-verao: 28;
+  --c-inverno: 16;
+  --c-reg: 1;
+  --c-lat: -26.908;
+  --c-lon: -48.662;
+}
+
+.comparador:has(#comparar-a option[value="bombinhas"]:checked),
+.comparador:has(#comparar-b option[value="bombinhas"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Bombinhas";
+  --c-regiao: "Litoral e Grande Florianópolis";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Mergulho e enseadas";
+  --c-pop-txt: "~25 mil";
+  --c-alt-txt: "10 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-3);
+  --c-pop: 25000;
+  --c-alt: 10;
+  --c-fund: 1992;
+  --c-verao: 28;
+  --c-inverno: 16;
+  --c-reg: 1;
+  --c-lat: -27.138;
+  --c-lon: -48.517;
+}
+
+.comparador:has(#comparar-a option[value="garopaba"]:checked),
+.comparador:has(#comparar-b option[value="garopaba"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Garopaba";
+  --c-regiao: "Litoral e Grande Florianópolis";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Surfe e baleia-franca";
+  --c-pop-txt: "~30 mil";
+  --c-alt-txt: "5 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-3);
+  --c-pop: 30000;
+  --c-alt: 5;
+  --c-fund: 1961;
+  --c-verao: 28;
+  --c-inverno: 16;
+  --c-reg: 1;
+  --c-lat: -28.027;
+  --c-lon: -48.619;
+}
+
+.comparador:has(#comparar-a option[value="blumenau"]:checked),
+.comparador:has(#comparar-b option[value="blumenau"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Blumenau";
+  --c-regiao: "Vale do Itajaí";
+  --c-heranca: "Alemã e italiana";
+  --c-destaque: "Oktoberfest e enxaimel";
+  --c-pop-txt: "~360 mil";
+  --c-alt-txt: "21 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 360000;
+  --c-alt: 21;
+  --c-fund: 1850;
+  --c-verao: 27;
+  --c-inverno: 15;
+  --c-reg: 2;
+  --c-lat: -26.919;
+  --c-lon: -49.066;
+}
+
+.comparador:has(#comparar-a option[value="pomerode"]:checked),
+.comparador:has(#comparar-b option[value="pomerode"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Pomerode";
+  --c-regiao: "Vale do Itajaí";
+  --c-heranca: "Alemã e italiana";
+  --c-destaque: "Cidade mais alemã do Brasil";
+  --c-pop-txt: "~34 mil";
+  --c-alt-txt: "85 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 34000;
+  --c-alt: 85;
+  --c-fund: 1959;
+  --c-verao: 27;
+  --c-inverno: 15;
+  --c-reg: 2;
+  --c-lat: -26.741;
+  --c-lon: -49.177;
+}
+
+.comparador:has(#comparar-a option[value="brusque"]:checked),
+.comparador:has(#comparar-b option[value="brusque"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Brusque";
+  --c-regiao: "Vale do Itajaí";
+  --c-heranca: "Alemã e italiana";
+  --c-destaque: "Berço da fiação";
+  --c-pop-txt: "~141 mil";
+  --c-alt-txt: "21 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 141000;
+  --c-alt: 21;
+  --c-fund: 1860;
+  --c-verao: 27;
+  --c-inverno: 15;
+  --c-reg: 2;
+  --c-lat: -27.098;
+  --c-lon: -48.917;
+}
+
+.comparador:has(#comparar-a option[value="timbo"]:checked),
+.comparador:has(#comparar-b option[value="timbo"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Timbó";
+  --c-regiao: "Vale do Itajaí";
+  --c-heranca: "Alemã e italiana";
+  --c-destaque: "Pérola do Vale";
+  --c-pop-txt: "~46 mil";
+  --c-alt-txt: "68 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 46000;
+  --c-alt: 68;
+  --c-fund: 1934;
+  --c-verao: 27;
+  --c-inverno: 15;
+  --c-reg: 2;
+  --c-lat: -26.823;
+  --c-lon: -49.272;
+}
+
+.comparador:has(#comparar-a option[value="indaial"]:checked),
+.comparador:has(#comparar-b option[value="indaial"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Indaial";
+  --c-regiao: "Vale do Itajaí";
+  --c-heranca: "Alemã e italiana";
+  --c-destaque: "Às margens do Itajaí-Açu";
+  --c-pop-txt: "~72 mil";
+  --c-alt-txt: "70 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 72000;
+  --c-alt: 70;
+  --c-fund: 1934;
+  --c-verao: 27;
+  --c-inverno: 15;
+  --c-reg: 2;
+  --c-lat: -26.898;
+  --c-lon: -49.232;
+}
+
+.comparador:has(#comparar-a option[value="joinville"]:checked),
+.comparador:has(#comparar-b option[value="joinville"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Joinville";
+  --c-regiao: "Norte / Nordeste";
+  --c-heranca: "Alemã";
+  --c-destaque: "Cidade das Flores e da Dança";
+  --c-pop-txt: "~616 mil";
+  --c-alt-txt: "4 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 616000;
+  --c-alt: 4;
+  --c-fund: 1851;
+  --c-verao: 26;
+  --c-inverno: 15;
+  --c-reg: 3;
+  --c-lat: -26.304;
+  --c-lon: -48.846;
+}
+
+.comparador:has(#comparar-a option[value="sao-bento-do-sul"]:checked),
+.comparador:has(#comparar-b option[value="sao-bento-do-sul"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "São Bento do Sul";
+  --c-regiao: "Norte / Nordeste";
+  --c-heranca: "Alemã";
+  --c-destaque: "Móveis e serra fria";
+  --c-pop-txt: "~83 mil";
+  --c-alt-txt: "838 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 83000;
+  --c-alt: 838;
+  --c-fund: 1873;
+  --c-verao: 26;
+  --c-inverno: 15;
+  --c-reg: 3;
+  --c-lat: -26.25;
+  --c-lon: -49.379;
+}
+
+.comparador:has(#comparar-a option[value="jaragua-do-sul"]:checked),
+.comparador:has(#comparar-b option[value="jaragua-do-sul"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Jaraguá do Sul";
+  --c-regiao: "Norte / Nordeste";
+  --c-heranca: "Alemã";
+  --c-destaque: "Indústria e Schützenfest";
+  --c-pop-txt: "~183 mil";
+  --c-alt-txt: "30 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 183000;
+  --c-alt: 30;
+  --c-fund: 1876;
+  --c-verao: 26;
+  --c-inverno: 15;
+  --c-reg: 3;
+  --c-lat: -26.486;
+  --c-lon: -49.071;
+}
+
+.comparador:has(#comparar-a option[value="sao-francisco-do-sul"]:checked),
+.comparador:has(#comparar-b option[value="sao-francisco-do-sul"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "São Francisco do Sul";
+  --c-regiao: "Norte / Nordeste";
+  --c-heranca: "Portuguesa e açoriana";
+  --c-destaque: "Centro histórico tombado";
+  --c-pop-txt: "~53 mil";
+  --c-alt-txt: "7 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 53000;
+  --c-alt: 7;
+  --c-fund: 1658;
+  --c-verao: 26;
+  --c-inverno: 15;
+  --c-reg: 3;
+  --c-lat: -26.243;
+  --c-lon: -48.638;
+}
+
+.comparador:has(#comparar-a option[value="lages"]:checked),
+.comparador:has(#comparar-b option[value="lages"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Lages";
+  --c-regiao: "Planalto Serrano";
+  --c-heranca: "Campeira";
+  --c-destaque: "Festa do Pinhão";
+  --c-pop-txt: "~165 mil";
+  --c-alt-txt: "884 m";
+  --c-cor-verao: var(--clima-4);
+  --c-cor-inverno: var(--clima-1);
+  --c-pop: 165000;
+  --c-alt: 884;
+  --c-fund: 1766;
+  --c-verao: 21;
+  --c-inverno: 8;
+  --c-reg: 4;
+  --c-lat: -27.816;
+  --c-lon: -50.326;
+}
+
+.comparador:has(#comparar-a option[value="sao-joaquim"]:checked),
+.comparador:has(#comparar-b option[value="sao-joaquim"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "São Joaquim";
+  --c-regiao: "Planalto Serrano";
+  --c-heranca: "Campeira";
+  --c-destaque: "Maçã, vinho e neve";
+  --c-pop-txt: "~26 mil";
+  --c-alt-txt: "1.353 m";
+  --c-cor-verao: var(--clima-4);
+  --c-cor-inverno: var(--clima-1);
+  --c-pop: 26000;
+  --c-alt: 1353;
+  --c-fund: 1886;
+  --c-verao: 21;
+  --c-inverno: 8;
+  --c-reg: 4;
+  --c-lat: -28.294;
+  --c-lon: -49.932;
+}
+
+.comparador:has(#comparar-a option[value="urubici"]:checked),
+.comparador:has(#comparar-b option[value="urubici"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Urubici";
+  --c-regiao: "Planalto Serrano";
+  --c-heranca: "Campeira";
+  --c-destaque: "Morro da Igreja";
+  --c-pop-txt: "~11 mil";
+  --c-alt-txt: "915 m";
+  --c-cor-verao: var(--clima-4);
+  --c-cor-inverno: var(--clima-1);
+  --c-pop: 11000;
+  --c-alt: 915;
+  --c-fund: 1956;
+  --c-verao: 21;
+  --c-inverno: 8;
+  --c-reg: 4;
+  --c-lat: -28.015;
+  --c-lon: -49.592;
+}
+
+.comparador:has(#comparar-a option[value="urupema"]:checked),
+.comparador:has(#comparar-b option[value="urupema"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Urupema";
+  --c-regiao: "Planalto Serrano";
+  --c-heranca: "Campeira";
+  --c-destaque: "Disputa a cidade mais fria";
+  --c-pop-txt: "~2,5 mil";
+  --c-alt-txt: "1.425 m";
+  --c-cor-verao: var(--clima-4);
+  --c-cor-inverno: var(--clima-1);
+  --c-pop: 2500;
+  --c-alt: 1425;
+  --c-fund: 1988;
+  --c-verao: 21;
+  --c-inverno: 8;
+  --c-reg: 4;
+  --c-lat: -27.956;
+  --c-lon: -49.873;
+}
+
+.comparador:has(#comparar-a option[value="bom-jardim-da-serra"]:checked),
+.comparador:has(#comparar-b option[value="bom-jardim-da-serra"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Bom Jardim da Serra";
+  --c-regiao: "Planalto Serrano";
+  --c-heranca: "Campeira";
+  --c-destaque: "Serra do Rio do Rastro";
+  --c-pop-txt: "~4,7 mil";
+  --c-alt-txt: "1.245 m";
+  --c-cor-verao: var(--clima-4);
+  --c-cor-inverno: var(--clima-1);
+  --c-pop: 4700;
+  --c-alt: 1245;
+  --c-fund: 1967;
+  --c-verao: 21;
+  --c-inverno: 8;
+  --c-reg: 4;
+  --c-lat: -28.337;
+  --c-lon: -49.627;
+}
+
+.comparador:has(#comparar-a option[value="chapeco"]:checked),
+.comparador:has(#comparar-b option[value="chapeco"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Chapecó";
+  --c-regiao: "Oeste";
+  --c-heranca: "Italiana e alemã";
+  --c-destaque: "Capital do agronegócio";
+  --c-pop-txt: "~254 mil";
+  --c-alt-txt: "674 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 254000;
+  --c-alt: 674;
+  --c-fund: 1917;
+  --c-verao: 27;
+  --c-inverno: 13;
+  --c-reg: 5;
+  --c-lat: -27.1;
+  --c-lon: -52.615;
+}
+
+.comparador:has(#comparar-a option[value="concordia"]:checked),
+.comparador:has(#comparar-b option[value="concordia"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Concórdia";
+  --c-regiao: "Oeste";
+  --c-heranca: "Italiana e alemã";
+  --c-destaque: "Aves e suínos";
+  --c-pop-txt: "~82 mil";
+  --c-alt-txt: "550 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 82000;
+  --c-alt: 550;
+  --c-fund: 1934;
+  --c-verao: 27;
+  --c-inverno: 13;
+  --c-reg: 5;
+  --c-lat: -27.234;
+  --c-lon: -52.028;
+}
+
+.comparador:has(#comparar-a option[value="xanxere"]:checked),
+.comparador:has(#comparar-b option[value="xanxere"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Xanxerê";
+  --c-regiao: "Oeste";
+  --c-heranca: "Italiana e alemã";
+  --c-destaque: "Festa do Milho";
+  --c-pop-txt: "~51 mil";
+  --c-alt-txt: "800 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 51000;
+  --c-alt: 800;
+  --c-fund: 1954;
+  --c-verao: 27;
+  --c-inverno: 13;
+  --c-reg: 5;
+  --c-lat: -26.877;
+  --c-lon: -52.404;
+}
+
+.comparador:has(#comparar-a option[value="sao-miguel-do-oeste"]:checked),
+.comparador:has(#comparar-b option[value="sao-miguel-do-oeste"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "São Miguel do Oeste";
+  --c-regiao: "Oeste";
+  --c-heranca: "Italiana e alemã";
+  --c-destaque: "Fronteira com a Argentina";
+  --c-pop-txt: "~44 mil";
+  --c-alt-txt: "645 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 44000;
+  --c-alt: 645;
+  --c-fund: 1954;
+  --c-verao: 27;
+  --c-inverno: 13;
+  --c-reg: 5;
+  --c-lat: -26.725;
+  --c-lon: -53.518;
+}
+
+.comparador:has(#comparar-a option[value="criciuma"]:checked),
+.comparador:has(#comparar-b option[value="criciuma"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Criciúma";
+  --c-regiao: "Sul";
+  --c-heranca: "Italiana";
+  --c-destaque: "Carvão e cerâmica";
+  --c-pop-txt: "~214 mil";
+  --c-alt-txt: "46 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 214000;
+  --c-alt: 46;
+  --c-fund: 1880;
+  --c-verao: 27;
+  --c-inverno: 14;
+  --c-reg: 6;
+  --c-lat: -28.678;
+  --c-lon: -49.37;
+}
+
+.comparador:has(#comparar-a option[value="tubarao"]:checked),
+.comparador:has(#comparar-b option[value="tubarao"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Tubarão";
+  --c-regiao: "Sul";
+  --c-heranca: "Italiana";
+  --c-destaque: "Às margens do rio Tubarão";
+  --c-pop-txt: "~110 mil";
+  --c-alt-txt: "9 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 110000;
+  --c-alt: 9;
+  --c-fund: 1870;
+  --c-verao: 27;
+  --c-inverno: 14;
+  --c-reg: 6;
+  --c-lat: -28.467;
+  --c-lon: -49.007;
+}
+
+.comparador:has(#comparar-a option[value="laguna"]:checked),
+.comparador:has(#comparar-b option[value="laguna"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Laguna";
+  --c-regiao: "Sul";
+  --c-heranca: "Açoriana";
+  --c-destaque: "Pesca com botos";
+  --c-pop-txt: "~43 mil";
+  --c-alt-txt: "2 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 43000;
+  --c-alt: 2;
+  --c-fund: 1676;
+  --c-verao: 27;
+  --c-inverno: 14;
+  --c-reg: 6;
+  --c-lat: -28.482;
+  --c-lon: -48.781;
+}
+
+.comparador:has(#comparar-a option[value="ararangua"]:checked),
+.comparador:has(#comparar-b option[value="ararangua"]:checked) > :not(.comparador__escolha) {
+  --c-nome: "Araranguá";
+  --c-regiao: "Sul";
+  --c-heranca: "Italiana";
+  --c-destaque: "Dunas e lagoas";
+  --c-pop-txt: "~71 mil";
+  --c-alt-txt: "13 m";
+  --c-cor-verao: var(--clima-5);
+  --c-cor-inverno: var(--clima-2);
+  --c-pop: 71000;
+  --c-alt: 13;
+  --c-fund: 1880;
+  --c-verao: 27;
+  --c-inverno: 14;
+  --c-reg: 6;
+  --c-lat: -28.935;
+  --c-lon: -49.486;
+}
+
+@supports selector(:has(a)) {
+  .calendario__mes,
+  [data-mes-status] {
+    display: none;
+  }
+}
+
+.calendario:has(#mes-1:checked) [data-mes="1"],
+.calendario:has(#mes-2:checked) [data-mes="2"],
+.calendario:has(#mes-3:checked) [data-mes="3"],
+.calendario:has(#mes-4:checked) [data-mes="4"],
+.calendario:has(#mes-5:checked) [data-mes="5"],
+.calendario:has(#mes-6:checked) [data-mes="6"],
+.calendario:has(#mes-7:checked) [data-mes="7"],
+.calendario:has(#mes-8:checked) [data-mes="8"],
+.calendario:has(#mes-9:checked) [data-mes="9"],
+.calendario:has(#mes-10:checked) [data-mes="10"],
+.calendario:has(#mes-11:checked) [data-mes="11"],
+.calendario:has(#mes-12:checked) [data-mes="12"] {
+  display: list-item;
+}
+
+.calendario:has(#mes-1:checked) [data-mes-status="1"],
+.calendario:has(#mes-2:checked) [data-mes-status="2"],
+.calendario:has(#mes-3:checked) [data-mes-status="3"],
+.calendario:has(#mes-4:checked) [data-mes-status="4"],
+.calendario:has(#mes-5:checked) [data-mes-status="5"],
+.calendario:has(#mes-6:checked) [data-mes-status="6"],
+.calendario:has(#mes-7:checked) [data-mes-status="7"],
+.calendario:has(#mes-8:checked) [data-mes-status="8"],
+.calendario:has(#mes-9:checked) [data-mes-status="9"],
+.calendario:has(#mes-10:checked) [data-mes-status="10"],
+.calendario:has(#mes-11:checked) [data-mes-status="11"],
+.calendario:has(#mes-12:checked) [data-mes-status="12"] {
+  display: inline;
+}
+
+.galeria-filtrada:has(#filtro-litoral:checked) .galeria__item:not([data-categoria="litoral"]),
+.galeria-filtrada:has(#filtro-serra:checked) .galeria__item:not([data-categoria="serra"]),
+.galeria-filtrada:has(#filtro-cidades:checked) .galeria__item:not([data-categoria="cidades"]),
+.galeria-filtrada:has(#filtro-gastronomia:checked) .galeria__item:not([data-categoria="gastronomia"]) {
+  display: none;
+}
+
+.quiz__pergunta,
+[data-passo-rotulo],
+.quiz__voltar,
+.quiz__proxima,
+.quiz__resultados {
+  display: none;
+}
+
+.quiz__passo {
+  visibility: hidden;
+}
+
+.quiz:not(:has(#passo-1:checked)) {
+  & :is([data-pergunta="1"], [data-voltar="1"], [data-proxima="1"]) { display: flex; }
+  & [data-pergunta="1"] { display: block; }
+  & [data-passo-rotulo="1"] { display: inline; }
+  & .quiz__progresso-barra { width: 20%; }
+  &:has([name="q1"]:checked) #passo-1 { visibility: visible; }
+  &:not(:has([name="q1"]:checked)) [data-proxima="1"] { opacity: 0.45; pointer-events: none; }
+  &:has(#passo-1:focus-visible) [data-proxima="1"] {
+    outline: 0.1875rem solid var(--cor-destaque);
+    outline-offset: 0.1875rem;
+  }
+}
+
+.quiz:has(#passo-1:checked):not(:has(#passo-2:checked)) {
+  & :is([data-pergunta="2"], [data-voltar="2"], [data-proxima="2"]) { display: flex; }
+  & [data-pergunta="2"] { display: block; }
+  & [data-passo-rotulo="2"] { display: inline; }
+  & .quiz__progresso-barra { width: 40%; }
+  & #passo-1,
+  &:has([name="q2"]:checked) #passo-2 { visibility: visible; }
+  &:not(:has([name="q2"]:checked)) [data-proxima="2"] { opacity: 0.45; pointer-events: none; }
+  &:has(#passo-2:focus-visible) [data-proxima="2"],
+  &:has(#passo-1:focus-visible) [data-voltar="2"] {
+    outline: 0.1875rem solid var(--cor-destaque);
+    outline-offset: 0.1875rem;
+  }
+}
+
+.quiz:has(#passo-2:checked):not(:has(#passo-3:checked)) {
+  & :is([data-pergunta="3"], [data-voltar="3"], [data-proxima="3"]) { display: flex; }
+  & [data-pergunta="3"] { display: block; }
+  & [data-passo-rotulo="3"] { display: inline; }
+  & .quiz__progresso-barra { width: 60%; }
+  & #passo-2,
+  &:has([name="q3"]:checked) #passo-3 { visibility: visible; }
+  &:not(:has([name="q3"]:checked)) [data-proxima="3"] { opacity: 0.45; pointer-events: none; }
+  &:has(#passo-3:focus-visible) [data-proxima="3"],
+  &:has(#passo-2:focus-visible) [data-voltar="3"] {
+    outline: 0.1875rem solid var(--cor-destaque);
+    outline-offset: 0.1875rem;
+  }
+}
+
+.quiz:has(#passo-3:checked):not(:has(#passo-4:checked)) {
+  & :is([data-pergunta="4"], [data-voltar="4"], [data-proxima="4"]) { display: flex; }
+  & [data-pergunta="4"] { display: block; }
+  & [data-passo-rotulo="4"] { display: inline; }
+  & .quiz__progresso-barra { width: 80%; }
+  & #passo-3,
+  &:has([name="q4"]:checked) #passo-4 { visibility: visible; }
+  &:not(:has([name="q4"]:checked)) [data-proxima="4"] { opacity: 0.45; pointer-events: none; }
+  &:has(#passo-4:focus-visible) [data-proxima="4"],
+  &:has(#passo-3:focus-visible) [data-voltar="4"] {
+    outline: 0.1875rem solid var(--cor-destaque);
+    outline-offset: 0.1875rem;
+  }
+}
+
+.quiz:has(#passo-4:checked):not(:has(#passo-5:checked)) {
+  & :is([data-pergunta="5"], [data-voltar="5"], [data-proxima="5"]) { display: flex; }
+  & [data-pergunta="5"] { display: block; }
+  & [data-passo-rotulo="5"] { display: inline; }
+  & .quiz__progresso-barra { width: 100%; }
+  & #passo-4,
+  &:has([name="q5"]:checked) #passo-5 { visibility: visible; }
+  &:not(:has([name="q5"]:checked)) [data-proxima="5"] { opacity: 0.45; pointer-events: none; }
+  &:has(#passo-5:focus-visible) [data-proxima="5"],
+  &:has(#passo-4:focus-visible) [data-voltar="5"] {
+    outline: 0.1875rem solid var(--cor-destaque);
+    outline-offset: 0.1875rem;
+  }
+}
+
+.quiz:has(#passo-5:checked) .quiz__cartao { display: none; }
+.quiz:has(#passo-5:checked) .quiz__resultados { display: grid; }
+
+@property --pts-litoral { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --pts-vale { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --pts-norte { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --pts-serra { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --pts-oeste { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --pts-sul { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --peso-litoral { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --peso-vale { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --peso-norte { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --peso-serra { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --peso-oeste { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --peso-sul { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-litoral { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-vale { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-norte { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-serra { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-oeste { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@property --vence-sul { syntax: "<integer>"; inherits: true; initial-value: 0; }
+
+.quiz:has(#q1a:checked) { --q1-serra: 1; }
+.quiz:has(#q1b:checked) { --q1-litoral: 1; }
+.quiz:has(#q1c:checked) { --q1-vale: 1; }
+.quiz:has(#q1d:checked) { --q1-oeste: 1; }
+.quiz:has(#q2a:checked) { --q2-litoral: 1; }
+.quiz:has(#q2b:checked) { --q2-vale: 1; }
+.quiz:has(#q2c:checked) { --q2-sul: 1; --q2-oeste: 1; }
+.quiz:has(#q2d:checked) { --q2-serra: 1; }
+.quiz:has(#q3a:checked) { --q3-serra: 1; --q3-sul: 1; }
+.quiz:has(#q3b:checked) { --q3-litoral: 1; }
+.quiz:has(#q3c:checked) { --q3-oeste: 1; }
+.quiz:has(#q3d:checked) { --q3-vale: 1; --q3-norte: 1; }
+.quiz:has(#q4a:checked) { --q4-norte: 1; }
+.quiz:has(#q4b:checked) { --q4-oeste: 1; }
+.quiz:has(#q4c:checked) { --q4-litoral: 1; }
+.quiz:has(#q4d:checked) { --q4-sul: 1; --q4-norte: 1; }
+.quiz:has(#q5a:checked) { --q5-serra: 1; }
+.quiz:has(#q5b:checked) { --q5-vale: 1; }
+.quiz:has(#q5c:checked) { --q5-sul: 1; }
+.quiz:has(#q5d:checked) { --q5-norte: 1; }
+
+.quiz {
+  --pts-litoral: calc(var(--q1-litoral, 0) + var(--q2-litoral, 0) + var(--q3-litoral, 0) + var(--q4-litoral, 0) + var(--q5-litoral, 0));
+  --pts-vale: calc(var(--q1-vale, 0) + var(--q2-vale, 0) + var(--q3-vale, 0) + var(--q4-vale, 0) + var(--q5-vale, 0));
+  --pts-norte: calc(var(--q1-norte, 0) + var(--q2-norte, 0) + var(--q3-norte, 0) + var(--q4-norte, 0) + var(--q5-norte, 0));
+  --pts-serra: calc(var(--q1-serra, 0) + var(--q2-serra, 0) + var(--q3-serra, 0) + var(--q4-serra, 0) + var(--q5-serra, 0));
+  --pts-oeste: calc(var(--q1-oeste, 0) + var(--q2-oeste, 0) + var(--q3-oeste, 0) + var(--q4-oeste, 0) + var(--q5-oeste, 0));
+  --pts-sul: calc(var(--q1-sul, 0) + var(--q2-sul, 0) + var(--q3-sul, 0) + var(--q4-sul, 0) + var(--q5-sul, 0));
+  --peso-litoral: calc(var(--pts-litoral) * 100 + var(--q1-litoral, 0) * 50 + 6);
+  --peso-vale: calc(var(--pts-vale) * 100 + var(--q1-vale, 0) * 50 + 5);
+  --peso-norte: calc(var(--pts-norte) * 100 + var(--q1-norte, 0) * 50 + 4);
+  --peso-serra: calc(var(--pts-serra) * 100 + var(--q1-serra, 0) * 50 + 3);
+  --peso-oeste: calc(var(--pts-oeste) * 100 + var(--q1-oeste, 0) * 50 + 2);
+  --peso-sul: calc(var(--pts-sul) * 100 + var(--q1-sul, 0) * 50 + 1);
+  --vence-litoral: clamp(0, var(--peso-litoral) - max(var(--peso-vale), var(--peso-norte), var(--peso-serra), var(--peso-oeste), var(--peso-sul)), 1);
+  --vence-vale: clamp(0, var(--peso-vale) - max(var(--peso-litoral), var(--peso-norte), var(--peso-serra), var(--peso-oeste), var(--peso-sul)), 1);
+  --vence-norte: clamp(0, var(--peso-norte) - max(var(--peso-litoral), var(--peso-vale), var(--peso-serra), var(--peso-oeste), var(--peso-sul)), 1);
+  --vence-serra: clamp(0, var(--peso-serra) - max(var(--peso-litoral), var(--peso-vale), var(--peso-norte), var(--peso-oeste), var(--peso-sul)), 1);
+  --vence-oeste: clamp(0, var(--peso-oeste) - max(var(--peso-litoral), var(--peso-vale), var(--peso-norte), var(--peso-serra), var(--peso-sul)), 1);
+  --vence-sul: clamp(0, var(--peso-sul) - max(var(--peso-litoral), var(--peso-vale), var(--peso-norte), var(--peso-serra), var(--peso-oeste)), 1);
+}
+
+.quiz__resultado {
+  grid-area: 1 / 1;
+}
+[data-resultado="litoral"] { z-index: var(--peso-litoral); }
+[data-resultado="vale"] { z-index: var(--peso-vale); }
+[data-resultado="norte"] { z-index: var(--peso-norte); }
+[data-resultado="serra"] { z-index: var(--peso-serra); }
+[data-resultado="oeste"] { z-index: var(--peso-oeste); }
+[data-resultado="sul"] { z-index: var(--peso-sul); }
+
+@supports selector(:has(a)) {
+  @container style(--vence-litoral: 0) { [data-resultado="litoral"] { display: none; } }
+  @container style(--vence-vale: 0) { [data-resultado="vale"] { display: none; } }
+  @container style(--vence-norte: 0) { [data-resultado="norte"] { display: none; } }
+  @container style(--vence-serra: 0) { [data-resultado="serra"] { display: none; } }
+  @container style(--vence-oeste: 0) { [data-resultado="oeste"] { display: none; } }
+  @container style(--vence-sul: 0) { [data-resultado="sul"] { display: none; } }
+}

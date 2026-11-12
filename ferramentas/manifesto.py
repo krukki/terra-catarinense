@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Gera ferramentas/imagens.json — o manifesto das 58 vagas de imagem.
 
 A chave de cada vaga é o seed da URL do picsum (ex.: "sc-serra-geada"):
@@ -9,9 +8,7 @@ import io
 import json
 from collections import Counter
 
-# seed -> (pasta, nome do arquivo, termos de busca no Commons)
 VAGAS = {
-    # --- cidades ---------------------------------------------------------
     "floripa-centro": ("cidades", "florianopolis",
         ["Florianópolis centro vista", "Florianópolis orla baía"]),
     "floripa-ponte": ("cidades", "florianopolis-ponte",
@@ -50,7 +47,6 @@ VAGAS = {
         ["Vale Europeu Santa Catarina", "Timbó Santa Catarina centro"]),
     "gal-ponte-hercilio": ("cidades", "ponte-hercilio-luz",
         ["Ponte Hercílio Luz iluminada", "Hercílio Luz bridge night"]),
-    # --- serra -----------------------------------------------------------
     "urubici-morro": ("serra", "urubici",
         ["Urubici Morro da Igreja", "Urubici Santa Catarina paisagem"]),
     "sao-joaquim-macieira": ("serra", "sao-joaquim",
@@ -75,7 +71,6 @@ VAGAS = {
         ["estrada rural campos de altitude Santa Catarina", "inverno serra catarinense"]),
     "cur-vinho-altitude": ("serra", "vinho-altitude",
         ["vinhedo São Joaquim Santa Catarina", "vinícola altitude Santa Catarina"]),
-    # --- litoral ---------------------------------------------------------
     "sc-litoral-praia": ("litoral", "litoral-praia",
         ["praia Santa Catarina litoral", "Santa Catarina beach coast"]),
     "sc-praia-verao": ("litoral", "praia-verao",
@@ -98,7 +93,6 @@ VAGAS = {
         ["marco de Tordesilhas Laguna", "Laguna Santa Catarina marco"]),
     "sc-acoriano-casario": ("litoral", "acoriano-casario",
         ["Ribeirão da Ilha Florianópolis casario", "arquitetura açoriana Santa Catarina"]),
-    # --- gastronomia -----------------------------------------------------
     "sc-ostras-prato": ("gastronomia", "ostras-prato",
         ["ostras servidas prato", "oysters served plate"]),
     "gal-ostras": ("gastronomia", "ostras-bandeja",
@@ -119,7 +113,6 @@ VAGAS = {
         ["pinhão cozido panela", "pinhão araucária semente"]),
     "prato-polenta-galeto": ("gastronomia", "polenta-galeto",
         ["polenta frita galeto", "galeto polenta prato"]),
-    # --- cultura ---------------------------------------------------------
     "sc-mata-atlantica-indigena": ("cultura", "mata-atlantica",
         ["Mata Atlântica trilha Santa Catarina", "Atlantic Forest trail Brazil"]),
     "sc-imigracao-alema-1829": ("cultura", "imigracao-alema",
@@ -134,8 +127,6 @@ VAGAS = {
         ["Escola Bolshoi Joinville", "bailarinos ensaio Joinville"]),
 }
 
-# Vagas sem foto literal provável no Commons — marcadas na contato-prova
-# para decisão caso a caso.
 INCERTAS = {
     "cur-tordesilhas-laguna", "cur-bolshoi", "sc-imigracao-alema-1829",
     "sc-blumenau-1850", "sc-mata-atlantica-indigena", "sc-italianos-videira",
