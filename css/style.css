@@ -919,38 +919,6 @@ strong {
   margin-top: 1.75rem;
 }
 
-.banner__numeros {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
-  margin-top: 2.25rem;
-  border-top: var(--borda-fina) solid var(--cor-borda);
-}
-
-.banner__numeros div {
-  padding: 0.8rem 1.25rem 0 0;
-}
-
-.banner__numeros div + div {
-  padding-left: 1.25rem;
-  border-left: var(--borda-fina) solid var(--cor-borda);
-}
-
-.banner__numeros dt {
-  font-family: var(--fonte-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cor-texto-suave);
-}
-
-.banner__numeros dd {
-  font-family: var(--fonte-titulo);
-  font-size: clamp(1.4rem, 4vw, 1.9rem);
-  font-weight: 450;
-  line-height: 1.2;
-}
-
 .banner__prancha {
   position: relative;
   padding: 0.6rem;
@@ -1072,8 +1040,86 @@ strong {
 
 .banner.banner--foto {
   margin-top: calc(-1 * (var(--altura-header) + 0.1875rem));
-  padding-block: calc(var(--altura-header) + 0.1875rem + 2.5rem) 2.5rem;
+  padding-block: calc(var(--altura-header) + 0.1875rem + 2.5rem) 7rem;
+  border-bottom: 0;
   background-color: var(--cor-principal-escura);
+}
+
+/* A foto se dissolve na cor de fundo da página, em vez de terminar numa
+   linha reta; os cartões de números ficam por cima dessa emenda */
+.banner--foto::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 11rem;
+  background: linear-gradient(180deg, transparent, var(--cor-fundo) 92%);
+  pointer-events: none;
+}
+
+.numeros-faixa {
+  position: relative;
+  z-index: 2;
+  margin-top: -4.5rem;
+}
+
+.numeros-faixa__lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.numeros-faixa__cartao {
+  padding: 0.9rem 1rem 1rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-top: 0.1875rem solid var(--cor-destaque);
+  background-color: var(--cor-superficie);
+  box-shadow: var(--sombra-forte);
+}
+
+.numeros-faixa__cartao dt {
+  font-family: var(--fonte-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.numeros-faixa__cartao dd {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.35rem, 5vw, 2.4rem);
+  font-weight: 450;
+  line-height: 1.15;
+}
+
+.numeros-faixa__cartao .numeros-faixa__nota {
+  margin-top: 0.2rem;
+  font-family: var(--fonte-texto);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--cor-texto-suave);
+}
+
+/* Menos vazio entre os cartões e a primeira seção */
+.numeros-faixa + .secao {
+  padding-top: 2.5rem;
+}
+
+@media (min-width: 48rem) {
+  .numeros-faixa__lista {
+    gap: 1rem;
+    max-width: 52rem;
+  }
+
+  .numeros-faixa__cartao {
+    padding: 1.1rem 1.4rem 1.2rem;
+  }
+
+  .numeros-faixa__cartao .numeros-faixa__nota {
+    font-size: 0.85rem;
+  }
 }
 
 .banner__fundo {
@@ -1113,10 +1159,6 @@ strong {
   --cor-fundo: #1B1F1D;
   color: var(--cor-texto);
   text-shadow: 0 0.1rem 0.6rem rgb(var(--cor-veu) / 0.45);
-}
-
-.banner--foto .banner__numeros {
-  width: fit-content;
 }
 
 /* A prancha fica no alto, alinhada ao topo do título */
@@ -3571,7 +3613,7 @@ tbody tr:nth-child(even) {
   }
 
   .banner.banner--foto {
-    padding-block: calc(var(--altura-header) + 0.1875rem + 3.5rem) 3rem;
+    padding-block: calc(var(--altura-header) + 0.1875rem + 3.5rem) 8rem;
   }
 
   /* Prancha grande nas telas largas (até 30rem), encolhendo aos poucos
