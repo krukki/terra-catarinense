@@ -1258,9 +1258,22 @@ strong {
   align-items: flex-end;
   min-height: min(36rem, 78svh);
   margin-top: calc(-1 * (var(--altura-header) + 0.1875rem));
-  padding-block: calc(var(--altura-header) + 0.1875rem + 3rem) 8rem;
+  padding-block: calc(var(--altura-header) + 0.1875rem + 3rem) 12rem;
   border-bottom: 0;
-  background-color: var(--cor-principal-escura);
+  background-color: transparent;
+}
+
+/* A foto e o véu somem aos poucos (máscara com curva ease-out), revelando
+   o fundo da página, como no banner da Início — sem linha onde termina */
+.hero-pagina--foto .hero-pagina__fundo,
+.hero-pagina--foto::before {
+  --dissolve: linear-gradient(180deg,
+    #000 0%, #000 66%,
+    rgb(0 0 0 / 0.95) 71%, rgb(0 0 0 / 0.84) 76%, rgb(0 0 0 / 0.67) 81%,
+    rgb(0 0 0 / 0.47) 85.5%, rgb(0 0 0 / 0.28) 90%, rgb(0 0 0 / 0.13) 94%,
+    rgb(0 0 0 / 0.04) 97.5%, transparent 100%);
+  -webkit-mask-image: var(--dissolve);
+  mask-image: var(--dissolve);
 }
 
 .hero-pagina--foto .container {
@@ -1306,47 +1319,6 @@ strong {
       linear-gradient(180deg, rgb(var(--cor-veu) / 0.6), transparent 9rem),
       linear-gradient(90deg, rgb(var(--cor-veu) / 0.86) 0%, rgb(var(--cor-veu) / 0.72) 45%, rgb(var(--cor-veu) / 0.25) 100%);
   }
-}
-
-/* dissolução na cor de fundo, como no banner da Início */
-.hero-pagina--foto::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  z-index: -1;
-  height: 7rem;
-  background: linear-gradient(180deg, transparent, var(--cor-fundo) 92%);
-  pointer-events: none;
-}
-
-/* A trilha logo abaixo não precisa da linha de cima: a foto já some ali */
-.hero-pagina--foto + .trilha {
-  border-top: 0;
-}
-
-.trilha {
-  padding-block: 0.8rem;
-  border-bottom: var(--borda-fina) solid var(--cor-borda);
-  font-family: var(--fonte-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.trilha ol {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  color: var(--cor-texto-suave);
-}
-
-.trilha a {
-  color: var(--cor-texto);
-}
-
-.trilha li + li::before {
-  content: "/\00a0";
-  color: var(--cor-borda);
 }
 
 .duas-colunas {
@@ -3592,7 +3564,7 @@ tbody tr:nth-child(even) {
   }
 
   .hero-pagina--foto {
-    padding-block: calc(var(--altura-header) + 0.1875rem + 4rem) 9rem;
+    padding-block: calc(var(--altura-header) + 0.1875rem + 4rem) 13rem;
   }
 
   .banner {
@@ -4106,6 +4078,17 @@ tbody tr:nth-child(even) {
   position: relative;
   border-bottom: var(--borda-fina) solid var(--cor-texto);
   background-color: color-mix(in srgb, var(--gelo) calc(var(--geada) * 100%), var(--mar));
+}
+
+/* Logo abaixo do topo com foto: a cor da viagem nasce do fundo da página,
+   sem borda reta entre a foto que some e a faixa azul */
+.hero-pagina--foto + .viagem {
+  background-image: linear-gradient(180deg,
+    var(--cor-fundo) 0%,
+    color-mix(in srgb, var(--cor-fundo) 80%, transparent) 2.5rem,
+    color-mix(in srgb, var(--cor-fundo) 50%, transparent) 5rem,
+    color-mix(in srgb, var(--cor-fundo) 20%, transparent) 8rem,
+    transparent 11rem);
 }
 
 @media (prefers-color-scheme: dark) {
