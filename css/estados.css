@@ -1394,3 +1394,44 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
 .antes-depois:has(#ad-100:checked) .antes-depois__rotulo--serra {
   opacity: 0;
 }
+
+/* ==========================================================================
+   Teste de conhecimento (curiosidades): nota com contador CSS
+   Cada alternativa certa marcada soma 1; o placar vem depois das
+   perguntas no HTML, então já lê o total. "Ver resultado" (#teste-ver)
+   mostra o placar e o gabarito de cada pergunta.
+   ========================================================================== */
+.teste__form {
+  counter-reset: acertos;
+}
+
+.teste__form input[data-certa]:checked {
+  counter-increment: acertos;
+}
+
+.teste__nota::before {
+  content: counter(acertos);
+}
+
+.teste__form:has(#teste-ver:checked) :is(.teste__placar, .teste__retorno) {
+  display: block;
+}
+
+.teste__form:has(#teste-ver:checked) .teste__ver-mostrar { display: none; }
+.teste__form:has(#teste-ver:checked) .teste__ver-esconder { display: inline; }
+
+.teste__pergunta:has([data-certa]:checked) .teste__certo,
+.teste__pergunta:has(input:checked):not(:has([data-certa]:checked)) .teste__errado,
+.teste__pergunta:not(:has(input:checked)) .teste__vazio {
+  display: inline;
+}
+
+/* No gabarito: a alternativa certa ganha borda, a errada escolhida fica riscada */
+.teste__form:has(#teste-ver:checked) .teste__opcao:has([data-certa]) {
+  border-color: var(--cor-principal);
+  border-width: 0.125rem;
+}
+
+.teste__form:has(#teste-ver:checked) .teste__opcao:has(input:checked:not([data-certa])) {
+  text-decoration: line-through;
+}

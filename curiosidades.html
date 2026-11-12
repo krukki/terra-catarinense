@@ -464,6 +464,182 @@
       </div>
     </section>
 
+    <section class="secao teste" id="teste">
+      <div class="container">
+        <div class="secao__cabecalho revelar">
+          <span class="etiqueta">Teste de conhecimento</span>
+          <h2>Quanto você sabe sobre Santa Catarina?</h2>
+          <p class="subtitulo-secao">
+            Dez perguntas sobre o que aparece no site. Responda, clique em
+            "Ver resultado" e veja a nota e o gabarito explicado.
+          </p>
+        </div>
+
+        <!-- A nota é um contador CSS: cada alternativa certa marcada
+             (data-certa) soma 1 em "acertos", e o placar, que vem depois
+             das perguntas no HTML, mostra counter(acertos). O botão
+             "Refazer" é um <button type="reset"> nativo do formulário. -->
+        <form class="teste__form" action="#teste">
+          <ol class="teste__perguntas">
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">01</span> Em que ano Florianópolis, então chamada Desterro, virou vila?</legend>
+              <label class="teste__opcao"><input type="radio" name="t1" value="1" data-certa> 1726</label>
+              <label class="teste__opcao"><input type="radio" name="t1" value="0"> 1673</label>
+              <label class="teste__opcao"><input type="radio" name="t1" value="2"> 1850</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: 1726.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: 1726.</span>
+                O povoado de Nossa Senhora do Desterro surgiu por volta de 1673, mas só virou vila em 1726. <a href="cidades.html#cidades">Ver em Cidades</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">02</span> Qual foi a primeira colônia alemã de Santa Catarina?</legend>
+              <label class="teste__opcao"><input type="radio" name="t2" value="0"> Blumenau</label>
+              <label class="teste__opcao"><input type="radio" name="t2" value="2"> Joinville</label>
+              <label class="teste__opcao"><input type="radio" name="t2" value="1" data-certa> São Pedro de Alcântara</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: São Pedro de Alcântara.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: São Pedro de Alcântara.</span>
+                Foi São Pedro de Alcântara, perto de Florianópolis, em 1829. Blumenau veio em 1850 e Joinville em 1851. <a href="cultura.html#linha-do-tempo">Ver em Cultura</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">03</span> Em Laguna, que animal avisa os pescadores do momento de lançar a rede?</legend>
+              <label class="teste__opcao"><input type="radio" name="t3" value="1" data-certa> Boto-da-tainha</label>
+              <label class="teste__opcao"><input type="radio" name="t3" value="0"> Boto-cinza</label>
+              <label class="teste__opcao"><input type="radio" name="t3" value="2"> Baleia-franca</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: Boto-da-tainha.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: Boto-da-tainha.</span>
+                É o boto-da-tainha, um golfinho-nariz-de-garrafa. O boto-cinza vive nas baías de Florianópolis. <a href="turismo.html#natureza">Ver em Turismo</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">04</span> Em que cidade acontece a Fenarreco, a festa do marreco recheado?</legend>
+              <label class="teste__opcao"><input type="radio" name="t4" value="2"> Pomerode</label>
+              <label class="teste__opcao"><input type="radio" name="t4" value="1" data-certa> Brusque</label>
+              <label class="teste__opcao"><input type="radio" name="t4" value="0"> Blumenau</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: Brusque.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: Brusque.</span>
+                A Fenarreco é de Brusque, em outubro. O marreco também é prato típico de Blumenau. <a href="cultura.html#calendario">Ver em Cultura</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">05</span> Qual é o ponto mais alto de Santa Catarina?</legend>
+              <label class="teste__opcao"><input type="radio" name="t5" value="0"> Morro da Igreja</label>
+              <label class="teste__opcao"><input type="radio" name="t5" value="2"> Serra do Rio do Rastro</label>
+              <label class="teste__opcao"><input type="radio" name="t5" value="1" data-certa> Morro da Boa Vista</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: Morro da Boa Vista.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: Morro da Boa Vista.</span>
+                É o Morro da Boa Vista, com 1.827 m. O Morro da Igreja, em Urubici, vem logo atrás, com 1.822 m. <a href="index.html#caracteristicas">Ver em Início</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">06</span> Em que posição Santa Catarina aparece no ranking do IDH dos estados (2024)?</legend>
+              <label class="teste__opcao"><input type="radio" name="t6" value="1" data-certa> 3º lugar</label>
+              <label class="teste__opcao"><input type="radio" name="t6" value="0"> 1º lugar</label>
+              <label class="teste__opcao"><input type="radio" name="t6" value="2"> 10º lugar</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: 3º lugar.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: 3º lugar.</span>
+                Terceiro, com 0,833, atrás do Distrito Federal e de São Paulo. <a href="panorama.html#economia">Ver em Panorama</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">07</span> Qual é o município com menos habitantes do estado?</legend>
+              <label class="teste__opcao"><input type="radio" name="t7" value="2"> Bombinhas</label>
+              <label class="teste__opcao"><input type="radio" name="t7" value="1" data-certa> Santiago do Sul</label>
+              <label class="teste__opcao"><input type="radio" name="t7" value="0"> Urupema</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: Santiago do Sul.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: Santiago do Sul.</span>
+                Santiago do Sul, no Oeste, com cerca de 1,7 mil moradores no Censo 2022. Urupema tem uns 2,5 mil. <a href="index.html#caracteristicas">Ver em Início</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">08</span> Quantas curvas tem a estrada da Serra do Rio do Rastro?</legend>
+              <label class="teste__opcao"><input type="radio" name="t8" value="2"> 1.284</label>
+              <label class="teste__opcao"><input type="radio" name="t8" value="0"> 84</label>
+              <label class="teste__opcao"><input type="radio" name="t8" value="1" data-certa> 284</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: 284.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: 284.</span>
+                São 284 curvas para vencer cerca de 1.200 metros de desnível. <a href="turismo.html#roteiros">Ver em Turismo</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">09</span> Quem trouxe a renda de bilro para Santa Catarina?</legend>
+              <label class="teste__opcao"><input type="radio" name="t9" value="2"> Os italianos</label>
+              <label class="teste__opcao"><input type="radio" name="t9" value="1" data-certa> Os açorianos</label>
+              <label class="teste__opcao"><input type="radio" name="t9" value="0"> Os alemães</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: Os açorianos.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: Os açorianos.</span>
+                Os açorianos. As rendeiras da Lagoa da Conceição e de Santo Antônio de Lisboa mantêm a técnica viva. <a href="cultura.html#festas">Ver em Cultura</a>
+              </p>
+            </fieldset>
+          </li>
+          <li class="teste__pergunta">
+            <fieldset>
+              <legend><span class="teste__num">10</span> Joinville tem a única escola fora da Rússia de qual companhia de balé?</legend>
+              <label class="teste__opcao"><input type="radio" name="t10" value="2"> Royal Ballet</label>
+              <label class="teste__opcao"><input type="radio" name="t10" value="1"> Ópera de Paris</label>
+              <label class="teste__opcao"><input type="radio" name="t10" value="0" data-certa> Teatro Bolshoi</label>
+              <p class="teste__retorno">
+                <span class="teste__certo">✓ Certo!</span>
+                <span class="teste__errado">✗ Resposta certa: Teatro Bolshoi.</span>
+                <span class="teste__vazio">Sem resposta. A certa é: Teatro Bolshoi.</span>
+                Do Teatro Bolshoi, com ensino gratuito. A cidade também sedia o Festival de Dança de Joinville. <a href="#cards">Ver em Curiosidades</a>
+              </p>
+            </fieldset>
+          </li>
+          </ol>
+
+          <div class="teste__acoes">
+            <label class="botao botao--destaque teste__ver">
+              <input class="visualmente-oculto" type="checkbox" id="teste-ver">
+              <span class="teste__ver-mostrar">Ver resultado</span>
+              <span class="teste__ver-esconder">Esconder resultado</span>
+            </label>
+            <button class="botao botao--contorno" type="reset">Refazer o teste</button>
+          </div>
+
+          <p class="teste__placar">
+            Você acertou <strong class="teste__nota"></strong> de 10.
+            <span class="teste__placar-dica">Confira em cada pergunta, acima, o que era certo e onde o assunto aparece no site.</span>
+          </p>
+        </form>
+      </div>
+    </section>
+
     <section class="secao secao--clara" id="enxaimel">
       <div class="container">
         <div class="duas-colunas">

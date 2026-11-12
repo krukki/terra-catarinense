@@ -3769,6 +3769,143 @@ tbody tr:nth-child(even) {
 }
 
 /* ==========================================================================
+   Teste de conhecimento (curiosidades.html)
+   A nota e o gabarito aparecem por estados em css/estados.css.
+   ========================================================================== */
+
+.teste__perguntas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.teste__pergunta fieldset {
+  height: 100%;
+  margin: 0;
+  padding: 1rem 1.1rem 1.1rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+
+.teste__pergunta legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.teste__num {
+  margin-right: 0.35rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  color: var(--cor-destaque);
+}
+
+.teste__opcao {
+  clear: both;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  padding: 0.5rem 0.7rem;
+  border: var(--borda-fina) solid var(--cor-borda);
+  border-radius: var(--raio);
+  cursor: pointer;
+  transition: border-color var(--transicao), background-color var(--transicao);
+}
+
+.teste__opcao:hover {
+  border-color: var(--cor-texto-suave);
+}
+
+.teste__opcao input {
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--cor-destaque);
+}
+
+.teste__opcao:has(:checked) {
+  border-color: var(--cor-destaque);
+  background-color: var(--cor-principal-clara);
+}
+
+.teste__retorno {
+  display: none;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: var(--borda-fina) dashed var(--cor-borda);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--cor-texto-suave);
+}
+
+.teste__certo,
+.teste__errado,
+.teste__vazio {
+  display: none;
+  margin-right: 0.25rem;
+  font-weight: 600;
+}
+
+.teste__certo { color: var(--cor-principal); }
+.teste__errado,
+.teste__vazio { color: var(--cor-destaque); }
+
+.teste__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-sm);
+  margin-top: var(--espaco-lg);
+}
+
+.teste__ver {
+  cursor: pointer;
+}
+
+.teste__ver:has(:focus-visible) {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+.teste__ver-esconder {
+  display: none;
+}
+
+.teste__placar {
+  display: none;
+  max-width: 34rem;
+  margin: var(--espaco-md) auto 0;
+  padding: 1rem 1.25rem;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-superficie);
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.teste__nota {
+  font-size: 2.2rem;
+  color: var(--cor-destaque);
+}
+
+.teste__placar-dica {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--fonte-texto);
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+/* ==========================================================================
    Transição entre páginas (View Transitions API, só CSS)
    Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
    com leve deslize. Navegadores sem suporte trocam de página normalmente;
