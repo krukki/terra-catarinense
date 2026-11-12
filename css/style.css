@@ -4103,6 +4103,276 @@ tbody tr:nth-child(even) {
 }
 
 /* ==========================================================================
+   Viagem do mar à neve (turismo.html)
+   Versão base (sem animação): tudo visível e parado. A versão animada,
+   ligada à rolagem, só entra com suporte a view-timeline e sem pedido
+   de menos movimento.
+   ========================================================================== */
+
+@property --alt { syntax: "<integer>"; inherits: true; initial-value: 1822; }
+@property --temp { syntax: "<integer>"; inherits: true; initial-value: 6; }
+@property --geada { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --alt-mil { syntax: "<integer>"; inherits: true; initial-value: 1; }
+@property --alt-resto { syntax: "<integer>"; inherits: true; initial-value: 822; }
+
+.viagem {
+  --mar: #CFE3EA;
+  --gelo: #F4F6F7;
+  --terreno-mar: #7E9C76;
+  --terreno-gelo: #DCE3E6;
+  --floco: #9DB6C9;
+  position: relative;
+  border-bottom: var(--borda-fina) solid var(--cor-texto);
+  background-color: color-mix(in srgb, var(--gelo) calc(var(--geada) * 100%), var(--mar));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(#tema:checked)) .viagem {
+    --mar: #0E2A33;
+    --gelo: #1F2A2E;
+    --terreno-mar: #2F4A33;
+    --terreno-gelo: #56646A;
+    --floco: #FFFFFF;
+  }
+}
+
+@media not (prefers-color-scheme: dark) {
+  :root:has(#tema:checked) .viagem {
+    --mar: #0E2A33;
+    --gelo: #1F2A2E;
+    --terreno-mar: #2F4A33;
+    --terreno-gelo: #56646A;
+    --floco: #FFFFFF;
+  }
+}
+
+.viagem__conteudo {
+  display: grid;
+  gap: 1rem;
+  padding-block: var(--espaco-xl);
+}
+
+.viagem__cabecalho h2 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+.viagem__leitura {
+  display: none;
+  gap: 2rem;
+}
+
+.viagem__leitura span {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.viagem__leitura strong {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* Altitude e temperatura como contadores: acompanham --alt e --temp */
+.viagem__leitura {
+  --alt-mil: round(down, var(--alt) / 1000, 1);
+  --alt-resto: mod(var(--alt), 1000);
+  counter-reset: altmil var(--alt-mil) altresto var(--alt-resto) temp var(--temp);
+  container-name: viagem-leitura;
+}
+
+.viagem__alt::before { content: counter(altmil) "." counter(altresto, tres-digitos) " m"; }
+.viagem__temp::before { content: counter(temp) " °C"; }
+
+@container viagem-leitura style(--alt-mil: 0) {
+  .viagem__alt::before { content: counter(altresto) " m"; }
+}
+
+.viagem__perfil {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* No palco fixo, o perfil ocupa só o que sobra da tela */
+.viagem__palco .viagem__perfil {
+  max-height: calc(100svh - var(--altura-header) - 17rem);
+}
+
+.viagem__terreno {
+  fill: color-mix(in srgb, var(--terreno-gelo) calc(var(--geada) * 100%), var(--terreno-mar));
+  opacity: 0.55;
+}
+
+.viagem__linha {
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.viagem__parada circle {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-fundo);
+  stroke-width: 3;
+}
+
+.viagem__parada-nome {
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 600;
+  fill: var(--cor-texto);
+}
+
+.viagem__parada-dado {
+  font-family: var(--fonte-mono);
+  font-size: 13px;
+  fill: var(--cor-texto-suave);
+}
+
+.viagem__parada text {
+  paint-order: stroke;
+  stroke: color-mix(in srgb, var(--gelo) calc(var(--geada) * 100%), var(--mar));
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+/* No celular o SVG encolhe muito: letras maiores nas paradas */
+@media (max-width: 47.99rem) {
+  .viagem__parada-nome { font-size: 30px; }
+  .viagem__parada-dado { font-size: 26px; }
+  .viagem__parada-nome { transform: translateY(-12px); }
+}
+
+.viagem__floco {
+  fill: var(--floco);
+  stroke: rgb(70 100 130 / 0.5);
+  stroke-width: 0.6;
+  animation: viagem-floco var(--d) linear var(--a) infinite;
+}
+
+@keyframes viagem-floco {
+  from { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  to { transform: translateY(70px); opacity: 0; }
+}
+
+.viagem__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.viagem__lista span {
+  display: block;
+  color: var(--cor-texto-suave);
+}
+
+.viagem__nota {
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+
+/* --- Versão animada pela rolagem --- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .viagem__trilho {
+      height: 320vh;
+      view-timeline-name: --viagem;
+    }
+
+    .viagem__palco {
+      position: sticky;
+      top: var(--altura-header);
+      height: calc(100svh - var(--altura-header));
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .viagem__conteudo {
+      width: 100%;
+      padding-block: 1rem;
+    }
+
+    .viagem__leitura {
+      display: flex;
+    }
+
+    /* A lista vira texto só para leitores de tela: o SVG mostra o mesmo */
+    .viagem__lista {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    /* a linha do tempo é do trilho (filho); timeline-scope a deixa
+       visível também para a própria .viagem, que muda a cor do fundo */
+    .viagem {
+      timeline-scope: --viagem;
+      animation: viagem-subida linear both;
+      animation-timeline: --viagem;
+      animation-range: contain 5% contain 95%;
+    }
+
+    .viagem__linha {
+      animation: viagem-traco linear both;
+      animation-timeline: --viagem;
+      animation-range: contain 5% contain 95%;
+    }
+
+    .viagem__parada {
+      animation: viagem-aparece linear both;
+      animation-timeline: --viagem;
+      animation-range: contain calc(5% + var(--em) * 88%) contain calc(9% + var(--em) * 88%);
+    }
+
+    .viagem__neve {
+      animation: viagem-aparece linear both;
+      animation-timeline: --viagem;
+      animation-range: contain 80% contain 92%;
+    }
+  }
+}
+
+@keyframes viagem-subida {
+  0%      { --alt: 3;    --temp: 16; --geada: 0; }
+  33.3%   { --alt: 915;  --temp: 10; --geada: 0.25; }
+  66.6%   { --alt: 1353; --temp: 8;  --geada: 0.6; }
+  100%    { --alt: 1822; --temp: 6;  --geada: 1; }
+}
+
+@keyframes viagem-traco {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes viagem-aparece {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viagem__neve {
+    display: none;
+  }
+}
+
+/* ==========================================================================
    Transição entre páginas (View Transitions API, só CSS)
    Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
    com leve deslize. Navegadores sem suporte trocam de página normalmente;
