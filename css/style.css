@@ -3554,6 +3554,47 @@ tbody tr:nth-child(even) {
   }
 }
 
+/* ==========================================================================
+   Transição entre páginas (View Transitions API, só CSS)
+   Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
+   com leve deslize. Navegadores sem suporte trocam de página normalmente;
+   quem pede menos movimento não recebe a animação.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.cabecalho {
+  view-transition-name: cabecalho;
+}
+
+main {
+  view-transition-name: conteudo;
+}
+
+::view-transition-group(cabecalho) {
+  animation-duration: 0.25s;
+}
+
+::view-transition-old(conteudo) {
+  animation: 0.22s ease-in both pagina-sai;
+}
+
+::view-transition-new(conteudo) {
+  animation: 0.32s ease-out both pagina-entra;
+}
+
+@keyframes pagina-sai {
+  to { opacity: 0; transform: translateY(-0.75rem); }
+}
+
+@keyframes pagina-entra {
+  from { opacity: 0; transform: translateY(0.75rem); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
