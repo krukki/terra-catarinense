@@ -1380,20 +1380,6 @@ body:has(#ver-comparadas:target):has(#comparar-a option[value="ararangua"]:check
   @container style(--vence-sul: 0) { [data-resultado="sul"] { display: none; } }
 }
 
-/* ==========================================================================
-   Antes e depois (index): cada rádio leva a divisória para uma posição.
-   Nos extremos, o rótulo da foto escondida some.
-   ========================================================================== */
-.antes-depois:has(#ad-0:checked)   { --corte: 0%; }
-.antes-depois:has(#ad-25:checked)  { --corte: 25%; }
-.antes-depois:has(#ad-50:checked)  { --corte: 50%; }
-.antes-depois:has(#ad-75:checked)  { --corte: 75%; }
-.antes-depois:has(#ad-100:checked) { --corte: 100%; }
-
-.antes-depois:has(#ad-0:checked) .antes-depois__rotulo--litoral,
-.antes-depois:has(#ad-100:checked) .antes-depois__rotulo--serra {
-  opacity: 0;
-}
 
 /* ==========================================================================
    Teste de conhecimento (curiosidades): nota com contador CSS
