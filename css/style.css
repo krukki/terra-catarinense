@@ -3624,6 +3624,151 @@ tbody tr:nth-child(even) {
 }
 
 /* ==========================================================================
+   Antes e depois: litoral × serra (index, "Duas Santa Catarinas")
+   A posição da divisória (--corte) vem dos rádios, em css/estados.css.
+   ========================================================================== */
+
+@property --corte {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+.antes-depois {
+  --corte: 50%;
+  max-width: 56rem;
+  margin: var(--espaco-xl) auto 0;
+  transition: --corte 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.antes-depois__palco {
+  position: relative;
+  aspect-ratio: 900 / 520;
+  overflow: hidden;
+  border: var(--borda-fina) solid var(--cor-texto);
+  background-color: var(--cor-img-vazia);
+}
+
+.antes-depois__palco img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.antes-depois__serra {
+  clip-path: inset(0 0 0 var(--corte));
+}
+
+.antes-depois__linha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--corte);
+  width: 0.1875rem;
+  translate: -50% 0;
+  background-color: var(--cor-branco, #fff);
+  box-shadow: 0 0 0.5rem rgb(0 0 0 / 0.45);
+}
+
+.antes-depois__linha::after {
+  content: "\2194";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--cor-branco, #fff);
+  color: #1B1F1D;
+  font-size: 1.1rem;
+  box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.35);
+}
+
+.antes-depois__rotulo {
+  position: absolute;
+  bottom: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  background-color: rgb(18 26 24 / 0.78);
+  color: #F3EEE4;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+
+.antes-depois__rotulo--litoral { left: 0.75rem; }
+.antes-depois__rotulo--serra { right: 0.75rem; }
+
+/* Faixas clicáveis sobre a foto: cada uma marca um dos 5 rádios */
+.antes-depois__faixas {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 12.5% 25% 25% 25% 12.5%;
+}
+
+.antes-depois__faixas label {
+  cursor: pointer;
+}
+
+/* Trilho: os próprios rádios, estilizados como marcas de um slider */
+.antes-depois__trilho {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto 0;
+  width: min(100%, 22rem);
+  padding: 0.5rem 0;
+}
+
+.antes-depois__trilho::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 0.125rem;
+  background-color: var(--cor-borda);
+}
+
+.antes-depois__trilho input {
+  appearance: none;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  border: var(--borda-fina) solid var(--cor-texto-suave);
+  border-radius: 50%;
+  background-color: var(--cor-fundo);
+  cursor: pointer;
+  transition: background-color var(--transicao), border-color var(--transicao), transform var(--transicao);
+}
+
+.antes-depois__trilho input:checked {
+  border-color: var(--cor-destaque);
+  background-color: var(--cor-destaque);
+  transform: scale(1.2);
+}
+
+.antes-depois__trilho input:focus-visible {
+  outline: 0.1875rem solid var(--cor-destaque);
+  outline-offset: 0.1875rem;
+}
+
+.antes-depois__legenda {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--cor-texto-suave);
+}
+
+/* ==========================================================================
    Transição entre páginas (View Transitions API, só CSS)
    Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
    com leve deslize. Navegadores sem suporte trocam de página normalmente;
