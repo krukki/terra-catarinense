@@ -67,9 +67,9 @@ terra-catarinense/
 ├── curiosidades.html ....... Cards com EFEITO FLIP, QUIZ "Qual Santa
 │                             Catarina é a sua?", arquitetura enxaimel e os
 │                             créditos das fotos.
-├── 404.html ................ Página de erro ("Você se perdeu na neblina da
-│                             serra"). O GitHub Pages a mostra sozinho em
-│                             qualquer endereço que não exista no site.
+├── 404.html ................ Página de erro simples, com o CSS dentro dela.
+│                             O GitHub Pages a mostra sozinho em qualquer
+│                             endereço que não exista no site.
 ├── css/
 │   ├── style.css ........... Toda a identidade visual, organizada em seções
 │   │                         comentadas (reset, variáveis de cor, tema

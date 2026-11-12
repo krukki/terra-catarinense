@@ -4057,53 +4057,6 @@ tbody tr:nth-child(even) {
 }
 
 /* ==========================================================================
-   Página 404 (404.html): topo com foto quase em tela cheia, botões e
-   cartões de destino que são links inteiros
-   ========================================================================== */
-.hero-pagina--foto.erro {
-  min-height: min(44rem, 92svh);
-}
-
-.erro__acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espaco-sm);
-  margin-top: 1.75rem;
-}
-
-/* os botões não herdam a cor clara do texto do topo */
-.hero-pagina--foto .erro__acoes .botao--contorno {
-  border-color: var(--cor-texto-claro);
-  color: var(--cor-texto-claro);
-  text-shadow: none;
-}
-
-.hero-pagina--foto .erro__acoes .botao--destaque {
-  text-shadow: none;
-}
-
-.erro__destino {
-  display: block;
-  color: var(--cor-texto);
-  text-decoration: none;
-  transition: border-color var(--transicao), transform var(--transicao);
-}
-
-.erro__destino h3 {
-  margin-bottom: 0.35rem;
-}
-
-.erro__destino p {
-  font-size: 0.92rem;
-  color: var(--cor-texto-suave);
-}
-
-.erro__destino:hover {
-  border-top-color: var(--cor-destaque);
-  transform: translateY(-0.125rem);
-}
-
-/* ==========================================================================
    Transição entre páginas (View Transitions API, só CSS)
    Ao trocar de página o cabeçalho fica parado e o conteúdo faz um fade
    com leve deslize. Navegadores sem suporte trocam de página normalmente;

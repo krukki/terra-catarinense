@@ -4,241 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Página não encontrada — Terra Catarinense</title>
-  <meta name="description" content="Este endereço não existe no Terra Catarinense. Volte ao início ou escolha uma das páginas do site.">
   <meta name="robots" content="noindex">
-  <meta name="author" content="Ronaldo Heitor Marques de Oliveira — 4 INF — IFMT Campus Várzea Grande">
-
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <meta name="theme-color" content="#F3EEE4" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0F1614" media="(prefers-color-scheme: dark)">
+  <!-- Página de erro simples: o CSS fica aqui dentro, para ela funcionar
+       em qualquer endereço errado, sem depender de outros arquivos -->
+  <style>
+    :root {
+      --fundo: #F3EEE4;
+      --texto: #1B1F1D;
+      --suave: #5A5A52;
+      --destaque: #A63D25;
+      color-scheme: light dark;
+    }
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/estados.css">
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fundo: #0F1614;
+        --texto: #EAE3D4;
+        --suave: #A9A392;
+      }
+    }
 
+    * { margin: 0; box-sizing: border-box; }
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100svh;
+      padding: 1.5rem;
+      background-color: var(--fundo);
+      color: var(--texto);
+      font-family: Inter, system-ui, sans-serif;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    main { max-width: 30rem; }
+
+    .codigo {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(5rem, 22vw, 9rem);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--destaque);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .codigo { color: #E58A6C; }
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    p {
+      margin-top: 0.75rem;
+      color: var(--suave);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1.75rem;
+      padding: 0.8rem 1.4rem;
+      background-color: var(--destaque);
+      color: #FFFFFF;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover { filter: brightness(1.1); }
+
+    a:focus-visible {
+      outline: 0.1875rem solid var(--texto);
+      outline-offset: 0.1875rem;
+    }
+  </style>
 </head>
-<body id="topo">
-
-  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
-
-  <header class="cabecalho cabecalho--transparente">
-    <div class="container cabecalho__interno">
-      <a class="logo" href="index.html">
-        <span class="logo__marca" aria-hidden="true">SC</span>
-        <span class="logo__texto">
-          Terra Catarinense
-          <small>o estado mais diverso do Brasil</small>
-        </span>
-      </a>
-
-      <div class="cabecalho__botoes">
-        <label class="tema-botao" title="Alternar entre tema claro e escuro">
-          <input class="tema-botao__caixa" type="checkbox" id="tema"
-                 aria-label="Alternar entre tema claro e escuro">
-          <span class="tema-botao__icone--claro" aria-hidden="true">&#9789;</span>
-          <span class="tema-botao__icone--escuro" aria-hidden="true">&#9788;</span>
-        </label>
-        <label class="tema-botao neve-botao" title="Fazer nevar nesta página">
-          <input class="tema-botao__caixa" type="checkbox" id="neve"
-                 aria-label="Fazer nevar nesta página">
-          <span aria-hidden="true">&#10052;</span>
-        </label>
-      </div>
-
-      <button class="menu-botao" type="button" popovertarget="menu-principal">
-        <span class="menu-botao__barras" aria-hidden="true"><span></span></span>
-        <span class="menu-botao__rotulo menu-botao__rotulo--abrir">Menu</span>
-        <span class="menu-botao__rotulo menu-botao__rotulo--fechar">Fechar</span>
-      </button>
-
-      <nav class="navegacao" id="menu-principal" popover aria-label="Navegação principal">
-        <ul class="navegacao__lista">
-          <li><a href="index.html">Início</a></li>
-          <li><a href="cidades.html">Cidades</a></li>
-          <li><a href="cultura.html">Cultura</a></li>
-          <li><a href="turismo.html">Turismo</a></li>
-          <li><a href="panorama.html#geografia">Geografia</a></li>
-          <li><a href="panorama.html#economia">Economia</a></li>
-          <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
-          <li><a href="curiosidades.html">Curiosidades</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="conteudo">
-
-    <section class="hero-pagina hero-pagina--foto erro">
-      <img class="hero-pagina__fundo" src="assets/topo/panorama.jpg"
-           alt="Camadas de montanhas da Serra Geral sob névoa, iluminadas pelo sol baixo."
-           width="1920" height="1080" decoding="async" fetchpriority="high">
-      <div class="container">
-        <span class="etiqueta">Erro 404</span>
-        <h1>Você se perdeu na neblina da serra</h1>
-        <p>
-          O endereço que você abriu não existe ou mudou de lugar. Acontece até
-          com quem conhece o caminho: na serra catarinense, a cerração baixa em
-          minutos.
-        </p>
-        <p class="erro__acoes">
-          <a class="botao botao--destaque" href="index.html">Voltar ao início</a>
-          <a class="botao botao--contorno" href="cidades.html#mapa">Abrir o atlas</a>
-        </p>
-      </div>
-    </section>
-
-    <section class="secao" id="destinos">
-      <div class="container">
-        <div class="secao__cabecalho">
-          <span class="etiqueta">Para onde ir</span>
-          <h2>As páginas do site</h2>
-        </div>
-
-        <nav class="grade-blocos" aria-label="Páginas do site">
-          <a class="bloco erro__destino" href="index.html">
-            <h3>Início</h3>
-            <p>Visão geral do estado, cidades em destaque e curiosidades.</p>
-          </a>
-          <a class="bloco erro__destino" href="cidades.html">
-            <h3>Cidades e regiões</h3>
-            <p>Atlas interativo, roteiros e comparador de cidades.</p>
-          </a>
-          <a class="bloco erro__destino" href="cultura.html">
-            <h3>Cultura e imigração</h3>
-            <p>Linha do tempo, mapa da ocupação e calendário de festas.</p>
-          </a>
-          <a class="bloco erro__destino" href="turismo.html">
-            <h3>Turismo e natureza</h3>
-            <p>Clima, fauna, flora, galeria de fotos e roteiros.</p>
-          </a>
-          <a class="bloco erro__destino" href="panorama.html">
-            <h3>Geografia, economia e gastronomia</h3>
-            <p>O relevo, a riqueza e os pratos típicos de cada região.</p>
-          </a>
-          <a class="bloco erro__destino" href="curiosidades.html">
-            <h3>Curiosidades</h3>
-            <p>Cards que viram, quiz, teste de conhecimento e enxaimel.</p>
-          </a>
-        </nav>
-      </div>
-    </section>
-
+<body>
+  <main>
+    <p class="codigo" aria-hidden="true">404</p>
+    <h1>Página não encontrada</h1>
+    <p>O endereço que você abriu não existe ou mudou de lugar.</p>
+    <a href="index.html">Voltar ao início</a>
   </main>
-
-  <footer class="rodape">
-    <div class="container">
-      <div class="rodape__grade">
-
-        <div class="rodape__sobre">
-          <h2>Terra Catarinense</h2>
-          <p>
-            Site educativo sobre o estado de Santa Catarina, produzido como
-            trabalho da disciplina de Front-End do curso Técnico em Informática
-            do IFMT — Campus Várzea Grande.
-          </p>
-
-          <div class="rodape__mapa-estado">
-            <img src="assets/mapa-sc.svg" width="600" height="380" loading="lazy" decoding="async"
-                 alt="Contorno do estado de Santa Catarina dividido em suas seis mesorregiões oficiais.">
-          </div>
-        </div>
-
-        <nav id="mapa-site" aria-labelledby="titulo-mapa-site">
-          <h3 class="rodape__titulo" id="titulo-mapa-site">Mapa do site</h3>
-          <ul class="rodape__lista">
-            <li><a href="index.html">Início</a></li>
-            <li><a href="index.html#sobre">Sobre Santa Catarina</a></li>
-            <li><a href="panorama.html#geografia">Geografia</a></li>
-            <li><a href="cidades.html">Cidades e regiões</a></li>
-            <li><a href="cultura.html">Cultura e imigração</a></li>
-            <li><a href="panorama.html#gastronomia">Gastronomia</a></li>
-            <li><a href="turismo.html">Turismo e natureza</a></li>
-            <li><a href="panorama.html#economia">Economia</a></li>
-            <li><a href="curiosidades.html">Curiosidades</a></li>
-            <li><a href="index.html#fontes">Fontes de pesquisa</a></li>
-            <li><a href="curiosidades.html#creditos">Créditos das fotos</a></li>
-          </ul>
-        </nav>
-
-        <div>
-          <h3 class="rodape__titulo">Fontes de pesquisa</h3>
-          <ul class="rodape__lista">
-            <li><a href="https://cidades.ibge.gov.br/brasil/sc/panorama" rel="external noopener" target="_blank">IBGE Cidades — panorama de SC</a></li>
-            <li><a href="https://censo2022.ibge.gov.br/panorama/" rel="external noopener" target="_blank">IBGE — Censo 2022</a></li>
-            <li><a href="https://www.undp.org/pt/brazil/news/nordeste-lidera-maiores-avancos-estaduais-no-idhm-entre-2012-e-2024" rel="external noopener" target="_blank">PNUD — Radar IDHM 2024</a></li>
-            <li><a href="https://estado.sc.gov.br/conheca-sc/" rel="external noopener" target="_blank">Governo de SC — Conheça SC</a></li>
-            <li><a href="https://santur.sc.gov.br/" rel="external noopener" target="_blank">Santur — turismo catarinense</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <section class="passaporte" id="quiz-concluido" aria-labelledby="titulo-passaporte">
-        <div class="passaporte__texto">
-          <h3 class="rodape__titulo" id="titulo-passaporte">Passaporte catarinense</h3>
-          <p>Cada página que você visita ganha cor aqui. Visite as seis e faça o quiz para completar os carimbos.</p>
-        </div>
-        <ul class="passaporte__carimbos">
-          <li><a class="carimbo" href="index.html"><span class="carimbo__icone" aria-hidden="true">✦</span>Início</a></li>
-          <li><a class="carimbo" href="panorama.html"><span class="carimbo__icone" aria-hidden="true">▲</span>Panorama</a></li>
-          <li><a class="carimbo" href="cidades.html"><span class="carimbo__icone" aria-hidden="true">◉</span>Cidades</a></li>
-          <li><a class="carimbo" href="cultura.html"><span class="carimbo__icone" aria-hidden="true">✿</span>Cultura</a></li>
-          <li><a class="carimbo" href="turismo.html"><span class="carimbo__icone" aria-hidden="true">☀</span>Turismo</a></li>
-          <li><a class="carimbo" href="curiosidades.html"><span class="carimbo__icone" aria-hidden="true">?</span>Curiosidades</a></li>
-          <li><a class="carimbo" href="curiosidades.html#quiz-concluido"><span class="carimbo__icone" aria-hidden="true">★</span>Quiz</a></li>
-        </ul>
-      </section>
-
-      <div class="rodape__base">
-        <p>
-          Trabalho escolar sem fins comerciais &middot; <span>2026</span> &middot;
-          Imagens ilustrativas de banco público de imagens.
-        </p>
-        <p class="rodape__assinatura">Ronaldo Heitor Marques de Oliveira — 4 INF</p>
-      </div>
-    </div>
-  </footer>
-
-  <a class="voltar-topo" href="#topo" aria-label="Voltar ao topo da página">&#8593;</a>
-
-
-  <!-- Neve: aparece quando o botão ❄ do cabeçalho está marcado (só CSS).
-       Posição, tamanho e velocidade de cada floco vêm das variáveis. -->
-  <div class="neve" aria-hidden="true">
-    <i style="--x:16.2%;--d:10.7s;--a:-4.5s;--t:1.13;--v:-0.7rem"></i>
-    <i style="--x:21.7%;--d:15.8s;--a:-7.5s;--t:1.04;--v:2.3rem"></i>
-    <i style="--x:25.2%;--d:10.8s;--a:-13.4s;--t:1.04;--v:2.2rem"></i>
-    <i style="--x:62.4%;--d:15.6s;--a:-6.7s;--t:0.86;--v:2.3rem"></i>
-    <i style="--x:50.9%;--d:13.8s;--a:-5.0s;--t:0.7;--v:2.3rem"></i>
-    <i style="--x:0.3%;--d:11.6s;--a:-5.1s;--t:1.3;--v:-1.7rem"></i>
-    <i style="--x:7.4%;--d:8.6s;--a:-8.8s;--t:0.9;--v:3.0rem"></i>
-    <i style="--x:50.7%;--d:12.6s;--a:-1.6s;--t:1.02;--v:1.6rem"></i>
-    <i style="--x:38.1%;--d:15.5s;--a:-2.2s;--t:0.73;--v:0.3rem"></i>
-    <i style="--x:45.0%;--d:7.3s;--a:-4.3s;--t:0.77;--v:-0.3rem"></i>
-    <i style="--x:67.2%;--d:11.0s;--a:-8.7s;--t:1.16;--v:-0.2rem"></i>
-    <i style="--x:60.3%;--d:8.5s;--a:-2.2s;--t:0.57;--v:1.8rem"></i>
-    <i style="--x:1.8%;--d:13.0s;--a:-3.8s;--t:0.72;--v:-2.3rem"></i>
-    <i style="--x:5.7%;--d:8.5s;--a:-1.2s;--t:0.96;--v:0.9rem"></i>
-    <i style="--x:43.7%;--d:16.0s;--a:-3.8s;--t:1.08;--v:-1.4rem"></i>
-    <i style="--x:63.7%;--d:7.4s;--a:-15.6s;--t:1.16;--v:-2.8rem"></i>
-    <i style="--x:23.0%;--d:15.4s;--a:-12.1s;--t:0.75;--v:-0.2rem"></i>
-    <i style="--x:14.0%;--d:12.3s;--a:-3.5s;--t:0.77;--v:-1.7rem"></i>
-    <i style="--x:5.8%;--d:11.3s;--a:-12.5s;--t:1.03;--v:2.9rem"></i>
-    <i style="--x:63.8%;--d:8.9s;--a:-10.4s;--t:0.87;--v:-2.6rem"></i>
-    <i style="--x:99.8%;--d:7.2s;--a:-0.6s;--t:0.79;--v:-0.2rem"></i>
-    <i style="--x:17.0%;--d:13.1s;--a:-15.7s;--t:1.01;--v:-2.0rem"></i>
-    <i style="--x:52.4%;--d:11.1s;--a:-6.3s;--t:0.91;--v:-1.7rem"></i>
-    <i style="--x:75.9%;--d:12.4s;--a:-2.3s;--t:0.78;--v:-1.4rem"></i>
-    <i style="--x:16.4%;--d:11.4s;--a:-1.9s;--t:0.75;--v:0.9rem"></i>
-    <i style="--x:50.0%;--d:8.5s;--a:-10.8s;--t:1.3;--v:1.1rem"></i>
-    <i style="--x:19.5%;--d:11.7s;--a:-12.8s;--t:1.18;--v:-2.9rem"></i>
-    <i style="--x:22.7%;--d:14.6s;--a:-1.9s;--t:0.92;--v:0.9rem"></i>
-    <i style="--x:0.4%;--d:8.8s;--a:-15.8s;--t:0.99;--v:-2.2rem"></i>
-    <i style="--x:69.6%;--d:10.4s;--a:-8.9s;--t:0.88;--v:-2.8rem"></i>
-    <i style="--x:93.4%;--d:15.0s;--a:-9.9s;--t:0.64;--v:-1.7rem"></i>
-    <i style="--x:73.0%;--d:12.3s;--a:-8.8s;--t:1.21;--v:-0.2rem"></i>
-  </div>
 </body>
 </html>
