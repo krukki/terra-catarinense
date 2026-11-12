@@ -1265,27 +1265,21 @@ strong {
 
 /* A foto e o véu somem aos poucos (máscara com curva ease-out), revelando
    o fundo da página, como no banner da Início — sem linha onde termina */
-/* A seção logo abaixo do topo com foto nasce do fundo da página: sem
-   borda e com a cor própria dela surgindo aos poucos, para não recriar a
-   linha que a dissolução da foto acabou de apagar */
+/* A seção logo abaixo do topo com foto usa o fundo da própria página, sem
+   borda nem cor própria: assim nada recria a linha que a dissolução apagou */
 .hero-pagina--foto + .secao {
   border-top: 0;
-  background-image: linear-gradient(180deg,
-    var(--cor-fundo) 0%,
-    color-mix(in srgb, var(--cor-fundo) 80%, transparent) 2.5rem,
-    color-mix(in srgb, var(--cor-fundo) 50%, transparent) 5rem,
-    color-mix(in srgb, var(--cor-fundo) 20%, transparent) 8rem,
-    transparent 11rem);
+  background: none;
 }
 
 .hero-pagina--foto .hero-pagina__fundo,
 .hero-pagina--foto::before {
   --dissolve: linear-gradient(180deg,
-    #000 0%, #000 58%,
-    rgb(0 0 0 / 0.97) 63%, rgb(0 0 0 / 0.9) 68%, rgb(0 0 0 / 0.78) 73%,
-    rgb(0 0 0 / 0.62) 78%, rgb(0 0 0 / 0.45) 82.5%, rgb(0 0 0 / 0.29) 87%,
-    rgb(0 0 0 / 0.16) 91%, rgb(0 0 0 / 0.07) 94.5%, rgb(0 0 0 / 0.02) 97.5%,
-    transparent 100%);
+    #000 0%, #000 56%,
+    rgb(0 0 0 / 0.96) 61%, rgb(0 0 0 / 0.86) 66%, rgb(0 0 0 / 0.71) 71%,
+    rgb(0 0 0 / 0.53) 76%, rgb(0 0 0 / 0.36) 80.5%, rgb(0 0 0 / 0.22) 84.5%,
+    rgb(0 0 0 / 0.12) 88%, rgb(0 0 0 / 0.06) 91%, rgb(0 0 0 / 0.025) 94%,
+    rgb(0 0 0 / 0.008) 97%, transparent 100%);
   -webkit-mask-image: var(--dissolve);
   mask-image: var(--dissolve);
 }
